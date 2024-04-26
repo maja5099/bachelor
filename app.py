@@ -1,3 +1,6 @@
+# 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
+# https://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@github.com/maja5099/bachelor.git
+
 from bottle import default_app, get, post, run
 import git
  
@@ -13,7 +16,7 @@ def git_update():
 ##############################
 @get("/")
 def _():
-  return "One"
+  return "Two"
  
 ##############################
 try:
