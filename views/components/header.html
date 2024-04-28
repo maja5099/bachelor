@@ -1,0 +1,22 @@
+<header class="text-white text-base bg-unidLightBlue drop-shadow-xl">
+  <div class="w-10/12 py-8 mx-auto flex items-center justify-between">
+    <a href="/"
+      ><img
+        class="w-28"
+        src="/assets/logos/{{unid_logo['primary_logo']}}"
+        alt="{{unid_logo['logo_alt']}}"
+    /></a>
+    <!-- prettier-ignore -->
+    % include('utilities/misc/nav_links')
+    <div class="gap-2 lg:gap-4 flex items-center">
+      <div>
+        <!-- prettier-ignore -->
+        % include('utilities/buttons/login_button', link='/', button_text='Log ind')
+      </div>
+      <div class="flex lg:hidden">
+        <!-- prettier-ignore -->
+        % include('utilities/buttons/burger_menu', link='/')
+      </div>
+    </div>
+  </div>
+</header>
