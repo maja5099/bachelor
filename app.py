@@ -30,19 +30,19 @@ unid_logo = {
     "logo_alt": "UNID Studio's logo",
 }
 
-selling_points = {       
-    "first": {"icon": "heart.svg", "icon_alt": "Hjerte ikon", "text": "Tilfredshedsgaranti"},
-    "second": {"icon": "discount.svg", "icon_alt": "Rabat ikon", "text": "Studierabat"},
-    "third": {"icon": "pen.svg", "icon_alt": "Blyant ikon", "text": "Skræddersyet løsning"},
-    "fourth": {"icon": "chat.svg", "icon_alt": "Taleboble", "text": "Hurtig kundeservice"}
-}
+selling_points = [       
+    {"icon": "heart.svg", "text": "Tilfredshedsgaranti"},
+    {"icon": "discount.svg", "text": "Studierabat"},
+    {"icon": "pen.svg", "text": "Skræddersyet løsning"},
+    {"icon": "chat.svg", "text": "Hurtig kundeservice"}
+]
 
-header_links = [
-    "Services & Priser",
-    "Om UNID Studio",
-    "Portfolio",
-    "Cases",
-    "Kontakt"
+header_nav_items = [
+    {"text": "Services & Priser", "link": "/"},
+    {"text": "Om UNID Studio", "link": "/"},
+    {"text": "Portfolio", "link": "/"},
+    {"text": "Cases", "link": "/"},
+    {"text": "Kontakt", "link": "/"},
 ]
 
 footer_info = [
@@ -52,8 +52,8 @@ footer_info = [
 ]
 
 social_media = {       
-    "instagram": {"icon": "instagram.svg", "icon_alt": "Instagram's ikon", "link": "https://www.instagram.com/unid.studio/"},
-    "linkedin": {"icon": "linkedin.svg", "icon_alt": "LinkedIn's ikon", "link": "https://www.linkedin.com/company/unid-studio/"},
+    "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
+    "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
 }
 
 section_landingpage_hero_content = {       
@@ -68,7 +68,7 @@ section_landingpage_hero_content = {
 #   Routes
 @route("/")
 def index():
-   return template('index', title="UNID Studio", header_links=header_links, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media)
+   return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media)
 
 
 ##############################

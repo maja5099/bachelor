@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
-  content: ["./views/**/*.*"],
+  mode: "jit",
+  content: ["./views/**/*.*", "./assets/**/*.*"],
   theme: {
     extend: {
       colors: {
@@ -19,8 +19,8 @@ module.exports = {
         montserrat: "'Montserrat', sans-serif",
       },
       backgroundImage: {
-        'wave': "url('/assets/graphics/wave.svg')",
-      }
+        wave: "url('/assets/graphics/wave.svg')",
+      },
     },
     plugins: [],
   },

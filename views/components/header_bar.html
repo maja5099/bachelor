@@ -1,19 +1,7 @@
 <section
   class="bg-unidYellow w-full flex justify-center text-center items-center"
 >
-  <div
-    class="w-11/12 lg:w-8/12 justify-between gap-4 flex-col columns-2 md:flex md:flex-row py-2.5 text-center items-center"
-  >
-    % for key, selling_point in selling_points.items():
-    <li class="flex items-center cursor-default text-center text-unidPurple justify-center gap-2">
-      <img
-        id="icon_small"
-        class="fill-unidPurple"
-        src="/assets/icons/{{selling_point['icon']}}"
-        alt="{{selling_point['icon_alt']}}"
-      />
-      <p id="selling_point">{{selling_point['text']}}</p>
-    </li>
-    % end
+  <div class="w-11/12 lg:w-8/12 grid grid-cols-2 md:grid-cols-4 gap-2 py-2.5">
+    % include('elements/selling_points')
   </div>
 </section>

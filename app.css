@@ -447,6 +447,8 @@ video {
 }
 
 html {
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 240 230 / var(--tw-bg-opacity));
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -569,6 +571,8 @@ h1 {
 #icon_hover {
   border-radius: 9999px;
   padding: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(247 240 230 / var(--tw-text-opacity));
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -710,33 +714,9 @@ h1 {
   --tw-contain-style:  ;
 }
 
-.relative {
-  position: relative;
-}
-
-.z-50 {
-  z-index: 50;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.mt-0 {
-  margin-top: 0px;
-}
-
-.mt-0\.5 {
-  margin-top: 0.125rem;
 }
 
 .block {
@@ -745,10 +725,6 @@ h1 {
 
 .flex {
   display: flex;
-}
-
-.inline-flex {
-  display: inline-flex;
 }
 
 .grid {
@@ -775,6 +751,10 @@ h1 {
   width: 83.333333%;
 }
 
+.w-11\/12 {
+  width: 91.666667%;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -795,37 +775,29 @@ h1 {
   width: 100%;
 }
 
-.w-11\/12 {
-  width: 91.666667%;
-}
-
-.w-1 {
-  width: 0.25rem;
-}
-
 .max-w-0 {
   max-width: 0px;
-}
-
-.flex-shrink {
-  flex-shrink: 1;
 }
 
 .flex-grow {
   flex-grow: 1;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
-
 .cursor-default {
   cursor: default;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .columns-2 {
   -moz-columns: 2;
        columns: 2;
+}
+
+.grid-flow-row {
+  grid-auto-flow: row;
 }
 
 .grid-cols-2 {
@@ -836,16 +808,8 @@ h1 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
 }
 
 .items-center {
@@ -880,18 +844,6 @@ h1 {
   gap: 1.5rem;
 }
 
-.gap-8 {
-  gap: 2rem;
-}
-
-.gap-y-4 {
-  row-gap: 1rem;
-}
-
-.gap-y-8 {
-  row-gap: 2rem;
-}
-
 .bg-unidLightBlue {
   --tw-bg-opacity: 1;
   background-color: rgb(160 180 211 / var(--tw-bg-opacity));
@@ -907,11 +859,6 @@ h1 {
   background-color: rgb(247 240 230 / var(--tw-bg-opacity));
 }
 
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-
 .bg-wave {
   background-image: url('/assets/graphics/wave.svg');
 }
@@ -920,16 +867,16 @@ h1 {
   background-size: cover;
 }
 
+.fill-current {
+  fill: currentColor;
+}
+
 .fill-unidPurple {
   fill: #59437B;
 }
 
 .fill-white {
   fill: #fff;
-}
-
-.fill-black {
-  fill: #000;
 }
 
 .object-cover {
@@ -990,18 +937,14 @@ h1 {
   font-weight: 500;
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-unidPurple {
   --tw-text-opacity: 1;
   color: rgb(89 67 123 / var(--tw-text-opacity));
 }
 
-.underline-offset-4 {
-  text-underline-offset: 4px;
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .drop-shadow-xl {
@@ -1041,10 +984,6 @@ h1 {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hover\:fill-unidPurple:hover {
-  fill: #59437B;
-}
-
 .hover\:font-semibold:hover {
   font-weight: 600;
 }
@@ -1058,22 +997,7 @@ h1 {
   max-width: 100%;
 }
 
-@media (min-width: 640px) {
-  .sm\:columns-3 {
-    -moz-columns: 3;
-         columns: 3;
-  }
-
-  .sm\:justify-start {
-    justify-content: flex-start;
-  }
-}
-
 @media (min-width: 768px) {
-  .md\:mt-0 {
-    margin-top: 0px;
-  }
-
   .md\:flex {
     display: flex;
   }
@@ -1086,20 +1010,8 @@ h1 {
     width: 50%;
   }
 
-  .md\:w-8\/12 {
-    width: 66.666667%;
-  }
-
-  .md\:w-10\/12 {
-    width: 83.333333%;
-  }
-
   .md\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .md\:grid-rows-1 {
-    grid-template-rows: repeat(1, minmax(0, 1fr));
   }
 
   .md\:flex-row {
@@ -1136,12 +1048,12 @@ h1 {
     display: none;
   }
 
-  .lg\:w-full {
-    width: 100%;
-  }
-
   .lg\:w-8\/12 {
     width: 66.666667%;
+  }
+
+  .lg\:w-full {
+    width: 100%;
   }
 
   .lg\:max-w-lg {
