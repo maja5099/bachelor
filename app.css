@@ -907,6 +907,11 @@ h1 {
   background-color: rgb(247 240 230 / var(--tw-bg-opacity));
 }
 
+.bg-red-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+
 .bg-wave {
   background-image: url('/assets/graphics/wave.svg');
 }
