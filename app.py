@@ -1,8 +1,14 @@
 # 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
 # https://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@github.com/maja5099/bachelor.git
 
-from bottle import default_app, post, route, get, run, template, static_file
+from bottle import default_app, post, route, get, run, template, static_file, TEMPLATE_PATH
 import git
+import os
+
+
+project_root = os.path.dirname(os.path.abspath(__file__))
+assets_template_path = os.path.join(project_root, 'assets', 'icons')
+TEMPLATE_PATH.append(assets_template_path)
 
 
 ##############################
@@ -21,6 +27,10 @@ def git_update():
 @get("/assets/<filename:re:.*\.(webp|png|jpg|gif|svg)>")
 def _(filename):
     return static_file(filename, root="./assets")
+
+@route('/assets/<filepath:path>')
+def server_static(filepath):
+    return static_file(filepath, root='./assets')
 
 
 ##############################
@@ -70,9 +80,6 @@ section_landingpage_hero_content = {
 def index():
    return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media)
 
-@route('/assets/<filepath:path>')
-def server_static(filepath):
-    return static_file(filepath, root='./assets')
 
 ##############################
 #   CSS
