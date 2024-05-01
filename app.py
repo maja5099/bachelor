@@ -62,8 +62,8 @@ footer_info = [
 ]
 
 social_media = {       
-    "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
-    "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
+    "instagram": {"icon": "instagram.tpl", "link": "https://www.instagram.com/unid.studio/"},
+    "linkedin": {"icon": "linkedin.tpl", "link": "https://www.linkedin.com/company/unid-studio/"},
 }
 
 section_landingpage_hero_content = {       
