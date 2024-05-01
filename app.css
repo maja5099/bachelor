@@ -779,10 +779,6 @@ h1 {
   max-width: 0px;
 }
 
-.flex-grow {
-  flex-grow: 1;
-}
-
 .cursor-default {
   cursor: default;
 }
@@ -791,21 +787,8 @@ h1 {
   cursor: pointer;
 }
 
-.columns-2 {
-  -moz-columns: 2;
-       columns: 2;
-}
-
-.grid-flow-row {
-  grid-auto-flow: row;
-}
-
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-rows-2 {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -873,10 +856,6 @@ h1 {
 
 .fill-unidPurple {
   fill: #59437B;
-}
-
-.fill-white {
-  fill: #fff;
 }
 
 .object-cover {
@@ -978,6 +957,10 @@ h1 {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+#icon {
+  color: #59437b;
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -988,24 +971,11 @@ h1 {
   font-weight: 600;
 }
 
-.hover\:text-unidPurple:hover {
-  --tw-text-opacity: 1;
-  color: rgb(89 67 123 / var(--tw-text-opacity));
-}
-
 .group:hover .group-hover\:max-w-full {
   max-width: 100%;
 }
 
 @media (min-width: 768px) {
-  .md\:flex {
-    display: flex;
-  }
-
-  .md\:grid {
-    display: grid;
-  }
-
   .md\:w-1\/2 {
     width: 50%;
   }
