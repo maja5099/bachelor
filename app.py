@@ -31,10 +31,10 @@ unid_logo = {
 }
 
 selling_points = [       
-    {"icon": "heart.svg", "text": "Tilfredshedsgaranti"},
-    {"icon": "discount.svg", "text": "Studierabat"},
-    {"icon": "pen.svg", "text": "Skræddersyet løsning"},
-    {"icon": "chat.svg", "text": "Hurtig kundeservice"}
+    {"icon": "heart.tpl", "text": "Tilfredshedsgaranti"},
+    {"icon": "discount.tpl", "text": "Studierabat"},
+    {"icon": "pen.tpl", "text": "Skræddersyet løsning"},
+    {"icon": "chat.tpl", "text": "Hurtig kundeservice"}
 ]
 
 header_nav_items = [
