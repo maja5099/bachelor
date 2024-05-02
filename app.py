@@ -6,11 +6,6 @@ import git
 import os
 
 
-project_root = os.path.dirname(os.path.abspath(__file__))
-assets_template_path = os.path.join(project_root, 'assets', 'icons')
-TEMPLATE_PATH.append(assets_template_path)
-
-
 ##############################
 #   Git and Pythonanywhere hook
 @post('/secret_url_for_git_hook')
@@ -20,6 +15,13 @@ def git_update():
   repo.create_head('main', origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
   origin.pull()
   return ""
+
+
+##############################
+#   Icons
+project_root = os.path.dirname(os.path.abspath(__file__))
+assets_template_path = os.path.join(project_root, 'assets', 'icons')
+TEMPLATE_PATH.append(assets_template_path)
 
 
 ##############################
@@ -73,12 +75,16 @@ section_landingpage_hero_content = {
     "image": "digital_design.svg",
 }
 
+ui_icons = {       
+    "user_icon": "user.tpl", 
+    "burger_icon": "burger.tpl"
+}
 
 ##############################
 #   Routes
 @route("/")
 def index():
-   return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media)
+   return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons)
 
 
 ##############################
