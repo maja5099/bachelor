@@ -87,6 +87,9 @@ def index():
    return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons)
 
 
+import routers.signup
+
+
 ##############################
 #   CSS
 @get("/app.css")

@@ -1,0 +1,75 @@
+from bottle import post, request, get, response, template
+import dbconnection
+import uuid
+import time
+import bcrypt
+
+
+@post("/signup")
+def _():
+    try:
+        db = dbconnection.db()
+        user_id = str(uuid.uuid4().hex)
+        first_name = request.forms.get("first_name", "")
+        last_name = request.forms.get("last_name", "")
+        email = dbconnection.validate_email()
+        phone = dbconnection.validate_phone()
+        username = dbconnection.validate_username()
+        password = dbconnection.validate_password()
+        is_active = "True"
+        created_at = int(time.time())
+        updated_at = int(time.time())
+        deleted_at = ""
+        user_roles_user_role_id = str(uuid.uuid4().hex)
+
+
+        salt = bcrypt.gensalt()
+
+        user = {
+        "user_id" : user_id,
+        "username" : username,
+        "first_name": first_name,
+        "last_name": last_name,
+        "email": email,
+        "phone": phone,
+        "password" : bcrypt.hashpw(password.encode("utf-8"), salt),
+        "is_active" : is_active,
+        "created_at" : created_at,
+        "updated_at" : updated_at,
+        "deleted_at" : deleted_at,
+        "user_roles_user_role_id" : user_roles_user_role_id,
+       
+        }
+
+        print(user)
+        values = ""
+        for key in user:
+            values = values + f":{key},"
+        values = values.rstrip(",")
+
+
+        print(values)
+        db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_roles_user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_roles_user_role_id)", user).rowcount
+        db.commit()
+
+
+        return {"info": "Signup succesful!"}
+    except Exception as e:
+        print(e)
+        if "db" in locals(): db.rollback()
+        return {"info":str(e)}
+    finally:
+        if "db" in locals(): db.close()
+
+@get("/signup")
+def signup_get():
+
+    try:
+        db = dbconnection.db()
+        return template("signup.html")
+    except Exception as e:
+        print(e)
+        if "db" in locals(): db.rollback() 
+        return {"info":str(e)}
+    finally:
+        if "db" in locals(): db.close()

@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS clipcards (
 	PRIMARY KEY(clipcard_id)
 ) WITHOUT ROWID;
 
-DROP TABLE IF EXISTS card_types;
+
 CREATE TABLE IF NOT EXISTS card_types (
 	clipcard_type_id	INTEGER NOT NULL UNIQUE,
 	clipcard_type_title	TEXT NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS card_types (
 ) WITHOUT ROWID;
 
 INSERT INTO card_types (clipcard_type_id, clipcard_type_title) VALUES
-(1, '10 time'),
+(1, '10 timer'),
 (2, '20 timer'),
 (3, '30 timer');
 

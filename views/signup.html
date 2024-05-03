@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <section id="signup" class="">
+        
+        <div class="">
+            
+            <span class="">Opret en bruger</span>
+
+            <!-- inputs start -->
+            <div class="mt-4 flex flex-col justify-center">
+                <input type="text" name="first_name" id="first_name" placeholder="Fornavn" class="">
+                <input type="text" name="last_name" id="last_name" placeholder="Efternavn"class="">
+                <input type="text" name="email" id="email" placeholder="E-mail"class="">
+                <input type="text" name="phone" id="phone" placeholder="Telefon"class="">
+                <input type="text" name="username" id="username" placeholder="Brugernavn"class="">
+                <input type="text" name="password" id="password" placeholder="Adgangskode"class="">
+
+            </div>
+            <!-- inputs end -->
+
+            <button onclick="signUp()" class="">Opret bruger</button>
+            
+           
+            <div class="">
+                <p class="">Har du allerede en bruger?</p>
+                <a id="#bottom-login onclick="#" class="" href="">Log ind</a>
+            </div>
+        </div>
+    </section>
+
+<script>
+
+    async function signUp() {
+        const first_name = document.querySelector("input[name='first_name']").value
+        const last_name = document.querySelector("input[name='last_name']").value
+        const email = document.querySelector("input[name='email']").value
+        const phone = document.querySelector("input[name='phone']").value
+        const username = document.querySelector("input[name='username']").value
+        const password = document.querySelector("input[name='password']").value
+        console.log("this is the username", username)
+
+        const formData = new FormData();
+
+        formData.append('first_name', first_name);
+        formData.append('last_name', last_name);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('username', username);
+        formData.append('password', password);
+        
+        for (const value of formData.values()) {
+            console.log(value);
+        }
+
+        const response = await fetch("/signup", {
+            method: "POST", 
+            body: formData
+        })
+        const data = await response.json()
+        console.log("This is the right username", username)
+        console.log("This is the data", data)
+    }
+</script>
+
+</body>
+</html>
