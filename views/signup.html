@@ -16,7 +16,7 @@
             
             <span class="">Opret en bruger</span>
 
-            <!-- inputs start -->
+    
             <div class="mt-4 flex flex-col justify-center">
                 <input type="text" name="first_name" id="first_name" placeholder="Fornavn" class="">
                 <input type="text" name="last_name" id="last_name" placeholder="Efternavn"class="">
@@ -24,12 +24,10 @@
                 <input type="text" name="phone" id="phone" placeholder="Telefon"class="">
                 <input type="text" name="username" id="username" placeholder="Brugernavn"class="">
                 <input type="text" name="password" id="password" placeholder="Adgangskode"class="">
-                <!-- Ny input til website navn -->
                 <input type="text" name="website_name" id="website_name" placeholder="Website navn" class="">
-                <!-- Ny input til website URL -->
                 <input type="text" name="website_url" id="website_url" placeholder="Website URL" class="">
             </div>
-            <!-- inputs end -->
+        
 
             <button onclick="signUp()" class="">Opret bruger</button>
             
@@ -50,8 +48,8 @@
         const phone = document.querySelector("input[name='phone']").value
         const username = document.querySelector("input[name='username']").value
         const password = document.querySelector("input[name='password']").value
-        const website_name = document.querySelector("input[name='website_name']").value // Hent værdien af website navn
-        const website_url = document.querySelector("input[name='website_url']").value // Hent værdien af website URL
+        const website_name = document.querySelector("input[name='website_name']").value 
+        const website_url = document.querySelector("input[name='website_url']").value 
         console.log("this is the username", username)
 
         const formData = new FormData();
@@ -62,8 +60,8 @@
         formData.append('phone', phone);
         formData.append('username', username);
         formData.append('password', password);
-        formData.append('website_name', website_name); // Tilføj website navn til formdata
-        formData.append('website_url', website_url); // Tilføj website URL til formdata
+        formData.append('website_name', website_name); 
+        formData.append('website_url', website_url); 
         
         for (const value of formData.values()) {
             console.log(value);

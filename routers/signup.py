@@ -22,17 +22,15 @@ def _():
         website_name = request.forms.get("website_name", "")
         website_url = request.forms.get("website_url", "")
 
-        # Bestemmer brugerens rolle baseret på deres e-mail-adresse
+       
         staff_emails = ["kontakt@unidstudio.dk", "denise@unidstudio.dk", "isabella@unidstudio.dk"]
         if email in staff_emails:
-            user_roles_user_role_id = "2"  # ID for staff role
-            staff_id = str(uuid.uuid4().hex)  # Generer staff_id
-            # Indsæt brugeren i staff-tabellen
+            user_roles_user_role_id = "2" 
+            staff_id = str(uuid.uuid4().hex)  
             db.execute("INSERT INTO staff (staff_id, user_role_id) VALUES (?, ?)", (staff_id, user_roles_user_role_id))
         else:
-            user_roles_user_role_id = "1"  # ID for customer role
-            customer_id = str(uuid.uuid4().hex)  # Generer customer_id
-            # Indsæt brugeren i customers-tabellen
+            user_roles_user_role_id = "1" 
+            customer_id = str(uuid.uuid4().hex)  
             db.execute("INSERT INTO customers (customer_id, user_role_id, website_name, website_url) VALUES (?, ?, ?, ?)", (customer_id, user_roles_user_role_id, website_name, website_url))
 
         salt = bcrypt.gensalt()
@@ -52,10 +50,9 @@ def _():
             "user_roles_user_role_id" : user_roles_user_role_id,
         }
 
-        # Indsæt brugeren i users-tabellen
+
         db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_roles_user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_roles_user_role_id)", user)
-        
-        # Commit ændringer til databasen
+
         db.commit()
 
         return {"info": "Signup succesful!"}
