@@ -1,0 +1,108 @@
+<section
+  class="grid grid-cols-1 lg:grid-cols-3 lg:h-screen lg:min-w-screen bg-unidYellow bg-wave bg-cover overflow-clip"
+>
+  <div class="lg:col-span-2 flex flex-col items-center justify-center">
+    <div
+      class="space-y-10 lg:space-y-12 justify-center flex flex-col mx-auto w-10/12 py-20 lg:py-16"
+    >
+      <div class="space-y-3 lg:space-y-6">
+        <h1>
+          Opret bruger
+        </h1>
+        <p id="subheader">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae,
+          voluptatum!
+        </p>
+      </div>
+      <form class="text-unidPurple grid lg:grid-cols-2 gap-x-14 gap-y-6 lg:gap-y-0">
+        <div class="space-y-6 lg:space-y-8">
+            <label class="block">
+                <span class="block mb-2 text-base font-semibold">Fornavn</span>
+                <input
+                  class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                  type="username"
+                  placeholder="Lorem"
+                  inputmode="username"
+                  required
+                />
+            </label>
+            <label class="block">
+            <span class="block mb-2 text-base font-semibold">Efternavn</span>
+            <input
+                class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                type="password"
+                placeholder="Ipsum"
+                required
+            />
+            </label>
+            <label class="block">
+                <span class="block mb-2 text-base font-semibold">Brugernavn</span>
+                <input
+                class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                type="password"
+                placeholder="LoremIpsum"
+                required
+                />
+            </label>
+            <label class="block">
+                <span class="block mb-2 text-base font-semibold">Adgangskode</span>
+                <input
+                  class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                  type="password"
+                  placeholder="••••••••"
+                  required
+                />
+            </label>
+        </div>
+        <div class="space-y-6 lg:space-y-8">
+            <label class="block">
+            <span class="block mb-2 text-base font-semibold">E-mail</span>
+            <input
+                class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                type="password"
+                placeholder="loremipsum@mail.com"
+                required
+            />
+            </label>
+            <label class="block">
+            <span class="block mb-2 text-base font-semibold">Telefon nummer</span>
+            <input
+                class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                type="password"
+                placeholder="Fx. 12 34 56 67"
+                required
+            />
+            </label>
+            <label class="block">
+            <span class="block mb-2 text-base font-semibold">Navn på website</span>
+            <input
+                class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                type="password"
+                placeholder="LoremIpsum"
+                required
+            />
+            </label>
+            <label class="block">
+            <span class="block mb-2 text-base font-semibold">URL til website</span>
+            <input
+                class="w-full py-3 px-5 rounded-md border border-unidLightBlue focus:border-unidPink"
+                type="password"
+                placeholder="https://www.loremipsum.dk"
+                required
+            />
+            </label>
+        </div>
+        </form>
+      <div class="lg:w-2/6 w-full pt-4 items-center mx-auto flex justify-center">
+        <!-- prettier-ignore -->
+        % include('utilities/buttons/primary_button', link='/', button_text=section_landingpage_hero_content['button_text'])
+      </div>
+    </div>
+    </div>
+  </div>
+  <div
+    class="bg-unidLightBlue h-full w-full flex flex-col py-20 lg:py-0 justify-center mx-auto"
+  >
+  <img class="w-8/12 mx-auto" src="/assets/logos/primary_logo.svg" alt="" />
+</div>
+</section>
