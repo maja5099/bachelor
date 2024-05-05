@@ -1,7 +1,6 @@
 -- SQLite
 
 -- USERS
-
 CREATE TABLE IF NOT EXISTS users (
     user_id	            	INTEGER NOT NULL UNIQUE,
 	first_name	        	TEXT NOT NULL,
@@ -14,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 	created_at	        	TEXT NOT NULL,
 	updated_at	        	TEXT,
 	deleted_at	        	TEXT,
-	user_roles_user_role_id	INTEGER UNIQUE,	
+	user_roles_user_role_id	INTEGER,	
 	PRIMARY KEY(user_id)
 ) WITHOUT ROWID;
 
@@ -77,8 +76,8 @@ CREATE TABLE IF NOT EXISTS payments (
 
 -- USER ROLES AND RIGHTS
 CREATE TABLE IF NOT EXISTS user_roles (
-	user_role_id		INTEGER NOT NULL UNIQUE,
-	user_role_title		TEXT NOT NULL UNIQUE,
+	user_role_id		INTEGER NOT NULL,
+	user_role_title		TEXT NOT NULL,
 	PRIMARY KEY(user_role_id)
 ) WITHOUT ROWID;
 
@@ -89,7 +88,7 @@ INSERT INTO user_roles (user_role_id, user_role_title) VALUES
 
 CREATE TABLE IF NOT EXISTS customers (
 	customer_id			INTEGER NOT NULL UNIQUE,
-	user_role_id		INTEGER NOT NULL UNIQUE,
+	user_role_id		INTEGER NOT NULL,
 	website_name		TEXT NOT NULL,
 	website_url			TEXT NOT NULL,
 	PRIMARY KEY(customer_id)
@@ -98,7 +97,7 @@ CREATE TABLE IF NOT EXISTS customers (
 
 CREATE TABLE IF NOT EXISTS staff (
 	staff_id			INTEGER NOT NULL UNIQUE,
-	user_role_id		INTEGER NOT NULL UNIQUE,
+	user_role_id		INTEGER NOT NULL,
 	PRIMARY KEY(staff_id)
 ) WITHOUT ROWID;
 
