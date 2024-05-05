@@ -19,13 +19,10 @@ def _():
             response.status = 400
             raise Exception("Brugernavnet eksisterer ikke")
 
-        # Hent den hashede adgangskode fra databasen
+   
         hashed_password_from_db = user["password"]
-
-        # Hash den indtastede adgangskode
         hashed_password_input = bcrypt.hashpw(password.encode("utf-8"), hashed_password_from_db)
 
-        # Sammenlign de to hashede adgangskoder
         if hashed_password_input == hashed_password_from_db:
             user.pop("password")
             response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True)
@@ -40,9 +37,6 @@ def _():
     finally:
         if "db" in locals(): 
             db.close()
-
-
-
 
 
 @get("/login")
