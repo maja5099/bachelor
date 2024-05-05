@@ -1,6 +1,7 @@
 -- SQLite
 
 -- USERS
+
 CREATE TABLE IF NOT EXISTS users (
     user_id	            	INTEGER NOT NULL UNIQUE,
 	first_name	        	TEXT NOT NULL,
