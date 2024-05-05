@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+    <section id="signup" class="">
+        
+        <div class="">
+            
+            <span class="">Log ind</span>
+
+    
+            <div class="mt-4 flex flex-col justify-center">
+                <input type="text" name="username" id="username" placeholder="Brugernavn"class="">
+                <input type="password" name="password" id="password" placeholder="Adgangskode"class="">
+            </div>
+        
+
+            <button onclick="login()" class="">Log ind</button>
+            <div class="">
+                <p id="error-message" class=""></p>
+            </div>
+           
+            <div class="">
+                <p class="">Har du ikke en bruger?</p>
+                <a id="#bottom-login onclick="#" class="" href="">Opret en bruger</a>
+            </div>
+        </div>
+    </section>
+
+
+<script>
+    
+
+        async function login() {
+            const username = document.querySelector("input[name='username']").value
+            const password = document.querySelector("input[name='password']").value
+            console.log("this is the username", username)
+            const formData = new FormData();
+
+
+            formData.append('username', username);
+            formData.append('password', password);
+            
+            for (const value of formData.values()) {
+                console.log(value);
+            }
+
+            const response = await fetch("/login", {
+                method: "POST", 
+                body: formData
+            })
+            const data = await response.json()
+        
+            
+            if (data.error) {
+                document.getElementById("error-message").innerText = data.error;
+            } else {
+                console.log("Login successful");
+            }
+            
+
+        }
+</script>
+
+</body>
+</html>

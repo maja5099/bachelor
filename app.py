@@ -88,6 +88,7 @@ def index():
 
 
 import routers.signup
+import routers.login
 
 
 ##############################
