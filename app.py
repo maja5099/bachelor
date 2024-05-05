@@ -26,7 +26,7 @@ TEMPLATE_PATH.append(assets_template_path)
 
 ##############################
 #   Images
-@get("/assets/<filename:re:.*\.(webp|png|jpg|gif|svg)>")
+@get(r"/assets/<filename:re:.*\.(webp|png|jpg|gif|svg)>")
 def _(filename):
     return static_file(filename, root="./assets")
 
@@ -99,7 +99,7 @@ def _():
 
 ##############################
 try:
-  import production
+  import production # type: ignore
   application = default_app()
 except Exception as ex:
   print("Running local server")
