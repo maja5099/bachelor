@@ -36,4 +36,37 @@
   #icon_large {
     @apply h-9 w-9;
   }
+  #form_label {
+    @apply text-unidPurple text-base font-semibold;
+  }
+  #form_input {
+    @apply w-full ps-16 py-3 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
+  }
+  #form_input_error {
+    @apply w-full ps-16 py-3 px-5 rounded-md border border-red-500 placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
+  }
+  #form_input_error {
+    @apply w-full ps-16 py-3 px-5 rounded-md border border-red-500 placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
+  }
+  #form_input_error_message {
+    @apply text-red-500 text-xs;
+  }
+  #form_input_success {
+    @apply w-full ps-16 py-3 px-5 rounded-md border border-green-500 placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
+  }
+}
+
+@layer utilities {
+  #form_input:focus {
+    border-color: #59437b;
+    outline: none;
+  }
+  #form_input_error:focus {
+    border: solid 1.5px #ef4444;
+    outline: none;
+  }
+  #form_input_success:focus {
+    border: solid 1.5px #22c55e;
+    outline: none;
+  }
 }
