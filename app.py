@@ -80,11 +80,94 @@ ui_icons = {
     "burger_icon": "burger.tpl"
 }
 
+form_inputs = {
+    "username": {
+        "label_for": "username",
+        "text": "Brugernavn", 
+        "icon": "user_circle.tpl", 
+        "type": "text",
+        "name": "username",
+        "inputmode":"text",
+        "placeholder": "LoremIpsum",
+        "form_info": "",
+    },
+    "password": {
+        "label_for": "pwd",
+        "text": "Adgangskode", 
+        "icon": "lock.tpl", 
+        "type": "password",
+        "name": "pwd",
+        "inputmode":"text",
+        "placeholder": "••••••••",
+        "form_info": "Use at least 8 characters, one uppercase, one lowercase and one number.",
+    },
+    "fname": {
+        "label_for": "fname",
+        "text": "Fornavn", 
+        "icon": "user_name_semi.tpl", 
+        "type": "text",
+        "name": "fname",
+        "inputmode":"text",
+        "placeholder": "Lorem",
+        "form_info": "",    
+    },
+    "lname": {
+        "label_for": "lname",
+        "text": "Efternavn", 
+        "icon": "user_name_full.tpl", 
+        "type": "text",
+        "name": "lname",
+        "inputmode":"text",
+        "placeholder": "Ipsum",
+        "form_info": "",    
+    },
+    "email": {
+        "label_for": "email",
+        "text": "Email", 
+        "icon": "email.tpl", 
+        "type": "email",
+        "name": "email",
+        "inputmode":"email",
+        "placeholder": "loremipsum@mail.com",
+        "form_info": "",    
+    },
+    "phone": {
+        "label_for": "phone",
+        "text": "Telefon nummer", 
+        "icon": "phone.tpl", 
+        "type": "tel",
+        "name": "phone",
+        "inputmode":"tel",
+        "placeholder": "12 34 56 67",
+        "form_info": "",    
+    },
+    "website_name": {
+        "label_for": "website_name",
+        "text": "Navn på din hjemmeside", 
+        "icon": "pen_line.tpl", 
+        "type": "text",
+        "name": "website_name",
+        "inputmode":"text",
+        "placeholder": "Lorem-Ipsum.dk",
+        "form_info": "",    
+    },
+    "website_url": {
+        "label_for": "website_url",
+        "text": "URL til din hjemmeside", 
+        "icon": "www.tpl", 
+        "type": "url",
+        "name": "website_url",
+        "inputmode":"url",
+        "placeholder": "https://www.lorem-ipsum.dk",
+        "form_info": "",    
+    },
+}
+
 ##############################
 #   Routes
 @route("/")
 def index():
-   return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons)
+   return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons, form_inputs=form_inputs)
 
 
 import routers.signup

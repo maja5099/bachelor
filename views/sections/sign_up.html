@@ -16,336 +16,31 @@
         <form class="grid lg:grid-cols-2 gap-x-14 gap-y-6 lg:gap-y-0">
           <div class="space-y-4 lg:space-y-6">
             <!-- FIRST NAME -->
-            <label for="fname" class="space-y-1.5 block">
-              <p id="form_label">Fornavn</p>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 48 48"
-                  >
-                    <defs>
-                      <mask id="ipTEditName0">
-                        <g
-                          fill="none"
-                          stroke="#fff"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="4"
-                        >
-                          <circle cx="24" cy="11" r="7" fill="#555" />
-                          <path d="M4 41c0-8.837 8.059-16 18-16" />
-                          <path fill="#555" d="m31 42l10-10l-4-4l-10 10v4z" />
-                        </g>
-                      </mask>
-                    </defs>
-                    <path
-                      fill="currentColor"
-                      d="M0 0h48v48H0z"
-                      mask="url(#ipTEditName0)"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="form_input"
-                  type="text"
-                  name="fname"
-                  inputmode="text"
-                  placeholder="Lorem"
-                  required
-                />
-              </div>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['fname']['label_for'], form_label=form_inputs['fname']['text'], form_svg=form_inputs['fname']['icon'], type=form_inputs['fname']['type'], name=form_inputs['fname']['name'], inputmode=form_inputs['fname']['inputmode'], placeholder=form_inputs['fname']['placeholder'], form_info=form_inputs['fname']['form_info'])
             <!-- LAST NAME -->
-            <label for="lname" class="space-y-1.5 block">
-              <p id="form_label">Efternavn</p>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 48 48"
-                  >
-                    <g
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="4"
-                    >
-                      <circle cx="24" cy="11" r="7" fill="currentColor" />
-                      <path d="M4 41c0-8.837 8.059-16 18-16" />
-                      <path
-                        fill="currentColor"
-                        d="m31 42l10-10l-4-4l-10 10v4z"
-                      />
-                    </g>
-                  </svg>
-                </div>
-                <input
-                  id="form_input"
-                  type="text"
-                  name="lname"
-                  inputmode="text"
-                  placeholder="Ipsum"
-                  required
-                />
-              </div>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['lname']['label_for'], form_label=form_inputs['lname']['text'], form_svg=form_inputs['lname']['icon'], type=form_inputs['lname']['type'], name=form_inputs['lname']['name'], inputmode=form_inputs['lname']['inputmode'], placeholder=form_inputs['lname']['placeholder'], form_info=form_inputs['lname']['form_info'])
             <!-- USERNAME -->
-            <label for="username" class="space-y-1.5 block">
-              <p id="form_label">Brugernavn</p>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M5.85 17.1q1.275-.975 2.85-1.537T12 15t3.3.563t2.85 1.537q.875-1.025 1.363-2.325T20 12q0-3.325-2.337-5.663T12 4T6.337 6.338T4 12q0 1.475.488 2.775T5.85 17.1M12 13q-1.475 0-2.488-1.012T8.5 9.5t1.013-2.488T12 6t2.488 1.013T15.5 9.5t-1.012 2.488T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="form_input"
-                  type="text"
-                  name="username"
-                  inputmode="text"
-                  placeholder="LoremIpsum"
-                  required
-                />
-              </div>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['username']['label_for'], form_label=form_inputs['username']['text'], form_svg=form_inputs['username']['icon'], type=form_inputs['username']['type'], name=form_inputs['username']['name'], inputmode=form_inputs['username']['inputmode'], placeholder=form_inputs['username']['placeholder'], form_info=form_inputs['username']['form_info'])
             <!-- PASSWORD -->
-            <label for="pwd" class="space-y-1.5 block">
-              <p id="form_label">Adgangskode</p>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M6 22q-.825 0-1.412-.587T4 20V10q0-.825.588-1.412T6 8h1V6q0-2.075 1.463-3.537T12 1t3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.587 1.413T18 22zm6-5q.825 0 1.413-.587T14 15t-.587-1.412T12 13t-1.412.588T10 15t.588 1.413T12 17M9 8h6V6q0-1.25-.875-2.125T12 3t-2.125.875T9 6z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="form_input"
-                  class="block ps-12"
-                  type="password"
-                  name="pwd"
-                  inputmode="text"
-                  placeholder="••••••••"
-                  required
-                />
-              </div>
-              <p
-                class="flex items-center gap-2.5 font-sans text-xs text-unidPurple"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11t-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"
-                  />
-                </svg>
-                Use at least 8 characters, one uppercase, one lowercase and one
-                number.
-              </p>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['password']['label_for'], form_label=form_inputs['password']['text'], form_svg=form_inputs['password']['icon'], type=form_inputs['password']['type'], name=form_inputs['password']['name'], inputmode=form_inputs['password']['inputmode'], placeholder=form_inputs['password']['placeholder'], form_info=form_inputs['password']['form_info'])
           </div>
           <div class="space-y-4 lg:space-y-6">
             <!-- EMAIL -->
-            <label for="email" class="space-y-1.5 block">
-              <p id="form_label">Email</p>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12v1.45q0 1.475-1.012 2.513T18.5 17q-.875 0-1.65-.375t-1.3-1.075q-.725.725-1.638 1.088T12 17q-2.075 0-3.537-1.463T7 12t1.463-3.537T12 7t3.538 1.463T17 12v1.45q0 .65.425 1.1T18.5 15t1.075-.45t.425-1.1V12q0-3.35-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20h4q.425 0 .713.288T17 21t-.288.713T16 22zm0-7q1.25 0 2.125-.875T15 12t-.875-2.125T12 9t-2.125.875T9 12t.875 2.125T12 15"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="form_input"
-                  type="email"
-                  name="email"
-                  inputmode="email"
-                  placeholder="loremipsum@mail.com"
-                  required
-                />
-              </div>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['email']['label_for'], form_label=form_inputs['email']['text'], form_svg=form_inputs['email']['icon'], type=form_inputs['phone']['type'], name=form_inputs['email']['name'], inputmode=form_inputs['email']['inputmode'], placeholder=form_inputs['email']['placeholder'], form_info=form_inputs['email']['form_info'])
             <!-- PHONE -->
-            <label for="phone" class="space-y-1.5 block">
-              <p id="form_label">Telefon nummer</p>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M4.05 21q-.45 0-.75-.3t-.3-.75V15.9q0-.325.225-.587t.575-.363l3.45-.7q.35-.05.713.063t.587.337L10.9 17q.95-.55 1.8-1.213t1.625-1.437q.825-.8 1.513-1.662t1.187-1.788L14.6 8.45q-.2-.2-.275-.475T14.3 7.3l.65-3.5q.05-.325.325-.562T15.9 3h4.05q.45 0 .75.3t.3.75q0 3.125-1.362 6.175t-3.863 5.55t-5.55 3.863T4.05 21"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="form_input"
-                  type="tel"
-                  name="phone"
-                  inputmode="tel"
-                  placeholder="Fx. 12 34 56 67"
-                  required
-                />
-              </div>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['phone']['label_for'], form_label=form_inputs['phone']['text'], form_svg=form_inputs['phone']['icon'], type=form_inputs['phone']['type'], name=form_inputs['phone']['name'], inputmode=form_inputs['phone']['inputmode'], placeholder=form_inputs['phone']['placeholder'], form_info=form_inputs['phone']['form_info'])
             <!-- WEBSITE NAME -->
-            <label for="website_name" class="space-y-1.5 block">
-              <div class="flex space-between justify-between">
-                <p id="form_label">Navn på din hjemmeside</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#22c55e"
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m3.88-11.71L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0"
-                  />
-                </svg>
-              </div>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m10 21l4-4h6q.825 0 1.413.588T22 19q0 .825-.588 1.413T20 21H10Zm-6-2h1.4l8.625-8.625l-1.4-1.4L4 17.6V19ZM18.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L18.3 8.925ZM3 21q-.425 0-.713-.288T2 20v-2.825q0-.2.075-.388t.225-.337l10.3-10.3l4.25 4.25l-10.3 10.3q-.15.15-.337.225T5.825 21H3ZM13.325 9.675l-.7-.7l1.4 1.4l-.7-.7Z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="form_input_success"
-                  type="text"
-                  name="website_name"
-                  inputmode="text"
-                  placeholder="LoremIpsum"
-                  required
-                />
-              </div>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['website_name']['label_for'], form_label=form_inputs['website_name']['text'], form_svg=form_inputs['website_name']['icon'], type=form_inputs['website_name']['type'], name=form_inputs['website_name']['name'], inputmode=form_inputs['website_name']['inputmode'], placeholder=form_inputs['website_name']['placeholder'], form_info=form_inputs['website_name']['form_info'])
             <!-- WEBSITE URL -->
-            <label for="website_url" class="space-y-1.5 block">
-              <div class="flex space-between justify-between">
-                <p id="form_label">URL til din hjemmeside</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#ef4444"
-                    d="M12 17q.425 0 .713-.288T13 16t-.288-.712T12 15t-.712.288T11 16t.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7t-.712.288T11 8v4q0 .425.288.713T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"
-                  />
-                </svg>
-              </div>
-              <div class="relative w-full">
-                <div
-                  class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue rounded-bl-md rounded-tl-md"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                  >
-                    <g
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    >
-                      <path
-                        d="M3.338 17A10 10 0 0 0 12 22a10 10 0 0 0 8.662-5M3.338 7A10 10 0 0 1 12 2a10 10 0 0 1 8.662 5"
-                      />
-                      <path
-                        d="M13 21.95s1.408-1.853 2.295-4.95M13 2.05S14.408 3.902 15.295 7M11 21.95S9.592 20.098 8.705 17M11 2.05S9.592 3.902 8.705 7M9 10l1.5 5l1.5-5l1.5 5l1.5-5M1 10l1.5 5L4 10l1.5 5L7 10m10 0l1.5 5l1.5-5l1.5 5l1.5-5"
-                      />
-                    </g>
-                  </svg>
-                </div>
-                <input
-                  id="form_input_error"
-                  type="url"
-                  name="website_url"
-                  inputmode="url"
-                  placeholder="https://www.lorem-ipsum.dk"
-                  required
-                />
-              </div>
-              <div id="form_input_error_message" class="flex gap-1.5">
-                <p class="font-bold">Åh nej!</p>
-                <p>Fejlbesked.</p>
-              </div>
-            </label>
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['website_url']['label_for'], form_label=form_inputs['website_url']['text'], form_svg=form_inputs['website_url']['icon'], type=form_inputs['website_url']['type'], name=form_inputs['website_url']['name'], inputmode=form_inputs['website_url']['inputmode'], placeholder=form_inputs['website_url']['placeholder'], form_info=form_inputs['website_url']['form_info'])
           </div>
         </form>
       </div>
@@ -355,8 +50,9 @@
         <div class="flex items-center h-5">
           <input
             type="checkbox"
-            class="w-4 h-4 border border-unidLightBlue rounded bg-white focus:ring-3 focus:ring-unidPurple"
-            required=""
+            id="form_checkbox"
+            class="w-4 h-4"
+            required
           />
         </div>
         <div class="flex gap-1.5">

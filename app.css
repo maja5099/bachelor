@@ -1044,20 +1044,16 @@ h1 {
   gap: 0.5rem;
 }
 
+.gap-2\.5 {
+  gap: 0.625rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
 
 .gap-6 {
   gap: 1.5rem;
-}
-
-.gap-3 {
-  gap: 0.75rem;
-}
-
-.gap-2\.5 {
-  gap: 0.625rem;
 }
 
 .gap-x-14 {
@@ -1093,24 +1089,20 @@ h1 {
   margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 
-.space-y-6 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
-.overflow-clip {
-  overflow: clip;
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
-.rounded {
-  border-radius: 0.25rem;
+.overflow-clip {
+  overflow: clip;
 }
 
 .rounded-bl-md {
@@ -1119,10 +1111,6 @@ h1 {
 
 .rounded-tl-md {
   border-top-left-radius: 0.375rem;
-}
-
-.border {
-  border-width: 1px;
 }
 
 .border-t {
@@ -1149,11 +1137,6 @@ h1 {
   background-color: rgb(247 240 230 / var(--tw-bg-opacity));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-wave {
   background-image: url('/assets/graphics/wave.svg');
 }
@@ -1164,6 +1147,10 @@ h1 {
 
 .fill-unidPurple {
   fill: #59437B;
+}
+
+.fill-white {
+  fill: #fff;
 }
 
 .object-cover {
@@ -1216,10 +1203,6 @@ h1 {
   padding-bottom: 2rem;
 }
 
-.ps-12 {
-  padding-inline-start: 3rem;
-}
-
 .pt-2 {
   padding-top: 0.5rem;
 }
@@ -1257,14 +1240,6 @@ h1 {
 
 .font-medium {
   font-weight: 500;
-}
-
-.uppercase {
-  text-transform: uppercase;
-}
-
-.lowercase {
-  text-transform: lowercase;
 }
 
 .text-unidLightBlue {
@@ -1336,11 +1311,6 @@ h1 {
 
 .hover\:font-semibold:hover {
   font-weight: 600;
-}
-
-.focus\:ring-unidPurple:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(89 67 123 / var(--tw-ring-opacity));
 }
 
 .group:hover .group-hover\:max-w-full {
