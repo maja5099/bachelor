@@ -69,4 +69,7 @@
     border: solid 1.5px #22c55e;
     outline: none;
   }
+  .icon_hidden {
+    display: none;
+  }
 }
