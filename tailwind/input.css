@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply font-montserrat bg-unidYellow;
+    @apply font-montserrat bg-unidYellow selection:bg-unidPurple selection:text-white scroll-smooth;
   }
   h1 {
     @apply text-unidPurple font-saira text-5xl md:text-6xl font-bold;
@@ -77,5 +77,8 @@
   }
   .icon_hidden {
     display: none;
+  }
+  input[type="checkbox"] {
+    accent-color: #59437b;
   }
 }

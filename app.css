@@ -447,9 +447,38 @@ video {
 }
 
 html {
+  scroll-behavior: smooth;
   --tw-bg-opacity: 1;
   background-color: rgb(247 240 230 / var(--tw-bg-opacity));
   font-family: 'Montserrat', sans-serif;
+}
+
+html *::-moz-selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(89 67 123 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+html *::selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(89 67 123 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+html::-moz-selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(89 67 123 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+html::selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(89 67 123 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 h1 {
@@ -1494,6 +1523,10 @@ h3 {
 
 .icon_hidden {
   display: none;
+}
+
+input[type="checkbox"] {
+  accent-color: #59437b;
 }
 
 .hover\:scale-105:hover {
