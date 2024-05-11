@@ -1,10 +1,10 @@
 # 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
 # https://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@github.com/maja5099/bachelor.git
 
-from bottle import default_app, post, route, get, run, template, static_file, TEMPLATE_PATH
+from bottle import default_app, post, route, get, run, template, static_file, TEMPLATE_PATH, request
 import git
 import os
-
+import dbconnection
 
 ##############################
 #   Git and Pythonanywhere hook
@@ -167,7 +167,14 @@ form_inputs = {
 #   Routes
 @route("/")
 def index():
-   return template('index', title="UNID Studio", header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons, form_inputs=form_inputs)
+    user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
+    if user: 
+        db = dbconnection.db()
+        username = user['username']
+        user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
+    else:
+        user = None
+    return template('index', title="UNID Studio", user=user, header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons, form_inputs=form_inputs)
 
 
 import routers.signup
@@ -187,4 +194,4 @@ try:
   application = default_app()
 except Exception as ex:
   print("Running local server")
-  run(host="127.0.0.1", port=4000, debug=True, reloader=True)
+  run(host="127.0.0.1", port=5000, debug=True, reloader=True)
