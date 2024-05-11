@@ -43,7 +43,7 @@ def _():
 def login_get():
     try:
         db = dbconnection.db()
-        return template("login.html")
+        return template("login", title="Log ind",)
     except Exception as e:
         print(e)
         if "db" in locals(): db.rollback() 
