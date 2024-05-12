@@ -87,6 +87,15 @@ form_inputs = {
     },
 }
 
+section_login_content = {
+    "header_text": "Log ind",
+    "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
+    "error_icon": "exclamation_mark.tpl",
+    "button_text": "Log ind",
+    "image": "unid_universe.svg",
+    "logo": "primary_logo.svg",
+}
+
 @post("/login")
 def _():
     try:
@@ -132,7 +141,7 @@ def _():
 def login_get():
     try:
         db = dbconnection.db()
-        return template("login", title="Log ind", form_inputs=form_inputs)
+        return template("login", title="Log ind", form_inputs=form_inputs, section_login_content=section_login_content)
     
     except Exception as e:
         print(e)
