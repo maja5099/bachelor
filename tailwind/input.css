@@ -48,6 +48,9 @@
   #form_input {
     @apply w-full ps-16 py-3 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
   }
+  #password_input {
+    @apply w-full ps-16 py-3 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
+  }
   #form_input_error {
     @apply w-full ps-16 py-3 px-5 rounded-md border border-red-500 placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
   }

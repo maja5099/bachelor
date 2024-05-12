@@ -176,6 +176,9 @@ def index():
         user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
     else:
         user = None
+        username = None
+        first_name = None
+        last_name = None
     return template('index', title="UNID Studio", user=user, first_name=first_name, last_name=last_name, username=username, header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons, form_inputs=form_inputs)
 
 

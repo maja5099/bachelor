@@ -33,47 +33,83 @@
   </head>
 
   <body>
-    <section>
-      <div>
-        <span>Log ind</span>
-        <div class="mt-4 flex flex-col justify-center">
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Brugernavn"
-          />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Adgangskode"
-          />
+    <section
+      class="grid grid-cols-1 lg:grid-cols-3 xl:h-screen xl:min-w-screen bg-unidYellow bg-wave bg-cover"
+    >
+      <div
+        class="lg:w-6/12 md:w-8/12 2xl:w-4/12 flex flex-col lg:col-span-2 space-y-10 lg:space-y-12 justify-center mx-auto w-10/12 py-20 lg:py-16"
+      >
+        <div class="space-y-3 lg:space-y-6">
+          <h1>Log ind</h1>
+          <p id="subheader">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae,
+            voluptatum!
+          </p>
         </div>
-        <button onclick="login()">Log ind</button>
-        <div>
-          <p id="error-message"></p>
+        <form class="space-y-6 lg:space-y-8">
+          <div id="username">
+            <!-- USERNAME -->
+            <!-- prettier-ignore -->
+            % include('utilities/input_field', label_for=form_inputs['username']['label_for'], form_label=form_inputs['username']['text'], form_svg=form_inputs['username']['icon'], type=form_inputs['username']['type'], name=form_inputs['username']['name'], inputmode=form_inputs['username']['inputmode'], placeholder=form_inputs['username']['placeholder'], form_info=form_inputs['username']['form_info'])
+          </div>
+          <div class="form_input_error_message">
+            <!-- PASSWORD -->
+            <!-- prettier-ignore -->
+            % include('utilities/password_field')
+          </div>
+        </form>
+        <div class="space-y-6">
+          <div id="error_message">
+            <p p></p>
+          </div>
+          <div
+            onclick="login()"
+            class="w-full pt-4 items-center mx-auto flex justify-center"
+          >
+            <!-- prettier-ignore -->
+            % include('utilities/buttons/primary_button', link='', type='', button_text='Log ind')
+          </div>
+          <div
+            class="flex pt-2 text-sm gap-2 text-unidLightBlue border-t border-unidLightBlue"
+          >
+            <p>Har du ikke en bruger?</p>
+            <a
+              href="#"
+              class="group transition duration-300 cursor-pointer text-sm hover:scale-105 font-bold ease-in-out"
+            >
+              Opret bruger
+              <span
+                class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-unidPurple"
+              ></span>
+            </a>
+          </div>
         </div>
-        <div>
-          <p>Har du ikke en bruger?</p>
-          <a id="" onclick="" class="" href="">Opret en bruger</a>
-        </div>
+      </div>
+      <div
+        class="bg-unidLightBlue relative flex py-14 lg:py-0 justify-center mx-auto"
+      >
+        <img
+          class="absolute top-10 right-10 hidden lg:block w-40"
+          src="/assets/logos/primary_logo.svg"
+          alt=""
+        />
+        <img
+          class="w-8/12 lg:w-10/12 mx-auto -mt-20 lg:-mt-0 lg:-ml-20"
+          src="/assets/illustrations/unid_universe.svg"
+          alt=""
+        />
       </div>
     </section>
 
     <script>
       async function login() {
+        event.preventDefault();
         const username = document.querySelector("input[name='username']").value;
         const password = document.querySelector("input[name='password']").value;
-        console.log("Username:", username);
-        const formData = new FormData();
 
+        const formData = new FormData();
         formData.append("username", username);
         formData.append("password", password);
-
-        for (const value of formData.values()) {
-          console.log(value);
-        }
 
         const response = await fetch("/login", {
           method: "POST",
@@ -82,7 +118,7 @@
         const data = await response.json();
 
         if (data.error) {
-          document.getElementById("error-message").innerText = data.error;
+          document.getElementById("error_message").innerText = data.error;
         } else {
           console.log("Login successful");
           window.location.href = "/";
