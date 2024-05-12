@@ -95,13 +95,17 @@ def _():
         username = request.forms.get("username")
         password = request.forms.get("password")
 
+        if not username or not password:
+            response.status = 400
+            raise Exception("Du skal udfylde både brugernavn og adgangskode, for at logge ind.")
+            
+
         db = dbconnection.db()
         user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
 
         if not user: 
             response.status = 400
             raise Exception("Brugernavnet eksisterer ikke")
-
    
         hashed_password_from_db = user["password"]
         hashed_password_input = bcrypt.hashpw(password.encode("utf-8"), hashed_password_from_db)
@@ -112,7 +116,7 @@ def _():
             return redirect("/")
         else:
             response.status = 400 
-            raise Exception("Forkert adgangskode") 
+            raise Exception("Adgangskoden er forkert") 
     
     except Exception as e:
         error_message = str(e)
