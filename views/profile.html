@@ -68,19 +68,19 @@
           <div class="grid md:grid-cols-2 gap-8">
             <!-- prettier-ignore -->
             % if "user_roles_user_role_id" in user:
-                  % if user["user_roles_user_role_id"] == 1:
-                      % include('components/profile_box', box_icon=ui_icons['hourglass_icon'], box_title='Tid tilbage', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
-                      % include('components/profile_box', box_icon=ui_icons['stop_watch_icon'], box_title='Tid brugt', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
-                  % elif user["user_roles_user_role_id"] == 2:
-                      % include('components/profile_box', box_icon=ui_icons['open_folder_icon'], box_title='Åbne klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
-                      % include('components/profile_box', box_icon=ui_icons['closed_folder_icon'], box_title='Lukkede klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
-                  % end
-                % end
+              % if user["user_roles_user_role_id"] == 1:
+                  % include('components/profile_box', box_icon=ui_icons['hourglass_icon'], box_title='Tid tilbage', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
+                  % include('components/profile_box', box_icon=ui_icons['stop_watch_icon'], box_title='Tid brugt', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
+              % elif user["user_roles_user_role_id"] == 2:
+                  % include('components/profile_box', box_icon=ui_icons['open_folder_icon'], box_title='Åbne klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
+                  % include('components/profile_box', box_icon=ui_icons['closed_folder_icon'], box_title='Lukkede klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
+              % end
+            % end
           </div>
         </div>
       </div>
     </section>
-    % include('components/footer')
+
     <!-- prettier-ignore -->
     % else:
     <script>
@@ -88,5 +88,17 @@
       window.location.href = "/login";
     </script>
     % end
+
+    <!-- prettier-ignore -->
+    % if "user_roles_user_role_id" in user:
+      % if user["user_roles_user_role_id"] == 1:
+        % include('sections/pricing')
+      % elif user["user_roles_user_role_id"] == 2:
+    <!-- Admin components -->
+    % end
+    <!-- prettier-ignore -->
+    % end
+
+    % include('components/footer')
   </body>
 </html>
