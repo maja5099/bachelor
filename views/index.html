@@ -35,17 +35,6 @@
     % include('components/header_bar')
     % include('components/header') 
     % include('sections/landingpage_hero')
-    <!-- prettier-ignore -->
-    % if user and "user_roles_user_role_id" in user:
-      % if user["user_roles_user_role_id"] == 1:
-    <p>Velkommen, {{first_name}} {{last_name}}!</p>
-    % elif user["user_roles_user_role_id"] == 2:
-    <p>Velkommen, {{first_name}} {{last_name}}!</p>
-    <p>Du er logget ind som admin</p>
-    % end
-    % end
-
-    <!-- prettier-ignore -->
     % include('components/footer')
   </body>
 </html>

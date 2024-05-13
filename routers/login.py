@@ -9,6 +9,7 @@ import content
 ##############################
 #   Content from content.py
 form_inputs = content.form_inputs
+unid_logo = content.unid_logo
 section_login_content = content.section_login_content
 
 
@@ -57,7 +58,7 @@ def _():
 def login_get():
     try:
         db = dbconnection.db()
-        return template("login", title="Log ind", form_inputs=form_inputs, section_login_content=section_login_content)
+        return template("login", title="Log ind", form_inputs=form_inputs, section_login_content=section_login_content,unid_logo=unid_logo)
     
     except Exception as e:
         print(e)

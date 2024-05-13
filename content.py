@@ -1,11 +1,17 @@
 unid_logo = {       
     "primary_logo": "primary_logo.svg",
+    "secondary_logo": "primary_logo.svg",
     "logo_alt": "UNID Studio's logo",
 }
 
 ui_icons = {       
     "user_icon": "user.tpl", 
-    "burger_icon": "burger.tpl"
+    "admin_icon": "admin.tpl",
+    "burger_icon": "burger.tpl",
+    "hourglass_icon": "hourglass.tpl",
+    "stop_watch_icon": "stop_watch.tpl",
+    "open_folder_icon": "open_folder.tpl",
+    "closed_folder_icon": "closed_folder.tpl",
 }
 
 selling_points = [       
@@ -132,3 +138,19 @@ section_login_content = {
     "image": "unid_universe.svg",
     "logo": "primary_logo.svg",
 }
+
+section_profile_admin = [
+    {"icon": "user.tpl", "text": "Oversigt", "link": "/"},
+    {"icon": "card.tpl", "text": "Klippekort", "link": "/"},
+    {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
+    {"icon": "settings.tpl", "text": "Kontoindstillinger", "link": "/"},
+]
+
+section_profile_customer = [
+    {"icon": "user.tpl", "text": "Oversigt", "link": "/"},
+    {"icon": "card.tpl", "text": "Klippekort", "link": "/"},
+    {"icon": "cart.tpl", "text": "Tilkøb", "link": "/"},
+    {"icon": "education.tpl", "text": "Kurser", "link": "/"},
+    {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
+    {"icon": "settings.tpl", "text": "Kontoindstillinger", "link": "/"},
+]

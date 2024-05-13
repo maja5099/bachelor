@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <!-- prettier-ignore -->
+    % if user:
+      % include('components/header_bar')
+      % include('components/header')
+    <section
+      class="bg-unidYellow bg-wave bg-cover py-20 space-y-8 lg:space-y-10"
+    >
+      <h1 class="flex justify-center">Min konto</h1>
+      <div
+        class="w-10/12 2xl:w-8/12 mx-auto space-y-8 lg:space-y-0 lg:gap-20 grid grid-cols-1 lg:grid-cols-3 items-center"
+      >
+        % include('components/profile_menu')
+        <div class="col-span-2 gap-10 md:gap-8 lg:gap-20 space-y-8">
+          <div
+            class="w-full h-full bg-unidLightBlue rounded-lg text-white justify-between xl:flex items-center p-6 space-y-2"
+          >
+            <!-- prettier-ignore -->
+            % if "user_roles_user_role_id" in user:
+              % if user["user_roles_user_role_id"] == 1:
+            <p class="font-bold text-lg">
+              Velkommen, {{first_name}} {{last_name}}!
+            </p>
+            % elif user["user_roles_user_role_id"] == 2:
+            <p class="font-bold text-lg">
+              Velkommen, {{first_name}} {{last_name}}!
+            </p>
+            <div class="flex gap-1 text-sm">
+              <p>Du er logget ind som</p>
+              <p class="underline underline-offset-4">admin</p>
+            </div>
+            % end
+            <!-- prettier-ignore -->
+            % end
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- prettier-ignore -->
+            % if "user_roles_user_role_id" in user:
+                  % if user["user_roles_user_role_id"] == 1:
+                      % include('components/profile_box', box_icon=ui_icons['hourglass_icon'], box_title='Tid tilbage', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
+                      % include('components/profile_box', box_icon=ui_icons['stop_watch_icon'], box_title='Tid brugt', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
+                  % elif user["user_roles_user_role_id"] == 2:
+                      % include('components/profile_box', box_icon=ui_icons['open_folder_icon'], box_title='Åbne klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
+                      % include('components/profile_box', box_icon=ui_icons['closed_folder_icon'], box_title='Lukkede klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
+                  % end
+                % end
+          </div>
+        </div>
+      </div>
+    </section>
+    % include('components/footer')
+    <!-- prettier-ignore -->
+    % else:
+    <script>
+      alert("Du skal være logget ind for at se denne side");
+      window.location.href = "/login";
+    </script>
+    % end
+  </body>
+</html>

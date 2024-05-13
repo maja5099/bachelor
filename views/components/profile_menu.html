@@ -1,0 +1,50 @@
+<div class="w-full h-full bg-unidLightBlue rounded-lg p-6 space-y-4">
+  <!-- prettier-ignore -->
+  % if user and "user_roles_user_role_id" in user:
+    % if user["user_roles_user_role_id"] == 1:
+    % for section_profile_customer in section_profile_customer:
+  <button class="secondary_button w-full flex cursor-pointer">
+    <div class="h-6 w-6">
+      <!-- prettier-ignore -->
+      % include(f'{section_profile_customer["icon"]}')
+    </div>
+    <p class="font-bold">{{section_profile_customer['text']}}</p>
+  </button>
+  % end
+  <!-- prettier-ignore -->
+  % elif user["user_roles_user_role_id"] == 2:
+  <!-- prettier-ignore -->
+  % for section_profile_admin in section_profile_admin:
+  <button class="secondary_button w-full flex cursor-pointer">
+    <div class="h-6 w-6">
+      <!-- prettier-ignore -->
+      % include(f'{section_profile_admin["icon"]}')
+    </div>
+    <p class="font-bold">{{section_profile_admin['text']}}</p>
+  </button>
+  % end
+  <!-- prettier-ignore -->
+  % end
+  <!-- prettier-ignore -->
+  % else:
+  <!-- Include some default content or error message -->
+  <p>User not logged in or invalid user data</p>
+  % end
+</div>
+
+<script>
+  const buttons = document.querySelectorAll(".secondary_button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      buttons.forEach((btn) =>
+        btn.classList.remove("secondary_button_selected")
+      );
+      this.classList.add("secondary_button_selected");
+    });
+  });
+
+  if (buttons.length > 0) {
+    buttons[0].classList.add("secondary_button_selected");
+  }
+</script>
