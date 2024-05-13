@@ -144,6 +144,7 @@ section_profile_admin = [
     {"icon": "card.tpl", "text": "Klippekort", "link": "/"},
     {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
     {"icon": "settings.tpl", "text": "Kontoindstillinger", "link": "/"},
+    {"icon": "log_out.tpl", "text": "Log ud", "link": "/"},
 ]
 
 section_profile_customer = [
@@ -153,4 +154,5 @@ section_profile_customer = [
     {"icon": "education.tpl", "text": "Kurser", "link": "/"},
     {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
     {"icon": "settings.tpl", "text": "Kontoindstillinger", "link": "/"},
+    {"icon": "log_out.tpl", "text": "Log ud", "link": "/"},
 ]
