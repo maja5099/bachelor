@@ -24,7 +24,7 @@ selling_points = [
 header_nav_items = [
     {"text": "Services & Priser", "link": "/"},
     {"text": "Om UNID Studio", "link": "/"},
-    {"text": "Portfolio", "link": "/"},
+    {"text": "Portfolio", "link": "/portfolio"},
     {"text": "Cases", "link": "/"},
     {"text": "Kontakt", "link": "/"},
 ]

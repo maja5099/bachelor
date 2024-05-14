@@ -72,6 +72,7 @@ def index():
 import routers.signup
 import routers.login
 import routers.profile
+import routers.portfolio
 
 
 ##############################

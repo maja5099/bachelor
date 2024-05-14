@@ -997,6 +997,10 @@ h3 {
   position: relative;
 }
 
+.inset-0 {
+  inset: 0px;
+}
+
 .inset-y-0 {
   top: 0px;
   bottom: 0px;
@@ -1020,6 +1024,10 @@ h3 {
 
 .col-span-1 {
   grid-column: span 1 / span 1;
+}
+
+.row-span-1 {
+  grid-row: span 1 / span 1;
 }
 
 .mx-6 {
@@ -1126,6 +1134,10 @@ h3 {
 
 .w-8\/12 {
   width: 66.666667%;
+}
+
+.w-auto {
+  width: auto;
 }
 
 .w-full {
@@ -1389,6 +1401,10 @@ h3 {
   padding: 0.75rem;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
 .p-6 {
   padding: 1.5rem;
 }
@@ -1515,6 +1531,10 @@ h3 {
   font-weight: 500;
 }
 
+.font-semibold {
+  font-weight: 600;
+}
+
 .tracking-wider {
   letter-spacing: 0.05em;
 }
@@ -1546,6 +1566,10 @@ h3 {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 
 .drop-shadow-xl {
@@ -1620,6 +1644,10 @@ input[type="checkbox"] {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
+}
+
 .hover\:font-semibold:hover {
   font-weight: 600;
 }
@@ -1628,9 +1656,21 @@ input[type="checkbox"] {
   max-width: 100%;
 }
 
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+.group:hover .group-hover\:opacity-80 {
+  opacity: 0.8;
+}
+
 @media (min-width: 768px) {
   .md\:col-span-2 {
     grid-column: span 2 / span 2;
+  }
+
+  .md\:row-span-2 {
+    grid-row: span 2 / span 2;
   }
 
   .md\:w-1\/2 {
@@ -1641,11 +1681,11 @@ input[type="checkbox"] {
     width: 33.333333%;
   }
 
-  .md\:w-8\/12 {
+  .md\:w-2\/3 {
     width: 66.666667%;
   }
 
-  .md\:w-2\/3 {
+  .md\:w-8\/12 {
     width: 66.666667%;
   }
 
@@ -1667,6 +1707,10 @@ input[type="checkbox"] {
 
   .md\:gap-2 {
     gap: 0.5rem;
+  }
+
+  .md\:gap-4 {
+    gap: 1rem;
   }
 
   .md\:gap-8 {
@@ -1753,10 +1797,6 @@ input[type="checkbox"] {
     width: 100%;
   }
 
-  .lg\:w-3\/6 {
-    width: 50%;
-  }
-
   .lg\:max-w-lg {
     max-width: 32rem;
   }
@@ -1771,6 +1811,14 @@ input[type="checkbox"] {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-rows-3 {
+    grid-template-rows: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:flex-row {
@@ -1797,10 +1845,6 @@ input[type="checkbox"] {
     gap: 1.5rem;
   }
 
-  .lg\:gap-16 {
-    gap: 4rem;
-  }
-
   .lg\:gap-y-0 {
     row-gap: 0px;
   }
@@ -1821,6 +1865,12 @@ input[type="checkbox"] {
     --tw-space-y-reverse: 0;
     margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+  }
+
+  .lg\:space-y-16 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(4rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(4rem * var(--tw-space-y-reverse));
   }
 
   .lg\:space-y-6 > :not([hidden]) ~ :not([hidden]) {
@@ -1882,28 +1932,20 @@ input[type="checkbox"] {
     width: 66.666667%;
   }
 
-  .xl\:w-3\/6 {
-    width: 50%;
-  }
-
   .xl\:w-2\/6 {
     width: 33.333333%;
-  }
-
-  .xl\:w-8\/12 {
-    width: 66.666667%;
   }
 
   .xl\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .xl\:gap-8 {
-    gap: 2rem;
-  }
-
   .xl\:gap-20 {
     gap: 5rem;
+  }
+
+  .xl\:gap-8 {
+    gap: 2rem;
   }
 
   .xl\:py-0 {
