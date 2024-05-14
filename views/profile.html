@@ -40,10 +40,13 @@
     >
       <h1 class="flex justify-center">Min konto</h1>
       <div
-        class="w-10/12 2xl:w-8/12 mx-auto space-y-8 lg:space-y-0 lg:gap-20 grid grid-cols-1 lg:grid-cols-3 items-center"
+        class="w-10/12 2xl:w-6/12 mx-auto space-y-8 lg:space-y-0 md:grid-cols-2 md:gap-10 xl:gap-20 grid grid-cols-1 lg:grid-cols-3 items-center"
       >
-        % include('components/profile_menu')
-        <div class="col-span-2 gap-10 md:gap-8 lg:gap-20 space-y-8">
+        <div class="col-span-1">
+          <!-- prettier-ignore -->
+          % include('components/profile_menu')
+        </div>
+        <div class="lg:col-span-2 col-span-1 grid gap-10 md:gap-8">
           <div
             class="w-full h-full bg-unidLightBlue rounded-lg text-white justify-between xl:flex items-center p-6 space-y-2"
           >
@@ -70,7 +73,8 @@
             <!-- prettier-ignore -->
             % end
           </div>
-          <div class="grid md:grid-cols-2 gap-8">
+
+          <div class="grid lg:grid-cols-2 gap-8">
             <!-- prettier-ignore -->
             % if "user_roles_user_role_id" in user:
               % if user["user_roles_user_role_id"] == 1:

@@ -143,7 +143,7 @@ section_profile_admin = [
     {"icon": "user.tpl", "text": "Oversigt", "link": "/"},
     {"icon": "card.tpl", "text": "Klippekort", "link": "/"},
     {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
-    {"icon": "settings.tpl", "text": "Kontoindstillinger", "link": "/"},
+    {"icon": "settings.tpl", "text": "Indstillinger", "link": "/"},
     {"icon": "log_out.tpl", "text": "Log ud", "link": "/"},
 ]
 
@@ -153,7 +153,7 @@ section_profile_customer = [
     {"icon": "cart.tpl", "text": "Tilkøb", "link": "/"},
     {"icon": "education.tpl", "text": "Kurser", "link": "/"},
     {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
-    {"icon": "settings.tpl", "text": "Kontoindstillinger", "link": "/"},
+    {"icon": "settings.tpl", "text": "Indstillinger", "link": "/"},
     {"icon": "log_out.tpl", "text": "Log ud", "link": "/"},
 ]
 
