@@ -1762,6 +1762,10 @@ input[type="checkbox"] {
     grid-row: span 2 / span 2;
   }
 
+  .md\:h-screen {
+    height: 100vh;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -1886,6 +1890,10 @@ input[type="checkbox"] {
 
   .lg\:hidden {
     display: none;
+  }
+
+  .lg\:h-screen {
+    height: 100vh;
   }
 
   .lg\:w-1\/2 {
