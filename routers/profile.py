@@ -21,6 +21,8 @@ section_profile_customer = content.section_profile_customer
 @get("/profile")
 def _():
     user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
+    if user is None:
+        redirect("/login")
     if user: 
         db = dbconnection.db()
         username = user['username']

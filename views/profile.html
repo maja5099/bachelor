@@ -32,7 +32,7 @@
   </head>
   <body>
     <!-- prettier-ignore -->
-    % if user:
+    % if user is not None and "user_roles_user_role_id" in user:
       % include('components/header_bar')
       % include('components/header')
     <section
@@ -89,13 +89,6 @@
         </div>
       </div>
     </section>
-
-    <!-- prettier-ignore -->
-    % else:
-    <script>
-      alert("Du skal være logget ind for at se denne side");
-      window.location.href = "/login";
-    </script>
     % end
 
     <!-- prettier-ignore -->
