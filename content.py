@@ -12,6 +12,7 @@ ui_icons = {
     "stop_watch_icon": "stop_watch.tpl",
     "open_folder_icon": "open_folder.tpl",
     "closed_folder_icon": "closed_folder.tpl",
+    "message": "letter.tpl",
 }
 
 selling_points = [       
@@ -24,9 +25,8 @@ selling_points = [
 header_nav_items = [
     {"text": "Services & Priser", "link": "/"},
     {"text": "Om UNID Studio", "link": "/"},
-    {"text": "Portfolio", "link": "/portfolio"},
-    {"text": "Cases", "link": "/"},
-    {"text": "Kontakt", "link": "/"},
+    {"text": "Case portfolio", "link": "/portfolio"},
+    {"text": "Kontakt", "link": "/contact"},
 ]
 
 footer_info = [
@@ -128,6 +128,16 @@ form_inputs = {
         "placeholder": "https://www.lorem-ipsum.dk",
         "form_info": "",    
     },
+    "full_name": {
+        "label_for": "name",
+        "text": "Navn", 
+        "icon": "user_circle.tpl", 
+        "type": "name",
+        "name": "name",
+        "inputmode":"text",
+        "placeholder": "Lorem Ipsum",
+        "form_info": "",
+    },
 }
 
 section_login_content = {
@@ -210,4 +220,23 @@ pricing_accent = {
     },
 }
 
+section_testimonial_content = {
+    "header_text": "Det siger vores kunder",
+    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+    "testimonial_icon": "quote.tpl",
+    "testimonials": [
+        {
+            "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+            "author_name": "Lorem ipsum", 
+            "author_job_title": "Lorem ipsum", 
+            "author_image": "user.tpl",
+        },
+        {
+            "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+            "author_name": "Lorem ipsum", 
+            "author_job_title": "Lorem ipsum", 
+            "author_image": "user.tpl",
+        },
+    ],
+}
 

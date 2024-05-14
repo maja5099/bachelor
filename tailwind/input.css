@@ -19,7 +19,7 @@
     @apply text-unidPurple font-montserrat text-lg md:text-2xl leading-8 md:leading-10;
   }
   #subheader {
-    @apply text-unidPurple font-montserrat text-lg md:text-lg leading-loose;
+    @apply text-unidPurple font-montserrat text-lg md:text-lg leading-relaxed;
   }
   #selling_point {
     @apply leading-relaxed flex text-xs lg:text-sm text-unidLightBlue font-bold;
