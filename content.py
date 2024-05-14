@@ -156,3 +156,58 @@ section_profile_customer = [
     {"icon": "settings.tpl", "text": "Kontoindstillinger", "link": "/"},
     {"icon": "log_out.tpl", "text": "Log ud", "link": "/"},
 ]
+
+pricing_default = {
+    "clipcard_a": {
+        "info": {
+            "title": "Klippekort A",
+            "hours": "10 timer",
+            "discount": "Spar 1.234 DKK",
+            "discount_icon": "discount.tpl",
+            "price": "12.345 DKK",
+        },
+        "selling_points": [
+            {"icon": "checkmark.tpl", "text": "Selling point 1"},
+            {"icon": "checkmark.tpl", "text": "Selling point 2"},
+            {"icon": "checkmark.tpl", "text": "Selling point 3"},
+            {"icon": "checkmark.tpl", "text": "Selling point 4"},
+        ]
+    },
+    "clipcard_b": {
+        "info": {
+            "title": "Klippekort B",
+            "hours": "20 timer",
+            "discount": "Spar 1.234 DKK",
+            "discount_icon": "discount.tpl",
+            "price": "12.345 DKK",
+        },
+        "selling_points": [
+            {"icon": "checkmark.tpl", "text": "Selling point 1"},
+            {"icon": "checkmark.tpl", "text": "Selling point 2"},
+            {"icon": "checkmark.tpl", "text": "Selling point 3"},
+            {"icon": "checkmark.tpl", "text": "Selling point 4"},
+        ]
+    }
+}
+
+pricing_accent = {
+    "clipcard_c": {
+        "info": {
+            "title": "Klippekort C",
+            "hours": "30 timer",
+            "discount": "Spar 1.234 DKK",
+            "discount_icon": "discount_full.tpl",
+            "price": "12.345 DKK",
+        },
+        "selling_points": [
+            {"icon": "checkmark_full.tpl", "text": "Selling point 1"},
+            {"icon": "checkmark_full.tpl", "text": "Selling point 2"},
+            {"icon": "checkmark_full.tpl", "text": "Selling point 3"},
+            {"icon": "checkmark_full.tpl", "text": "Selling point 4"},
+            {"icon": "checkmark_full.tpl", "text": "Selling point 5"},
+            {"icon": "checkmark_full.tpl", "text": "Selling point 6"},
+        ]
+    },
+}
+
+

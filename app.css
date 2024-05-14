@@ -1096,6 +1096,14 @@ h3 {
   height: 100%;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
+.h-auto {
+  height: auto;
+}
+
 .w-10\/12 {
   width: 83.333333%;
 }
@@ -1150,6 +1158,10 @@ h3 {
 
 .w-full {
   width: 100%;
+}
+
+.w-8 {
+  width: 2rem;
 }
 
 .max-w-0 {
