@@ -7,6 +7,7 @@ import os
 import dbconnection
 import content
 
+
 ##############################
 #   GIT AND PYTHONANYWHERE HOOK
 @post('/secret_url_for_git_hook')
@@ -77,6 +78,9 @@ import routers.login
 import routers.profile
 import routers.portfolio
 import routers.contact
+import routers.clipcards
+import routers.payment
+
 
 
 ##############################

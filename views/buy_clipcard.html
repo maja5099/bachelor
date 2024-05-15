@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Køb Klippekort</title>
+  </head>
+  <body>
+    <h1>Køb Klippekort</h1>
+    <form action="/process_payment" method="post">
+      <input type="hidden" name="customer_id" value="123" />
+
+      <input type="hidden" name="clipcard_type" value="{{ clipcard_type }}" />
+      <input type="hidden" name="clipcard_price" value="{{ clipcard_price }}" />
+      <p><strong>Klippekorttype:</strong> {{ clipcard_type }}</p>
+      <p><strong>Pris:</strong> {{ clipcard_price }} kr</p>
+
+      <h2>Betalingsoplysninger</h2>
+      <label for="cardnumber">Kortnummer:</label>
+      <input type="text" id="cardnumber" name="cardnumber" required /><br />
+      <label for="expiration_date">Gyldigt til (mm/åå):</label>
+      <input
+        type="text"
+        id="expiration_date"
+        name="expiration_date"
+        required
+      /><br />
+      <label for="security_code">Kontrolcifre:</label>
+      <input
+        type="text"
+        id="security_code"
+        name="security_code"
+        required
+      /><br />
+      <label for="name">Kortholderens navn:</label>
+      <input type="text" id="name" name="name" required /><br />
+
+      <button type="submit">Bekræft Køb</button>
+    </form>
+  </body>
+</html>

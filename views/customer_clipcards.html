@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klippekort</title>
+    <script>
+      function redirectToBuyForm(clipcardType, clipcardPrice) {
+        var formattedClipcardType = clipcardType.replace(/\s+/g, "-");
+        window.location.href =
+          "/buy_clipcard/" + formattedClipcardType + "/" + clipcardPrice;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Klippekort</h1>
+    <ul>
+      % for card in clipcards:
+      <li>
+        {{ card['clipcard_type_title'] }} - Pris: {{ card['clipcard_price'] }}
+        kr
+        <button
+          type="button"
+          onclick="redirectToBuyForm('{{ card['clipcard_type_title'] }}', '{{ card['clipcard_price'] }}')"
+        >
+          Køb
+        </button>
+      </li>
+      % end
+    </ul>
+  </body>
+</html>

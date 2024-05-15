@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- CLIPCARDS AND CARDTYPES
 CREATE TABLE IF NOT EXISTS clipcards (
 	clipcard_id	        INTEGER NOT NULL UNIQUE,
-	clipcard_type_id	INTEGER NOT NULL UNIQUE,
+	clipcard_type_id	INTEGER NOT NULL,
 	time_used			INTEGER NOT NULL,
 	remaining_time	    INTEGER NOT NULL,
 	created_at	        TEXT NOT NULL,
@@ -35,13 +35,14 @@ CREATE TABLE IF NOT EXISTS clipcards (
 CREATE TABLE IF NOT EXISTS card_types (
 	clipcard_type_id	INTEGER NOT NULL UNIQUE,
 	clipcard_type_title	TEXT NOT NULL,
+	clipcard_price		INTEGER NOT NULL,
 	PRIMARY KEY(clipcard_type_id)
 ) WITHOUT ROWID;
 
-INSERT INTO card_types (clipcard_type_id, clipcard_type_title) VALUES
-(1, '10 timer'),
-(2, '20 timer'),
-(3, '30 timer');
+INSERT INTO card_types (clipcard_type_id, clipcard_type_title, clipcard_price) VALUES
+(1, '10 timer', 7000),
+(2, '20 timer', 14000),
+(3, '30 timer', 19500);
 
 
 -- TASKS
@@ -66,7 +67,7 @@ CREATE TABLE IF NOT EXISTS tasks (
 -- PAYMENTS
 CREATE TABLE IF NOT EXISTS payments (
 	payment_id	        INTEGER NOT NULL UNIQUE,
-	customer_id			INTEGER NOT NULL UNIQUE,
+	customer_id			INTEGER NOT NULL,
 	clipcard_id	        INTEGER NOT NULL UNIQUE,
 	amount_paid	        INTEGER NOT NULL,
 	created_at	        TEXT NOT NULL,
