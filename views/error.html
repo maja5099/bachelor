@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <section class="bg-unidBeige w-full lg:h-screen">
+      <div class="flex justify-center items-center h-full">
+        <div class="w-10/12 2xl:w-6/12">
+          <div
+            class="flex flex-col items-center py-24 lg:py-0 md:py-28 lg:flex-row gap-8 md:gap-10 lg:gap-16 space-y-8 md:space-y-10 lg:space-y-16"
+          >
+            <div
+              class="lg:w-2/3 flex justify-center items-center text-center flex-col gap-y-8 md:gap-y-12"
+            >
+              <div class="space-y-2">
+                <p class="text-sm tracking-widest text-unidPurple">
+                  {{ error_title }}
+                </p>
+                <div class="space-y-6">
+                  <h2>{{ title }}</h2>
+                  <p id="subheader">{{ error_message }}</p>
+                </div>
+              </div>
+              <div class="lg:w-3/6">
+                <!-- prettier-ignore -->
+                <a href="{{button_link}}">
+                    % include('utilities/buttons/primary_button', type='button', link='/', button_text=button_text)
+                </a>
+              </div>
+            </div>
+            <div class="w-2/3">
+              <img
+                src="/assets/illustrations/{{ error_image }}"
+                alt="Error Illustration"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

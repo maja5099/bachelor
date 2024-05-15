@@ -240,3 +240,17 @@ section_testimonial_content = {
     ],
 }
 
+error_content = {
+    "title": "Hov! Der skete en fejl",
+    "image": "unid_universe.svg",
+    "button_link": "/", 
+    "button_text": "Gå til forsiden",
+    "404": {
+        "error_title": "Fejl 404: Siden blev ikke fundet",
+        "error_message": "Beklager, men den side, du forsøgte at tilgå, eksisterer ikke. Tjek venligst URL'en og prøv igen, eller kontakt os, hvis problemet fortsætter."
+    },
+    "500": {
+        "error_title": "Fejl 500: Intern Serverfejl",
+        "error_message": "Vi beklager, men der er sket en fejl på serveren, som forhindrer udførelsen af din anmodning. Prøv venligst igen senere, eller kontakt os, hvis problemet fortsætter."
+    },
+}
