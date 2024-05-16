@@ -4,16 +4,13 @@ import datetime
 import dbconnection
 import os
 
-# Funktion til at hente den aktuelle bruger baseret på sessionoplysninger
+
 def get_current_user():
     try:
-        # Hent brugeroplysninger fra cookien
         user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
         if not user_info:
             return None
         
-        # Her kan du tilpasse din logik til at hente brugeren baseret på cookien
-        # For eksempel kan du bruge brugernavnet til at finde brugeren i databasen
         username = user_info.get('username')
         if username:
             db = dbconnection.db()
@@ -31,12 +28,10 @@ db = dbconnection.db()
 @post('/process_payment')
 def process_payment():
     try:
-        # Hent den aktuelle bruger
         current_user = get_current_user()
         if not current_user:
             raise Exception('User information not found in session.')
 
-        # Hent brugerens ID
         user_id = current_user['user_id']
         if not user_id:
             raise Exception('User ID not found.')

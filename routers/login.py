@@ -12,28 +12,6 @@ unid_logo = content.unid_logo
 section_login_content = content.section_login_content
 
 
-# Funktion til at hente den aktuelle bruger baseret på sessionoplysninger
-def get_current_user():
-    try:
-        # Hent brugeroplysninger fra cookien
-        user = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
-        if not user:
-            return None
-        
-        # Her kan du tilpasse din logik til at hente brugeren baseret på cookien
-        # For eksempel kan du bruge brugernavnet til at finde brugeren i databasen
-        username = user.get('username')
-        if username:
-            db = dbconnection.db()
-            current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
-            db.close()
-            return current_user
-        else:
-            return None
-    except Exception as e:
-        print(e)
-        return None
-
 
 @post("/login")
 def _():

@@ -65,9 +65,10 @@ CREATE TABLE IF NOT EXISTS tasks (
 
 
 -- PAYMENTS
+DROP TABLE IF EXISTS payments;
 CREATE TABLE IF NOT EXISTS payments (
 	payment_id	        INTEGER NOT NULL UNIQUE,
-	user_id				INTEGER NOT NULL UNIQUE,
+	user_id				INTEGER NOT NULL,
 	clipcard_id	        INTEGER NOT NULL UNIQUE,
 	amount_paid	        INTEGER NOT NULL,
 	created_at	        TEXT NOT NULL,
