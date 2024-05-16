@@ -6,9 +6,8 @@
     <title>Klippekort</title>
     <script>
       function redirectToBuyForm(clipcardType, clipcardPrice) {
-        var formattedClipcardType = clipcardType.replace(/\s+/g, "-");
         window.location.href =
-          "/buy_clipcard/" + formattedClipcardType + "/" + clipcardPrice;
+          "/buy_clipcard/" + clipcardType + "/" + clipcardPrice;
       }
     </script>
   </head>

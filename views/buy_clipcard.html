@@ -8,8 +8,6 @@
   <body>
     <h1>Køb Klippekort</h1>
     <form action="/process_payment" method="post">
-      <input type="hidden" name="customer_id" value="123" />
-
       <input type="hidden" name="clipcard_type" value="{{ clipcard_type }}" />
       <input type="hidden" name="clipcard_price" value="{{ clipcard_price }}" />
       <p><strong>Klippekorttype:</strong> {{ clipcard_type }}</p>
