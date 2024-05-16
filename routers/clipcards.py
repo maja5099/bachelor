@@ -58,7 +58,6 @@ def delete_clipcard(clipcard_id):
         db = dbconnection.db()
         cursor = db.cursor()
 
-        # Execute a DELETE query to remove the clip card with the given ID
         cursor.execute("DELETE FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
         db.commit()
 
