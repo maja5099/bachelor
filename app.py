@@ -81,8 +81,6 @@ import routers.contact
 import routers.clipcards
 import routers.payment
 
-
-
 ##############################
 #   CSS
 @get("/app.css")
