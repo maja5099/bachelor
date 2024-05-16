@@ -35,14 +35,15 @@ CREATE TABLE IF NOT EXISTS clipcards (
 CREATE TABLE IF NOT EXISTS card_types (
 	clipcard_type_id	INTEGER NOT NULL UNIQUE,
 	clipcard_type_title	TEXT NOT NULL,
+	clipcard_type_time	INTEGER NOT NULL,
 	clipcard_price		INTEGER NOT NULL,
 	PRIMARY KEY(clipcard_type_id)
 ) WITHOUT ROWID;
 
-INSERT INTO card_types (clipcard_type_id, clipcard_type_title, clipcard_price) VALUES
-(1, '10 timer', 7000),
-(2, '20 timer', 14000),
-(3, '30 timer', 19500);
+INSERT INTO card_types (clipcard_type_id, clipcard_type_title, clipcard_type_time, clipcard_price) VALUES
+(1, '10 timer', 10, 7000),
+(2, '20 timer', 20, 14000),
+(3, '30 timer', 30, 19500);
 
 
 -- TASKS
@@ -65,7 +66,6 @@ CREATE TABLE IF NOT EXISTS tasks (
 
 
 -- PAYMENTS
-DROP TABLE IF EXISTS payments;
 CREATE TABLE IF NOT EXISTS payments (
 	payment_id	        INTEGER NOT NULL UNIQUE,
 	user_id				INTEGER NOT NULL,
@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS staff (
 	user_role_id		INTEGER NOT NULL,
 	PRIMARY KEY(staff_id)
 ) WITHOUT ROWID;
+
 
 CREATE TABLE IF NOT EXISTS user_role_rights (
 	right_id			INTEGER NOT NULL UNIQUE,

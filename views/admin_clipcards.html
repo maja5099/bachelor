@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aktive Klippekort</title>
+  </head>
+  <body>
+    <h1>Aktive Klippekort</h1>
+
+    % for clipcard in active_clipcards:
+
+    <div>
+      <h2>Brugeroplysninger</h2>
+      <strong>Fornavn:</strong> {{ clipcard['first_name'] }} <br />
+      <strong>Efternavn:</strong> {{ clipcard['last_name'] }}<br />
+      <strong>Brugernavn:</strong> {{ clipcard['username'] }}<br />
+      <strong>Email:</strong> {{ clipcard['email'] }}<br />
+    </div>
+
+    <div>
+      <h2>Website</h2>
+      <strong>Navn:</strong> {{ clipcard['website_name'] }}<br />
+      <strong>URL:</strong> {{ clipcard['website_url'] }}<br />
+    </div>
+
+    <div>
+      <h2>Klippekortoplysninger</h2>
+      <strong>Klippekort ID:</strong> {{ clipcard['clipcard_id'] }}<br />
+      <strong>Klippekorttype:</strong> {{ clipcard['clipcard_type_title'] }}<br />
+      <strong>Købsdato:</strong>{{ clipcard['created_at'] }}
+      <br />
+    </div>
+
+    <div>
+      <h2>Timeoverblik</h2>
+      <strong>Tid brugt:</strong> {{ clipcard['time_used'] }} timer<br />
+      <strong>Tid tilbage:</strong> {{ clipcard['remaining_time'] }} timer<br />
+    </div>
+
+    % end
+  </body>
+</html>
