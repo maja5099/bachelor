@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Klippekort</title>
     <script>
-      function redirectToBuyForm(clipcardType, clipcardPrice) {
+      function buyClipcard(clipcardType, clipcardPrice) {
         window.location.href =
           "/buy_clipcard/" + clipcardType + "/" + clipcardPrice;
       }
@@ -20,12 +20,24 @@
         kr
         <button
           type="button"
-          onclick="redirectToBuyForm('{{ card['clipcard_type_title'] }}', '{{ card['clipcard_price'] }}')"
+          class="buy-button"
+          data-clipcard-type="{{ card['clipcard_type_title'] }}"
+          data-clipcard-price="{{ card['clipcard_price'] }}"
         >
           Køb
         </button>
       </li>
       % end
     </ul>
+
+    <script>
+      document.querySelectorAll(".buy-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          var clipcardType = this.getAttribute("data-clipcard-type");
+          var clipcardPrice = this.getAttribute("data-clipcard-price");
+          buyClipcard(clipcardType, clipcardPrice);
+        });
+      });
+    </script>
   </body>
 </html>

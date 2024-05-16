@@ -10,34 +10,77 @@
 
     % for clipcard in active_clipcards:
 
-    <div>
-      <h2>Brugeroplysninger</h2>
-      <strong>Fornavn:</strong> {{ clipcard['first_name'] }} <br />
-      <strong>Efternavn:</strong> {{ clipcard['last_name'] }}<br />
-      <strong>Brugernavn:</strong> {{ clipcard['username'] }}<br />
-      <strong>Email:</strong> {{ clipcard['email'] }}<br />
-    </div>
+    <div id="clipcard_{{ clipcard['clipcard_id'] }}">
+      <h2>{{ clipcard['first_name'] }} {{ clipcard['last_name'] }}</h2>
+      <h2>{{ clipcard['website_url'] }}</h2>
+      <p>{{ clipcard['remaining_time'] }} timer</p>
 
-    <div>
-      <h2>Website</h2>
-      <strong>Navn:</strong> {{ clipcard['website_name'] }}<br />
-      <strong>URL:</strong> {{ clipcard['website_url'] }}<br />
-    </div>
+      <div>
+        <h3>Brugeroplysninger</h3>
+        <p>Fornavn: {{ clipcard['first_name'] }}</p>
+        <p>Efternavn: {{ clipcard['last_name'] }}</p>
+        <p>Brugernavn: {{ clipcard['username'] }}</p>
+        <p>Email: {{ clipcard['email'] }}</p>
+      </div>
 
-    <div>
-      <h2>Klippekortoplysninger</h2>
-      <strong>Klippekort ID:</strong> {{ clipcard['clipcard_id'] }}<br />
-      <strong>Klippekorttype:</strong> {{ clipcard['clipcard_type_title'] }}<br />
-      <strong>Købsdato:</strong>{{ clipcard['created_at'] }}
-      <br />
-    </div>
+      <div>
+        <h3>Website</h3>
+        <p>Navn: {{ clipcard['website_name'] }}</p>
+        <p>URL: {{ clipcard['website_url'] }}</p>
+      </div>
 
-    <div>
-      <h2>Timeoverblik</h2>
-      <strong>Tid brugt:</strong> {{ clipcard['time_used'] }} timer<br />
-      <strong>Tid tilbage:</strong> {{ clipcard['remaining_time'] }} timer<br />
+      <div>
+        <h3>Klippekortoplysninger</h3>
+        <p>Klippekort ID: {{ clipcard['clipcard_id'] }}</p>
+        <p>Klippekorttype: {{ clipcard['clipcard_type_title'] }}</p>
+      </div>
+
+      <div>
+        <h3>Timeoverblik</h3>
+        <p>Tid brugt: {{ clipcard['time_used'] }} timer</p>
+        <p>Tid tilbage: {{ clipcard['remaining_time'] }} timer</p>
+      </div>
+
+      <button
+        type="button"
+        class="delete-button"
+        data-clipcard-id="{{ clipcard['clipcard_id'] }}"
+      >
+        Slet klippekort
+      </button>
     </div>
 
     % end
+
+    <script>
+      document.querySelectorAll(".delete-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          var clipcardId = this.getAttribute("data-clipcard-id");
+          deleteClipcard(clipcardId);
+        });
+      });
+
+      function deleteClipcard(clipcardId) {
+        fetch("/delete_clipcard/" + clipcardId, {
+          method: "POST",
+        })
+          .then((response) => {
+            if (response.ok) {
+              var clipcardElement = document.getElementById(
+                "clipcard_" + clipcardId
+              );
+              if (clipcardElement) {
+                clipcardElement.remove();
+              }
+            } else {
+              throw new Error("Kunne ikke slette klippekortet.");
+            }
+          })
+          .catch((error) => {
+            console.error("Fejl:", error);
+            alert("Der opstod en fejl ved sletning af klippekortet.");
+          });
+      }
+    </script>
   </body>
 </html>

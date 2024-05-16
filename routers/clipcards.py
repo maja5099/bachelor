@@ -1,4 +1,5 @@
-from bottle import template, get
+from bottle import template, get, post, response
+import json
 import dbconnection
 
 db = dbconnection.db()
@@ -49,3 +50,25 @@ def admin_clipcards():
     
     finally:
         if "db" in locals(): db.close()
+
+
+@post('/delete_clipcard/<clipcard_id>')
+def delete_clipcard(clipcard_id):
+    try:
+        db = dbconnection.db()
+        cursor = db.cursor()
+
+        # Execute a DELETE query to remove the clip card with the given ID
+        cursor.execute("DELETE FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
+        db.commit()
+
+        return "Klippekortet er blevet slettet."
+
+    except Exception as e:
+        db.rollback()
+        print(e)
+        return {"info": str(e)}
+
+    finally:
+        if "db" in locals():
+            db.close()

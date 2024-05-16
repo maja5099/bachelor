@@ -46,18 +46,15 @@ def process_payment():
         clipcard_type_title = request.forms.get('clipcard_type')
         time_used = 0
         
-        # Hent clipcard_type_id og clipcard_type_time baseret på clipcard_type_title
         cursor = db.cursor()
-        print("Clipcard type title:", clipcard_type_title)
         cursor.execute("SELECT clipcard_type_id, clipcard_type_time FROM card_types WHERE clipcard_type_title = ?", (clipcard_type_title,))
         row = cursor.fetchone()
-        print("Clipcard type title:", clipcard_type_title)
 
         if not row:
             raise Exception('Clipcard type not found')
 
-        clipcard_type_id = row['clipcard_type_id']  # clipcard_type_id hentes ved at bruge kolonnenavnet
-        remaining_time = row['clipcard_type_time']  # remaining_time hentes ved at bruge kolonnenavnet
+        clipcard_type_id = row['clipcard_type_id'] 
+        remaining_time = row['clipcard_type_time']  
 
         cursor.execute("INSERT INTO payments (payment_id, user_id, clipcard_id, amount_paid, created_at) VALUES (?, ?, ?, ?, ?)",
                        (payment_id, user_id, clipcard_id, amount_paid, created_at))
