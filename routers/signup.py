@@ -26,11 +26,11 @@ def _():
         staff_emails = ["kontakt@unidstudio.dk", "denise@unidstudio.dk", "isabella@unidstudio.dk"]
         if email in staff_emails:
             user_roles_user_role_id = "2" 
-            staff_id = str(uuid.uuid4().hex)  
+            staff_id = user_id  
             db.execute("INSERT INTO staff (staff_id, user_role_id) VALUES (?, ?)", (staff_id, user_roles_user_role_id))
         else:
             user_roles_user_role_id = "1" 
-            customer_id = str(uuid.uuid4().hex)  
+            customer_id = user_id  
             db.execute("INSERT INTO customers (customer_id, user_role_id, website_name, website_url) VALUES (?, ?, ?, ?)", (customer_id, user_roles_user_role_id, website_name, website_url))
 
         salt = bcrypt.gensalt()

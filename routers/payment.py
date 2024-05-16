@@ -4,37 +4,43 @@ import datetime
 import dbconnection
 import os
 
-db = dbconnection.db()
-
-# Hent customer_id fra databasen baseret på user_id
-def get_customer_id_from_user_id(user_id):
-    cursor = db.cursor()
-    cursor.execute("SELECT customer_id FROM customers WHERE user_id = ?", (user_id,))
-    result = cursor.fetchone()
-    cursor.close()
-    if result:
-        return result[0]
-    else:
-        return None
-
-@post('/process_payment')
-def process_payment():
+# Funktion til at hente den aktuelle bruger baseret på sessionoplysninger
+def get_current_user():
     try:
         # Hent brugeroplysninger fra cookien
         user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
         if not user_info:
-            raise Exception('User information not found in cookie.')
+            return None
         
-        # Hent brugerens ID fra brugeroplysningerne
-        user_id = user_info['user_id']
+        # Her kan du tilpasse din logik til at hente brugeren baseret på cookien
+        # For eksempel kan du bruge brugernavnet til at finde brugeren i databasen
+        username = user_info.get('username')
+        if username:
+            db = dbconnection.db()
+            current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
+            db.close()
+            return current_user
+        else:
+            return None
+    except Exception as e:
+        print(e)
+        return None
+
+db = dbconnection.db()
+
+@post('/process_payment')
+def process_payment():
+    try:
+        # Hent den aktuelle bruger
+        current_user = get_current_user()
+        if not current_user:
+            raise Exception('User information not found in session.')
+
+        # Hent brugerens ID
+        user_id = current_user['user_id']
         if not user_id:
-            raise Exception('User ID not found in cookie.')
-        
-        # Hent customer_id baseret på user_id
-        customer_id = get_customer_id_from_user_id(user_id)
-        if not customer_id:
-            raise Exception('Customer ID not found for user ID: {}'.format(user_id))
-        
+            raise Exception('User ID not found.')
+
         clipcard_price = request.forms.get('clipcard_price')
         amount_paid = clipcard_price 
         payment_id = str(uuid.uuid4())
@@ -42,8 +48,8 @@ def process_payment():
         created_at = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
         cursor = db.cursor()
-        cursor.execute("INSERT INTO payments (payment_id, customer_id, clipcard_id, amount_paid, created_at) VALUES (?, ?, ?, ?, ?)",
-                       (payment_id, customer_id, clipcard_id, amount_paid, created_at))
+        cursor.execute("INSERT INTO payments (payment_id, user_id, clipcard_id, amount_paid, created_at) VALUES (?, ?, ?, ?, ?)",
+                       (payment_id, user_id, clipcard_id, amount_paid, created_at))
         db.commit()
         cursor.close()
         
