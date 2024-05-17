@@ -67,6 +67,7 @@ def send_message():
         db = dbconnection.db()
         cursor = db.cursor()
 
+
         cursor.execute("""
             INSERT INTO messages (message_id, user_id, message_subject, message_text, message_file, created_at, deleted_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
