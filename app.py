@@ -80,6 +80,7 @@ import routers.portfolio
 import routers.contact
 import routers.clipcards
 import routers.payment
+import routers.messages
 
 ##############################
 #   CSS
