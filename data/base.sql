@@ -118,7 +118,7 @@ INSERT INTO user_role_rights (right_id, user_role_id, can_view, can_add, can_edi
 (1, '1', '1', '0', '0', '0'),
 (2, '2', '1', '1', '1', '1');
 
-
+-- MESSAGES
 CREATE TABLE IF NOT EXISTS messages (
 	message_id			INTEGER NOT NULL UNIQUE,
 	user_id				INTEGER NOT NULL,
