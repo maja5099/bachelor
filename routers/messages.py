@@ -129,8 +129,6 @@ def admin_messages_get():
         """)
         messages = cursor.fetchall()
         
-        # Udskriv de hentede beskeder til fejlfindingsformål
-        print(f"Hentede beskeder: {messages}")
 
         return template("admin_messages.html", messages=messages)
     except Exception as e:
