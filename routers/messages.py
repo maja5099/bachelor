@@ -4,9 +4,9 @@ import uuid
 import time
 import dbconnection
 
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-UPLOADS_FOLDER = os.path.join(os.path.dirname(ROOT_DIR), "uploads")
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
+UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
+ 
 
 def save_file(upload):
     allowed_extensions = {'png', 'jpg', 'jpeg'}
@@ -17,12 +17,14 @@ def save_file(upload):
     os.makedirs(UPLOADS_FOLDER, exist_ok=True)
 
     file_name = str(uuid.uuid4()) + '.' + file_extension
-    file_path = os.path.join(UPLOADS_FOLDER, file_name)
+    file_path = os.path.join(UPLOADS_FOLDER, file_name)  
 
     with open(file_path, "wb") as open_file:
         open_file.write(upload.file.read())
 
-    return str(file_path)
+
+    return "/uploads/" + file_name
+
 
 def get_current_user():
     try:
@@ -67,7 +69,6 @@ def send_message():
         db = dbconnection.db()
         cursor = db.cursor()
 
-
         cursor.execute("""
             INSERT INTO messages (message_id, user_id, message_subject, message_text, message_file, created_at, deleted_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -102,3 +103,42 @@ def messages_get():
         return {"info":str(e)}
     finally:
         if "db" in locals(): db.close()
+
+
+@get("/admin_messages")
+def admin_messages_get():
+    try:
+        db = dbconnection.db()
+        
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT 
+                messages.message_subject, 
+                messages.message_text, 
+                messages.message_file,
+                users.first_name, 
+                users.last_name, 
+                customers.website_name,
+                customers.website_url
+            FROM messages
+            JOIN users ON messages.user_id = users.user_id
+            JOIN customers ON messages.user_id = customers.customer_id
+            WHERE messages.deleted_at IS ""
+            ORDER BY messages.created_at DESC;
+
+        """)
+        messages = cursor.fetchall()
+        
+        # Udskriv de hentede beskeder til fejlfindingsformål
+        print(f"Hentede beskeder: {messages}")
+
+        return template("admin_messages.html", messages=messages)
+    except Exception as e:
+        print(e)
+        if "db" in locals():
+            db.rollback()
+        return {"info": str(e)}
+    finally:
+        if "db" in locals(): db.close()
+
+
