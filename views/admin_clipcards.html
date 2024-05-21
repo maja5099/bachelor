@@ -51,6 +51,39 @@
 
     % end
 
+    <h1>Timeregistrering</h1>
+    <form action="/submit_task" method="post">
+      <label for="customer">Kunde:</label>
+      <select id="customer" name="customer">
+        <option value="kunde1">Kunde 1</option>
+        <option value="kunde2">Kunde 2</option>
+        <option value="kunde3">Kunde 3</option>
+      </select>
+      <br />
+      <label for="description">Opgavebeskrivelse:</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+        cols="50"
+      ></textarea>
+      <br />
+      <label for="hours">Tid brugt:</label>
+      <input type="number" id="hours" name="hours" min="0" step="1" value="0" />
+      timer
+      <input
+        type="number"
+        id="minutes"
+        name="minutes"
+        min="0"
+        max="59"
+        step="1"
+        value="0"
+      />
+      minutter
+      <br />
+      <input type="submit" value="Indsend" />
+    </form>
     <script>
       document.querySelectorAll(".delete-button").forEach((button) => {
         button.addEventListener("click", function () {
