@@ -6,6 +6,7 @@ import git
 import os
 import dbconnection
 import content
+from routers.messages import UPLOADS_FOLDER
 
 
 ##############################
@@ -88,6 +89,13 @@ import routers.messages
 @get("/app.css")
 def _():
     return static_file('app.css', root='.')
+
+
+##############################
+#   FILE UPLOAD
+@get('/uploads/<filename:path>')
+def send_upload(filename):
+    return static_file(filename, root=UPLOADS_FOLDER)
 
 
 ##############################
