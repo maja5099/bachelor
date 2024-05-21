@@ -9,7 +9,6 @@
     <h1>Aktive Klippekort</h1>
 
     % for clipcard in active_clipcards:
-
     <div id="clipcard_{{ clipcard['clipcard_id'] }}">
       <h2>{{ clipcard['first_name'] }} {{ clipcard['last_name'] }}</h2>
       <h2>{{ clipcard['website_url'] }}</h2>
@@ -48,7 +47,6 @@
         Slet klippekort
       </button>
     </div>
-
     % end
 
     <h1>Timeregistrering</h1>
@@ -59,12 +57,14 @@
     >
       <label for="customer">Kunde:</label>
       <select id="customer" name="customer">
-        <option value="kunde1">Kunde 1</option>
-        <option value="kunde2">Kunde 2</option>
-        <option value="kunde3">Kunde 3</option>
+        % for customer in active_customers:
+        <option value="{{customer['user_id']}}">
+          {{customer['first_name']}} {{customer['last_name']}}
+        </option>
+        % end
       </select>
       <br />
-      <label for="description">Opgavetitel:</label>
+      <label for="title">Opgavetitel:</label>
       <textarea id="title" name="title"></textarea>
       <br />
       <label for="description">Opgavebeskrivelse:</label>
@@ -84,7 +84,7 @@
       />
       minutter
       <br />
-      <input type="submit" value="Indsend" />
+      <input type="submit" value="Registrer" />
     </form>
     <script>
       document.querySelectorAll(".delete-button").forEach((button) => {

@@ -51,7 +51,6 @@ CREATE TABLE IF NOT EXISTS tasks (
 	task_id	            INTEGER NOT NULL UNIQUE,
 	clipcard_id	        INTEGER NOT NULL UNIQUE,
 	customer_id			INTEGER NOT NULL UNIQUE,
-	staff_id			INTEGER NOT NULL UNIQUE,
 	task_title			TEXT NOT NULL,
 	task_description	TEXT NOT NULL,
 	created_at	        TEXT,
