@@ -4,11 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beskeder</title>
+    <script>
+      function deleteMessage(button) {
+        var messageId = button.getAttribute("data-message-id");
+        fetch("/delete_message", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: "message_id=" + messageId,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.info === "Besked slettet") {
+              location.reload();
+            } else {
+              alert(data.info);
+            }
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
   </head>
   <body>
     <h1>Indsendte Beskeder</h1>
     % for message in messages:
-    <div style="background-color: gainsboro">
+    <div style="background-color: gainsboro; margin-bottom: 10px">
       <h2>{{ message['first_name'] }} {{ message['last_name'] }}</h2>
       <h3>{{ message['website_name'] }} - {{ message['website_url'] }}</h3>
       <h4>Emne: {{ message['message_subject'] }}</h4>
@@ -17,8 +38,14 @@
       <a href="{{ message['message_file'] }}" target="_blank"
         >Se vedhæftede filer</a
       >
-
       % end
+      <button
+        data-message-id="{{ message['message_id'] }}"
+        onclick="deleteMessage(this)"
+      >
+        Slet Besked
+      </button>
     </div>
+    % end
   </body>
 </html>

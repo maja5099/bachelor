@@ -113,6 +113,7 @@ def admin_messages_get():
         cursor = db.cursor()
         cursor.execute("""
             SELECT 
+                messages.message_id,
                 messages.message_subject, 
                 messages.message_text, 
                 messages.message_file,
@@ -125,11 +126,9 @@ def admin_messages_get():
             JOIN customers ON messages.user_id = customers.customer_id
             WHERE messages.deleted_at IS ""
             ORDER BY messages.created_at DESC;
-
         """)
         messages = cursor.fetchall()
         
-
         return template("admin_messages.html", messages=messages)
     except Exception as e:
         print(e)
@@ -137,6 +136,50 @@ def admin_messages_get():
             db.rollback()
         return {"info": str(e)}
     finally:
-        if "db" in locals(): db.close()
+        if "db" in locals():
+            db.close()
 
 
+@post('/delete_message')
+def delete_message():
+    try:
+        message_id = request.forms.get('message_id')
+        if not message_id:
+            response.status = 400
+            return {"info": "Besked-ID mangler"}
+
+        current_user = get_current_user()
+        if not current_user:
+            response.status = 401
+            return {"info": "Bruger ikke logget ind"}
+        
+        user_id = current_user['user_id']
+
+        deleted_at = int(time.time())
+
+        db = dbconnection.db()
+        cursor = db.cursor()
+
+        cursor.execute("""
+            UPDATE messages 
+            SET deleted_at = ?
+            WHERE message_id = ? AND user_id = ?
+        """, (deleted_at, message_id, user_id))
+
+        db.commit()
+
+        if cursor.rowcount == 0:
+            response.status = 404
+            return {"info": "Besked ikke fundet"}
+
+        return {"info": "Besked slettet"}
+
+    except Exception as e:
+        print(e)
+        if "db" in locals():
+            db.rollback()
+        return {"info": str(e)}
+
+    finally:
+        if "db" in locals():
+            db.close()
