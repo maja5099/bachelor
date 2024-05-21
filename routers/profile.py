@@ -2,7 +2,7 @@ from bottle import post, request, response, redirect, template, get
 import bcrypt
 import os
 from dotenv import load_dotenv
-import dbconnection
+import master
 import content
 
 ##############################
@@ -24,7 +24,7 @@ def _():
     if user is None:
         redirect("/login")
     if user: 
-        db = dbconnection.db()
+        db = master.db()
         username = user['username']
         first_name = user['first_name']
         last_name = user['last_name']

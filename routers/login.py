@@ -2,7 +2,7 @@ from bottle import post, request, response, redirect, template, get
 import bcrypt
 import os
 from dotenv import load_dotenv
-import dbconnection
+import master
 import content
 
 ##############################
@@ -26,7 +26,7 @@ def _():
             raise Exception("Du skal udfylde både brugernavn og adgangskode, for at logge ind.")
             
 
-        db = dbconnection.db()
+        db = master.db()
         user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
 
         if not user: 
@@ -57,7 +57,7 @@ def _():
 @get("/login")
 def login_get():
     try:
-        db = dbconnection.db()
+        db = master.db()
         return template("login", title="Log ind", form_inputs=form_inputs, section_login_content=section_login_content,unid_logo=unid_logo)
     
     except Exception as e:

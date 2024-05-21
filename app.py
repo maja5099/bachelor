@@ -4,7 +4,7 @@
 from bottle import default_app, post, route, get, run, template, static_file, TEMPLATE_PATH, request, error
 import git
 import os
-import dbconnection
+import master
 import content
 from routers.messages import UPLOADS_FOLDER
 
@@ -59,7 +59,7 @@ error_content = content.error_content
 def index():
     user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
     if user: 
-        db = dbconnection.db()
+        db = master.db()
         username = user['username']
         first_name = user['first_name']
         last_name = user['last_name']

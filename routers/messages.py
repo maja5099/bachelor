@@ -2,7 +2,7 @@ from bottle import post, get, request, response, template
 import os
 import uuid
 import time
-import dbconnection
+import master
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
 UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
@@ -32,7 +32,7 @@ def get_current_user():
         
         username = user_info.get('username')
         if username:
-            db = dbconnection.db()
+            db = master.db()
             current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
             db.close()
             return current_user
@@ -69,7 +69,7 @@ def send_message():
         created_at = int(time.time())
         deleted_at = ""
 
-        db = dbconnection.db()
+        db = master.db()
         cursor = db.cursor()
 
         cursor.execute("""
@@ -99,7 +99,7 @@ def send_message():
 @get("/messages")
 def messages_get():
     try:
-        db = dbconnection.db()
+        db = master.db()
         return template("messages.html")
     except Exception as e:
         print(e)
@@ -112,7 +112,7 @@ def messages_get():
 @get("/admin_messages")
 def admin_messages_get():
     try:
-        db = dbconnection.db()
+        db = master.db()
         
         cursor = db.cursor()
         cursor.execute("""
@@ -161,7 +161,7 @@ def delete_message():
 
         deleted_at = int(time.time())
 
-        db = dbconnection.db()
+        db = master.db()
         cursor = db.cursor()
 
         cursor.execute("""

@@ -22,7 +22,7 @@ def user():
   try:
     load_dotenv(".env")
     user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
-    print("dbconnection cookie", user)
+    print("master cookie", user)
     if user:
       return user
     else:

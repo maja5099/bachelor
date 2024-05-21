@@ -1,5 +1,5 @@
 from bottle import template, get, request
-import dbconnection
+import master
 import content
 import os
 
@@ -20,7 +20,7 @@ section_profile_customer = content.section_profile_customer
 def _():
     user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
     if user: 
-        db = dbconnection.db()
+        db = master.db()
         username = user['username']
         first_name = user['first_name']
         last_name = user['last_name']

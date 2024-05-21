@@ -1,5 +1,5 @@
 from bottle import post, request, get, response, template
-import dbconnection
+import master
 import uuid
 import time
 import bcrypt
@@ -7,14 +7,14 @@ import bcrypt
 @post("/signup")
 def _():
     try:
-        db = dbconnection.db()
+        db = master.db()
         user_id = str(uuid.uuid4().hex)
         first_name = request.forms.get("first_name", "")
         last_name = request.forms.get("last_name", "")
-        email = dbconnection.validate_email()
-        phone = dbconnection.validate_phone()
-        username = dbconnection.validate_username()
-        password = dbconnection.validate_password()
+        email = master.validate_email()
+        phone = master.validate_phone()
+        username = master.validate_username()
+        password = master.validate_password()
         is_active = "True"
         created_at = int(time.time())
         updated_at = int(time.time())
@@ -66,7 +66,7 @@ def _():
 @get("/signup")
 def signup_get():
     try:
-        db = dbconnection.db()
+        db = master.db()
         return template("signup.html")
     except Exception as e:
         print(e)

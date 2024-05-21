@@ -1,8 +1,8 @@
 from bottle import template, get, post
-import dbconnection
+import master
 import time
 
-db = dbconnection.db()
+db = master.db()
 
 @get('/customer_clipcards')
 def clipcards():
@@ -26,7 +26,7 @@ def buy_clipcard (clipcard_type, clipcard_price):
 @get('/admin_clipcards')
 def admin_clipcards():
     try:
-        db = dbconnection.db()
+        db = master.db()
         cursor = db.cursor()
         
         cursor.execute("""
@@ -55,7 +55,7 @@ def admin_clipcards():
 @post('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
     try:
-        db = dbconnection.db()
+        db = master.db()
         cursor = db.cursor()
 
         updated_at = int(time.time())

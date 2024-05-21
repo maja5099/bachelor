@@ -1,7 +1,7 @@
 from bottle import post, request, redirect, template
 import uuid
 import time
-import dbconnection
+import master
 import os
 
 
@@ -13,7 +13,7 @@ def get_current_user():
         
         username = user_info.get('username')
         if username:
-            db = dbconnection.db()
+            db = master.db()
             current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
             db.close()
             return current_user
@@ -23,7 +23,7 @@ def get_current_user():
         print(e)
         return None
 
-db = dbconnection.db()
+db = master.db()
 
 @post('/process_payment')
 def process_payment():
