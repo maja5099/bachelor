@@ -6,24 +6,22 @@ import dbconnection
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
 UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
- 
 
 def save_file(upload):
     allowed_extensions = {'png', 'jpg', 'jpeg'}
-    file_extension = upload.filename.split('.')[-1].lower()
-    if file_extension not in allowed_extensions:
-        raise ValueError("Kun filer af typerne PNG, JPG eller JPEG er tilladt.")
+    if upload and upload.filename:
+        file_extension = upload.filename.split('.')[-1].lower()
+        if file_extension in allowed_extensions:
+            os.makedirs(UPLOADS_FOLDER, exist_ok=True)
 
-    os.makedirs(UPLOADS_FOLDER, exist_ok=True)
+            file_name = str(uuid.uuid4()) + '.' + file_extension
+            file_path = os.path.join(UPLOADS_FOLDER, file_name)  
 
-    file_name = str(uuid.uuid4()) + '.' + file_extension
-    file_path = os.path.join(UPLOADS_FOLDER, file_name)  
+            with open(file_path, "wb") as open_file:
+                open_file.write(upload.file.read())
 
-    with open(file_path, "wb") as open_file:
-        open_file.write(upload.file.read())
-
-
-    return "/uploads/" + file_name
+            return "/uploads/" + file_name
+    return None  
 
 
 def get_current_user():
@@ -51,9 +49,14 @@ def send_message():
         message_text = request.forms.get('message')
         message_file = request.files.get('file')
 
-        file_path = None
-        if message_file:
-            file_path = save_file(message_file)
+        if not message_subject or not message_text:
+            response.status = 400
+            return {"info": "Emne og beskedtekst er påkrævet"}
+
+        file_path = save_file(message_file)
+
+        if file_path is None:
+            file_path = "" 
 
         message_id = str(uuid.uuid4().hex)
 
@@ -76,15 +79,16 @@ def send_message():
 
         db.commit()
 
-        return "Beskeden er blevet sendt."
+        return {"info": "Beskeden er blevet sendt."}
 
     except ValueError as ve:
         response.status = 400
-        return str(ve)
+        return {"info": str(ve)}
     except Exception as e:
         print(e)
         if "db" in locals():
             db.rollback()
+        response.status = 500
         return {"info": str(e)}
 
     finally:

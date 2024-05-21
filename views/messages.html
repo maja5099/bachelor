@@ -20,13 +20,7 @@
       </div>
       <div>
         <label for="file">Upload fil:</label>
-        <input
-          type="file"
-          id="file"
-          name="file"
-          accept=".png, .jpg, .jpeg"
-          multiple
-        />
+        <input type="file" id="file" name="file" accept=".png, .jpg, .jpeg" />
       </div>
       <button type="button" id="sendMessageButton">Send</button>
       <div id="messageSent" style="display: none"></div>
@@ -43,11 +37,12 @@
             processData: false,
             contentType: false,
             success: function (response) {
-              $("#messageSent").text("Beskeden er blevet sendt.").show();
+              $("#messageSent").text(response.info).show();
               $("#contactForm")[0].reset();
             },
             error: function (xhr, status, error) {
-              alert("Der opstod en fejl: " + error);
+              var response = JSON.parse(xhr.responseText);
+              alert("Der opstod en fejl: " + response.info);
             },
           });
         });
