@@ -1,6 +1,6 @@
-from bottle import template, get, post, response
-import json
+from bottle import template, get, post
 import dbconnection
+import time
 
 db = dbconnection.db()
 
@@ -58,10 +58,18 @@ def delete_clipcard(clipcard_id):
         db = dbconnection.db()
         cursor = db.cursor()
 
-        cursor.execute("DELETE FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
+        updated_at = int(time.time())
+        deleted_at = int(time.time())
+
+        cursor.execute("""
+            UPDATE clipcards 
+            SET updated_at = ?, deleted_at = ?, is_active = ? 
+            WHERE clipcard_id = ?
+        """, (updated_at, deleted_at, "False", clipcard_id))
+        
         db.commit()
 
-        return "Klippekortet er blevet slettet."
+        return "Klippekortet er blevet opdateret."
 
     except Exception as e:
         db.rollback()
