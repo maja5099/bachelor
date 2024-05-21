@@ -115,21 +115,6 @@
             alert("Der opstod en fejl ved sletning af klippekortet.");
           });
       }
-
-      // Få fat i dropdown-elementet
-      var customerDropdown = document.getElementById("customer");
-
-      // Send forespørgsel til serveren for at hente kunder
-      fetch("/get_customers")
-        .then((response) => response.json())
-        .then((customers) => {
-          // Tilføj hver kunde som en option i dropdown-listen
-          customers.forEach((customer) => {
-            var option = document.createElement("option");
-            option.text = customer[0] + " " + customer[1];
-            customerDropdown.add(option);
-          });
-        });
     </script>
   </body>
 </html>
