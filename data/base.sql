@@ -52,15 +52,10 @@ CREATE TABLE IF NOT EXISTS tasks (
 	clipcard_id	        INTEGER NOT NULL UNIQUE,
 	customer_id			INTEGER NOT NULL UNIQUE,
 	staff_id			INTEGER NOT NULL UNIQUE,
-	tasks_title			TEXT NOT NULL,
+	task_title			TEXT NOT NULL,
 	task_description	TEXT NOT NULL,
 	created_at	        TEXT,
-	updated_at	        TEXT,
-	end_at	            TEXT,
 	time_spent	        INTEGER NOT NULL,
-	category			TEXT,
-	priority			INTEGER,
-	is_active			INTEGER,
 	PRIMARY KEY(task_id)
 ) WITHOUT ROWID;
 

@@ -52,7 +52,11 @@
     % end
 
     <h1>Timeregistrering</h1>
-    <form action="/submit_task" method="post">
+    <form
+      action="/submit_task"
+      method="post"
+      style="display: flex; align-items: center; gap: 10px"
+    >
       <label for="customer">Kunde:</label>
       <select id="customer" name="customer">
         <option value="kunde1">Kunde 1</option>
@@ -60,13 +64,11 @@
         <option value="kunde3">Kunde 3</option>
       </select>
       <br />
+      <label for="description">Opgavetitel:</label>
+      <textarea id="title" name="title"></textarea>
+      <br />
       <label for="description">Opgavebeskrivelse:</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="4"
-        cols="50"
-      ></textarea>
+      <textarea id="description" name="description"></textarea>
       <br />
       <label for="hours">Tid brugt:</label>
       <input type="number" id="hours" name="hours" min="0" step="1" value="0" />
@@ -113,6 +115,21 @@
             alert("Der opstod en fejl ved sletning af klippekortet.");
           });
       }
+
+      // Få fat i dropdown-elementet
+      var customerDropdown = document.getElementById("customer");
+
+      // Send forespørgsel til serveren for at hente kunder
+      fetch("/get_customers")
+        .then((response) => response.json())
+        .then((customers) => {
+          // Tilføj hver kunde som en option i dropdown-listen
+          customers.forEach((customer) => {
+            var option = document.createElement("option");
+            option.text = customer[0] + " " + customer[1];
+            customerDropdown.add(option);
+          });
+        });
     </script>
   </body>
 </html>
