@@ -2,6 +2,8 @@ from bottle import template, get, post, request
 import master
 import time
 import uuid
+import sqlite3
+
 
 db = master.db()
 
@@ -93,23 +95,40 @@ from bottle import request
 @post('/submit_task')
 def submit_task():
     try:
+        db.row_factory = sqlite3.Row 
         cursor = db.cursor()
         
-        # Hent data fra formen
-        clipcard_id = request.forms.get('clipcard_id')
+        user_id = request.forms.get('customer')
         task_title = request.forms.get('title')
         task_description = request.forms.get('description')
         hours = int(request.forms.get('hours'))
         minutes = int(request.forms.get('minutes'))
-        time_spent = hours * 60 + minutes  # Konverter timer og minutter til minutter
-        created_at = int(time.time())  # Aktuelt tidspunkt
+        time_spent = hours * 60 + minutes
+        created_at = int(time.time())
 
-        # Find user_id baseret på clipcard_id fra payments-tabellen
-        cursor.execute("SELECT user_id FROM payments WHERE clipcard_id = ?", (clipcard_id,))
-        user_id = cursor.fetchone()[0]  # Antagelse: Der er kun én bruger pr. klippekort
+        print("Form data:")
+        print("user_id:", user_id)
+        print("task_title:", task_title)
+        print("task_description:", task_description)
+        print("hours:", hours)
+        print("minutes:", minutes)
 
-        # Indsæt opgave i tasks-tabellen
-        task_id = str(uuid.uuid4().hex)  # Generer et unikt ID for opgaven
+        cursor.execute("""
+            SELECT payments.clipcard_id
+            FROM payments
+            JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
+            WHERE payments.user_id = ? AND clipcards.is_active = "TRUE"
+        """, (user_id,))
+        result = cursor.fetchone()
+
+        print("SQL query result:", result)
+
+        if result is None:
+            return {"info": "No active clipcard found for the provided user_id."}
+
+        clipcard_id = result["clipcard_id"]
+
+        task_id = str(uuid.uuid4().hex) 
         cursor.execute("""
             INSERT INTO tasks (task_id, clipcard_id, customer_id, task_title, task_description, created_at, time_spent) 
             VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -121,8 +140,10 @@ def submit_task():
 
     except Exception as e:
         db.rollback()
-        print("Error in submit_task:", e)
+        import traceback
+        print("Error in submit_task:", traceback.format_exc())
         return {"info": str(e)}
 
     finally:
         if "db" in locals(): db.close()
+
