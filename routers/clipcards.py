@@ -1,6 +1,7 @@
-from bottle import template, get, post
+from bottle import template, get, post, request
 import master
 import time
+import uuid
 
 db = master.db()
 
@@ -82,6 +83,45 @@ def delete_clipcard(clipcard_id):
     except Exception as e:
         db.rollback()
         print("Error in delete_clipcard:", e)
+        return {"info": str(e)}
+
+    finally:
+        if "db" in locals(): db.close()
+
+from bottle import request
+
+@post('/submit_task')
+def submit_task():
+    try:
+        cursor = db.cursor()
+        
+        # Hent data fra formen
+        clipcard_id = request.forms.get('clipcard_id')
+        task_title = request.forms.get('title')
+        task_description = request.forms.get('description')
+        hours = int(request.forms.get('hours'))
+        minutes = int(request.forms.get('minutes'))
+        time_spent = hours * 60 + minutes  # Konverter timer og minutter til minutter
+        created_at = int(time.time())  # Aktuelt tidspunkt
+
+        # Find user_id baseret på clipcard_id fra payments-tabellen
+        cursor.execute("SELECT user_id FROM payments WHERE clipcard_id = ?", (clipcard_id,))
+        user_id = cursor.fetchone()[0]  # Antagelse: Der er kun én bruger pr. klippekort
+
+        # Indsæt opgave i tasks-tabellen
+        task_id = str(uuid.uuid4().hex)  # Generer et unikt ID for opgaven
+        cursor.execute("""
+            INSERT INTO tasks (task_id, clipcard_id, customer_id, task_title, task_description, created_at, time_spent) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (task_id, clipcard_id, user_id, task_title, task_description, created_at, time_spent))
+
+        db.commit()
+        
+        return "Opgaven er blevet indsendt."
+
+    except Exception as e:
+        db.rollback()
+        print("Error in submit_task:", e)
         return {"info": str(e)}
 
     finally:
