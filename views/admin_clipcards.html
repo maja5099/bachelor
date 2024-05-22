@@ -51,6 +51,7 @@
 
     <h1>Timeregistrering</h1>
     <form
+      id="taskForm"
       action="/submit_task"
       method="post"
       style="display: flex; align-items: center; gap: 10px"
@@ -87,6 +88,8 @@
       <input type="submit" value="Registrer" />
     </form>
 
+    <div id="responseMessage"></div>
+
     <script>
       document.querySelectorAll(".delete-button").forEach((button) => {
         button.addEventListener("click", function () {
@@ -116,6 +119,35 @@
             alert("Der opstod en fejl ved sletning af klippekortet.");
           });
       }
+
+      document
+        .getElementById("taskForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const form = event.target;
+          const formData = new FormData(form);
+
+          fetch("/submit_task", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const responseMessage =
+                document.getElementById("responseMessage");
+              if (data.info) {
+                responseMessage.textContent = data.info;
+              } else {
+                responseMessage.textContent = "Opgaven er blevet registreret.";
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              document.getElementById("responseMessage").textContent =
+                "Der opstod en fejl.";
+            });
+        });
     </script>
   </body>
 </html>

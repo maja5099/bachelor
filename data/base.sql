@@ -49,8 +49,8 @@ INSERT INTO card_types (clipcard_type_id, clipcard_type_title, clipcard_type_tim
 -- TASKS
 CREATE TABLE IF NOT EXISTS tasks (
 	task_id	            INTEGER NOT NULL UNIQUE,
-	clipcard_id	        INTEGER NOT NULL UNIQUE,
-	customer_id			INTEGER NOT NULL UNIQUE,
+	clipcard_id	        INTEGER NOT NULL,
+	customer_id			INTEGER NOT NULL,
 	task_title			TEXT NOT NULL,
 	task_description	TEXT NOT NULL,
 	created_at	        TEXT,

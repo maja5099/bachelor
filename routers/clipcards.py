@@ -1,8 +1,9 @@
-from bottle import template, get, post, request
+from bottle import template, get, post, request, response
 import master
 import time
 import uuid
 import sqlite3
+import json
 
 
 db = master.db()
@@ -90,7 +91,6 @@ def delete_clipcard(clipcard_id):
     finally:
         if "db" in locals(): db.close()
 
-from bottle import request
 
 @post('/submit_task')
 def submit_task():
@@ -121,8 +121,6 @@ def submit_task():
         """, (user_id,))
         result = cursor.fetchone()
 
-        print("SQL query result:", result)
-
         if result is None:
             return {"info": "No active clipcard found for the provided user_id."}
 
@@ -136,14 +134,37 @@ def submit_task():
 
         db.commit()
         
-        return "Opgaven er blevet indsendt."
+        # Opdater time_used i clipcards-tabellen
+        cursor.execute("""
+            SELECT time_used 
+            FROM clipcards 
+            WHERE clipcard_id = ?
+        """, (clipcard_id,))
+        row = cursor.fetchone()
+        if row is not None and row["time_used"] != '':
+            time_used_minutes = int(row["time_used"])
+            time_used_hours = time_used_minutes / 60  # Konverter tid fra minutter til timer
+            time_used_hours += time_spent / 60  # Tilføj time_spent i timer
+            cursor.execute("""
+                UPDATE clipcards 
+                SET time_used = ? 
+                WHERE clipcard_id = ?
+            """, (time_used_hours * 60, clipcard_id))  # Konverter tid tilbage til minutter før opdatering i databasen
+            db.commit()
+
+
+        response.content_type = 'application/json'
+        return json.dumps({"info": "Opgaven er blevet indsendt."})
 
     except Exception as e:
         db.rollback()
         import traceback
         print("Error in submit_task:", traceback.format_exc())
-        return {"info": str(e)}
+        response.content_type = 'application/json'
+        return json.dumps({"info": str(e)})
 
     finally:
         if "db" in locals(): db.close()
+
+
 
