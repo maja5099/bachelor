@@ -6,6 +6,7 @@ import master
 import content
 import logging
 from colored_logging import setup_logger
+from routers.messages import UPLOADS_FOLDER
 
 ##############################
 #   COLERED LOGGING
@@ -100,6 +101,15 @@ def server_static(filepath):
     finally:
         logger.info("Static file request completed.")
 
+@get('/uploads/<filename:path>')
+def send_upload(filename):
+    try:
+        logger.success("Image file served successfully.")
+        return static_file(filename, root=UPLOADS_FOLDER)
+    except Exception as e:
+        logger.error("ERROR: Error serving image file: %s", e)
+    finally:
+        logger.info("Image request completed.")
 
 ##############################
 #   ROUTERS
