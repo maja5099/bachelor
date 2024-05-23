@@ -2,7 +2,6 @@ from bottle import template, get, post, request, response
 import master
 import time
 import uuid
-import sqlite3
 import json
 from math import floor
 
@@ -155,7 +154,6 @@ def submit_task():
 
         db.commit()
         
-        # Opdater time_used og remaining_time i clipcards-tabellen
         cursor.execute("""
             SELECT time_used, remaining_time
             FROM clipcards 
