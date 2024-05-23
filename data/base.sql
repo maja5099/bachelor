@@ -98,20 +98,6 @@ CREATE TABLE IF NOT EXISTS staff (
 ) WITHOUT ROWID;
 
 
-CREATE TABLE IF NOT EXISTS user_role_rights (
-	right_id			INTEGER NOT NULL UNIQUE,
-	user_role_id		INTEGER NOT NULL UNIQUE,
-	can_view			INTEGER NOT NULL,
-	can_add				INTEGER NOT NULL,
-	can_edit			INTEGER NOT NULL,
-	can_delete			INTEGER NOT NULL,
-	PRIMARY KEY(user_role_id)
-) WITHOUT ROWID;
-
-INSERT INTO user_role_rights (right_id, user_role_id, can_view, can_add, can_edit, can_delete) VALUES
-(1, '1', '1', '0', '0', '0'),
-(2, '2', '1', '1', '1', '1');
-
 -- MESSAGES
 CREATE TABLE IF NOT EXISTS messages (
 	message_id			INTEGER NOT NULL UNIQUE,
