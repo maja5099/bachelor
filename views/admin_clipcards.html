@@ -12,7 +12,7 @@
     <div id="clipcard_{{ clipcard['clipcard_id'] }}">
       <h2>{{ clipcard['first_name'] }} {{ clipcard['last_name'] }}</h2>
       <h2>{{ clipcard['website_url'] }}</h2>
-      <p>{{ clipcard['remaining_time'] }} timer</p>
+      <p>{{ clipcard['remaining_time_text'] }}</p>
 
       <div>
         <h3>Brugeroplysninger</h3>
@@ -35,8 +35,8 @@
 
       <div>
         <h3>Timeoverblik</h3>
-        <p>Tid brugt: {{ clipcard['time_used'] }} timer</p>
-        <p>Tid tilbage: {{ clipcard['remaining_time'] }} timer</p>
+        <p>Tid brugt: {{ clipcard['time_used_text'] }}</p>
+        <p>Tid tilbage: {{ clipcard['remaining_time_text'] }}</p>
       </div>
 
       <button

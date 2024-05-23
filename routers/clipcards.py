@@ -4,6 +4,7 @@ import time
 import uuid
 import sqlite3
 import json
+from math import floor
 
 
 db = master.db()
@@ -24,6 +25,11 @@ def clipcards():
 @get('/buy_clipcard/<clipcard_type>/<clipcard_price>')
 def buy_clipcard(clipcard_type, clipcard_price):
     return template('buy_clipcard.html', clipcard_type=clipcard_type, clipcard_price=clipcard_price)
+
+def minutes_to_hours_minutes(minutes):
+    hours = floor(minutes / 60)
+    remaining_minutes = minutes % 60
+    return hours, remaining_minutes
 
 @get('/admin_clipcards')
 def admin_clipcards():
@@ -46,6 +52,8 @@ def admin_clipcards():
         if not active_clipcards:
             print("Ingen aktive klippekort.") 
             return template("admin_clipcards", active_clipcards=[], active_customers=[])
+        
+    
 
         active_customers = [{'user_id': row['user_id'], 
                              'first_name': row['first_name'], 
@@ -53,6 +61,20 @@ def admin_clipcards():
                              'clipcard_id': row['clipcard_id']} 
                             for row in active_clipcards]
         
+
+        for clipcard in active_clipcards:
+            clipcard['time_used_hours'], clipcard['time_used_minutes'] = minutes_to_hours_minutes(clipcard['time_used'])
+            clipcard['remaining_time_hours'], clipcard['remaining_time_minutes'] = minutes_to_hours_minutes(clipcard['remaining_time'])
+
+            if clipcard['time_used_minutes'] > 0:
+                clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer og {clipcard['time_used_minutes']} minutter"
+            else:
+                clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer"
+
+            if clipcard['remaining_time_minutes'] > 0:
+                clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer og {clipcard['remaining_time_minutes']} minutter"
+            else:
+                clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
        
         return template("admin_clipcards", active_clipcards=active_clipcards, active_customers=active_customers)
     
@@ -95,7 +117,6 @@ def delete_clipcard(clipcard_id):
 @post('/submit_task')
 def submit_task():
     try:
-        db.row_factory = sqlite3.Row 
         cursor = db.cursor()
         
         user_id = request.forms.get('customer')
@@ -134,24 +155,24 @@ def submit_task():
 
         db.commit()
         
-        # Opdater time_used i clipcards-tabellen
+        # Opdater time_used og remaining_time i clipcards-tabellen
         cursor.execute("""
-            SELECT time_used 
+            SELECT time_used, remaining_time
             FROM clipcards 
             WHERE clipcard_id = ?
         """, (clipcard_id,))
-        row = cursor.fetchone()
-        if row is not None and row["time_used"] != '':
-            time_used_minutes = int(row["time_used"])
-            time_used_hours = time_used_minutes / 60  # Konverter tid fra minutter til timer
-            time_used_hours += time_spent / 60  # Tilføj time_spent i timer
+        time_data = cursor.fetchone()
+
+        if time_data is not None and time_data["time_used"] is not None:
+            time_used_minutes = int(time_data["time_used"]) + time_spent
+            remaining_time_minutes = int(time_data["remaining_time"]) - time_spent
             cursor.execute("""
                 UPDATE clipcards 
-                SET time_used = ? 
+                SET time_used = ?, remaining_time = ? 
                 WHERE clipcard_id = ?
-            """, (time_used_hours * 60, clipcard_id))  # Konverter tid tilbage til minutter før opdatering i databasen
-            db.commit()
+            """, (time_used_minutes, remaining_time_minutes, clipcard_id))
 
+            db.commit()
 
         response.content_type = 'application/json'
         return json.dumps({"info": "Opgaven er blevet indsendt."})
@@ -165,6 +186,9 @@ def submit_task():
 
     finally:
         if "db" in locals(): db.close()
+
+
+
 
 
 
