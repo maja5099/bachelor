@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS card_types (
 ) WITHOUT ROWID;
 
 INSERT INTO card_types (clipcard_type_id, clipcard_type_title, clipcard_type_time, clipcard_price) VALUES
-(1, '10 timer', 10, 7000),
-(2, '20 timer', 20, 14000),
-(3, '30 timer', 30, 19500);
+(1, '10 timer', 600, 7000),
+(2, '20 timer', 1200, 14000),
+(3, '30 timer', 1800, 19500);
 
 
 -- TASKS
