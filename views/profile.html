@@ -33,8 +33,8 @@
   <body>
     <!-- prettier-ignore -->
     % if user is not None and "user_roles_user_role_id" in user:
-      % include('components/header_bar')
-      % include('components/header')
+    % include('components/header_bar')
+    % include('components/header')
     <section
       class="bg-unidYellow bg-wave bg-cover py-20 space-y-8 lg:space-y-10"
     >
@@ -44,63 +44,49 @@
       >
         <div class="col-span-1">
           <!-- prettier-ignore -->
-          % include('components/profile_menu')
+          % include('components/profile/profile_menu')
         </div>
-        <div class="lg:col-span-2 col-span-1 grid gap-10 md:gap-8">
-          <div
-            class="w-full h-full bg-unidLightBlue rounded-lg text-white justify-between xl:flex items-center p-6 space-y-2"
-          >
-            <!-- prettier-ignore -->
-            % if "user_roles_user_role_id" in user:
-              % if user["user_roles_user_role_id"] == 1:
-            <p class="font-bold text-lg">
-              Velkommen, {{first_name}} {{last_name}}!
-            </p>
-            <div class="flex gap-1 text-sm">
-              <p>Du har</p>
-              <p class="font-bold">1 aktivt</p>
-              <p>klippekort A</p>
-            </div>
-            % elif user["user_roles_user_role_id"] == 2:
-            <p class="font-bold text-lg">
-              Velkommen, {{first_name}} {{last_name}}!
-            </p>
-            <div class="flex gap-1 text-sm">
-              <p>Du er logget ind som</p>
-              <p class="font-bold">admin</p>
-            </div>
-            % end
-            <!-- prettier-ignore -->
-            % end
-          </div>
-
-          <div class="grid lg:grid-cols-2 gap-8">
-            <!-- prettier-ignore -->
-            % if "user_roles_user_role_id" in user:
-              % if user["user_roles_user_role_id"] == 1:
-                  % include('components/profile_box', box_icon=ui_icons['hourglass_icon'], box_title='Tid tilbage', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
-                  % include('components/profile_box', box_icon=ui_icons['stop_watch_icon'], box_title='Tid brugt', box_content_big='123', box_content_medium='timer', box_content_small='123', box_content_xsmall='minutter')
-              % elif user["user_roles_user_role_id"] == 2:
-                  % include('components/profile_box', box_icon=ui_icons['open_folder_icon'], box_title='Åbne klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
-                  % include('components/profile_box', box_icon=ui_icons['closed_folder_icon'], box_title='Lukkede klippekort', box_content_big='123', box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
-              % end
-            % end
-          </div>
+        <div
+          id="profile_content"
+          class="lg:col-span-2 col-span-1 grid gap-10 md:gap-8"
+        >
+          % include('components/profile/profile_overview')
         </div>
       </div>
     </section>
     % end
-
     <!-- prettier-ignore -->
-    % if "user_roles_user_role_id" in user:
-      % if user["user_roles_user_role_id"] == 1:
-        % include('sections/pricing')
-      % elif user["user_roles_user_role_id"] == 2:
-    <!-- Admin components -->
-    % end
-    <!-- prettier-ignore -->
-    % end
-
     % include('components/footer')
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".secondary_button");
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", function () {
+            buttons.forEach((btn) =>
+              btn.classList.remove("secondary_button_selected")
+            );
+            this.classList.add("secondary_button_selected");
+            const templateName = this.getAttribute("data-template");
+            loadTemplate(templateName);
+          });
+        });
+
+        if (buttons.length > 0) {
+          buttons[0].classList.add("secondary_button_selected");
+          loadTemplate(buttons[0].getAttribute("data-template"));
+        }
+
+        function loadTemplate(templateName) {
+          fetch(`/profile/${templateName}`)
+            .then((response) => response.text())
+            .then((html) => {
+              document.getElementById("profile_content").innerHTML = html;
+            })
+            .catch((error) => console.error("Error loading template:", error));
+        }
+      });
+    </script>
   </body>
 </html>

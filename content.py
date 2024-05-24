@@ -150,21 +150,21 @@ section_login_content = {
 }
 
 section_profile_admin = [
-    {"icon": "user.tpl", "text": "Oversigt", "link": "/"},
-    {"icon": "card.tpl", "text": "Klippekort", "link": "/"},
-    {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
-    {"icon": "settings.tpl", "text": "Indstillinger", "link": "/"},
-    {"icon": "log_out.tpl", "text": "Log ud", "link": "/"},
+    {"icon": "user.tpl", "text": "Oversigt", "template": "profile_overview"},
+    {"icon": "card.tpl", "text": "Klippekort", "template": "profile_clipcard"},
+    {"icon": "letter.tpl", "text": "Beskeder", "template": "profile_messages"},
+    {"icon": "settings.tpl", "text": "Indstillinger", "template": "profile_settings"},
+    {"icon": "log_out.tpl", "text": "Log ud", "template": "profile_log_out"},
 ]
 
 section_profile_customer = [
-    {"icon": "user.tpl", "text": "Oversigt", "link": "/"},
-    {"icon": "card.tpl", "text": "Klippekort", "link": "/"},
-    {"icon": "cart.tpl", "text": "Tilkøb", "link": "/"},
-    {"icon": "education.tpl", "text": "Kurser", "link": "/"},
-    {"icon": "letter.tpl", "text": "Beskeder", "link": "/"},
-    {"icon": "settings.tpl", "text": "Indstillinger", "link": "/"},
-    {"icon": "log_out.tpl", "text": "Log ud", "link": "/"},
+    {"icon": "user.tpl", "text": "Oversigt", "template": "profile_overview"},
+    {"icon": "card.tpl", "text": "Klippekort", "template": "profile_clipcard"},
+    {"icon": "cart.tpl", "text": "Tilkøb", "template": "profile_additional_purchase"},
+    {"icon": "education.tpl", "text": "Kurser", "template": "profile_courses"},
+    {"icon": "letter.tpl", "text": "Beskeder", "template": "profile_messages"},
+    {"icon": "settings.tpl", "text": "Indstillinger", "template": "profile_settings"},
+    {"icon": "log_out.tpl", "text": "Log ud", "template": "profile_log_out"},
 ]
 
 pricing_default = {
