@@ -39,7 +39,8 @@ def _():
         if hashed_password_input == hashed_password_from_db:
             user.pop("password")
             response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True)
-            return redirect("/")
+            return {"info": "Login successful", "redirect": "/"}
+            
         else:
             response.status = 400 
             raise Exception("Adgangskoden er forkert") 

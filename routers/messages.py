@@ -150,12 +150,12 @@ def delete_message():
         message_id = request.forms.get('message_id')
         if not message_id:
             response.status = 400
-            return {"info": "Besked-ID mangler"}
+            return {"info": "Message ID is missing."}
 
         current_user = get_current_user()
         if not current_user:
             response.status = 401
-            return {"info": "Bruger ikke logget ind"}
+            return {"info": "User not logged in."}
         
         user_id = current_user['user_id']
 
@@ -174,9 +174,9 @@ def delete_message():
 
         if cursor.rowcount == 0:
             response.status = 404
-            return {"info": "Besked ikke fundet"}
+            return {"info": "Message not found."}
 
-        return {"info": "Besked slettet"}
+        return {"info": "Message deleted."}
 
     except Exception as e:
         print(e)

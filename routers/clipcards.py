@@ -49,7 +49,7 @@ def admin_clipcards():
         cursor.close()
 
         if not active_clipcards:
-            print("Ingen aktive klippekort.") 
+            print("No active clip cards.") 
             return template("admin_clipcards", active_clipcards=[], active_customers=[])
         
     
@@ -91,6 +91,14 @@ def delete_clipcard(clipcard_id):
     try:
         cursor = db.cursor()
 
+        cursor.execute("SELECT * FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
+        existing_clipcard = cursor.fetchone()
+        if existing_clipcard is None:
+            return f"The clip card with id {clipcard_id} does not exist."
+
+        if existing_clipcard["is_active"] == "FALSE":
+            return f"The clip card with id {clipcard_id} has already been deleted."
+
         updated_at = int(time.time())
         deleted_at = int(time.time())
 
@@ -102,7 +110,7 @@ def delete_clipcard(clipcard_id):
         
         db.commit()
 
-        return "Klippekortet er blevet opdateret."
+        return "The clip card has been deleted."
 
     except Exception as e:
         db.rollback()
@@ -111,6 +119,8 @@ def delete_clipcard(clipcard_id):
 
     finally:
         if "db" in locals(): db.close()
+
+
 
 
 @post('/submit_task')
