@@ -1,6 +1,6 @@
 <section class="bg-unidPink">
   <div
-    class="width_standard mx-auto py-24 md:py-28 space-y-8 md:space-y-12"
+    class="width_standard padding_y_standard mx-auto space-y-8 md:space-y-12"
   >
     <div class="flex justify-center">
       <div class="lg:w-2/3 flex justify-center flex-col text-center gap-y-6">

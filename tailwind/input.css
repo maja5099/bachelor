@@ -78,6 +78,9 @@
   .width_big {
     @apply w-10/12 2xl:w-8/12;
   }
+  .padding_y_standard {
+    @apply py-24 md:py-28 lg:py-32;
+  }
 }
 
 @layer utilities {
