@@ -27,6 +27,9 @@
   #primary_button {
     @apply text-white text-sm w-full md:text-base font-bold bg-unidLightBlue py-3.5 px-10 rounded-md drop-shadow-xl transition ease-in-out duration-300 hover:bg-unidLightBlueHover hover:scale-105;
   }
+  #secondary_button {
+    @apply text-white text-sm w-full md:text-base font-bold hover:scale-105 items-center gap-2 hover:text-unidPurple hover:bg-unidYellow py-3.5 px-7 rounded-md transition ease-in-out duration-300;
+  }
   #login_button {
     @apply text-white text-base hover:scale-105 font-bold items-center gap-2 hover:text-unidPurple hover:bg-unidYellow py-3.5 px-7 rounded-md transition ease-in-out duration-300;
   }

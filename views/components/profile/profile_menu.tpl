@@ -24,7 +24,10 @@
     % end
 
   <!-- prettier-ignore -->
-  % include('components/profile/profile_logout')
+  <div id="open_logout_pop_up">
+    % include('components/profile/profile_logout')
+  </div>
+  
 
   <!-- prettier-ignore -->
   % else:
