@@ -81,6 +81,9 @@
   .padding_y_standard {
     @apply py-24 md:py-28 lg:py-32;
   }
+  .space_y_standard {
+    @apply space-y-8 md:space-y-10 lg:space-y-16;
+  }
 }
 
 @layer utilities {

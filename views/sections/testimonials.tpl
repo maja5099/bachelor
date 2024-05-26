@@ -1,6 +1,6 @@
 <section class="bg-unidBeige">
   <div
-    class="width_standard mx-auto padding_y_standard space-y-8 md:space-y-10 lg:space-y-16"
+    class="width_standard mx-auto padding_y_standard space_y_standard"
   >
     <div class="flex justify-center">
       <div
