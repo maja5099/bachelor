@@ -5,14 +5,18 @@
     <!-- prettier-ignore -->
     % if "user_roles_user_role_id" in user:
         % if user["user_roles_user_role_id"] == 1:
-    <p class="font-bold text-lg">Velkommen, {{first_name}} {{last_name}}!</p>
+    <p class="font-bold text-lg">
+      Velkommen, {{ first_name }} {{ last_name }}!
+    </p>
     <div class="flex gap-1 text-sm">
       <p>Du har</p>
       <p class="font-bold">1 aktivt</p>
       <p>klippekort A</p>
     </div>
     % elif user["user_roles_user_role_id"] == 2:
-    <p class="font-bold text-lg">Velkommen, {{first_name}} {{last_name}}!</p>
+    <p class="font-bold text-lg">
+      Velkommen, {{ first_name }} {{ last_name }}!
+    </p>
     <div class="flex gap-1 text-sm">
       <p>Du er logget ind som</p>
       <p class="font-bold">admin</p>

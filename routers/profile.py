@@ -79,9 +79,9 @@ def profile():
 def template_finder(template_name, directories):
     for directory in directories:
         for root, _, files in os.walk(f'views/{directory}'):
-            if f'{template_name}.html' in files:
+            if f'{template_name}.tpl' in files:
                 logger.success("Template '%s' found in directory '%s'.", template_name, directory)
-                return os.path.join(root, f'{template_name}.html')
+                return os.path.join(root, f'{template_name}.tpl')
     logger.error("Template '%s' not found in any directories.", template_name)
     return None
 
@@ -112,7 +112,7 @@ def profile_template(template_name):
             raise Exception(f"Template '{template_name}' not found in any of the directories.")
 
         # Remove the 'views/' prefix and the '.html' suffix to get the template path for bottle
-        template_path = template_path.replace('views/', '').replace('.html', '')
+        template_path = template_path.replace('views/', '').replace('.tpl', '')
 
         return template(template_path, 
                         title="Din profil", 
@@ -135,3 +135,4 @@ def profile_template(template_name):
         return f"Error loading template {template_name}: {e}"
     finally:
         logger.info("Template request for '%s' completed.", template_name)
+ # type: ignore
