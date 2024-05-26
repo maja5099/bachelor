@@ -69,6 +69,15 @@
   #form_input_success {
     @apply w-full ps-16 py-3 px-5 rounded-md border border-green-500 placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300;
   }
+  .width_small {
+    @apply w-10/12 md:w-8/12 lg:w-6/12 2xl:w-4/12;
+  }
+  .width_standard {
+    @apply w-10/12 2xl:w-6/12;
+  }
+  .width_big {
+    @apply w-10/12 2xl:w-8/12;
+  }
 }
 
 @layer utilities {

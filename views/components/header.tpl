@@ -1,6 +1,6 @@
 <header class="text-white text-base bg-unidLightBlue drop-shadow-xl">
   <div
-    class="w-10/12 2xl:w-8/12 py-8 mx-auto flex items-center justify-between"
+    class="width_big py-8 mx-auto flex items-center justify-between"
   >
     <div class="flex">
       % if user:
