@@ -1,1 +1,0 @@
-<p>Her kommer der en log ud funktion</p>

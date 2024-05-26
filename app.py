@@ -116,6 +116,7 @@ def send_upload(filename):
 try:
     import routers.signup
     import routers.login
+    import routers.logout
     import routers.profile
     import routers.portfolio
     import routers.contact

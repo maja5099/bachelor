@@ -154,7 +154,6 @@ section_profile_admin = [
     {"icon": "card.svg", "text": "Klippekort", "template": "profile_clipcard"},
     {"icon": "letter.svg", "text": "Beskeder", "template": "profile_messages"},
     {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
-    {"icon": "log_out.svg", "text": "Log ud", "template": "profile_log_out"},
 ]
 
 section_profile_customer = [
@@ -164,7 +163,6 @@ section_profile_customer = [
     {"icon": "education.svg", "text": "Kurser", "template": "profile_courses"},
     {"icon": "letter.svg", "text": "Beskeder", "template": "profile_messages"},
     {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
-    {"icon": "log_out.svg", "text": "Log ud", "template": "profile_log_out"},
 ]
 
 pricing_default = {

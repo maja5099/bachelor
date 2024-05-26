@@ -69,7 +69,12 @@
             );
             this.classList.add("secondary_button_selected");
             const templateName = this.getAttribute("data-template");
-            loadTemplate(templateName);
+
+            if (templateName) {
+              loadTemplate(templateName);
+            } else {
+              console.log("No template associated with this button.");
+            }
           });
         });
 
