@@ -5,21 +5,21 @@ unid_logo = {
 }
 
 ui_icons = {       
-    "user_icon": "user.tpl", 
-    "admin_icon": "admin.tpl",
-    "burger_icon": "burger.tpl",
-    "hourglass_icon": "hourglass.tpl",
-    "stop_watch_icon": "stop_watch.tpl",
-    "open_folder_icon": "open_folder.tpl",
-    "closed_folder_icon": "closed_folder.tpl",
-    "message": "letter.tpl",
+    "user_icon": "user.svg", 
+    "admin_icon": "admin.svg",
+    "burger_icon": "burger.svg",
+    "hourglass_icon": "hourglass.svg",
+    "stop_watch_icon": "stop_watch.svg",
+    "open_folder_icon": "open_folder.svg",
+    "closed_folder_icon": "closed_folder.svg",
+    "message": "letter.svg",
 }
 
 selling_points = [       
-    {"icon": "heart.tpl", "text": "Tilfredshedsgaranti"},
-    {"icon": "discount.tpl", "text": "Studierabat"},
-    {"icon": "pen.tpl", "text": "Skræddersyet løsning"},
-    {"icon": "chat.tpl", "text": "Hurtig kundeservice"}
+    {"icon": "heart.svg", "text": "Tilfredshedsgaranti"},
+    {"icon": "discount.svg", "text": "Studierabat"},
+    {"icon": "pen.svg", "text": "Skræddersyet løsning"},
+    {"icon": "chat.svg", "text": "Hurtig kundeservice"}
 ]
 
 header_nav_items = [
@@ -36,8 +36,8 @@ footer_info = [
 ]
 
 social_media = {       
-    "instagram": {"icon": "instagram.tpl", "link": "https://www.instagram.com/unid.studio/"},
-    "linkedin": {"icon": "linkedin.tpl", "link": "https://www.linkedin.com/company/unid-studio/"},
+    "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
+    "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
 }
 
 section_landingpage_hero_content = {       
@@ -51,7 +51,7 @@ form_inputs = {
     "username": {
         "label_for": "username",
         "text": "Brugernavn", 
-        "icon": "user_circle.tpl", 
+        "icon": "user_circle.svg", 
         "type": "text",
         "name": "username",
         "inputmode":"text",
@@ -61,7 +61,7 @@ form_inputs = {
     "password": {
         "label_for": "pwd",
         "text": "Adgangskode", 
-        "icon": "lock.tpl", 
+        "icon": "lock.svg", 
         "type": "password",
         "name": "pwd",
         "inputmode":"text",
@@ -71,7 +71,7 @@ form_inputs = {
     "fname": {
         "label_for": "fname",
         "text": "Fornavn", 
-        "icon": "user_name_semi.tpl", 
+        "icon": "user_name_semi.svg", 
         "type": "text",
         "name": "fname",
         "inputmode":"text",
@@ -81,7 +81,7 @@ form_inputs = {
     "lname": {
         "label_for": "lname",
         "text": "Efternavn", 
-        "icon": "user_name_full.tpl", 
+        "icon": "user_name_full.svg", 
         "type": "text",
         "name": "lname",
         "inputmode":"text",
@@ -91,7 +91,7 @@ form_inputs = {
     "email": {
         "label_for": "email",
         "text": "Email", 
-        "icon": "email.tpl", 
+        "icon": "email.svg", 
         "type": "email",
         "name": "email",
         "inputmode":"email",
@@ -101,7 +101,7 @@ form_inputs = {
     "phone": {
         "label_for": "phone",
         "text": "Telefon nummer", 
-        "icon": "phone.tpl", 
+        "icon": "phone.svg", 
         "type": "tel",
         "name": "phone",
         "inputmode":"tel",
@@ -111,7 +111,7 @@ form_inputs = {
     "website_name": {
         "label_for": "website_name",
         "text": "Navn på din hjemmeside", 
-        "icon": "pen_line.tpl", 
+        "icon": "pen_line.svg", 
         "type": "text",
         "name": "website_name",
         "inputmode":"text",
@@ -121,7 +121,7 @@ form_inputs = {
     "website_url": {
         "label_for": "website_url",
         "text": "URL til din hjemmeside", 
-        "icon": "www.tpl", 
+        "icon": "www.svg", 
         "type": "url",
         "name": "website_url",
         "inputmode":"url",
@@ -131,7 +131,7 @@ form_inputs = {
     "full_name": {
         "label_for": "name",
         "text": "Navn", 
-        "icon": "user_circle.tpl", 
+        "icon": "user_circle.svg", 
         "type": "name",
         "name": "name",
         "inputmode":"text",
@@ -143,28 +143,28 @@ form_inputs = {
 section_login_content = {
     "header_text": "Log ind",
     "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
-    "error_icon": "exclamation_mark.tpl",
+    "error_icon": "exclamation_mark.svg",
     "button_text": "Log ind",
     "image": "unid_universe.svg",
     "logo": "primary_logo.svg",
 }
 
 section_profile_admin = [
-    {"icon": "user.tpl", "text": "Oversigt", "template": "profile_overview"},
-    {"icon": "card.tpl", "text": "Klippekort", "template": "profile_clipcard"},
-    {"icon": "letter.tpl", "text": "Beskeder", "template": "profile_messages"},
-    {"icon": "settings.tpl", "text": "Indstillinger", "template": "profile_settings"},
-    {"icon": "log_out.tpl", "text": "Log ud", "template": "profile_log_out"},
+    {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
+    {"icon": "card.svg", "text": "Klippekort", "template": "profile_clipcard"},
+    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_messages"},
+    {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
+    {"icon": "log_out.svg", "text": "Log ud", "template": "profile_log_out"},
 ]
 
 section_profile_customer = [
-    {"icon": "user.tpl", "text": "Oversigt", "template": "profile_overview"},
-    {"icon": "card.tpl", "text": "Klippekort", "template": "profile_clipcard"},
-    {"icon": "cart.tpl", "text": "Tilkøb", "template": "profile_additional_purchase"},
-    {"icon": "education.tpl", "text": "Kurser", "template": "profile_courses"},
-    {"icon": "letter.tpl", "text": "Beskeder", "template": "profile_messages"},
-    {"icon": "settings.tpl", "text": "Indstillinger", "template": "profile_settings"},
-    {"icon": "log_out.tpl", "text": "Log ud", "template": "profile_log_out"},
+    {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
+    {"icon": "card.svg", "text": "Klippekort", "template": "profile_clipcard"},
+    {"icon": "cart.svg", "text": "Tilkøb", "template": "profile_additional_purchase"},
+    {"icon": "education.svg", "text": "Kurser", "template": "profile_courses"},
+    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_messages"},
+    {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
+    {"icon": "log_out.svg", "text": "Log ud", "template": "profile_log_out"},
 ]
 
 pricing_default = {
@@ -173,14 +173,14 @@ pricing_default = {
             "title": "Klippekort A",
             "hours": "10 timer",
             "discount": "Spar 1.234 DKK",
-            "discount_icon": "discount.tpl",
+            "discount_icon": "discount.svg",
             "price": "12.345 DKK",
         },
         "selling_points": [
-            {"icon": "checkmark.tpl", "text": "Selling point 1"},
-            {"icon": "checkmark.tpl", "text": "Selling point 2"},
-            {"icon": "checkmark.tpl", "text": "Selling point 3"},
-            {"icon": "checkmark.tpl", "text": "Selling point 4"},
+            {"icon": "checkmark.svg", "text": "Selling point 1"},
+            {"icon": "checkmark.svg", "text": "Selling point 2"},
+            {"icon": "checkmark.svg", "text": "Selling point 3"},
+            {"icon": "checkmark.svg", "text": "Selling point 4"},
         ]
     },
     "clipcard_b": {
@@ -188,14 +188,14 @@ pricing_default = {
             "title": "Klippekort B",
             "hours": "20 timer",
             "discount": "Spar 1.234 DKK",
-            "discount_icon": "discount.tpl",
+            "discount_icon": "discount.svg",
             "price": "12.345 DKK",
         },
         "selling_points": [
-            {"icon": "checkmark.tpl", "text": "Selling point 1"},
-            {"icon": "checkmark.tpl", "text": "Selling point 2"},
-            {"icon": "checkmark.tpl", "text": "Selling point 3"},
-            {"icon": "checkmark.tpl", "text": "Selling point 4"},
+            {"icon": "checkmark.svg", "text": "Selling point 1"},
+            {"icon": "checkmark.svg", "text": "Selling point 2"},
+            {"icon": "checkmark.svg", "text": "Selling point 3"},
+            {"icon": "checkmark.svg", "text": "Selling point 4"},
         ]
     }
 }
@@ -206,16 +206,16 @@ pricing_accent = {
             "title": "Klippekort C",
             "hours": "30 timer",
             "discount": "Spar 1.234 DKK",
-            "discount_icon": "discount_full.tpl",
+            "discount_icon": "discount_full.svg",
             "price": "12.345 DKK",
         },
         "selling_points": [
-            {"icon": "checkmark_full.tpl", "text": "Selling point 1"},
-            {"icon": "checkmark_full.tpl", "text": "Selling point 2"},
-            {"icon": "checkmark_full.tpl", "text": "Selling point 3"},
-            {"icon": "checkmark_full.tpl", "text": "Selling point 4"},
-            {"icon": "checkmark_full.tpl", "text": "Selling point 5"},
-            {"icon": "checkmark_full.tpl", "text": "Selling point 6"},
+            {"icon": "checkmark_full.svg", "text": "Selling point 1"},
+            {"icon": "checkmark_full.svg", "text": "Selling point 2"},
+            {"icon": "checkmark_full.svg", "text": "Selling point 3"},
+            {"icon": "checkmark_full.svg", "text": "Selling point 4"},
+            {"icon": "checkmark_full.svg", "text": "Selling point 5"},
+            {"icon": "checkmark_full.svg", "text": "Selling point 6"},
         ]
     },
 }
@@ -223,19 +223,19 @@ pricing_accent = {
 section_testimonial_content = {
     "header_text": "Det siger vores kunder",
     "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-    "testimonial_icon": "quote.tpl",
+    "testimonial_icon": "quote.svg",
     "testimonials": [
         {
             "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
             "author_name": "Lorem ipsum", 
             "author_job_title": "Lorem ipsum", 
-            "author_image": "user.tpl",
+            "author_image": "user.svg",
         },
         {
             "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
             "author_name": "Lorem ipsum", 
             "author_job_title": "Lorem ipsum", 
-            "author_image": "user.tpl",
+            "author_image": "user.svg",
         },
     ],
 }
