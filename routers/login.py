@@ -4,6 +4,8 @@ import os
 from dotenv import load_dotenv
 import master
 import content
+import datetime
+
 
 ##############################
 #   Content from content.py
@@ -42,7 +44,7 @@ def _():
 
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
-            response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True)
+            response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True, Secure=True, samesite='Strict')
             return {"info": "Login successful", "redirect": "/"}
         else:
             response.status = 400 
@@ -56,7 +58,6 @@ def _():
     finally:
         if "db" in locals(): 
             db.close()
-
 
 
 @get("/login")
