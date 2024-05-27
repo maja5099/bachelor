@@ -23,7 +23,7 @@ def _():
     try:
         load_dotenv('.env')
 
-        # Indhent brugerinput
+
         username = request.forms.get("username")
         password = request.forms.get("password")
 
@@ -31,7 +31,6 @@ def _():
             response.status = 400
             raise Exception("Du skal udfylde både brugernavn og adgangskode, for at logge ind.")
             
-        # Databaseopslag
         db = master.db()
         user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
 
@@ -39,10 +38,8 @@ def _():
             response.status = 400
             raise Exception("Brugernavnet eksisterer ikke")
    
-        # Hashing og validering
         hashed_password_from_db = user["password"]
 
-        # Sammenligning af hashede adgangskoder
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
             response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True)
