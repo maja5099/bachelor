@@ -21,7 +21,7 @@ def db():
 def user():
   try:
     load_dotenv(".env")
-    user = request.get_cookie("user", secret=os.getenv('MY_SECRET'), httponly=True, Secure=True, samesite='Strict')
+    user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
     print("user cookie", user)
     if user:
       return user
