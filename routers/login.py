@@ -14,17 +14,17 @@ unid_logo = content.unid_logo
 section_login_content = content.section_login_content
 
 
-
-from bottle import post, request, response
-import bcrypt
-import os
-from dotenv import load_dotenv
+def set_cookie_secure(cookie_name, cookie_value):
+    host = os.getenv('HOST')
+    if host != 'localhost':
+        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True, secure=True, samesite='Strict')
+    else:
+        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
 
 @post("/login")
-def _():
+def login():
     try:
         load_dotenv('.env')
-
 
         username = request.forms.get("username")
         password = request.forms.get("password")
@@ -44,7 +44,7 @@ def _():
 
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
-            response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True, Secure=True, samesite='Strict')
+            set_cookie_secure("user", user)
             return {"info": "Login successful", "redirect": "/"}
         else:
             response.status = 400 

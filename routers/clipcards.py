@@ -1,4 +1,4 @@
-from bottle import template, get, post, request, response
+from bottle import template, get, post, request, response, delete
 import master
 import time
 import uuid
@@ -86,7 +86,7 @@ def admin_clipcards():
 
 
 
-@post('/delete_clipcard/<clipcard_id>')
+@delete('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
     try:
         cursor = db.cursor()

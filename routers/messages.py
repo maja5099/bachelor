@@ -1,4 +1,4 @@
-from bottle import post, get, request, response, template
+from bottle import post, get, request, response, template, delete
 import os
 import uuid
 import time
@@ -144,7 +144,7 @@ def admin_messages_get():
             db.close()
 
 
-@post('/delete_message')
+@delete('/delete_message')
 def delete_message():
     try:
         message_id = request.forms.get('message_id')
