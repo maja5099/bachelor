@@ -9,8 +9,8 @@ def _():
     try:
         db = master.db()
         user_id = str(uuid.uuid4().hex)
-        first_name = request.forms.get("first_name", "")
-        last_name = request.forms.get("last_name", "")
+        first_name = request.forms.get("first_name")
+        last_name = request.forms.get("last_name")
         email = master.validate_email()
         phone = master.validate_phone()
         username = master.validate_username()
