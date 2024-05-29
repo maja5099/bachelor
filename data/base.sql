@@ -1,8 +1,11 @@
 -- SQLite
 
+
+-- ##############################
 -- USERS
 CREATE TABLE IF NOT EXISTS users (
     user_id	            	INTEGER NOT NULL UNIQUE,
+	user_roles_user_role_id	INTEGER,	
 	first_name	        	TEXT NOT NULL,
 	last_name	        	TEXT NOT NULL,
 	email	            	TEXT NOT NULL,
@@ -13,11 +16,12 @@ CREATE TABLE IF NOT EXISTS users (
 	created_at	        	TEXT NOT NULL,
 	updated_at	        	TEXT,
 	deleted_at	        	TEXT,
-	user_roles_user_role_id	INTEGER,	
-	PRIMARY KEY(user_id)
+	PRIMARY KEY(user_id),
+	FOREIGN KEY(user_roles_user_role_id) REFERENCES user_roles(user_role_id)
 ) WITHOUT ROWID;
 
 
+-- ##############################
 -- CLIPCARDS AND CARDTYPES
 CREATE TABLE IF NOT EXISTS clipcards (
 	clipcard_id	        INTEGER NOT NULL UNIQUE,
@@ -29,8 +33,8 @@ CREATE TABLE IF NOT EXISTS clipcards (
 	deleted_at			TEXT,
 	is_active			INTEGER NOT NULL,
 	PRIMARY KEY(clipcard_id)
+	FOREIGN KEY(clipcard_type_id) REFERENCES card_types(clipcard_type_id)
 ) WITHOUT ROWID;
-
 
 CREATE TABLE IF NOT EXISTS card_types (
 	clipcard_type_id	INTEGER NOT NULL UNIQUE,
@@ -46,6 +50,7 @@ INSERT INTO card_types (clipcard_type_id, clipcard_type_title, clipcard_type_tim
 (3, '30 timer', 1800, 19500);
 
 
+-- ##############################
 -- TASKS
 CREATE TABLE IF NOT EXISTS tasks (
 	task_id	            INTEGER NOT NULL UNIQUE,
@@ -55,10 +60,13 @@ CREATE TABLE IF NOT EXISTS tasks (
 	task_description	TEXT NOT NULL,
 	created_at	        TEXT,
 	time_spent	        INTEGER NOT NULL,
-	PRIMARY KEY(task_id)
+	PRIMARY KEY(task_id),
+	FOREIGN KEY(clipcard_id) REFERENCES clipcards(clipcard_id),
+	FOREIGN KEY(customer_id) REFERENCES customers(customer_id)
 ) WITHOUT ROWID;
 
 
+-- ##############################
 -- PAYMENTS
 CREATE TABLE IF NOT EXISTS payments (
 	payment_id	        INTEGER NOT NULL UNIQUE,
@@ -66,10 +74,13 @@ CREATE TABLE IF NOT EXISTS payments (
 	clipcard_id	        INTEGER NOT NULL UNIQUE,
 	amount_paid	        INTEGER NOT NULL,
 	created_at	        TEXT NOT NULL,
-	PRIMARY KEY(payment_id)
+	PRIMARY KEY(payment_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id),
+	FOREIGN KEY(clipcard_id) REFERENCES clipcards(clipcard_id)
 ) WITHOUT ROWID;
 
 
+-- ##############################
 -- USER ROLES AND RIGHTS
 CREATE TABLE IF NOT EXISTS user_roles (
 	user_role_id		INTEGER NOT NULL,
@@ -81,23 +92,24 @@ INSERT INTO user_roles (user_role_id, user_role_title) VALUES
 (1, 'customer'),
 (2, 'staff');
 
-
 CREATE TABLE IF NOT EXISTS customers (
 	customer_id			INTEGER NOT NULL UNIQUE,
 	user_role_id		INTEGER NOT NULL,
 	website_name		TEXT NOT NULL,
 	website_url			TEXT NOT NULL,
-	PRIMARY KEY(customer_id)
+	PRIMARY KEY(customer_id),
+	FOREIGN KEY(user_role_id) REFERENCES user_roles(user_role_id)
 ) WITHOUT ROWID;
-
 
 CREATE TABLE IF NOT EXISTS staff (
 	staff_id			INTEGER NOT NULL UNIQUE,
 	user_role_id		INTEGER NOT NULL,
-	PRIMARY KEY(staff_id)
+	PRIMARY KEY(staff_id),
+	FOREIGN KEY(user_role_id) REFERENCES user_roles(user_role_id)
 ) WITHOUT ROWID;
 
 
+-- ##############################
 -- MESSAGES
 CREATE TABLE IF NOT EXISTS messages (
 	message_id			INTEGER NOT NULL UNIQUE,
@@ -107,5 +119,6 @@ CREATE TABLE IF NOT EXISTS messages (
 	message_file		TEXT,
 	created_at			TEXT NOT NULL,
 	deleted_at			TEXT,
-	PRIMARY KEY(message_id)
+	PRIMARY KEY(message_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
 ) WITHOUT ROWID;
