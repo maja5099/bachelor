@@ -28,6 +28,7 @@
       href="/assets/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>{{title}}</title>
   </head>
   <body>
@@ -62,64 +63,7 @@
     <!-- Logout pop up (hidden by default) -->
     % include('components/profile/logout_pop_up')
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Button style and dynamic templates
-        const buttons = document.querySelectorAll(".secondary_button");
-
-        buttons.forEach((button) => {
-          button.addEventListener("click", function () {
-            buttons.forEach((btn) =>
-              btn.classList.remove("secondary_button_selected")
-            );
-            this.classList.add("secondary_button_selected");
-            const templateName = this.getAttribute("data-template");
-
-            // Handles menu item with no template
-            if (templateName) {
-              loadTemplate(templateName);
-            } else {
-              console.log("No template associated with this button.");
-            }
-          });
-        });
-
-        // First button selected by default
-        if (buttons.length > 0) {
-          buttons[0].classList.add("secondary_button_selected");
-          loadTemplate(buttons[0].getAttribute("data-template"));
-        }
-
-        // Load templates dynamically
-        function loadTemplate(templateName) {
-          fetch(`/profile/${templateName}`)
-            .then((response) => response.text())
-            .then((html) => {
-              document.getElementById("profile_content").innerHTML = html;
-            })
-            .catch((error) => console.error("Error loading template:", error));
-        }
-
-        // Toggle pop up
-        const togglePopup = () => {
-          const popup = document.getElementById("logout_popup");
-          if (popup) popup.classList.toggle("object_hidden");
-        };
-
-        // Open pop up button
-        const openButton = document.getElementById("open_logout_pop_up");
-        openButton.addEventListener("click", function () {
-          const popup = document.getElementById("logout_popup");
-          if (popup) popup.classList.remove("object_hidden");
-        });
-
-        // Close pop up button
-        const closeButton = document.getElementById("close_logout_pop_up");
-        closeButton.addEventListener("click", function () {
-          const popup = document.getElementById("logout_popup");
-          if (popup) popup.classList.add("object_hidden");
-        });
-      });
-    </script>
+    <!-- SCRIPT -->
+    <script src="/static/script.js"></script>
   </body>
 </html>

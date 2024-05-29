@@ -52,20 +52,3 @@
     </button>
   </div>
 </label>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggleButton = document.getElementById("visibility_button");
-    toggleButton.addEventListener("click", function () {
-      const input = document.getElementById("password_input");
-      const icons = document.querySelectorAll("#visibility_button .visibility_icon");
-
-      // Toggle the type attribute
-      input.type = input.type === "password" ? "text" : "password";
-
-      // Toggle icon visibility
-      icons.forEach((icon) => {
-        icon.classList.toggle("object_hidden");
-      });
-    });
-  });
-</script>

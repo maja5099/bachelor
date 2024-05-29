@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Aktive Klippekort</title>
   </head>
   <body>
@@ -90,64 +91,7 @@
 
     <div id="responseMessage"></div>
 
-    <script>
-      document.querySelectorAll(".delete-button").forEach((button) => {
-        button.addEventListener("click", function () {
-          var clipcardId = this.getAttribute("data-clipcard-id");
-          deleteClipcard(clipcardId);
-        });
-      });
-
-      function deleteClipcard(clipcardId) {
-        fetch("/delete_clipcard/" + clipcardId, {
-          method: "DELETE",
-        })
-          .then((response) => {
-            if (response.ok) {
-              var clipcardElement = document.getElementById(
-                "clipcard_" + clipcardId
-              );
-              if (clipcardElement) {
-                clipcardElement.remove();
-              }
-            } else {
-              throw new Error("Kunne ikke slette klippekortet.");
-            }
-          })
-          .catch((error) => {
-            console.error("Fejl:", error);
-            alert("Der opstod en fejl ved sletning af klippekortet.");
-          });
-      }
-
-      document
-        .getElementById("taskForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          const form = event.target;
-          const formData = new FormData(form);
-
-          fetch("/submit_task", {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              const responseMessage =
-                document.getElementById("responseMessage");
-              if (data.info) {
-                responseMessage.textContent = data.info;
-              } else {
-                responseMessage.textContent = "Opgaven er blevet registreret.";
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-              document.getElementById("responseMessage").textContent =
-                "Der opstod en fejl.";
-            });
-        });
-    </script>
+    <!-- SCRIPT -->
+    <script src="/static/script.js"></script>
   </body>
 </html>

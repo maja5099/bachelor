@@ -3,13 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Klippekort</title>
-    <script>
-      function buyClipcard(clipcardType, clipcardPrice) {
-        window.location.href =
-          "/buy_clipcard/" + clipcardType + "/" + clipcardPrice;
-      }
-    </script>
   </head>
   <body>
     <h2>KLIPPEKORT</h2>
@@ -41,14 +36,7 @@
       % end
     </div>
 
-    <script>
-      document.querySelectorAll(".buy-button").forEach((button) => {
-        button.addEventListener("click", function () {
-          var clipcardType = this.getAttribute("data-clipcard-type");
-          var clipcardPrice = this.getAttribute("data-clipcard-price");
-          buyClipcard(clipcardType, clipcardPrice);
-        });
-      });
-    </script>
+    <!-- SCRIPT -->
+    <script src="/static/script.js"></script>
   </body>
 </html>

@@ -100,7 +100,7 @@ def send_message():
 def messages_get():
     try:
         db = master.db()
-        return template("messages.html")
+        return template("customer_messages.html")
     except Exception as e:
         print(e)
         if "db" in locals(): db.rollback() 
