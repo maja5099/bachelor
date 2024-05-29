@@ -15,7 +15,7 @@ def _():
         phone = master.validate_phone()
         username = master.validate_username()
         password = master.validate_password()
-        is_active = "True"
+        is_active = 1
         created_at = int(time.time())
         updated_at = int(time.time())
         deleted_at = ""
@@ -25,13 +25,13 @@ def _():
        
         staff_emails = ["kontakt@unidstudio.dk", "denise@unidstudio.dk", "isabella@unidstudio.dk"]
         if email in staff_emails:
-            user_roles_user_role_id = "2" 
+            user_role_id = "2" 
             staff_id = user_id  
-            db.execute("INSERT INTO staff (staff_id, user_role_id) VALUES (?, ?)", (staff_id, user_roles_user_role_id))
+            db.execute("INSERT INTO staff (staff_id, user_role_id) VALUES (?, ?)", (staff_id, user_role_id))
         else:
-            user_roles_user_role_id = "1" 
+            user_role_id = "1" 
             customer_id = user_id  
-            db.execute("INSERT INTO customers (customer_id, user_role_id, website_name, website_url) VALUES (?, ?, ?, ?)", (customer_id, user_roles_user_role_id, website_name, website_url))
+            db.execute("INSERT INTO customers (customer_id, user_role_id, website_name, website_url) VALUES (?, ?, ?, ?)", (customer_id, user_role_id, website_name, website_url))
 
         salt = bcrypt.gensalt()
 
@@ -47,11 +47,11 @@ def _():
             "created_at" : created_at,
             "updated_at" : updated_at,
             "deleted_at" : deleted_at,
-            "user_roles_user_role_id" : user_roles_user_role_id,
+            "user_role_id" : user_role_id,
         }
 
 
-        db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_roles_user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_roles_user_role_id)", user)
+        db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_role_id)", user)
 
         db.commit()
 

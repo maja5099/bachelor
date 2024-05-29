@@ -42,7 +42,7 @@ def admin_clipcards():
             JOIN users ON payments.user_id = users.user_id
             JOIN customers ON users.user_id = customers.customer_id
             JOIN card_types ON clipcards.clipcard_type_id = card_types.clipcard_type_id
-            WHERE clipcards.is_active = "TRUE";
+            WHERE clipcards.is_active = "1";
         """)
         
         active_clipcards = cursor.fetchall()
@@ -85,7 +85,6 @@ def admin_clipcards():
         if "db" in locals(): db.close()
 
 
-
 @delete('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
     try:
@@ -94,10 +93,10 @@ def delete_clipcard(clipcard_id):
         cursor.execute("SELECT * FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
         existing_clipcard = cursor.fetchone()
         if existing_clipcard is None:
-            return f"The clip card with id {clipcard_id} does not exist."
+            return {"info": f"The clip card with id {clipcard_id} does not exist."}
 
-        if existing_clipcard["is_active"] == "FALSE":
-            return f"The clip card with id {clipcard_id} has already been deleted."
+        if existing_clipcard["is_active"] == "0":
+            return {"info": f"The clip card with id {clipcard_id} has already been deleted."}
 
         updated_at = int(time.time())
         deleted_at = int(time.time())
@@ -106,11 +105,11 @@ def delete_clipcard(clipcard_id):
             UPDATE clipcards 
             SET updated_at = ?, deleted_at = ?, is_active = ? 
             WHERE clipcard_id = ?
-        """, (updated_at, deleted_at, "FALSE", clipcard_id))
+        """, (updated_at, deleted_at, 0, clipcard_id))
         
         db.commit()
 
-        return "The clip card has been deleted."
+        return {"info": "The clip card has been deleted."}
 
     except Exception as e:
         db.rollback()
@@ -118,7 +117,9 @@ def delete_clipcard(clipcard_id):
         return {"info": str(e)}
 
     finally:
-        if "db" in locals(): db.close()
+        if 'cursor' in locals(): cursor.close()
+        if 'db' in locals(): db.close()
+
 
 
 
@@ -147,7 +148,7 @@ def submit_task():
             SELECT payments.clipcard_id
             FROM payments
             JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
-            WHERE payments.user_id = ? AND clipcards.is_active = "TRUE"
+            WHERE payments.user_id = ? AND clipcards.is_active = "1"
         """, (user_id,))
         result = cursor.fetchone()
 

@@ -8,7 +8,7 @@
       function deleteMessage(button) {
         var messageId = button.getAttribute("data-message-id");
         fetch("/delete_message", {
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
@@ -16,8 +16,9 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            if (data.info === "Besked slettet") {
-              location.reload();
+            if (data.info === "Message deleted.") {
+              var messageDiv = button.closest("div");
+              messageDiv.parentNode.removeChild(messageDiv);
             } else {
               alert(data.info);
             }

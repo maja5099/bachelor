@@ -100,7 +100,7 @@
 
       function deleteClipcard(clipcardId) {
         fetch("/delete_clipcard/" + clipcardId, {
-          method: "POST",
+          method: "DELETE",
         })
           .then((response) => {
             if (response.ok) {

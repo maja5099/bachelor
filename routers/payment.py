@@ -42,13 +42,9 @@ def process_payment():
         clipcard_id = str(uuid.uuid4())
         created_at = int(time.time())
         updated_at = int(time.time())
-        is_active = "TRUE"
+        is_active = 1
         clipcard_type_title = request.forms.get('clipcard_type')
         time_used = 0
-
-        # Log værdierne af clipcard_type_title og clipcard_price
-        print("Clipcard type:", clipcard_type_title)
-        print("Clipcard price:", clipcard_price)
         
         cursor = db.cursor()
         cursor.execute("SELECT clipcard_type_id, clipcard_type_time FROM card_types WHERE clipcard_type_title = ?", (clipcard_type_title,))

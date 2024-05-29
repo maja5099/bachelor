@@ -5,7 +5,7 @@
 -- USERS
 CREATE TABLE IF NOT EXISTS users (
     user_id	            	INTEGER NOT NULL UNIQUE,
-	user_roles_user_role_id	INTEGER,	
+	user_role_id			INTEGER,	
 	first_name	        	TEXT NOT NULL,
 	last_name	        	TEXT NOT NULL,
 	email	            	TEXT NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
 	updated_at	        	TEXT,
 	deleted_at	        	TEXT,
 	PRIMARY KEY(user_id),
-	FOREIGN KEY(user_roles_user_role_id) REFERENCES user_roles(user_role_id)
+	FOREIGN KEY(user_role_id) REFERENCES user_roles(user_role_id)
 ) WITHOUT ROWID;
 
 
