@@ -1,1 +1,0 @@
-<p>Det her er klippekort</p>

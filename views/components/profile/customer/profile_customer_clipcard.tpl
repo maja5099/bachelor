@@ -1,0 +1,1 @@
+<p>Det her er customer klippekort</p>

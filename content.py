@@ -151,17 +151,17 @@ section_login_content = {
 
 section_profile_admin = [
     {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
-    {"icon": "card.svg", "text": "Klippekort", "template": "profile_clipcard"},
-    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_messages"},
+    {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
+    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_admin_messages"},
     {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
 ]
 
 section_profile_customer = [
     {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
-    {"icon": "card.svg", "text": "Klippekort", "template": "profile_clipcard"},
+    {"icon": "card.svg", "text": "Klippekort", "template": "profile_customer_clipcard"},
     {"icon": "cart.svg", "text": "Tilkøb", "template": "profile_additional_purchase"},
     {"icon": "education.svg", "text": "Kurser", "template": "profile_courses"},
-    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_messages"},
+    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_customer_messages"},
     {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
 ]
 
