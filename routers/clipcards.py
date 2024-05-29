@@ -20,6 +20,10 @@ def clipcards():
     except Exception as e:
         print("Error in clipcards:", e)
         return {"info": str(e)}
+    
+    finally:
+        if 'cursor' in locals(): cursor.close()
+        if 'db' in locals(): db.close()
 
 @get('/buy_clipcard/<clipcard_type>/<clipcard_price>')
 def buy_clipcard(clipcard_type, clipcard_price):
