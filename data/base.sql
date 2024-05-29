@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
 	phone					INTEGER NOT NULL UNIQUE,
 	username				TEXT NOT NULL UNIQUE,
 	password	        	TEXT NOT NULL,
-	is_active	        	INTEGER NOT NULL,
+	is_active	        	INTEGER NOT NULL CHECK (is_active IN (0, 1)),
 	created_at	        	TEXT NOT NULL,
 	updated_at	        	TEXT,
 	deleted_at	        	TEXT,
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS clipcards (
 	created_at	        TEXT NOT NULL,
 	updated_at	        TEXT NOT NULL,
 	deleted_at			TEXT,
-	is_active			INTEGER NOT NULL,
-	PRIMARY KEY(clipcard_id)
+	is_active			INTEGER NOT NULL CHECK (is_active IN (0, 1)),
+	PRIMARY KEY(clipcard_id),
 	FOREIGN KEY(clipcard_type_id) REFERENCES card_types(clipcard_type_id)
 ) WITHOUT ROWID;
 
