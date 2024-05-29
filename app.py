@@ -1,4 +1,4 @@
-from bottle import default_app, post, route, get, run, template, static_file, TEMPLATE_PATH, request, error
+from bottle import default_app, route, get, request, error, run, template, static_file, TEMPLATE_PATH
 import git
 import os
 import json
@@ -7,6 +7,7 @@ import content
 import logging
 from colored_logging import setup_logger
 from routers.messages import UPLOADS_FOLDER
+
 
 ##############################
 #   COLERED LOGGING
@@ -28,19 +29,6 @@ def git_update():
         logger.error("Error updating git repository: %s", e)
     finally:
         logger.info("Git update process completed.")
-
-
-##############################
-#   CSS
-@get("/app.css")
-def serve_css():
-    try:
-        logger.success("Served CSS file succesfully.")
-        return static_file('app.css', root='.')
-    except Exception as e:
-        logger.error("Error serving CSS file: %s", e)
-    finally:
-        logger.info("CSS request completed.")
 
 
 ##############################
@@ -80,36 +68,51 @@ finally:
 
 
 ##############################
-#   IMAGES
-@get(r"/assets/<filename:re:.*\.(webp|png|jpg|gif|svg)>")
-def serve_image(filename):
+#   STATIC
+#   CSS file
+@get("/app.css")
+def css_static():
     try:
-        logger.success("Image file served successfully.")
-        return static_file(filename, root="./assets")
+        logger.success("Static file CSS served succesfully.")
+        return static_file('app.css', root='.')
     except Exception as e:
-        logger.error("ERROR: Error serving image file: %s", e)
+        logger.error("Error serving static file css: %s", e)
     finally:
-        logger.info("Image request completed.")
+        logger.info("Static file css request completed.")
 
+#   Assets folder
 @route('/assets/<filepath:path>')
-def server_static(filepath):
+def assets_static(filepath):
     try:
-        logger.success("Static file served successfully.")
+        logger.success("Static folder assets served successfully.")
         return static_file(filepath, root='./assets')
     except Exception as e:
-        logger.error("Error serving static file: %s", e)
+        logger.error("Error serving static folder assets: %s", e)
     finally:
-        logger.info("Static file request completed.")
+        logger.info("Static folder assets request completed.")
 
-@get('/uploads/<filename:path>')
-def send_upload(filename):
+#   Static folder
+@route('/static/<filepath:path>')
+def static(filepath):
     try:
-        logger.success("Image file served successfully.")
+        logger.success("Static folder served successfully.")
+        return static_file(filepath, root='./static')
+    except Exception as e:
+        logger.error("Error serving static folder: %s", e)
+    finally:
+        logger.info("Static folder request completed.")
+
+#   Uploads folder
+@get('/uploads/<filename:path>')
+def uploads_static(filename):
+    try:
+        logger.success("Static folder uploads served successfully.")
         return static_file(filename, root=UPLOADS_FOLDER)
     except Exception as e:
-        logger.error("ERROR: Error serving image file: %s", e)
+        logger.error("Error serving static folder uploads: %s", e)
     finally:
-        logger.info("Image request completed.")
+        logger.info("Static folder uploads request completed.")
+
 
 ##############################
 #   ROUTERS

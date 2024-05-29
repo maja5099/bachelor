@@ -1312,10 +1312,6 @@ h3 {
   max-width: 0px;
 }
 
-.max-w-lg {
-  max-width: 32rem;
-}
-
 .max-w-xl {
   max-width: 36rem;
 }
@@ -1564,6 +1560,11 @@ h3 {
   background-color: rgb(160 180 211 / var(--tw-bg-opacity));
 }
 
+.bg-unidLightPurple {
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 203 229 / var(--tw-bg-opacity));
+}
+
 .bg-unidPink {
   --tw-bg-opacity: 1;
   background-color: rgb(245 219 227 / var(--tw-bg-opacity));
@@ -1577,11 +1578,6 @@ h3 {
 .bg-unidYellow {
   --tw-bg-opacity: 1;
   background-color: rgb(247 240 230 / var(--tw-bg-opacity));
-}
-
-.bg-unidLightPurple {
-  --tw-bg-opacity: 1;
-  background-color: rgb(228 203 229 / var(--tw-bg-opacity));
 }
 
 .bg-wave {
