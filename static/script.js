@@ -17,9 +17,9 @@
 // ##############################
 // PROFILE.HTML
 document.addEventListener("DOMContentLoaded", function () {
+  
   // Button style and dynamic templates
   const buttons = document.querySelectorAll(".secondary_button");
-
   buttons.forEach((button) => {
     button.addEventListener("click", function () {
       buttons.forEach((btn) =>
@@ -28,8 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
       this.classList.add("secondary_button_selected");
       const templateName = this.getAttribute("data-template");
 
-      // Handles menu item with no template
+      // Update URL with template name
       if (templateName) {
+        updateURL(templateName);
         loadTemplate(templateName);
       } else {
         console.log("No template associated with this button.");
@@ -40,7 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // First button selected by default
   if (buttons.length > 0) {
     buttons[0].classList.add("secondary_button_selected");
-    loadTemplate(buttons[0].getAttribute("data-template"));
+    const defaultTemplate = buttons[0].getAttribute("data-template");
+    updateURL(defaultTemplate);
+    loadTemplate(defaultTemplate);
+  }
+
+  // Update URL with template name
+  function updateURL(templateName) {
+    window.location.hash = `/${templateName}`;
   }
 
   // Load templates dynamically
@@ -52,12 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => console.error("Error loading template:", error));
   }
-
-  // Toggle pop up
-  const togglePopup = () => {
-    const popup = document.getElementById("logout_popup");
-    if (popup) popup.classList.toggle("object_hidden");
-  };
 
   // Open pop up button
   const openButton = document.getElementById("open_logout_pop_up");
@@ -259,17 +261,17 @@ document
 // ##############################
 // PASSWORD_FIELD.TPL
 function pwd_visibility_toggle() {
-    var input = document.getElementById('password_input');
-    var icons = document.querySelectorAll('#visibility_button .visibility_icon');
-    input.type = (input.type === 'password' ? 'text' : 'password');
-    icons.forEach(function(icon) {
-        icon.classList.toggle('object_hidden');
-    });
+  var input = document.getElementById("password_input");
+  var icons = document.querySelectorAll("#visibility_button .visibility_icon");
+  input.type = input.type === "password" ? "text" : "password";
+  icons.forEach(function (icon) {
+    icon.classList.toggle("object_hidden");
+  });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    var visibilityButton = document.getElementById('visibility_button');
-    if (visibilityButton) {
-        visibilityButton.addEventListener('click', pwd_visibility_toggle);
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  var visibilityButton = document.getElementById("visibility_button");
+  if (visibilityButton) {
+    visibilityButton.addEventListener("click", pwd_visibility_toggle);
+  }
 });
