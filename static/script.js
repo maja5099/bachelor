@@ -1,25 +1,7 @@
-// ##############################
-//      TABLE OF CONTENTS
-// PAGES
-// - profile.html
-// - signup.html
-// - login.html
-// - customer_messages.html
-// - customer_clipcards.html
-// - admin_messages.html
-// - admin_clipcards.html
-// COMPONENTS
-// ELEMENTS
-// SECTIONS
-// UTILITIES
-// - password_field.tpl
-
-// ##############################
-// PROFILE.HTML
 document.addEventListener("DOMContentLoaded", function () {
-  
   // Button style and dynamic templates
   const buttons = document.querySelectorAll(".secondary_button");
+
   buttons.forEach((button) => {
     button.addEventListener("click", function () {
       buttons.forEach((btn) =>
@@ -28,9 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
       this.classList.add("secondary_button_selected");
       const templateName = this.getAttribute("data-template");
 
-      // Update URL with template name
+      // Handles menu item with no template
       if (templateName) {
-        updateURL(templateName);
         loadTemplate(templateName);
       } else {
         console.log("No template associated with this button.");
@@ -41,14 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // First button selected by default
   if (buttons.length > 0) {
     buttons[0].classList.add("secondary_button_selected");
-    const defaultTemplate = buttons[0].getAttribute("data-template");
-    updateURL(defaultTemplate);
-    loadTemplate(defaultTemplate);
-  }
-
-  // Update URL with template name
-  function updateURL(templateName) {
-    window.location.hash = `/${templateName}`;
+    loadTemplate(buttons[0].getAttribute("data-template"));
   }
 
   // Load templates dynamically
@@ -61,19 +35,29 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error loading template:", error));
   }
 
+  // Toggle pop up
+  const togglePopup = () => {
+    const popup = document.getElementById("logout_popup");
+    if (popup) popup.classList.toggle("object_hidden");
+  };
+
   // Open pop up button
   const openButton = document.getElementById("open_logout_pop_up");
-  openButton.addEventListener("click", function () {
-    const popup = document.getElementById("logout_popup");
-    if (popup) popup.classList.remove("object_hidden");
-  });
+  if (openButton) {
+    openButton.addEventListener("click", function () {
+      const popup = document.getElementById("logout_popup");
+      if (popup) popup.classList.remove("object_hidden");
+    });
+  }
 
   // Close pop up button
   const closeButton = document.getElementById("close_logout_pop_up");
-  closeButton.addEventListener("click", function () {
-    const popup = document.getElementById("logout_popup");
-    if (popup) popup.classList.add("object_hidden");
-  });
+  if (closeButton) {
+    closeButton.addEventListener("click", function () {
+      const popup = document.getElementById("logout_popup");
+      if (popup) popup.classList.add("object_hidden");
+    });
+  }
 });
 
 // ##############################
@@ -230,33 +214,36 @@ function deleteClipcard(clipcardId) {
     });
 }
 
-document
-  .getElementById("taskForm")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const taskForm = document.getElementById("taskForm");
+  if (taskForm) {
+    taskForm.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    const form = event.target;
-    const formData = new FormData(form);
+      const form = event.target;
+      const formData = new FormData(form);
 
-    fetch("/submit_task", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const responseMessage = document.getElementById("responseMessage");
-        if (data.info) {
-          responseMessage.textContent = data.info;
-        } else {
-          responseMessage.textContent = "Opgaven er blevet registreret.";
-        }
+      fetch("/submit_task", {
+        method: "POST",
+        body: formData,
       })
-      .catch((error) => {
-        console.error("Error:", error);
-        document.getElementById("responseMessage").textContent =
-          "Der opstod en fejl.";
-      });
-  });
+        .then((response) => response.json())
+        .then((data) => {
+          const responseMessage = document.getElementById("responseMessage");
+          if (data.info) {
+            responseMessage.textContent = data.info;
+          } else {
+            responseMessage.textContent = "Opgaven er blevet registreret.";
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          document.getElementById("responseMessage").textContent =
+            "Der opstod en fejl.";
+        });
+    });
+  }
+});
 
 // ##############################
 // PASSWORD_FIELD.TPL
