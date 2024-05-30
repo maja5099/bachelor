@@ -24,6 +24,8 @@ def _():
         user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
         if user: 
             db = master.db()
+            print("Type of user:", type(user))
+            print("User:", user)
             username = user['username']
             first_name = user['first_name']
             last_name = user['last_name']
