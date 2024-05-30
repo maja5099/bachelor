@@ -4,7 +4,7 @@
     <div class="w-2/3 md:w-1/3 xl:w-2/3 bg-unidPurple text-white rounded-t-lg">
       <div class="flex gap-3 p-3 items-center justify-center">
         <div class="w-6 h-6">
-          % include(f'{clipcard_value['info']['discount_icon']}')
+          % include(f"{clipcard_value['info']['discount_icon']}")
         </div>
         <p class="font-medium tracking-wider text-base">
           {{ clipcard_value['info']['discount'] }}
@@ -29,7 +29,7 @@
         <div class="flex items-center gap-2 text-unidLightBlue">
           <div class="text-unidPurple w-5 h-5">
             <!-- prettier-ignore -->
-            % include(f'{point['icon']}')
+            % include(f"{point['icon']}")
           </div>
           <p>{{ point['text'] }}</p>
         </div>

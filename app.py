@@ -126,6 +126,7 @@ try:
     import routers.clipcards
     import routers.payment
     import routers.messages
+    import routers.services_and_prices
     logger.success("Routers imported successfully.")
 except Exception as e:
     logger.error("Error importing routers: %s", e)
