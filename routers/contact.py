@@ -35,7 +35,7 @@ def _():
             username = None
             first_name = None
             last_name = None
-        return template('kontakt.html', title="UNID Studio - Kontakt", user=user, form_inputs=form_inputs, pricing_default=pricing_default, pricing_accent=pricing_accent, section_profile_admin=section_profile_admin, section_profile_customer=section_profile_customer, first_name=first_name, last_name=last_name, username=username, header_nav_items=header_nav_items, footer_info=footer_info, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons)
+        return template('contact', title="UNID Studio - Kontakt", user=user, form_inputs=form_inputs, pricing_default=pricing_default, pricing_accent=pricing_accent, section_profile_admin=section_profile_admin, section_profile_customer=section_profile_customer, first_name=first_name, last_name=last_name, username=username, header_nav_items=header_nav_items, footer_info=footer_info, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons)
     except Exception as e:
         error_message = str(e)
         traceback_message = traceback.format_exc()
