@@ -1,12 +1,17 @@
+##############################
+#   IMPORTS
+#   Library imports
 from bottle import default_app, route, get, request, error, run, template, static_file, TEMPLATE_PATH
+import logging
+import json
 import git
 import os
-import json
-import master
-import content
-import logging
-from colored_logging import setup_logger
+
+#   Local application imports
 from routers.messages import UPLOADS_FOLDER
+from colored_logging import setup_logger
+import content
+import master
 
 
 ##############################
@@ -33,25 +38,30 @@ def git_update():
 
 ##############################
 #   ERROR HANDLING
+def handle_error(error_code, error):
+    try:
+        logger.success(f"Handled {error_code} response successfully")
+        logger.error(f"Error {error_code} details: {error}")
+        return template('error', 
+                        title=error_content['title'], 
+                        error=error, 
+                        error_image=error_content['image'], 
+                        button_link=error_content['button_link'], 
+                        button_text=error_content['button_text'], 
+                        error_title=error_content[str(error_code)]['error_title'], 
+                        error_message=error_content[str(error_code)]['error_message'])
+    except Exception as e:
+        logger.error(f"Error handling {error_code} response: {e}")
+    finally:
+        logger.info(f"{error_code} error handling completed.")
+
 @error(404)
 def error404(error):
-    try:
-        logger.success("Handled 404 response succesfully: %s", error)
-        return template('error', title=error_content['title'], error=error, error_image=error_content['image'], button_link=error_content['button_link'], button_text=error_content['button_text'], error_title=error_content['404']['error_title'], error_message=error_content['404']['error_message'])
-    except Exception as e:
-        logger.error("Error handling 404 response: %s", e)
-    finally:
-        logger.info("404 error handling completed.")
+    return handle_error(404, error)
 
 @error(500)
 def error500(error):
-    try:
-        logger.success("Handled 500 response succesfully: %s", error)
-        return template('error', title=error_content['title'], error=error, error_image=error_content['image'], button_link=error_content['button_link'], button_text=error_content['button_text'], error_title=error_content['500']['error_title'], error_message=error_content['500']['error_message'])
-    except Exception as e:
-        logger.error("Error handling 500 response: %s", e)
-    finally:
-        logger.info("500 error handling completed.")
+    return handle_error(500, error)
 
 
 ##############################
@@ -69,64 +79,49 @@ finally:
 
 ##############################
 #   STATIC
-#   CSS file
+def serve_static(filepath, root):
+    try:
+        logger.success(f"Static file {filepath} served successfully.")
+        return static_file(filepath, root=root)
+    except Exception as e:
+        logger.error(f"Error serving static file {filepath}: {e}")
+    finally:
+        logger.info(f"Static file request completed for {filepath}.")
+
+# CSS file
 @get("/app.css")
-def css_static():
-    try:
-        logger.success("Static file CSS served succesfully.")
-        return static_file('app.css', root='.')
-    except Exception as e:
-        logger.error("Error serving static file css: %s", e)
-    finally:
-        logger.info("Static file css request completed.")
+def css_file_static():
+    return serve_static('app.css', '.')
 
-#   Assets folder
+# Assets folder
 @route('/assets/<filepath:path>')
-def assets_static(filepath):
-    try:
-        logger.success("Static folder assets served successfully.")
-        return static_file(filepath, root='./assets')
-    except Exception as e:
-        logger.error("Error serving static folder assets: %s", e)
-    finally:
-        logger.info("Static folder assets request completed.")
+def assets_folder_static(filepath):
+    return serve_static(filepath, './assets')
 
-#   Static folder
+# Static folder
 @route('/static/<filepath:path>')
-def static(filepath):
-    try:
-        logger.success("Static folder served successfully.")
-        return static_file(filepath, root='./static')
-    except Exception as e:
-        logger.error("Error serving static folder: %s", e)
-    finally:
-        logger.info("Static folder request completed.")
+def static_folder(filepath):
+    return serve_static(filepath, './static')
 
-#   Uploads folder
+# Uploads folder
 @get('/uploads/<filename:path>')
-def uploads_static(filename):
-    try:
-        logger.success("Static folder uploads served successfully.")
-        return static_file(filename, root=UPLOADS_FOLDER)
-    except Exception as e:
-        logger.error("Error serving static folder uploads: %s", e)
-    finally:
-        logger.info("Static folder uploads request completed.")
+def uploads_folder_static(filename):
+    return serve_static(filename, UPLOADS_FOLDER)
 
 
 ##############################
 #   ROUTERS
 try:
-    import routers.signup
+    import routers.clipcards
+    import routers.contact
     import routers.login
     import routers.logout
-    import routers.profile
-    import routers.portfolio
-    import routers.contact
-    import routers.clipcards
-    import routers.payment
     import routers.messages
+    import routers.payment
+    import routers.portfolio
+    import routers.profile
     import routers.services_and_prices
+    import routers.signup
     logger.success("Routers imported successfully.")
 except Exception as e:
     logger.error("Error importing routers: %s", e)
@@ -135,20 +130,20 @@ finally:
 
 
 ##############################
-#   CONTENT (CONTENT.PY)
+#   CONTENT (FROM CONTENT.PY)
 try:
-    header_nav_items = content.header_nav_items
+    error_content = content.error_content
     footer_info = content.footer_info
-    section_landingpage_hero_content = content.section_landingpage_hero_content
-    unid_logo = content.unid_logo
-    selling_points = content.selling_points
-    social_media = content.social_media
-    ui_icons = content.ui_icons
     form_inputs = content.form_inputs
+    header_nav_items = content.header_nav_items
+    section_landingpage_hero_content = content.section_landingpage_hero_content
     section_profile_admin = content.section_profile_admin
     section_profile_customer = content.section_profile_customer
     section_testimonial_content = content.section_testimonial_content
-    error_content = content.error_content
+    selling_points = content.selling_points
+    social_media = content.social_media
+    ui_icons = content.ui_icons
+    unid_logo = content.unid_logo
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error("Error importing content: %s", e)
@@ -206,7 +201,26 @@ def index():
     else:
         logger.info("No user cookie found.")
 
-    return template('index', title="UNID Studio", user=user, error_content=error_content, section_testimonial_content=section_testimonial_content, testimonials=section_testimonial_content['testimonials'], section_profile_admin=section_profile_admin, section_profile_customer=section_profile_customer, first_name=first_name, last_name=last_name, username=username, header_nav_items=header_nav_items, footer_info=footer_info, section_landingpage_hero_content=section_landingpage_hero_content, unid_logo=unid_logo, selling_points=selling_points, social_media=social_media, ui_icons=ui_icons, form_inputs=form_inputs)
+    return template('index', 
+                    title="UNID Studio", 
+                    error_content=error_content, 
+                    first_name=first_name, 
+                    footer_info=footer_info, 
+                    form_inputs=form_inputs, 
+                    header_nav_items=header_nav_items, 
+                    last_name=last_name, 
+                    section_landingpage_hero_content=section_landingpage_hero_content, 
+                    section_profile_admin=section_profile_admin, 
+                    section_profile_customer=section_profile_customer, 
+                    section_testimonial_content=section_testimonial_content, 
+                    selling_points=selling_points, 
+                    social_media=social_media, 
+                    testimonials=section_testimonial_content['testimonials'], 
+                    ui_icons=ui_icons, 
+                    unid_logo=unid_logo, 
+                    user=user, 
+                    username=username
+                    )
 
 
 ##############################
