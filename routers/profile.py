@@ -4,6 +4,7 @@ import master
 import content
 import logging
 from colored_logging import setup_logger
+import routers.messages 
 
 
 ##############################
@@ -34,6 +35,7 @@ finally:
 
 # List of directories to search for templates
 template_dirs = ['components', 'elements', 'sections', 'utilities']
+
 
 @get("/profile")
 def profile():
@@ -105,17 +107,29 @@ def profile_template(template_name):
         username = user['username']
         logger.success("User profile for template '%s' loaded successfully: %s", template_name, username)
 
-        # Search for the template in the predefined directories
-        template_path = template_finder(template_name, template_dirs)
+        # Content from messages.py
+        messages = routers.messages
+        messages.save_file()
+        messages.get_current_user()
+        messages.send_message()
+        messages.messages_get()
+        messages.admin_messages_get()
+        messages.delete_message()
 
+        # Find correct template
+        template_path = template_finder(template_name, template_dirs)
         if template_path is None:
             raise Exception(f"Template '{template_name}' not found in any of the directories.")
-
-        # Remove the 'views/' prefix and the '.html' suffix to get the template path for bottle
         template_path = template_path.replace('views/', '').replace('.tpl', '')
 
         return template(template_path, 
                         title="Din profil", 
+                        save_file=messages.save_file,
+                        get_current_user=messages.get_current_user,
+                        send_message=messages.send_message,
+                        messages_get=messages.messages_get,
+                        admin_messages_get=messages.admin_messages_get,
+                        delete_message=messages.delete_message,
                         user=user, 
                         pricing_default=pricing_default, 
                         pricing_accent=pricing_accent, 
@@ -129,7 +143,8 @@ def profile_template(template_name):
                         unid_logo=unid_logo, 
                         selling_points=selling_points, 
                         social_media=social_media, 
-                        ui_icons=ui_icons)
+                        ui_icons=ui_icons
+                        )
     except Exception as e:
         logger.error("Error loading template '%s': %s", template_name, e)
         return f"Error loading template {template_name}: {e}"

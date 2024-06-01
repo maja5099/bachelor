@@ -1,4 +1,4 @@
-from bottle import post, get, request, response, template, delete
+from bottle import post, get, request, response, template, delete, route
 import os
 import uuid
 import time
@@ -7,21 +7,21 @@ import master
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
 UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
 
-def save_file(upload):
-    allowed_extensions = {'png', 'jpg', 'jpeg'}
+
+# upload=None solves missing 1 required positional argument: 'upload' error
+def save_file(upload=None):
     if upload and upload.filename:
+        allowed_extensions = {'png', 'jpg', 'jpeg'}
         file_extension = upload.filename.split('.')[-1].lower()
         if file_extension in allowed_extensions:
             os.makedirs(UPLOADS_FOLDER, exist_ok=True)
-
             file_name = str(uuid.uuid4()) + '.' + file_extension
             file_path = os.path.join(UPLOADS_FOLDER, file_name)  
-
             with open(file_path, "wb") as open_file:
                 open_file.write(upload.file.read())
-
             return "/uploads/" + file_name
-    return None  
+    return None
+ 
 
 
 def get_current_user():
@@ -100,7 +100,14 @@ def send_message():
 def messages_get():
     try:
         db = master.db()
-        return template("customer_messages.html")
+        template_path = find_template('profile_customer_messages', template_dirs)
+        if template_path is None:
+            return "Template not found."
+            
+        # Extract the relative path from views directory if necessary
+        relative_path = template_path.replace('views/', '').replace('.tpl', '')
+
+        return template(relative_path)
     except Exception as e:
         print(e)
         if "db" in locals(): db.rollback() 
@@ -109,11 +116,29 @@ def messages_get():
         if "db" in locals(): db.close()
 
 
-@get("/admin_messages")
+template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin']
+
+
+def find_template(template_name, directories):
+    base_path = 'views'
+    for directory in directories:
+        path = os.path.join(base_path, directory)
+        print(f"Checking directory: {path}")
+        for root, dirs, files in os.walk(path):
+            print(f"Visited {root}")
+            if f'{template_name}.tpl' in files:
+                template_path = os.path.join(root, template_name + '.tpl')
+                print(f"Found template at: {template_path}")
+                return template_path
+    print("Template not found")
+    return None
+
+
+
+@get('/admin_messages')
 def admin_messages_get():
     try:
         db = master.db()
-        
         cursor = db.cursor()
         cursor.execute("""
             SELECT 
@@ -131,9 +156,18 @@ def admin_messages_get():
             WHERE messages.deleted_at IS ""
             ORDER BY messages.created_at DESC;
         """)
+
         messages = cursor.fetchall()
-        
-        return template("admin_messages.html", messages=messages)
+
+        template_path = find_template('profile_admin_messages', template_dirs)
+        if template_path is None:
+            return "Template not found."
+            
+        # Extract the relative path from views directory if necessary
+        relative_path = template_path.replace('views/', '').replace('.tpl', '')
+
+        return template(relative_path, messages=messages)
+
     except Exception as e:
         print(e)
         if "db" in locals():
