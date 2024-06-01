@@ -190,7 +190,7 @@ def index():
                 logger.info("User not found in database: %s", user_data['username'])
         
         # Error decoding cookie
-        except (json.JSONDecodeError, TypeError) as e:
+        except Exception as e:
             logger.error("Error decoding user_cookie, perhaps user is not logged in yet. Error: %s", e)
 
         # Always executed   
