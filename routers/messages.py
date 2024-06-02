@@ -135,7 +135,7 @@ def find_template(template_name, directories):
 
 
 
-@get('/admin_messages')
+@get('/profile/profile_admin_messages')
 def admin_messages_get():
     try:
         db = master.db()
@@ -158,6 +158,7 @@ def admin_messages_get():
         """)
 
         messages = cursor.fetchall()
+        print(messages)
 
         template_path = find_template('profile_admin_messages', template_dirs)
         if template_path is None:

@@ -47,18 +47,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Update URL with template name
   function updateURL(templateName) {
-    window.location.hash = `/${templateName}`;
+    const newURL = `/profile/${templateName}`;
+    window.history.pushState({ templateName }, "", newURL);
   }
 
   // Load templates dynamically
   function loadTemplate(templateName) {
+    console.log(`Fetching template: ${templateName}`);
     fetch(`/profile/${templateName}`)
-      .then((response) => response.text())
+      .then((response) => {
+        console.log(`Response status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
       .then((html) => {
+        console.log(`Template loaded successfully`);
         document.getElementById("profile_content").innerHTML = html;
       })
       .catch((error) => console.error("Error loading template:", error));
   }
+
+  // Add an event listener to handle back/forward navigation
+  window.addEventListener("popstate", (event) => {
+    if (event.state && event.state.templateName) {
+      loadTemplate(event.state.templateName);
+    }
+  });
 
   // Open pop up button
   const openButton = document.getElementById("open_logout_pop_up");
@@ -148,6 +164,7 @@ async function login(event) {
 // CUSTOMER_MESSAGES.HTML
 $(document).ready(function () {
   $("#sendMessageButton").click(function () {
+    console.log("Send button clicked");
     var formData = new FormData($("#contactForm")[0]);
     $.ajax({
       url: "/send_message",
@@ -159,7 +176,7 @@ $(document).ready(function () {
         $("#messageSent").text(response.info).show();
         $("#contactForm")[0].reset();
       },
-      error: function (xhr, status, error) {
+      error: function (xhr) {
         var response = JSON.parse(xhr.responseText);
         alert("Der opstod en fejl: " + response.info);
       },

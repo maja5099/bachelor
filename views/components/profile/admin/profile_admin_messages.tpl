@@ -1,9 +1,10 @@
+<body>
 <div>
-  <h1>Indsendte Beskeder TESSSSTTTTT</h1>
+  <h1>Indsendte Beskeder</h1>
   <!-- prettier-ignore -->
-  % if message: 
+  % if messages: 
   % for message in messages:
-  <div style="background-color: gainsboro; margin-bottom: 10px">
+  <div>
     <h2>{{ message["first_name"] }} {{ message["last_name"] }}</h2>
     <h3>{{ message["website_name"] }} - {{ message["website_url"] }}</h3>
     <h4>Emne: {{ message["message_subject"] }}</h4>
@@ -26,3 +27,7 @@
   <p>Ingen beskeder at vise.</p>
   % end
 </div>
+
+<!-- SCRIPT -->
+    <script src="./static/script.js"></script>
+</body>

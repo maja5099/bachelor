@@ -4,7 +4,8 @@ import master
 import content
 import logging
 from colored_logging import setup_logger
-import routers.messages 
+import routers.messages as messages
+
 
 
 ##############################
@@ -89,6 +90,7 @@ def template_finder(template_name, directories):
 
 @route('/profile/<template_name>')
 def profile_template(template_name):
+    logger.info(f"Request for template: {template_name}")
     try:
         user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
         if not user_cookie:
@@ -107,20 +109,13 @@ def profile_template(template_name):
         username = user['username']
         logger.success("User profile for template '%s' loaded successfully: %s", template_name, username)
 
-        # Content from messages.py
-        messages = routers.messages
-        messages.save_file()
-        messages.get_current_user()
-        messages.send_message()
-        messages.messages_get()
-        messages.admin_messages_get()
-        messages.delete_message()
-
         # Find correct template
         template_path = template_finder(template_name, template_dirs)
         if template_path is None:
             raise Exception(f"Template '{template_name}' not found in any of the directories.")
         template_path = template_path.replace('views/', '').replace('.tpl', '')
+
+        logger.info(f"Serving template: {template_path}")
 
         return template(template_path, 
                         title="Din profil", 
@@ -150,4 +145,5 @@ def profile_template(template_name):
         return f"Error loading template {template_name}: {e}"
     finally:
         logger.info("Template request for '%s' completed.", template_name)
+
  # type: ignore
