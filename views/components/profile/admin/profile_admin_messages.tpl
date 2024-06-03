@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="da">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indsendte Beskeder</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="/static/script.js"></script>
-</head>
 <body>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/static/script.js"></script>
   <div>
     <h1>Indsendte Beskeder</h1>
     <!-- prettier-ignore -->
@@ -30,4 +23,4 @@
     % end
   </div>
 </body>
-</html>
+

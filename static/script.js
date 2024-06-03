@@ -163,7 +163,6 @@ async function login(event) {
 // ##############################
 // CUSTOMER_MESSAGES.HTML
 $(document).ready(function () {
-  // Brug event delegation til at binde klik-hændelsen til en overordnet element
   $("body").on("click", "#sendMessageButton", function () {
     console.log("Send button clicked");
     var formData = new FormData($("#contactForm")[0]);
