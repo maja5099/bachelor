@@ -163,7 +163,8 @@ async function login(event) {
 // ##############################
 // CUSTOMER_MESSAGES.HTML
 $(document).ready(function () {
-  $("#sendMessageButton").click(function () {
+  // Brug event delegation til at binde klik-hændelsen til en overordnet element
+  $("body").on("click", "#sendMessageButton", function () {
     console.log("Send button clicked");
     var formData = new FormData($("#contactForm")[0]);
     $.ajax({
@@ -173,10 +174,12 @@ $(document).ready(function () {
       processData: false,
       contentType: false,
       success: function (response) {
+        console.log("Success response:", response);
         $("#messageSent").text(response.info).show();
         $("#contactForm")[0].reset();
       },
       error: function (xhr) {
+        console.error("Error response:", xhr);
         var response = JSON.parse(xhr.responseText);
         alert("Der opstod en fejl: " + response.info);
       },

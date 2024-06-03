@@ -1,5 +1,13 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/static/script.js"></script>
+</head>
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <h2>KONTAKT</h2>
     <h1>Har du noget der skal rettes eller laves på dit website?</h1>
     <form id="contactForm" enctype="multipart/form-data">
@@ -18,6 +26,5 @@
         <button type="button" id="sendMessageButton">Send</button>
         <div id="messageSent" style="display: none"></div>
     </form>
-
-    <script src="/static/script.js"></script>
 </body>
+</html>
