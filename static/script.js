@@ -236,11 +236,11 @@ function deleteMessage(button) {
 
 // ##############################
 // ADMIN_CLIPCARDS.HTML
-document.querySelectorAll(".delete-button").forEach((button) => {
-  button.addEventListener("click", function () {
-    var clipcardId = this.getAttribute("data-clipcard-id");
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("delete-button")) {
+    var clipcardId = event.target.getAttribute("data-clipcard-id");
     deleteClipcard(clipcardId);
-  });
+  }
 });
 
 function deleteClipcard(clipcardId) {
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const taskForm = document.getElementById("taskForm");
   if (taskForm) {
     taskForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+      event.preventDefault(); // Forhindrer formularen i at blive sendt normalt
 
       const form = event.target;
       const formData = new FormData(form);

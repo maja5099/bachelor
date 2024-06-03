@@ -1,9 +1,10 @@
-from bottle import template, get, post, request, response, delete
+from bottle import template, get, post, request, response, delete, template
 import master
 import time
 import uuid
 import json
 from math import floor
+import os
 
 
 db = master.db()
@@ -34,9 +35,17 @@ def minutes_to_hours_minutes(minutes):
     remaining_minutes = minutes % 60
     return hours, remaining_minutes
 
-@get('/admin_clipcards')
-def admin_clipcards():
+@get('/profile/profile_admin_clipcard')
+def admin_clipcards_get():
     try:
+        db = master.db()
+        template_path = find_template('profile_admin_clipcard', template_dirs)
+        if template_path is None:
+            return "Template not found."
+            
+        # Extract the relative path from views directory if necessary
+        relative_path = template_path.replace('views/', '').replace('.tpl', '')
+
         cursor = db.cursor()
         
         cursor.execute("""
@@ -54,16 +63,13 @@ def admin_clipcards():
 
         if not active_clipcards:
             print("No active clip cards.") 
-            return template("admin_clipcards", active_clipcards=[], active_customers=[])
+            return template(relative_path, active_clipcards=[], active_customers=[])
         
-    
-
         active_customers = [{'user_id': row['user_id'], 
                              'first_name': row['first_name'], 
                              'last_name': row['last_name'], 
                              'clipcard_id': row['clipcard_id']} 
                             for row in active_clipcards]
-        
 
         for clipcard in active_clipcards:
             clipcard['time_used_hours'], clipcard['time_used_minutes'] = minutes_to_hours_minutes(clipcard['time_used'])
@@ -79,7 +85,7 @@ def admin_clipcards():
             else:
                 clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
        
-        return template("admin_clipcards", active_clipcards=active_clipcards, active_customers=active_customers)
+        return template(relative_path, active_clipcards=active_clipcards, active_customers=active_customers)
     
     except Exception as e:
         print("Error in admin_clipcards:", e) 
@@ -88,6 +94,21 @@ def admin_clipcards():
     finally:
         if "db" in locals(): db.close()
 
+template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin']
+
+def find_template(template_name, directories):
+    base_path = 'views'
+    for directory in directories:
+        path = os.path.join(base_path, directory)
+        print(f"Checking directory: {path}")
+        for root, dirs, files in os.walk(path):
+            print(f"Visited {root}")
+            if f'{template_name}.tpl' in files:
+                template_path = os.path.join(root, template_name + '.tpl')
+                print(f"Found template at: {template_path}")
+                return template_path
+    print("Template not found")
+    return None
 
 @delete('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
@@ -192,8 +213,7 @@ def submit_task():
 
     except Exception as e:
         db.rollback()
-        import traceback
-        print("Error in submit_task:", traceback.format_exc())
+        print("Error in submit_task:", e)
         response.content_type = 'application/json'
         return json.dumps({"info": str(e)})
 
