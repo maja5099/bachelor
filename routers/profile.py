@@ -6,6 +6,7 @@ import logging
 from colored_logging import setup_logger
 import routers.messages as messages
 from math import floor
+from datetime import datetime
 
 
 ##############################
@@ -63,6 +64,25 @@ def minutes_to_hours_minutes(minutes):
     return hours, remaining_minutes
 
 
+def format_time_spent(minutes):
+    if minutes <= 60:
+        return f"{minutes} minutter"
+    else:
+        hours = minutes // 60
+        remaining_minutes = minutes % 60
+        return f"{hours} timer og {remaining_minutes} minutter"
+
+def format_created_at(timestamp):
+    if isinstance(timestamp, str):
+        try:
+            timestamp = int(timestamp)
+        except ValueError:
+            print("Fejl: Timestamp kan ikke konverteres til en integer.")
+            return None
+    created_at_dt = datetime.fromtimestamp(timestamp)
+    formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
+    return formatted_created_at
+
 @get("/profile")
 def profile():
     try:
@@ -79,44 +99,69 @@ def profile():
         username = user['username']
         logger.success("User profile loaded successfully: %s", username)
 
-        payment_query = """
-            SELECT payments.clipcard_id
-            FROM payments
-            JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
-            WHERE payments.user_id = ? AND clipcards.is_active = 1
-            LIMIT 1
-        """
-        payment = db.execute(payment_query, (user['user_id'],)).fetchone()
-
-        if payment:
-            clipcard_id = payment['clipcard_id']
-            
-            clipcard_query = """
-                SELECT time_used, remaining_time
-                FROM clipcards
-                WHERE clipcard_id = ? AND is_active = 1
+        # Sørg for at brugeren har user_role_id = 1 før vi henter betalingsoplysningerne
+        if user["user_role_id"] == 1:
+            payment_query = """
+                SELECT payments.clipcard_id
+                FROM payments
+                JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
+                WHERE payments.user_id = ? AND clipcards.is_active = 1
+                LIMIT 1
             """
-            clipcard_data = db.execute(clipcard_query, (clipcard_id,)).fetchone()
+            payment = db.execute(payment_query, (user['user_id'],)).fetchone()
 
-            if clipcard_data:
-                time_used = clipcard_data['time_used']
-                remaining_time = clipcard_data['remaining_time']
-                time_used_hours, time_used_minutes = minutes_to_hours_minutes(time_used)
-                remaining_hours, remaining_minutes = minutes_to_hours_minutes(remaining_time)
+            if payment:
+                clipcard_id = payment['clipcard_id']
+                # Hent time_used og remaining_time fra clipcards tabellen baseret på clipcard_id
+                clipcard_query = """
+                    SELECT time_used, remaining_time
+                    FROM clipcards
+                    WHERE clipcard_id = ? AND is_active = 1
+                """
+                clipcard_data = db.execute(clipcard_query, (clipcard_id,)).fetchone()
+
+                if clipcard_data:
+                    time_used = clipcard_data['time_used']
+                    remaining_time = clipcard_data['remaining_time']
+
+                    # Konverter time_used og remaining_time til timer og minutter
+                    time_used_hours, time_used_minutes = minutes_to_hours_minutes(time_used)
+                    remaining_hours, remaining_minutes = minutes_to_hours_minutes(remaining_time)
+                else:
+                    logger.info("Clipcard data not found or inactive for user.")
+                    time_used_hours = None
+                    time_used_minutes = None
+                    remaining_hours = None
+                    remaining_minutes = None
             else:
-                logger.info("Clipcard data not found or inactive for user.")
+                logger.info("Payment not found for user.")
                 time_used_hours = None
                 time_used_minutes = None
                 remaining_hours = None
                 remaining_minutes = None
+
+            # Hent tasks baseret på user_id
+            tasks_query = """
+                SELECT task_title, task_description, time_spent, created_at
+                FROM tasks
+                WHERE customer_id = ?
+            """
+            tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
+
+            # Format time spent and created_at for each task
+            formatted_tasks = []
+            for task in tasks:
+                task['formatted_time_spent'] = format_time_spent(task['time_spent'])
+                task['formatted_created_at'] = format_created_at(task['created_at'])
+                formatted_tasks.append(task)
         else:
-            logger.info("Payment not found for user.")
             time_used_hours = None
             time_used_minutes = None
             remaining_hours = None
             remaining_minutes = None
+            formatted_tasks = []
 
-
+        # Hent antallet af aktive og inaktive klippekort uanset brugerens rolle
         active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
         inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
 
@@ -124,31 +169,33 @@ def profile():
         inactive_clipcards_count = inactive_clipcards_result['count']
 
         return template('profile', title="Din profil",
-                                    user=user,
-                                    pricing_default=pricing_default,
-                                    pricing_accent=pricing_accent,
-                                    section_profile_admin=section_profile_admin,
-                                    section_profile_customer=section_profile_customer,
-                                    first_name=first_name,
-                                    last_name=last_name,
-                                    username=username,
-                                    header_nav_items=header_nav_items,
-                                    footer_info=footer_info,
-                                    unid_logo=unid_logo,
-                                    selling_points=selling_points,
-                                    social_media=social_media,
-                                    ui_icons=ui_icons,
-                                    active_clipcards_count=active_clipcards_count,
-                                    inactive_clipcards_count=inactive_clipcards_count,
-                                    time_used_hours=time_used_hours,
-                                    time_used_minutes=time_used_minutes,
-                                    remaining_hours=remaining_hours,
-                                    remaining_minutes=remaining_minutes)
-                                    
+                        user=user,
+                        pricing_default=pricing_default,
+                        pricing_accent=pricing_accent,
+                        section_profile_admin=section_profile_admin,
+                        section_profile_customer=section_profile_customer,
+                        first_name=first_name,
+                        last_name=last_name,
+                        username=username,
+                        header_nav_items=header_nav_items,
+                        footer_info=footer_info,
+                        unid_logo=unid_logo,
+                        selling_points=selling_points,
+                        social_media=social_media,
+                        ui_icons=ui_icons,
+                        active_clipcards_count=active_clipcards_count,
+                        inactive_clipcards_count=inactive_clipcards_count,
+                        time_used_hours=time_used_hours,
+                        time_used_minutes=time_used_minutes,
+                        remaining_hours=remaining_hours,
+                        remaining_minutes=remaining_minutes,
+                        tasks=formatted_tasks)
+
     except Exception as e:
         logger.error("Error loading profile: %s", e)
     finally:
         logger.info("Profile request completed.")
+
 
 
 def template_finder(template_name, directories):
@@ -218,6 +265,7 @@ def profile_template(template_name):
     finally:
         logger.info("Template request for '%s' completed.", template_name)
 
+
 @get("/profile/profile_overview")
 def profile_overview():
     logger.info("Attempting to load profile overview...")
@@ -255,7 +303,7 @@ def profile_overview():
 
             if clipcard_data:
                 time_used = clipcard_data['time_used']
-                remaining_time = clipcard_data['remaining_time']               
+                remaining_time = clipcard_data['remaining_time']
                 time_used_hours, time_used_minutes = minutes_to_hours_minutes(time_used)
                 remaining_hours, remaining_minutes = minutes_to_hours_minutes(remaining_time)
             else:
@@ -277,8 +325,20 @@ def profile_overview():
         active_clipcards_count = active_clipcards_result['count']
         inactive_clipcards_count = inactive_clipcards_result['count']
 
-        logger.info("Active clipcards count result: %s", active_clipcards_count)
-        logger.info("Inactive clipcards count result: %s", inactive_clipcards_count)
+        # Fetch tasks
+        tasks_query = """
+            SELECT task_title, task_description, time_spent, created_at
+            FROM tasks
+            WHERE customer_id = ?
+        """
+        tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
+
+        # Format time spent and created_at for each task
+        formatted_tasks = []
+        for task in tasks:
+            task['formatted_time_spent'] = format_time_spent(task['time_spent'])
+            task['formatted_created_at'] = format_created_at(task['created_at'])
+            formatted_tasks.append(task)
 
         logger.info("Rendering template with counts...")
 
@@ -286,7 +346,6 @@ def profile_overview():
         if template_path is None:
             return "Template not found."
 
-        # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
         logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", active_clipcards_count, inactive_clipcards_count)
@@ -302,13 +361,15 @@ def profile_overview():
                         time_used_hours=time_used_hours,
                         time_used_minutes=time_used_minutes,
                         remaining_hours=remaining_hours,
-                        remaining_minutes=remaining_minutes)
+                        remaining_minutes=remaining_minutes,
+                        tasks=formatted_tasks)
 
     except Exception as e:
         logger.error("Error loading profile overview: %s", e)
         return f"An error occurred while loading the profile overview: {e}"
     finally:
         logger.info("Profile overview request completed.")
+
 
 
 def find_template(template_name, directories):
