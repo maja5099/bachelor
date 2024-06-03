@@ -58,6 +58,9 @@ def profile():
         username = user['username']
         logger.success("User profile loaded successfully: %s", username)
 
+        active_clipcards_count = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
+        inactive_clipcards_count  = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
+
         return template('profile', 
                         title="Din profil", 
                         user=user, 
@@ -73,7 +76,9 @@ def profile():
                         unid_logo=unid_logo, 
                         selling_points=selling_points, 
                         social_media=social_media, 
-                        ui_icons=ui_icons)
+                        ui_icons=ui_icons,
+                        active_clipcards_count=active_clipcards_count,
+                        inactive_clipcards_count=inactive_clipcards_count)
     except Exception as e:
         logger.error("Error loading profile: %s", e)
     finally:
@@ -146,19 +151,18 @@ def profile_template(template_name):
     finally:
         logger.info("Template request for '%s' completed.", template_name)
 
-import traceback
-
 @get("/profile/profile_overview")
 def profile_overview():
     logger.info("Attempting to load profile overview...")
     try:
         user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
-        logger.info("User cookie: %s", user_cookie)  # Midlertidig logbesked
+        logger.info("User cookie: %s", user_cookie)
         if not user_cookie:
             logger.info("No user cookie found, redirecting to login.")
             redirect("/login")
 
         db = master.db()
+
         user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (user_cookie['username'],)).fetchone()
 
         if not user:
@@ -169,9 +173,11 @@ def profile_overview():
         last_name = user['last_name']
         username = user['username']
 
-        # Execute queries and log raw results
-        active_clipcards_count = db.execute("SELECT COUNT(*) FROM clipcards WHERE is_active = 1").fetchone()
-        inactive_clipcards_count  = db.execute("SELECT COUNT(*) FROM clipcards WHERE is_active = 0").fetchone()
+        active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
+        inactive_clipcards_result  = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
+
+        active_clipcards_count = active_clipcards_result['count']
+        inactive_clipcards_count = inactive_clipcards_result['count']
 
         logger.info("Active clipcards count result: %s", active_clipcards_count)
         logger.info("Inactive clipcards count result: %s", inactive_clipcards_count)
@@ -181,11 +187,10 @@ def profile_overview():
         template_path = find_template('profile_overview', template_dirs)
         if template_path is None:
             return "Template not found."
-            
+
         # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
-        # Log variables before rendering template
         logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", active_clipcards_count, inactive_clipcards_count)
 
         return template(relative_path, 
@@ -196,10 +201,9 @@ def profile_overview():
                         ui_icons=ui_icons,
                         active_clipcards_count=active_clipcards_count,
                         inactive_clipcards_count=inactive_clipcards_count)
-        
+
     except Exception as e:
         logger.error("Error loading profile overview: %s", e)
-        logger.error("Traceback: %s", traceback.format_exc())
         return f"An error occurred while loading the profile overview: {e}"
     finally:
         logger.info("Profile overview request completed.")
