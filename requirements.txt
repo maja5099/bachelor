@@ -1,4 +1,14 @@
-gitpython==3.1.43
+# WEB FRAMEWORK
 bottle==0.12.23
-bcrypt==4.0.1
-python-dotenv==1.0.0
+
+# CONFIG
+python-dotenv==1.0.0   
+
+# VERSION CONTROL
+gitpython==3.1.43       
+
+# TESTING LIBS
+WebTest==3.0.0
+
+# SECURITY LIBS
+bcrypt==4.0.1   

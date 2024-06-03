@@ -13,6 +13,9 @@ from colored_logging import setup_logger
 import content
 import master
 
+#   Initialising app at module level
+application = default_app()
+
 
 ##############################
 #   COLERED LOGGING
@@ -40,16 +43,18 @@ def git_update():
 #   ERROR HANDLING
 def handle_error(error_code, error):
     try:
-        logger.success(f"Handled {error_code} response successfully")
-        logger.error(f"Error {error_code} details: {error}")
-        return template('error', 
-                        title=error_content['title'], 
-                        error=error, 
-                        error_image=error_content['image'], 
-                        button_link=error_content['button_link'], 
-                        button_text=error_content['button_text'], 
-                        error_title=error_content[str(error_code)]['error_title'], 
-                        error_message=error_content[str(error_code)]['error_message'])
+        if error:
+            logger.error(f"Handled {error_code} succesfully with following error details: {error}")
+            return template('error', 
+                            title=error_content['title'], 
+                            error=error, 
+                            error_image=error_content['image'], 
+                            button_link=error_content['button_link'], 
+                            button_text=error_content['button_text'], 
+                            error_title=error_content[str(error_code)]['error_title'], 
+                            error_message=error_content[str(error_code)]['error_message'])
+        else:
+            logger.success(f"Handled {error_code} response successfully with no errors.")
     except Exception as e:
         logger.error(f"Error handling {error_code} response: {e}")
     finally:
@@ -225,13 +230,11 @@ def index():
 
 ##############################
 #   LOCAL HOST
-try:
-    import production # type: ignore
-    application = default_app()
-except ImportError:
-    logger.success("Running local server")
-    run(host="127.0.0.1", port=2000, debug=True, reloader=True)
-except Exception as e:
-    logger.error("Error running local server: %s", e)
-finally:
-    logger.info("Local host setup completed.")
+if __name__ == "__main__":
+    try:
+        logger.success("Running local server")
+        run(host="127.0.0.1", port=2000, debug=True, reloader=True)
+    except Exception as e:
+        logger.error(f"Error running local server: {e}")
+    finally:
+        logger.info("Local host setup completed.")
