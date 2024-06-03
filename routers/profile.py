@@ -81,28 +81,24 @@ def profile():
 
         # Sørg for at brugeren har user_role_id = 1 før vi henter betalingsoplysningerne
         if user["user_role_id"] == 1:
-            # Hent betalingsoplysninger fra databasen baseret på user_id
-            payment = db.execute("SELECT * FROM payments WHERE user_id = ? LIMIT 1", (user['user_id'],)).fetchone()
+            payment_query = """
+                SELECT payments.*, 
+                    clipcards.time_used, 
+                    clipcards.remaining_time
+                FROM payments
+                JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
+                WHERE payments.user_id = ? 
+                LIMIT 1
+            """
+            payment = db.execute(payment_query, (user['user_id'],)).fetchone()
 
             if payment:
-                clipcard_id = payment['clipcard_id']
+                time_used = payment['time_used']
+                remaining_time = payment['remaining_time']
 
-                # Hent time_used og remaining_time fra clipcards tabellen ved hjælp af clipcard_id
-                clipcard = db.execute("SELECT * FROM clipcards WHERE clipcard_id = ? LIMIT 1", (clipcard_id,)).fetchone()
-
-                if clipcard:
-                    time_used = clipcard['time_used']
-                    remaining_time = clipcard['remaining_time']
-
-                    # Konverter time_used og remaining_time til timer og minutter
-                    time_used_hours, time_used_minutes = convert_minutes_to_hours_minutes(time_used)
-                    remaining_hours, remaining_minutes = convert_minutes_to_hours_minutes(remaining_time)
-                else:
-                    logger.info("Clipcard not found for user.")
-                    time_used_hours = None
-                    time_used_minutes = None
-                    remaining_hours = None
-                    remaining_minutes = None
+                # Konverter time_used og remaining_time til timer og minutter
+                time_used_hours, time_used_minutes = convert_minutes_to_hours_minutes(time_used)
+                remaining_hours, remaining_minutes = convert_minutes_to_hours_minutes(remaining_time)
             else:
                 logger.info("Payment not found for user.")
                 time_used_hours = None
@@ -114,6 +110,7 @@ def profile():
             time_used_minutes = None
             remaining_hours = None
             remaining_minutes = None
+
 
         # Hent antallet af aktive og inaktive klippekort uanset brugerens rolle
         active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
@@ -237,28 +234,24 @@ def profile_overview():
 
         # Sørg for at brugeren har user_role_id = 1 før vi henter betalingsoplysningerne
         if user["user_role_id"] == 1:
-            # Hent betalingsoplysninger fra databasen baseret på user_id
-            payment = db.execute("SELECT * FROM payments WHERE user_id = ? LIMIT 1", (user['user_id'],)).fetchone()
+            payment_query = """
+                SELECT payments.*, 
+                    clipcards.time_used, 
+                    clipcards.remaining_time
+                FROM payments
+                JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
+                WHERE payments.user_id = ? 
+                LIMIT 1
+            """
+            payment = db.execute(payment_query, (user['user_id'],)).fetchone()
 
             if payment:
-                clipcard_id = payment['clipcard_id']
+                time_used = payment['time_used']
+                remaining_time = payment['remaining_time']
 
-                # Fetching time_used and remaining_time from clipcards table using clipcard_id
-                clipcard = db.execute("SELECT * FROM clipcards WHERE clipcard_id = ? LIMIT 1", (clipcard_id,)).fetchone()
-
-                if clipcard:
-                    time_used = clipcard['time_used']
-                    remaining_time = clipcard['remaining_time']
-
-                    # Konverter time_used og remaining_time til timer og minutter
-                    time_used_hours, time_used_minutes = convert_minutes_to_hours_minutes(time_used)
-                    remaining_hours, remaining_minutes = convert_minutes_to_hours_minutes(remaining_time)
-                else:
-                    logger.info("Clipcard not found for user.")
-                    time_used_hours = None
-                    time_used_minutes = None
-                    remaining_hours = None
-                    remaining_minutes = None
+                # Konverter time_used og remaining_time til timer og minutter
+                time_used_hours, time_used_minutes = convert_minutes_to_hours_minutes(time_used)
+                remaining_hours, remaining_minutes = convert_minutes_to_hours_minutes(remaining_time)
             else:
                 logger.info("Payment not found for user.")
                 time_used_hours = None
@@ -270,6 +263,7 @@ def profile_overview():
             time_used_minutes = None
             remaining_hours = None
             remaining_minutes = None
+
 
         active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
         inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
