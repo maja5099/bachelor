@@ -146,4 +146,80 @@ def profile_template(template_name):
     finally:
         logger.info("Template request for '%s' completed.", template_name)
 
+import traceback
+
+@get("/profile/profile_overview")
+def profile_overview():
+    logger.info("Attempting to load profile overview...")
+    try:
+        user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
+        logger.info("User cookie: %s", user_cookie)  # Midlertidig logbesked
+        if not user_cookie:
+            logger.info("No user cookie found, redirecting to login.")
+            redirect("/login")
+
+        db = master.db()
+        user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (user_cookie['username'],)).fetchone()
+
+        if not user:
+            logger.info("User not found in database, redirecting to login.")
+            redirect("/login")
+
+        first_name = user['first_name']
+        last_name = user['last_name']
+        username = user['username']
+
+        # Execute queries and log raw results
+        active_clipcards_count = db.execute("SELECT COUNT(*) FROM clipcards WHERE is_active = 1").fetchone()
+        inactive_clipcards_count  = db.execute("SELECT COUNT(*) FROM clipcards WHERE is_active = 0").fetchone()
+
+        logger.info("Active clipcards count result: %s", active_clipcards_count)
+        logger.info("Inactive clipcards count result: %s", inactive_clipcards_count)
+
+        logger.info("Rendering template with counts...")
+
+        template_path = find_template('profile_overview', template_dirs)
+        if template_path is None:
+            return "Template not found."
+            
+        # Extract the relative path from views directory if necessary
+        relative_path = template_path.replace('views/', '').replace('.tpl', '')
+
+        # Log variables before rendering template
+        logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", active_clipcards_count, inactive_clipcards_count)
+
+        return template(relative_path, 
+                        user=user,
+                        first_name=first_name,
+                        last_name=last_name,
+                        username=username,
+                        ui_icons=ui_icons,
+                        active_clipcards_count=active_clipcards_count,
+                        inactive_clipcards_count=inactive_clipcards_count)
+        
+    except Exception as e:
+        logger.error("Error loading profile overview: %s", e)
+        logger.error("Traceback: %s", traceback.format_exc())
+        return f"An error occurred while loading the profile overview: {e}"
+    finally:
+        logger.info("Profile overview request completed.")
+
+
+def find_template(template_name, directories):
+    base_path = 'views'
+    for directory in directories:
+        path = os.path.join(base_path, directory)
+        print(f"Checking directory: {path}")
+        for root, dirs, files in os.walk(path):
+            print(f"Visited {root}")
+            if f'{template_name}.tpl' in files:
+                template_path = os.path.join(root, template_name + '.tpl')
+                print(f"Found template at: {template_path}")
+                return template_path
+    print("Template not found")
+    return None
+
+
  # type: ignore
+
+
