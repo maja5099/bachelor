@@ -267,8 +267,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const taskForm = document.getElementById("taskForm");
   if (taskForm) {
     taskForm.addEventListener("submit", function (event) {
-      event.preventDefault(); // Forhindrer formularen i at blive sendt normalt
-
       const form = event.target;
       const formData = new FormData(form);
 
