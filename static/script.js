@@ -200,8 +200,6 @@ document.querySelectorAll(".buy-button").forEach((button) => {
 
 // ##############################
 // ADMIN_MESSAGES.HTML
-console.log("script.js loaded"); // Denne log skulle vises, når scriptet indlæses
-
 function deleteMessage(button) {
   var messageId = button.getAttribute("data-message-id");
   console.log("Delete button clicked");
@@ -233,10 +231,6 @@ function deleteMessage(button) {
       console.error("Fetch error:", error);
     });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Script loaded and DOM fully parsed.");
-});
 
 // ##############################
 // ADMIN_CLIPCARDS.HTML
