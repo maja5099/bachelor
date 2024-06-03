@@ -37,52 +37,120 @@ finally:
 # List of directories to search for templates
 template_dirs = ['components', 'elements', 'sections', 'utilities']
 
+def get_current_user():
+    try:
+        user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
+        if not user_info:
+            return None
+        
+        username = user_info.get('username')
+        if username:
+            db = master.db()
+            current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
+            db.close()
+            return current_user
+        else:
+            return None
+    except Exception as e:
+        print(e)
+        return None
+    
+
+def convert_minutes_to_hours_minutes(minutes):
+    hours = minutes // 60
+    remaining_minutes = minutes % 60
+    return hours, remaining_minutes
+
+
 
 @get("/profile")
 def profile():
     try:
-        user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
-        if not user_cookie:
-            logger.info("No user cookie found, redirecting to login.")
+        current_user = get_current_user()
+        if not current_user:
+            logger.info("No current user found, redirecting to login.")
             redirect("/login")
 
         db = master.db()
-        user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (user_cookie['username'],)).fetchone()
-        
-        if not user:
-            logger.info("User not found in database, redirecting to login.")
-            redirect("/login")
+        user = current_user
 
         first_name = user['first_name']
         last_name = user['last_name']
         username = user['username']
         logger.success("User profile loaded successfully: %s", username)
 
-        active_clipcards_count = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
-        inactive_clipcards_count  = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
+        # Sørg for at brugeren har user_role_id = 1 før vi henter betalingsoplysningerne
+        if user["user_role_id"] == 1:
+            # Hent betalingsoplysninger fra databasen baseret på user_id
+            payment = db.execute("SELECT * FROM payments WHERE user_id = ? LIMIT 1", (user['user_id'],)).fetchone()
 
-        return template('profile', 
-                        title="Din profil", 
-                        user=user, 
-                        pricing_default=pricing_default, 
-                        pricing_accent=pricing_accent, 
-                        section_profile_admin=section_profile_admin, 
-                        section_profile_customer=section_profile_customer, 
-                        first_name=first_name, 
-                        last_name=last_name, 
-                        username=username, 
-                        header_nav_items=header_nav_items, 
-                        footer_info=footer_info, 
-                        unid_logo=unid_logo, 
-                        selling_points=selling_points, 
-                        social_media=social_media, 
-                        ui_icons=ui_icons,
-                        active_clipcards_count=active_clipcards_count,
-                        inactive_clipcards_count=inactive_clipcards_count)
+            if payment:
+                clipcard_id = payment['clipcard_id']
+
+                # Hent time_used og remaining_time fra clipcards tabellen ved hjælp af clipcard_id
+                clipcard = db.execute("SELECT * FROM clipcards WHERE clipcard_id = ? LIMIT 1", (clipcard_id,)).fetchone()
+
+                if clipcard:
+                    time_used = clipcard['time_used']
+                    remaining_time = clipcard['remaining_time']
+
+                    # Konverter time_used og remaining_time til timer og minutter
+                    time_used_hours, time_used_minutes = convert_minutes_to_hours_minutes(time_used)
+                    remaining_hours, remaining_minutes = convert_minutes_to_hours_minutes(remaining_time)
+                else:
+                    logger.info("Clipcard not found for user.")
+                    time_used_hours = None
+                    time_used_minutes = None
+                    remaining_hours = None
+                    remaining_minutes = None
+            else:
+                logger.info("Payment not found for user.")
+                time_used_hours = None
+                time_used_minutes = None
+                remaining_hours = None
+                remaining_minutes = None
+        else:
+            time_used_hours = None
+            time_used_minutes = None
+            remaining_hours = None
+            remaining_minutes = None
+
+        # Hent antallet af aktive og inaktive klippekort uanset brugerens rolle
+        active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
+        inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
+
+        active_clipcards_count = active_clipcards_result['count']
+        inactive_clipcards_count = inactive_clipcards_result['count']
+
+        return template('profile', title="Din profil",
+                                    user=user,
+                                    pricing_default=pricing_default,
+                                    pricing_accent=pricing_accent,
+                                    section_profile_admin=section_profile_admin,
+                                    section_profile_customer=section_profile_customer,
+                                    first_name=first_name,
+                                    last_name=last_name,
+                                    username=username,
+                                    header_nav_items=header_nav_items,
+                                    footer_info=footer_info,
+                                    unid_logo=unid_logo,
+                                    selling_points=selling_points,
+                                    social_media=social_media,
+                                    ui_icons=ui_icons,
+                                    active_clipcards_count=active_clipcards_count,
+                                    inactive_clipcards_count=inactive_clipcards_count,
+                                    time_used_hours=time_used_hours,
+                                    time_used_minutes=time_used_minutes,
+                                    remaining_hours=remaining_hours,
+                                    remaining_minutes=remaining_minutes)
+                                    
     except Exception as e:
         logger.error("Error loading profile: %s", e)
     finally:
         logger.info("Profile request completed.")
+
+
+
 
 def template_finder(template_name, directories):
     for directory in directories:
@@ -155,26 +223,56 @@ def profile_template(template_name):
 def profile_overview():
     logger.info("Attempting to load profile overview...")
     try:
-        user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
-        logger.info("User cookie: %s", user_cookie)
-        if not user_cookie:
-            logger.info("No user cookie found, redirecting to login.")
+        current_user = get_current_user()
+        if not current_user:
+            logger.info("No current user found, redirecting to login.")
             redirect("/login")
 
         db = master.db()
-
-        user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (user_cookie['username'],)).fetchone()
-
-        if not user:
-            logger.info("User not found in database, redirecting to login.")
-            redirect("/login")
+        user = current_user
 
         first_name = user['first_name']
         last_name = user['last_name']
         username = user['username']
 
+        # Sørg for at brugeren har user_role_id = 1 før vi henter betalingsoplysningerne
+        if user["user_role_id"] == 1:
+            # Hent betalingsoplysninger fra databasen baseret på user_id
+            payment = db.execute("SELECT * FROM payments WHERE user_id = ? LIMIT 1", (user['user_id'],)).fetchone()
+
+            if payment:
+                clipcard_id = payment['clipcard_id']
+
+                # Fetching time_used and remaining_time from clipcards table using clipcard_id
+                clipcard = db.execute("SELECT * FROM clipcards WHERE clipcard_id = ? LIMIT 1", (clipcard_id,)).fetchone()
+
+                if clipcard:
+                    time_used = clipcard['time_used']
+                    remaining_time = clipcard['remaining_time']
+
+                    # Konverter time_used og remaining_time til timer og minutter
+                    time_used_hours, time_used_minutes = convert_minutes_to_hours_minutes(time_used)
+                    remaining_hours, remaining_minutes = convert_minutes_to_hours_minutes(remaining_time)
+                else:
+                    logger.info("Clipcard not found for user.")
+                    time_used_hours = None
+                    time_used_minutes = None
+                    remaining_hours = None
+                    remaining_minutes = None
+            else:
+                logger.info("Payment not found for user.")
+                time_used_hours = None
+                time_used_minutes = None
+                remaining_hours = None
+                remaining_minutes = None
+        else:
+            time_used_hours = None
+            time_used_minutes = None
+            remaining_hours = None
+            remaining_minutes = None
+
         active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
-        inactive_clipcards_result  = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
+        inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
 
         active_clipcards_count = active_clipcards_result['count']
         inactive_clipcards_count = inactive_clipcards_result['count']
@@ -193,20 +291,27 @@ def profile_overview():
 
         logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", active_clipcards_count, inactive_clipcards_count)
 
-        return template(relative_path, 
-                        user=user,
+        return template(relative_path,
+                        user=current_user,
                         first_name=first_name,
                         last_name=last_name,
                         username=username,
                         ui_icons=ui_icons,
                         active_clipcards_count=active_clipcards_count,
-                        inactive_clipcards_count=inactive_clipcards_count)
+                        inactive_clipcards_count=inactive_clipcards_count,
+                        time_used_hours=time_used_hours,
+                        time_used_minutes=time_used_minutes,
+                        remaining_hours=remaining_hours,
+                        remaining_minutes=remaining_minutes)
 
     except Exception as e:
         logger.error("Error loading profile overview: %s", e)
         return f"An error occurred while loading the profile overview: {e}"
     finally:
         logger.info("Profile overview request completed.")
+
+
+
 
 
 def find_template(template_name, directories):
