@@ -9,15 +9,22 @@ import os
 
 db = master.db()
 
-@get('/customer_clipcards')
+@get('/profile/profile_customer_clipcard')
 def clipcards():
     try:
         cursor = db.cursor()
         cursor.execute("SELECT clipcard_type_title, clipcard_price FROM card_types")
         clipcards = cursor.fetchall()
         cursor.close()
-        return template("customer_clipcards", clipcards=clipcards)
-    
+        template_path = find_template('profile_customer_clipcard', template_dirs)
+        if template_path is None:
+            return "Template not found."
+            
+        # Extract the relative path from views directory if necessary
+        relative_path = template_path.replace('views/', '').replace('.tpl', '')
+
+        return template(relative_path, clipcards=clipcards)
+       
     except Exception as e:
         print("Error in clipcards:", e)
         return {"info": str(e)}

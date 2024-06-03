@@ -188,15 +188,18 @@ $(document).ready(function () {
 
 // ##############################
 // CUSTOMER_CLIPCARDS.HTML
-function buyClipcard(clipcardType, clipcardPrice) {
-  window.location.href = "/buy_clipcard/" + clipcardType + "/" + clipcardPrice;
-}
+document.addEventListener("DOMContentLoaded", function () {
+  function buyClipcard(clipcardType, clipcardPrice) {
+    window.location.href =
+      "/buy_clipcard/" + clipcardType + "/" + clipcardPrice;
+  }
 
-document.querySelectorAll(".buy-button").forEach((button) => {
-  button.addEventListener("click", function () {
-    var clipcardType = this.getAttribute("data-clipcard-type");
-    var clipcardPrice = this.getAttribute("data-clipcard-price");
-    buyClipcard(clipcardType, clipcardPrice);
+  document.addEventListener("click", function (event) {
+    if (event.target && event.target.classList.contains("buy-button")) {
+      var clipcardType = event.target.getAttribute("data-clipcard-type");
+      var clipcardPrice = event.target.getAttribute("data-clipcard-price");
+      buyClipcard(clipcardType, clipcardPrice);
+    }
   });
 });
 
