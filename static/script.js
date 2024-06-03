@@ -200,8 +200,13 @@ document.querySelectorAll(".buy-button").forEach((button) => {
 
 // ##############################
 // ADMIN_MESSAGES.HTML
+console.log("script.js loaded"); // Denne log skulle vises, når scriptet indlæses
+
 function deleteMessage(button) {
   var messageId = button.getAttribute("data-message-id");
+  console.log("Delete button clicked");
+  console.log("Message ID:", messageId);
+
   fetch("/delete_message", {
     method: "DELETE",
     headers: {
@@ -209,17 +214,29 @@ function deleteMessage(button) {
     },
     body: "message_id=" + messageId,
   })
-    .then((response) => response.json())
+    .then((response) => {
+      console.log("Response status:", response.status);
+      return response.json();
+    })
     .then((data) => {
+      console.log("Response data:", data);
       if (data.info === "Message deleted.") {
         var messageDiv = button.closest("div");
         messageDiv.parentNode.removeChild(messageDiv);
+        console.log("Message deleted successfully.");
       } else {
         alert(data.info);
+        console.log("Error:", data.info);
       }
     })
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => {
+      console.error("Fetch error:", error);
+    });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Script loaded and DOM fully parsed.");
+});
 
 // ##############################
 // ADMIN_CLIPCARDS.HTML

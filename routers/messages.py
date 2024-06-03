@@ -182,18 +182,20 @@ def admin_messages_get():
 @delete('/delete_message')
 def delete_message():
     try:
+        print("Received delete request")  # Log modtagelse
         message_id = request.forms.get('message_id')
+        print("Message ID:", message_id)  # Log Message ID
         if not message_id:
             response.status = 400
             return {"info": "Message ID is missing."}
 
+        # Få den aktuelle bruger
         current_user = get_current_user()
         if not current_user:
             response.status = 401
             return {"info": "User not logged in."}
         
-        user_id = current_user['user_id']
-
+        # Opdater beskedens slettede tidspunkt
         deleted_at = int(time.time())
 
         db = master.db()
@@ -202,8 +204,8 @@ def delete_message():
         cursor.execute("""
             UPDATE messages 
             SET deleted_at = ?
-            WHERE message_id = ? AND user_id = ?
-        """, (deleted_at, message_id, user_id))
+            WHERE message_id = ?  -- Brug message_id i stedet for user_id
+        """, (deleted_at, message_id))
 
         db.commit()
 
@@ -222,3 +224,5 @@ def delete_message():
     finally:
         if "db" in locals():
             db.close()
+
+
