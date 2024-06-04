@@ -124,6 +124,7 @@ try:
     import routers.messages
     import routers.payment
     import routers.portfolio
+    import routers.about_us
     import routers.profile
     import routers.services_and_prices
     import routers.signup

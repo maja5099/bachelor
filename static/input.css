@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply font-montserrat bg-unidYellow selection:bg-unidPurple selection:text-white scroll-smooth;
+    @apply font-montserrat bg-unidYellow text-unidPurple selection:bg-unidPurple selection:text-white scroll-smooth;
   }
   h1 {
     @apply text-unidPurple font-saira text-5xl md:text-6xl font-bold;

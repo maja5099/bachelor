@@ -24,7 +24,7 @@ selling_points = [
 
 header_nav_items = [
     {"text": "Services & Priser", "link": "/services_and_prices"},
-    {"text": "Om UNID Studio", "link": "/"},
+    {"text": "Om UNID Studio", "link": "/about_us"},
     {"text": "Case portfolio", "link": "/portfolio"},
     {"text": "Kontakt", "link": "/contact"},
 ]
@@ -250,5 +250,57 @@ error_content = {
     "500": {
         "error_title": "Fejl 500: Intern Serverfejl",
         "error_message": "Vi beklager, men der er sket en fejl på serveren, som forhindrer udførelsen af din anmodning. Prøv venligst igen senere, eller kontakt os, hvis problemet fortsætter."
+    },
+}
+
+about_us_content = {
+    "subheader": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+    "section_highlights": {
+        "title": "Lille studio - med store idéer",
+        "subheader": "OM UNID STUDIO",
+        "highlights": [
+            {"illustration": "tools.png", "illustration_alt": "Illustration med kreative værktøjer", "title": "Erfaring", "text": "Vi har stor erfaring indenfor grafisk design og udvikling af websites. Med vores ekspertise, kan vi skræddersy en løsning efter dine ønsker og behov."},
+            {"illustration": "book.png", "illustration_alt": "Illustration med en bog", "title": "KEA Ignite", "text": "Vi har et samarbejde med KEA. Hvis du er iværksætter, og går på KEA, så giver vi rabat på vores ydelser."},
+            {"illustration": "screen.png", "illustration_alt": "Illustration med en skærm med former på", "title": "Tidligere cases", "text": "Vi vægter tilfredshedgaranti højt, og afslutter ikke en case, før kunden er tilfreds. Vores tidligere cases, kan ses i vores portfolio."},
+            {"illustration": "phone_mail.png", "illustration_alt": "Illustration med en telefon og et brev", "title": "Kontakt os", "text": "Lad os høre om din idé. Vi er altid parate, til at hjælpe - og vi skræddersyer gerne én løsning til netop din virksomhed."},
+        ],
+    },
+    "section_vision": {
+        "title": "Vores vision",
+        "subheader": "VISION",
+        "introduction": "Vi glæder os over at støtte ambitiøse studerende på deres iværksætterrejse.",
+        "first_chapter_content": "Vi tror på, at en stærk start er nøglen til vedvarende vækst – og for at gøre denne start så tilgængelig som muligt, tilbyder vi særlige studierabatter på vores hjemmesidepakker. På den måde ønsker vi at lette byrden for nye forretningsfolk og give dem den nødvendige digitale platform, til at realisere deres visioner.",
+        "second_chapter_title": "Hvordan opnår du studierabat?",
+        "second_chapter_content": "Jonglerer du med både iværksætteri og uddannelse, så tilbyder vi særlige studierabatter på vores hjemmesidepakker. Det eneste krav vi har til dig, er at du skal være iværksætter samt være indskrevet på en uddannelsesinstitution – og kunne fremvise et gyldigt studiekort. Opnå din studierabat i dag, og lad os sammen bygge fundamentet for din fremtidige succes.",
+        "illustration": "digital_design.svg",
+        "illustration_alt": "Illustration af digitalt design",
+    },
+    "section_skills": {
+        "title": "Et udpluk af vores kompetencer",
+        "subheader": "KOMPETENCER",
+        "skills": [
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+        ],
+    },
+    "section_team": {
+        "title": "Bag om teamet - hvem er vi?",
+        "subheader": "TEAM",
+        "introduction": "Vi er et dedikeret og kreativt team, som har sans for selv de mindste detaljer. For os er det vigtigt at levere den bedste og mest konkurrencedygtige løsning.",
+        "text": "Vi, Denise & Isabella, står bag UNID Studio. Vi har begge et stort flair, for at designe og udvikle digitale løsninger. Vi har udarbejdet og leveret mange digitale løsninger, og sammen udgør vi et team, hvor vores forskellige færdigheder og kompetencer komplementerer hinanden godt – og danner grobund for kreative løsninger, der skiller sig ud. Når vi udvikler websites og andre løsninger, vægter vi dine ønsker og behov højt, og på baggrund af det, kommer vi med vores forslag på, hvordan vi sammen kan komme i mål – og få udviklet den bedste løsning til lige netop dig.",
+        "employees": [
+            {"employee_image": "denise.jpg", "image_alt": "Portræt af Denise", "employee_name": "Denise Dalvang Hansen", "employee_job_title": "Designer & grafiker", "employee_information": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, fuga?"},
+            {"employee_image": "isabella.jpg", "image_alt": "Portræt af Isabella", "employee_name": "Isabella Hilarius Nielsen", "employee_job_title": "Webudvikler", "employee_information": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, fuga?"},
+        ],
     },
 }
