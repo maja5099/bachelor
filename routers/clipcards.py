@@ -163,10 +163,6 @@ def submit_task():
         task_title = request.forms.get('title')
         task_description = request.forms.get('description')
 
-        # Ensure data is decoded correctly if necessary
-        task_title = task_title.encode('latin1').decode('utf-8')
-        task_description = task_description.encode('latin1').decode('utf-8')
-
         hours = int(request.forms.get('hours'))
         minutes = int(request.forms.get('minutes'))
         time_spent = hours * 60 + minutes
@@ -218,17 +214,15 @@ def submit_task():
 
             db.commit()
 
-        response.content_type = 'application/json'
-        return json.dumps({"info": "Opgaven er blevet indsendt."})
+ 
+        return {"info": "Opgaven er blevet indsendt."}
 
     except Exception as e:
         db.rollback()
         print("Error in submit_task:", e)
-        response.content_type = 'application/json'
-        return json.dumps({"info": str(e)})
+        return {"info": str(e)}
 
-    finally:
-        if "db" in locals(): db.close()
+
 
 
 

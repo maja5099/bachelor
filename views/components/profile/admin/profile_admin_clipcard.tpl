@@ -45,11 +45,7 @@
     % end
 
     <h1>Timeregistrering</h1>
-    <form
-      id="taskForm"
-      action="/submit_task"
-      method="post"
-    >
+    <form id="taskForm">
       <label for="customer">Kunde:</label>
       <select id="customer" name="customer">
         % for customer in active_customers:
@@ -79,8 +75,7 @@
       />
       minutter
       <br />
-      <input type="submit" value="Registrer" />
+      <button type="button" id="submitTaskButton">Registrer</button>
+      <div id="taskSubmissionMessage" style="display: none;"></div>
     </form>
-
-    <div id="responseMessage"></div>
 </body>
