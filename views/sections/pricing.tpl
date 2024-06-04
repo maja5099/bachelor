@@ -15,6 +15,7 @@
     >
       <!-- prettier-ignore -->
       % include('components/pricing_default')
+      % include('components/pricing_default')
       % include('components/pricing_accent')
     </div>
   </div>

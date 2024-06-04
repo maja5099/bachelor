@@ -266,33 +266,28 @@ function deleteClipcard(clipcardId) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const taskForm = document.getElementById("taskForm");
-  if (taskForm) {
-    taskForm.addEventListener("submit", function (event) {
-      const form = event.target;
-      const formData = new FormData(form);
-
-      fetch("/submit_task", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          const responseMessage = document.getElementById("responseMessage");
-          if (data.info) {
-            responseMessage.textContent = data.info;
-          } else {
-            responseMessage.textContent = "Opgaven er blevet registreret.";
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          document.getElementById("responseMessage").textContent =
-            "Der opstod en fejl.";
-        });
+$(document).ready(function () {
+  $("body").on("click", "#submitTaskButton", function () {
+    console.log("Button clicked");
+    var formData = new FormData($("#taskForm")[0]);
+    $.ajax({
+      url: "/submit_task",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log("Success response:", response);
+        $("#taskSubmissionMessage").text(response.info).show();
+        $("#taskForm")[0].reset();
+      },
+      error: function (xhr) {
+        console.error("Error response:", xhr);
+        var response = JSON.parse(xhr.responseText);
+        alert("Der opstod en fejl: " + response.info);
+      },
     });
-  }
+  });
 });
 
 // ##############################

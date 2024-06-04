@@ -168,7 +168,7 @@ section_profile_customer = [
 pricing_default = {
     "clipcard_a": {
         "info": {
-            "title": "Klippekort A",
+            "title": "Klippekort",
             "hours": "10 timer",
             "discount": "Spar 1.234 DKK",
             "discount_icon": "discount.svg",
@@ -181,21 +181,6 @@ pricing_default = {
             {"icon": "checkmark.svg", "text": "Selling point 4"},
         ]
     },
-    "clipcard_b": {
-        "info": {
-            "title": "Klippekort B",
-            "hours": "20 timer",
-            "discount": "Spar 1.234 DKK",
-            "discount_icon": "discount.svg",
-            "price": "12.345 DKK",
-        },
-        "selling_points": [
-            {"icon": "checkmark.svg", "text": "Selling point 1"},
-            {"icon": "checkmark.svg", "text": "Selling point 2"},
-            {"icon": "checkmark.svg", "text": "Selling point 3"},
-            {"icon": "checkmark.svg", "text": "Selling point 4"},
-        ]
-    }
 }
 
 pricing_accent = {

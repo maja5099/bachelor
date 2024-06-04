@@ -2,9 +2,37 @@ from bottle import template, get, post, request, response, delete, template
 import master
 import time
 import uuid
-import json
 from math import floor
+from colored_logging import setup_logger
+import content
+import logging
 import os
+
+
+
+##############################
+#   COLORED LOGGING
+logger = setup_logger(__name__, level=logging.INFO)
+logger.setLevel(logging.INFO)
+
+##############################
+#   Content from content.py
+try:
+    header_nav_items = content.header_nav_items
+    footer_info = content.footer_info
+    unid_logo = content.unid_logo
+    selling_points = content.selling_points
+    social_media = content.social_media
+    ui_icons = content.ui_icons
+    pricing_default = content.pricing_default
+    pricing_accent = content.pricing_accent
+    section_profile_admin = content.section_profile_admin
+    section_profile_customer = content.section_profile_customer
+    logger.success("Content imported successfully.")
+except Exception as e:
+    logger.error("Error importing content: %s", e)
+finally:
+    logger.info("Content import process completed.")
 
 
 db = master.db()
@@ -23,7 +51,7 @@ def clipcards():
         # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
-        return template(relative_path, clipcards=clipcards)
+        return template(relative_path, clipcards=clipcards, pricing_default=pricing_default, pricing_accent=pricing_accent)
        
     except Exception as e:
         print("Error in clipcards:", e)
@@ -153,9 +181,6 @@ def delete_clipcard(clipcard_id):
         if 'db' in locals(): db.close()
 
 
-
-
-
 @post('/submit_task')
 def submit_task():
     try:
@@ -164,6 +189,7 @@ def submit_task():
         user_id = request.forms.get('customer')
         task_title = request.forms.get('title')
         task_description = request.forms.get('description')
+
         hours = int(request.forms.get('hours'))
         minutes = int(request.forms.get('minutes'))
         time_spent = hours * 60 + minutes
@@ -215,17 +241,15 @@ def submit_task():
 
             db.commit()
 
-        response.content_type = 'application/json'
-        return json.dumps({"info": "Opgaven er blevet indsendt."})
+ 
+        return {"info": "Opgaven er blevet indsendt."}
 
     except Exception as e:
         db.rollback()
         print("Error in submit_task:", e)
-        response.content_type = 'application/json'
-        return json.dumps({"info": str(e)})
+        return {"info": str(e)}
 
-    finally:
-        if "db" in locals(): db.close()
+
 
 
 

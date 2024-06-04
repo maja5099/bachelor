@@ -45,11 +45,7 @@
     % end
 
     <h1>Timeregistrering</h1>
-    <form
-      id="taskForm"
-      action="/submit_task"
-      method="post"
-    >
+    <form id="taskForm">
       <label for="customer">Kunde:</label>
       <select id="customer" name="customer">
         % for customer in active_customers:
@@ -60,10 +56,10 @@
       </select>
       <br />
       <label for="title">Opgavetitel:</label>
-      <textarea id="title" name="title"></textarea>
+      <textarea id="title" name="title" accept-charset="UTF-8"></textarea>
       <br />
       <label for="description">Opgavebeskrivelse:</label>
-      <textarea id="description" name="description"></textarea>
+      <textarea id="description" name="description" accept-charset="UTF-8"></textarea>
       <br />
       <label for="hours">Tid brugt:</label>
       <input type="number" id="hours" name="hours" min="0" step="1" value="0" />
@@ -79,8 +75,7 @@
       />
       minutter
       <br />
-      <input type="submit" value="Registrer" />
+      <button type="button" id="submitTaskButton">Registrer</button>
+      <div id="taskSubmissionMessage" style="display: none;"></div>
     </form>
-
-    <div id="responseMessage"></div>
 </body>
