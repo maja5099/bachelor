@@ -62,7 +62,7 @@ def get_current_user():
 
 
 ##############################
-# Converts minutes to hours and minutes
+#   Converts minutes to hours and minutes
 def minutes_to_hours_minutes(minutes):
     hours = floor(minutes / 60)
     remaining_minutes = minutes % 60
@@ -70,7 +70,7 @@ def minutes_to_hours_minutes(minutes):
 
 
 ##############################
-# Adds minutes and hours depending on the time
+#   Adds minutes and hours depending on the time
 def format_time_spent(minutes):
     if minutes <= 60:
         return f"{minutes} minutter"
@@ -81,7 +81,7 @@ def format_time_spent(minutes):
 
 
 ##############################
-# Formats timestamp
+#   Formats timestamp
 def format_created_at(timestamp):
     if isinstance(timestamp, str):
         try:
@@ -95,7 +95,7 @@ def format_created_at(timestamp):
 
 
 ##############################
-# Loads information to be included in the admin/customer profile
+#   Fetching information to be included in the admin/customer profile
 def load_profile_data():
     current_user = get_current_user()
     if not current_user:
@@ -109,6 +109,7 @@ def load_profile_data():
     last_name = user['last_name']
     username = user['username']
 
+    #   Fetching clipcard_id from payments
     payment_query = """
         SELECT payments.clipcard_id
         FROM payments
@@ -118,6 +119,7 @@ def load_profile_data():
     """
     payment = db.execute(payment_query, (user['user_id'],)).fetchone()
 
+    #   Fetching time_used and remaining_time from active clipcards
     if payment:
         clipcard_id = payment['clipcard_id']
         
@@ -128,6 +130,7 @@ def load_profile_data():
         """
         clipcard_data = db.execute(clipcard_query, (clipcard_id,)).fetchone()
 
+        #   Converts time_used and remaining_time to hours and minutes
         if clipcard_data:
             time_used = clipcard_data['time_used']
             remaining_time = clipcard_data['remaining_time']
@@ -146,12 +149,14 @@ def load_profile_data():
         remaining_hours = None
         remaining_minutes = None
 
+    #   Fetching active and inactive clipcards
     active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
     inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
 
     active_clipcards_count = active_clipcards_result['count']
     inactive_clipcards_count = inactive_clipcards_result['count']
 
+    #   Fetching tasks
     tasks_query = """
         SELECT task_title, task_description, time_spent, created_at
         FROM tasks
@@ -160,6 +165,7 @@ def load_profile_data():
     """
     tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
 
+    #   Formats time_spent and created_at in tasks
     formatted_tasks = []
     for task in tasks:
         task['formatted_time_spent'] = format_time_spent(task['time_spent'])
@@ -181,6 +187,8 @@ def load_profile_data():
     }
 
 
+##############################
+#   Get user profile
 @get("/profile")
 def profile():
     try:
@@ -215,13 +223,15 @@ def profile():
         logger.info("Profile request completed.")
 
 
+##############################
+#   Get user profile and template
 @route('/profile/<template_name>')
 def profile_template(template_name):
     logger.info(f"Request for template: {template_name}")
     try:
+        #   Include profile data if the template is profile_overview
         data = load_profile_data()
         if template_name == "profile_overview":
-            # Specific logic for profile_overview
             template_path = find_template(template_name, template_dirs)
             if template_path is None:
                 return "Template not found."
