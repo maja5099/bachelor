@@ -53,7 +53,7 @@
         <p class="text-unidPurple text-base lg:text-lg">Pris</p>
         <div class="flex items-center gap-2">
           <p class="text-unidPurple text-right text-2xl xl:text-3xl font-saira font-bold">
-            {{ card['clipcard_price'] }}
+            {{ card['clipcard_price'] }} DKK
           </p>
           <div class="flex flex-col text-xs text-unidPurple">
             <p>ekskl.</p>
@@ -74,8 +74,7 @@
   </div>
 </div>
 % end
-% end
-      
+% end    
 <script src="/static/script.js"></script>
 </body>
 
