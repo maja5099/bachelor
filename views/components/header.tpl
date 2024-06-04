@@ -1,4 +1,4 @@
-<header class="text-white text-base bg-unidLightBlue drop-shadow-xl">
+<header class="text-white text-base bg-unidLightBlue drop-shadow-xl sticky top-0 z-50 transition-all duration-300 ease-in-out">
   <div
     class="width_big py-8 mx-auto flex items-center justify-between"
   >

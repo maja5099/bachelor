@@ -1096,6 +1096,10 @@ h3 {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
 }
@@ -1119,6 +1123,46 @@ h3 {
 
 .top-10 {
   top: 2.5rem;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.top-1 {
+  top: 0.25rem;
+}
+
+.top-24 {
+  top: 6rem;
+}
+
+.top-40 {
+  top: 10rem;
+}
+
+.top-80 {
+  top: 20rem;
+}
+
+.top-96 {
+  top: 24rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.top-52 {
+  top: 13rem;
+}
+
+.top-36 {
+  top: 9rem;
+}
+
+.top-44 {
+  top: 11rem;
 }
 
 .z-50 {
@@ -1256,6 +1300,16 @@ h3 {
 
 .h-28 {
   height: 7rem;
+}
+
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.max-h-fit {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
 }
 
 .w-11\/12 {
@@ -1891,6 +1945,12 @@ h3 {
   transition-duration: 150ms;
 }
 
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -1944,6 +2004,10 @@ input[type="checkbox"] {
 
 .hover\:font-semibold:hover {
   font-weight: 600;
+}
+
+.hover\:opacity-90:hover {
+  opacity: 0.9;
 }
 
 .group:hover .group-hover\:max-w-full {
