@@ -9,6 +9,7 @@ import os
 
 db = master.db()
 
+
 @get('/profile/profile_customer_clipcard')
 def clipcards():
     try:
@@ -153,9 +154,6 @@ def delete_clipcard(clipcard_id):
         if 'db' in locals(): db.close()
 
 
-
-
-
 @post('/submit_task')
 def submit_task():
     try:
@@ -164,6 +162,11 @@ def submit_task():
         user_id = request.forms.get('customer')
         task_title = request.forms.get('title')
         task_description = request.forms.get('description')
+
+        # Ensure data is decoded correctly if necessary
+        task_title = task_title.encode('latin1').decode('utf-8')
+        task_description = task_description.encode('latin1').decode('utf-8')
+
         hours = int(request.forms.get('hours'))
         minutes = int(request.forms.get('minutes'))
         time_spent = hours * 60 + minutes
