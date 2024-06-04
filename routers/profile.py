@@ -38,6 +38,8 @@ finally:
 # List of directories to search for templates
 template_dirs = ['components', 'elements', 'sections', 'utilities']
 
+
+# Get current user
 def get_current_user():
     try:
         user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
@@ -57,13 +59,13 @@ def get_current_user():
         return None
     
 
-
+# Converts minutes to hours and minutes
 def minutes_to_hours_minutes(minutes):
     hours = floor(minutes / 60)
     remaining_minutes = minutes % 60
     return hours, remaining_minutes
 
-
+# Adds minutes and hours depending on the time
 def format_time_spent(minutes):
     if minutes <= 60:
         return f"{minutes} minutter"
@@ -72,6 +74,7 @@ def format_time_spent(minutes):
         remaining_minutes = minutes % 60
         return f"{hours} timer og {remaining_minutes} minutter"
 
+# Formats timestamp
 def format_created_at(timestamp):
     if isinstance(timestamp, str):
         try:
@@ -99,7 +102,6 @@ def profile():
         username = user['username']
         logger.success("User profile loaded successfully: %s", username)
 
-        # Sørg for at brugeren har user_role_id = 1 før vi henter betalingsoplysningerne
         if user["user_role_id"] == 1:
             payment_query = """
                 SELECT payments.clipcard_id
@@ -112,7 +114,6 @@ def profile():
 
             if payment:
                 clipcard_id = payment['clipcard_id']
-                # Hent time_used og remaining_time fra clipcards tabellen baseret på clipcard_id
                 clipcard_query = """
                     SELECT time_used, remaining_time
                     FROM clipcards
@@ -123,8 +124,6 @@ def profile():
                 if clipcard_data:
                     time_used = clipcard_data['time_used']
                     remaining_time = clipcard_data['remaining_time']
-
-                    # Konverter time_used og remaining_time til timer og minutter
                     time_used_hours, time_used_minutes = minutes_to_hours_minutes(time_used)
                     remaining_hours, remaining_minutes = minutes_to_hours_minutes(remaining_time)
                 else:
@@ -140,7 +139,6 @@ def profile():
                 remaining_hours = None
                 remaining_minutes = None
 
-            # Hent tasks baseret på user_id
             tasks_query = """
                 SELECT task_title, task_description, time_spent, created_at
                 FROM tasks
@@ -149,7 +147,6 @@ def profile():
             """
             tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
 
-            # Format time spent and created_at for each task
             formatted_tasks = []
             for task in tasks:
                 task['formatted_time_spent'] = format_time_spent(task['time_spent'])
@@ -162,7 +159,6 @@ def profile():
             remaining_minutes = None
             formatted_tasks = []
 
-        # Hent antallet af aktive og inaktive klippekort uanset brugerens rolle
         active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
         inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
 
@@ -198,7 +194,6 @@ def profile():
         logger.info("Profile request completed.")
 
 
-
 def template_finder(template_name, directories):
     for directory in directories:
         for root, _, files in os.walk(f'views/{directory}'):
@@ -207,6 +202,7 @@ def template_finder(template_name, directories):
                 return os.path.join(root, f'{template_name}.tpl')
     logger.error("Template '%s' not found in any directories.", template_name)
     return None
+
 
 @route('/profile/<template_name>')
 def profile_template(template_name):
@@ -326,7 +322,6 @@ def profile_overview():
         active_clipcards_count = active_clipcards_result['count']
         inactive_clipcards_count = inactive_clipcards_result['count']
 
-        # Fetch tasks
         tasks_query = """
             SELECT task_title, task_description, time_spent, created_at
             FROM tasks
@@ -335,7 +330,6 @@ def profile_overview():
         """
         tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
 
-        # Format time spent and created_at for each task
         formatted_tasks = []
         for task in tasks:
             task['formatted_time_spent'] = format_time_spent(task['time_spent'])
