@@ -145,6 +145,7 @@ def profile():
                 SELECT task_title, task_description, time_spent, created_at
                 FROM tasks
                 WHERE customer_id = ?
+                ORDER BY created_at DESC
             """
             tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
 
@@ -330,6 +331,7 @@ def profile_overview():
             SELECT task_title, task_description, time_spent, created_at
             FROM tasks
             WHERE customer_id = ?
+            ORDER BY created_at DESC
         """
         tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
 
