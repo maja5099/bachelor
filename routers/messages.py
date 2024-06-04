@@ -143,6 +143,7 @@ def admin_messages_get():
         cursor.execute("""
             SELECT 
                 messages.message_id,
+                messages.created_at,
                 messages.message_subject, 
                 messages.message_text, 
                 messages.message_file,

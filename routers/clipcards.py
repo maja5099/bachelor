@@ -84,7 +84,7 @@ def admin_clipcards_get():
         cursor = db.cursor()
         
         cursor.execute("""
-            SELECT clipcards.clipcard_id, clipcards.remaining_time, clipcards.time_used, users.user_id, users.first_name, users.last_name, users.username, users.email, customers.website_name, customers.website_url, card_types.clipcard_type_title
+            SELECT clipcards.clipcard_id, clipcards.remaining_time, clipcards.time_used, clipcards.created_at, users.user_id, users.first_name, users.last_name, users.username, users.email, users.phone, customers.website_name, customers.website_url, card_types.clipcard_type_title
             FROM clipcards
             JOIN payments ON clipcards.clipcard_id = payments.clipcard_id
             JOIN users ON payments.user_id = users.user_id
