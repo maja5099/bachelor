@@ -192,7 +192,6 @@ def load_profile_data():
 @get("/profile")
 def profile():
     try:
-        
         data = load_profile_data()
 
         return template('profile', title="Din profil",
