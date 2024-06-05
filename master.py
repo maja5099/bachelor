@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from bottle import request, response
 import os
 import re
+import secrets
 
 ##############################
 def dict_factory(cursor, row):
@@ -31,6 +32,13 @@ def user():
     print(ex)
     raise ex
   
+
+##############################
+# CSRF Token
+def generate_csrf_token():
+    return secrets.token_hex(16)
+  
+
 ##############################
 #Email Validation
 
@@ -97,3 +105,4 @@ def validate_phone():
     if not re.match(PHONE_REGEX, phone):
         raise ValueError(error)
     return phone
+

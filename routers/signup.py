@@ -4,6 +4,7 @@ import uuid
 import time
 import bcrypt
 
+
 @post("/signup")
 def _():
     try:
@@ -22,7 +23,8 @@ def _():
         website_name = request.forms.get("website_name", "")
         website_url = request.forms.get("website_url", "")
 
-       
+        csrf_token = master.generate_csrf_token()
+
         staff_emails = ["kontakt@unidstudio.dk", "denise@unidstudio.dk", "isabella@unidstudio.dk"]
         if email in staff_emails:
             user_role_id = "2" 
@@ -50,7 +52,6 @@ def _():
             "user_role_id" : user_role_id,
         }
 
-
         db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_role_id)", user)
 
         db.commit()
@@ -67,7 +68,10 @@ def _():
 def signup_get():
     try:
         db = master.db()
-        return template("signup.html")
+        
+        csrf_token = master.generate_csrf_token()
+        
+        return template("signup.html", csrf_token=csrf_token)
     except Exception as e:
         print(e)
         if "db" in locals(): db.rollback() 
