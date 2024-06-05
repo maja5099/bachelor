@@ -152,6 +152,7 @@ section_login_content = {
 section_profile_admin = [
     {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
     {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
+    {"icon": "stop_watch.svg", "text": "Timeregistrering", "template": "profile_admin_hour_registration"},
     {"icon": "letter.svg", "text": "Beskeder", "template": "profile_admin_messages"},
     {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
 ]

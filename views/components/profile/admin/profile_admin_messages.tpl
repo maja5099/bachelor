@@ -31,7 +31,7 @@
               </div>
               <p class="font-bold text-lg">{{ message["message_subject"] }}</p>
             </div>
-            <p>{{ message["created_at"] }}</p>
+            <p>Sendt den: {{ message["created_at"] }}</p>
           </div>
           <div class="flex flex-col gap-8 p-6 text-unidPurple">
             <!-- USER -->
@@ -57,7 +57,7 @@
                     <p class="font-semibold">Emne:</p>
                     <p>{{ message["message_subject"] }}</p>
                   </div>
-                  <div class="flex gap-2">
+                  <div class="md:flex gap-2">
                     <p class="font-semibold">Besked:</p>
                     <p>{{ message["message_text"] }}</p>
                   </div>
@@ -67,11 +67,29 @@
                 <div>
                   % if message['message_file']:
                   <a
-                    class="underline underline-offset-2"
+                    class="group transition duration-300 cursor-pointer text-unidLightBlue text-sm hover:scale-105 font-semibold ease-in-out"
                     href="{{ message['message_file'] }}"
                     target="_blank"
                   >
-                    Se vedhæftede filer
+                    <div class="flex gap-1.5">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M19 19H8q-.825 0-1.412-.587T6 17V3q0-.825.588-1.412T8 1h6.175q.4 0 .763.15t.637.425l4.85 4.85q.275.275.425.638t.15.762V17q0 .825-.587 1.413T19 19m0-11h-3.5q-.625 0-1.062-.437T14 6.5V3H8v14h11zM4 23q-.825 0-1.412-.587T2 21V8q0-.425.288-.712T3 7t.713.288T4 8v13h10q.425 0 .713.288T15 22t-.288.713T14 23zM8 3v5zv14z"
+                        />
+                      </svg>
+                      <div>
+                        <p>Se vedhæftede filer</p>
+                        <span
+                          class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-unidPurple"
+                        ></span>
+                      </div>
+                    </div>
                   </a>
                   % end
                 </div>

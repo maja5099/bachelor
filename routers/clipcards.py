@@ -129,6 +129,66 @@ def admin_clipcards_get():
     finally:
         if "db" in locals(): db.close()
 
+@get('/profile/profile_admin_hour_registration')
+def admin_clipcards_get():
+    try:
+        db = master.db()
+        template_path = find_template('profile_admin_hour_registration', template_dirs)
+        if template_path is None:
+            return "Template not found."
+            
+        # Extract the relative path from views directory if necessary
+        relative_path = template_path.replace('views/', '').replace('.tpl', '')
+
+        cursor = db.cursor()
+        
+        cursor.execute("""
+            SELECT clipcards.clipcard_id, clipcards.remaining_time, clipcards.time_used, clipcards.created_at, users.user_id, users.first_name, users.last_name, users.username, users.email, users.phone, customers.website_name, customers.website_url, card_types.clipcard_type_title
+            FROM clipcards
+            JOIN payments ON clipcards.clipcard_id = payments.clipcard_id
+            JOIN users ON payments.user_id = users.user_id
+            JOIN customers ON users.user_id = customers.customer_id
+            JOIN card_types ON clipcards.clipcard_type_id = card_types.clipcard_type_id
+            WHERE clipcards.is_active = "1";
+        """)
+        
+        active_clipcards = cursor.fetchall()
+        cursor.close()
+
+        if not active_clipcards:
+            print("No active clip cards.") 
+            return template(relative_path, active_clipcards=[], active_customers=[])
+        
+        active_customers = [{'user_id': row['user_id'], 
+                             'first_name': row['first_name'], 
+                             'last_name': row['last_name'], 
+                             'clipcard_id': row['clipcard_id']} 
+                            for row in active_clipcards]
+
+        for clipcard in active_clipcards:
+            clipcard['time_used_hours'], clipcard['time_used_minutes'] = minutes_to_hours_minutes(clipcard['time_used'])
+            clipcard['remaining_time_hours'], clipcard['remaining_time_minutes'] = minutes_to_hours_minutes(clipcard['remaining_time'])
+
+            if clipcard['time_used_minutes'] > 0:
+                clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer og {clipcard['time_used_minutes']} minutter"
+            else:
+                clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer"
+
+            if clipcard['remaining_time_minutes'] > 0:
+                clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer og {clipcard['remaining_time_minutes']} minutter"
+            else:
+                clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
+       
+        return template(relative_path, active_clipcards=active_clipcards, active_customers=active_customers)
+    
+    except Exception as e:
+        print("Error in admin_clipcards:", e) 
+        return {"info": str(e)}
+    
+    finally:
+        if "db" in locals(): db.close()
+
+
 template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin']
 
 def find_template(template_name, directories):
