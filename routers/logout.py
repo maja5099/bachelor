@@ -36,7 +36,10 @@ def logout():
         # User and cookie found
         username = user['username']
         logger.info("Attempting to log out user: %s", username)
+        # Delete user cookie
         response.delete_cookie("user")
+        # Delete CSRF token cookie
+        response.delete_cookie("csrf_token")
         logger.success("Successfully logged out user: %s", username)
         return redirect("/")
     

@@ -138,16 +138,16 @@ def load_profile_data():
             remaining_hours, remaining_minutes = minutes_to_hours_minutes(remaining_time)
         else:
             logger.info("Clipcard data not found or inactive for user.")
-            time_used_hours = None
-            time_used_minutes = None
-            remaining_hours = None
-            remaining_minutes = None
+            time_used_hours = 0
+            time_used_minutes = 0
+            remaining_hours = 0
+            remaining_minutes = 0
     else:
         logger.info("Payment not found for user.")
-        time_used_hours = None
-        time_used_minutes = None
-        remaining_hours = None
-        remaining_minutes = None
+        time_used_hours = 0
+        time_used_minutes = 0
+        remaining_hours = 0
+        remaining_minutes = 0
 
     #   Fetching active and inactive clipcards
     active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()

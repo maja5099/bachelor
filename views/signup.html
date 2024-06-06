@@ -53,70 +53,68 @@
         <span class="">Opret en bruger</span>
 
         <div class="mt-4 flex flex-col justify-center">
-          <form>
-            <input
-              type="hidden"
-              name="csrf_token"
-              id="csrf_token"
-              value="{{ csrf_token }}"
-            />
-            <input
-              type="text"
-              name="first_name"
-              id="first_name"
-              placeholder="Fornavn"
-              class=""
-            />
-            <input
-              type="text"
-              name="last_name"
-              id="last_name"
-              placeholder="Efternavn"
-              class=""
-            />
-            <input
-              type="text"
-              name="email"
-              id="email"
-              placeholder="E-mail"
-              class=""
-            />
-            <input
-              type="text"
-              name="phone"
-              id="phone"
-              placeholder="Telefon"
-              class=""
-            />
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Brugernavn"
-              class=""
-            />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Adgangskode"
-              class=""
-            />
-            <input
-              type="text"
-              name="website_name"
-              id="website_name"
-              placeholder="Website navn"
-              class=""
-            />
-            <input
-              type="text"
-              name="website_url"
-              id="website_url"
-              placeholder="Website URL"
-              class=""
-            />
-          </form>
+          <input
+            type="hidden"
+            name="csrf_token"
+            id="csrf_token"
+            value="{{ csrf_token }}"
+          />
+          <input
+            type="text"
+            name="first_name"
+            id="first_name"
+            placeholder="Fornavn"
+            class=""
+          />
+          <input
+            type="text"
+            name="last_name"
+            id="last_name"
+            placeholder="Efternavn"
+            class=""
+          />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="E-mail"
+            class=""
+          />
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Telefon"
+            class=""
+          />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Brugernavn"
+            class=""
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Adgangskode"
+            class=""
+          />
+          <input
+            type="text"
+            name="website_name"
+            id="website_name"
+            placeholder="Website navn"
+            class=""
+          />
+          <input
+            type="text"
+            name="website_url"
+            id="website_url"
+            placeholder="Website URL"
+            class=""
+          />
         </div>
 
         <button onclick="signUp()" class="">Opret bruger</button>

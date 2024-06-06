@@ -3,12 +3,30 @@ import master
 import uuid
 import time
 import bcrypt
+import os
 
+def set_csrf_cookie_secure(cookie_name, cookie_value):
+    host = os.getenv('HOST')
+    if host != 'localhost':
+        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=False, secure=True, samesite='Strict')
+    else:
+        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=False)
 
 @post("/signup")
 def _():
     try:
         db = master.db()
+
+        # Get the CSRF token from the form sent with the POST request
+        csrf_token_post = request.forms.get("csrf_token")
+        
+        # Get the CSRF token from the cookie
+        csrf_token_cookie = request.get_cookie("csrf_token", secret=os.getenv('MY_SECRET'))
+        
+        # Verify CSRF token
+        if csrf_token_post != csrf_token_cookie:
+            raise Exception("Invalid CSRF token")
+
         user_id = str(uuid.uuid4().hex)
         first_name = request.forms.get("first_name")
         last_name = request.forms.get("last_name")
@@ -22,8 +40,6 @@ def _():
         deleted_at = ""
         website_name = request.forms.get("website_name", "")
         website_url = request.forms.get("website_url", "")
-
-        csrf_token = master.generate_csrf_token()
 
         staff_emails = ["kontakt@unidstudio.dk", "denise@unidstudio.dk", "isabella@unidstudio.dk"]
         if email in staff_emails:
@@ -69,8 +85,13 @@ def signup_get():
     try:
         db = master.db()
         
+        # Generer et CSRF-token
         csrf_token = master.generate_csrf_token()
-        
+
+        # Udskriv værdien af CSRF-tokenet og sæt det i cookien
+        print("CSRF token (GET):", csrf_token)
+        set_csrf_cookie_secure("csrf_token", csrf_token)
+
         return template("signup.html", csrf_token=csrf_token)
     except Exception as e:
         print(e)
