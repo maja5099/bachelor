@@ -3,10 +3,8 @@
 #   Library imports
 from bottle import default_app, route, get, request, error, run, template, static_file, TEMPLATE_PATH
 import logging
-import json
 import git
 import os
-
 
 #   Local application imports
 from routers.messages import UPLOADS_FOLDER
@@ -14,7 +12,9 @@ from colored_logging import setup_logger
 import content
 import master
 
-#   Initialising app at module level
+
+##############################
+#   INITIALIZE APP
 application = default_app()
 
 
@@ -35,7 +35,7 @@ def git_update():
         logger.success("Git repository updated successfully.")
         return ""
     except Exception as e:
-        logger.error("Error updating git repository: %s", e)
+        logger.error(f"Error updating git repository: {e}")
     finally:
         logger.info("Git update process completed.")
 
@@ -78,7 +78,7 @@ try:
     TEMPLATE_PATH.append(assets_template_path)
     logger.success("Icons path set successfully.")
 except Exception as e:
-    logger.error("Error setting icons path: %s", e)
+    logger.error(f"Error setting icons path: {e}")
 finally:
     logger.info("Icons path configuration completed.")
 
@@ -131,7 +131,7 @@ try:
     import routers.signup
     logger.success("Routers imported successfully.")
 except Exception as e:
-    logger.error("Error importing routers: %s", e)
+    logger.error(f"Error importing routers: {e}")
 finally:
     logger.info("Router import process completed.")
 
@@ -139,95 +139,72 @@ finally:
 ##############################
 #   CONTENT (FROM CONTENT.PY)
 try:
-    error_content = content.error_content
-    footer_info = content.footer_info
-    form_inputs = content.form_inputs
-    header_nav_items = content.header_nav_items
-    section_landingpage_hero_content = content.section_landingpage_hero_content
-    section_profile_admin = content.section_profile_admin
-    section_profile_customer = content.section_profile_customer
-    section_testimonial_content = content.section_testimonial_content
-    selling_points = content.selling_points
-    social_media = content.social_media
+    # Global
     ui_icons = content.ui_icons
     unid_logo = content.unid_logo
+    error_content = content.error_content
+    # Header
+    header_nav_items = content.header_nav_items
+    selling_points = content.selling_points
+    # Footer
+    footer_info = content.footer_info
+    social_media = content.social_media
+    # Content for this page
+    section_landingpage_hero_content = content.section_landingpage_hero_content
+    section_testimonial_content = content.section_testimonial_content
     logger.success("Content imported successfully.")
 except Exception as e:
-    logger.error("Error importing content: %s", e)
+    logger.error(f"Error importing content: {e}")
 finally:
     logger.info("Content import process completed.")
 
 
 ##############################
 #   INDEX
-@route("/")
+@get("/")
 def index():
-    # Retrieve the user cookie
-    user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
-    logger.info("Found user cookie: %s", user_cookie)
 
-    # Variables set to none to ensure they have a defined value even if user is not found (prevents error)
-    user = None
-    username = first_name = last_name = None
+    page_name = "index"
 
-    # If cookie is found / user is logged in
-    if user_cookie:
-        try:
-            # Check if user_cookie is a dictionary or a string
-            if isinstance(user_cookie, str):
-                user_data = json.loads(user_cookie)
-                logger.info("User data extracted: %s", user_data)
-            else:
-                user_data = user_cookie
-                logger.info("User data extracted: %s", user_data)
-            
-            # Database connection
+    try:
+        # Securely retrieve user cookie
+        user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
+
+        # Validate cookie, then fetch user details from db
+        if user_cookie and isinstance(user_cookie, dict):
             db = master.db()
-            user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (user_data['username'],)).fetchone()
-            
-            # User is found in the database
-            if user:
-                username = user['username']
-                first_name = user['first_name']
-                last_name = user['last_name']
-                logger.success("User found in database: %s", username)
-            
-            # User is not found in the database
-            else:
-                logger.info("User not found in database: %s", user_data['username'])
-        
-        # Error decoding cookie
-        except Exception as e:
-            logger.error("Error decoding user_cookie, perhaps user is not logged in yet. Error: %s", e)
+            username = user_cookie.get('username')
+            user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
+            logger.success(f"Valid user cookie found for /{page_name}, retrieved data from database")
+            logger.info(f"Logged in user: {username}")
 
-        # Always executed   
-        finally:
-            logger.info("Completed user authentication process.")
+        # Handle scenarios where no valid cookie is found (e.g., user not logged in)
+        else:
+            user = username = None
+            logger.warning(f"No valid user cookie found for /{page_name}, perhaps user is not logged in yet")
+
+        return template(page_name, 
+                        title="UNID Studio", 
+                        error_content=error_content, 
+                        footer_info=footer_info, 
+                        header_nav_items=header_nav_items, 
+                        section_landingpage_hero_content=section_landingpage_hero_content, 
+                        section_testimonial_content=section_testimonial_content, 
+                        selling_points=selling_points, 
+                        social_media=social_media, 
+                        testimonials=section_testimonial_content['testimonials'], 
+                        ui_icons=ui_icons, 
+                        unid_logo=unid_logo, 
+                        user=user, 
+                        username=username
+                        )
     
-    # If cookie is not found / user is not logged in
-    else:
-        logger.info("No user cookie found.")
+    except Exception as e:
+        logger.error(f"Error during request for /{page_name}: {e}")
+        raise
 
-    return template('index', 
-                    title="UNID Studio", 
-                    error_content=error_content, 
-                    first_name=first_name, 
-                    footer_info=footer_info, 
-                    form_inputs=form_inputs, 
-                    header_nav_items=header_nav_items, 
-                    last_name=last_name, 
-                    section_landingpage_hero_content=section_landingpage_hero_content, 
-                    section_profile_admin=section_profile_admin, 
-                    section_profile_customer=section_profile_customer, 
-                    section_testimonial_content=section_testimonial_content, 
-                    selling_points=selling_points, 
-                    social_media=social_media, 
-                    testimonials=section_testimonial_content['testimonials'], 
-                    ui_icons=ui_icons, 
-                    unid_logo=unid_logo, 
-                    user=user, 
-                    username=username
-                    )
+    finally:
+        logger.info(f"Completed request for /{page_name}")
 
 
 ##############################

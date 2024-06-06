@@ -18,7 +18,7 @@ try:
     logger.setLevel(logging.INFO)
     logger.success("Logging imported successfully.")
 except Exception as e:
-    logger.error("Error importing logging: %s", e)
+    logger.error(f"Error importing logging: {e}")
 finally:
     logger.info("Logging import process completed.")
 
@@ -40,7 +40,7 @@ try:
     pricing_accent = content.pricing_accent
     logger.success("Content imported successfully.")
 except Exception as e:
-    logger.error("Error importing content: %s", e)
+    logger.error(f"Error importing content: {e}")
 finally:
     logger.info("Content import process completed.")
 
@@ -61,12 +61,13 @@ def services_and_prices():
             db = master.db()
             username = user_cookie.get('username')
             user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
-            logger.success("Valid user cookie found for /%s, retrieved data from database", page_name)
+            logger.success(f"Valid user cookie found for /{page_name}, retrieved data from database")
+            logger.info(f"Logged in user: {username}")
 
         # Handle scenarios where no valid cookie is found (e.g., user not logged in)
         else:
             user = username = None
-            logger.warning("No valid user cookie found for /%s, perhaps user is not logged in yet", page_name)
+            logger.warning(f"No valid user cookie found for /{page_name}, perhaps user is not logged in yet")
 
         return template(page_name, 
                         title="UNID Studio - Services og priser", 
