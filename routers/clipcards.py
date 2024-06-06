@@ -61,25 +61,9 @@ def clipcards():
         if 'cursor' in locals(): cursor.close()
         if 'db' in locals(): db.close()
 
-def set_csrf_cookie_secure(cookie_name, cookie_value):
-    host = os.getenv('HOST')
-    if host != 'localhost':
-        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=False, secure=True, samesite='Strict')
-    else:
-        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=False)
-
 @get('/buy_clipcard/<clipcard_type>/<clipcard_price>')
 def buy_clipcard(clipcard_type, clipcard_price):
-    csrf_token_cookie = request.get_cookie("csrf_token", secret=os.getenv('MY_SECRET'))
-    if csrf_token_cookie is None:  # Hvis cookien ikke findes, eller hvis den er blevet slettet
-        response.status = 403  # Afvis anmodningen med HTTP-statuskode 403 (Forbidden)
-        return "CSRF token missing"  # Returner en fejlmeddelelse til brugeren
-    else:
-        csrf_token = csrf_token_cookie  # Brug det eksisterende CSRF-token
-
-    # Indstil cookien med det nye CSRF-token
-    set_csrf_cookie_secure("csrf_token", csrf_token) 
-    return template('buy_clipcard.html', clipcard_type=clipcard_type, clipcard_price=clipcard_price, csrf_token=csrf_token)
+    return template('buy_clipcard.html', clipcard_type=clipcard_type, clipcard_price=clipcard_price)
 
 
 def minutes_to_hours_minutes(minutes):

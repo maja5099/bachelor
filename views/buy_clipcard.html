@@ -48,7 +48,6 @@
   <body>
     <h1>Køb Klippekort</h1>
     <form action="/process_payment" method="post">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
       <input type="hidden" name="clipcard_type" value="{{ clipcard_type }}" />
       <input type="hidden" name="clipcard_price" value="{{ clipcard_price }}" />
       <p><strong>Klippekorttype:</strong> {{ clipcard_type }}</p>

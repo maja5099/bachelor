@@ -27,11 +27,6 @@ db = master.db()
 @post('/process_payment')
 def process_payment():
     try:
-        # Verify CSRF token
-        csrf_token = request.forms.get("csrf_token")
-        if csrf_token != request.get_cookie("csrf_token", secret=os.getenv('MY_SECRET')):
-            raise Exception("Invalid CSRF token")
-
         current_user = get_current_user()
         if not current_user:
             raise Exception('User information not found in session.')

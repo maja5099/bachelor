@@ -18,12 +18,6 @@ def set_cookie_secure(cookie_name, cookie_value):
     else:
         response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
 
-def set_csrf_cookie_secure(cookie_name, cookie_value):
-    host = os.getenv('HOST')
-    if host != 'localhost':
-        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=False, secure=True, samesite='Strict')
-    else:
-        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=False)
 
 @post("/login")
 def login():
@@ -32,12 +26,7 @@ def login():
         
         username = request.forms.get("username")
         password = request.forms.get("password")
-        csrf_token = request.forms.get("csrf_token") 
-
-        # Check if CSRF token is valid
-        if csrf_token != request.get_cookie("csrf_token", secret=os.getenv('MY_SECRET')):
-            response.status = 400
-            raise Exception("Invalid CSRF token")
+    
 
         if not username or not password:
             response.status = 400
@@ -56,10 +45,7 @@ def login():
             user.pop("password")
             set_cookie_secure("user", user)
 
-            # Generate a new CSRF token after successful login
-            csrf_token = master.generate_csrf_token()
-            print("CSRF token:", csrf_token)  
-            set_csrf_cookie_secure("csrf_token", csrf_token)
+    
 
             return {"info": "Login successful", "redirect": "/"}
         else:
@@ -79,9 +65,9 @@ def login():
 def login_get():
     try:
         db = master.db()
-        csrf_token = request.forms.get("csrf_token")
 
-        return template("login", title="Log in", form_inputs=form_inputs, section_login_content=section_login_content, unid_logo=unid_logo, csrf_token=csrf_token)
+
+        return template("login", title="Log in", form_inputs=form_inputs, section_login_content=section_login_content, unid_logo=unid_logo)
     
     except Exception as e:
         print(e)  
