@@ -4,7 +4,7 @@
     <div id="icon_medium" class="size-6 text-unidLightBlue">
       % include(f'{section_testimonial_content["testimonial_icon"]}')
     </div>
-    <p class="text-unidPurple md:text-center">{{testimonial['text']}}</p>
+    <p class="text-unidPurple md:text-center">{{ testimonial["text"] }}</p>
   </div>
   <div class="inline-flex items-center gap-4">
     <div
@@ -14,9 +14,11 @@
     </div>
     <div class="justify-center flex flex-col">
       <p class="font-bold text-lg tracking-wider font-saira text-unidPurple">
-        {{testimonial['author_name']}}
+        {{ testimonial["author_name"] }}
       </p>
-      <p class="text-unidPurple text-sm">{{testimonial['author_job_title']}}</p>
+      <p class="text-unidPurple text-sm">
+        {{ testimonial["author_job_title"] }}
+      </p>
     </div>
   </div>
 </div>

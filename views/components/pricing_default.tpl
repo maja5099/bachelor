@@ -9,7 +9,7 @@
           % include(f"{clipcard_value['info']['discount_icon']}")
         </div>
         <p class="font-medium text-sm tracking-wider">
-          {{ clipcard_value['info']['discount'] }}
+          {{ clipcard_value["info"]["discount"] }}
         </p>
       </div>
     </div>
@@ -20,9 +20,9 @@
     <div class="flex flex-col lg:flex-row justify-between gap-6">
       <div class="text-unidPurple space-y-1 p-6">
         <p class="text-sm tracking-widest title-font font-medium">
-          {{ clipcard_value['info']['title'] }}
+          {{ clipcard_value["info"]["title"] }}
         </p>
-        <h3>{{ clipcard_value['info']['hours'] }}</h3>
+        <h3>{{ clipcard_value["info"]["hours"] }}</h3>
       </div>
     </div>
     <div class="border-b border-unidLightBlue mx-6"></div>
@@ -31,10 +31,9 @@
         % for point in clipcard_value['selling_points']:
         <div class="flex items-center gap-2 text-unidLightBlue">
           <div class="text-unidPurple w-5 h-5">
-            <!-- prettier-ignore -->
             % include(f"{point['icon']}")
           </div>
-          <p>{{ point['text'] }}</p>
+          <p>{{ point["text"] }}</p>
         </div>
         % end
       </div>
@@ -44,7 +43,7 @@
           <p
             class="text-unidPurple text-right text-2xl xl:text-3xl font-saira font-bold"
           >
-            {{ clipcard_value['info']['price'] }}
+            {{ clipcard_value["info"]["price"] }}
           </p>
           <div class="flex flex-col text-xs text-unidPurple">
             <p>ekskl.</p>

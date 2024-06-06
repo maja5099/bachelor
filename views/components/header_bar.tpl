@@ -1,4 +1,4 @@
-<section
+<div
   class="bg-unidYellow w-full flex justify-center text-center items-center"
 >
   <div
@@ -6,4 +6,4 @@
   >
     % include('elements/selling_points')
   </div>
-</section>
+</div>

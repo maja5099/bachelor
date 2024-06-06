@@ -1,3 +1,6 @@
 {
-  "python.analysis.extraPaths": ["./routers"]
+  "python.analysis.extraPaths": ["./routers"],
+  "files.associations": {
+    "*.tpl": "html"
+}
 }

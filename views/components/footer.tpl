@@ -4,35 +4,32 @@
   >
     <!-- LOGO -->
     % if user:
-    <!-- prettier-ignore -->
     <a href="/">
-        <img
-          class="w-16"
-          src="/assets/logos/{{unid_logo['secondary_logo']}}"
-          alt="{{unid_logo['logo_alt']}}"
-        />
-      </a>
+      <img
+        class="w-16"
+        src="/assets/logos/{{ unid_logo['secondary_logo'] }}"
+        alt="{{ unid_logo['logo_alt'] }}"
+      />
+    </a>
     % else:
-    <!-- prettier-ignore -->
     <a href="/">
-        <img
-          class="w-16"
-          src="/assets/logos/{{unid_logo['primary_logo']}}"
-          alt="{{unid_logo['logo_alt']}}"
-        />
-      </a>
+      <img
+        class="w-16"
+        src="/assets/logos/{{ unid_logo['primary_logo'] }}"
+        alt="{{ unid_logo['logo_alt'] }}"
+      />
+    </a>
     % end
     <!-- FOOTER INFO -->
     <div
       class="text-xs flex-col cursor-default flex lg:flex-row justify-center text-center gap-2 lg:gap-6"
     >
       % for footer_info in footer_info:
-      <p>{{footer_info}}</p>
+      <p>{{ footer_info }}</p>
       % end
     </div>
     <!-- SOME -->
     <div class="flex items-center text-center justify-center gap-2">
-      <!-- prettier-ignore -->
       % include('elements/social_media')
     </div>
   </div>

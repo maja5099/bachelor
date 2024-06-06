@@ -24,7 +24,6 @@
         </div>
       </div>
       <div class="flex flex-col gap-10 p-6 text-unidPurple">
-        <!-- USER -->
         <form id="taskForm" class="space-y-8 w-full">
           <div class="flex flex-col gap-2 text-sm">
             <div class="space-y-1">
