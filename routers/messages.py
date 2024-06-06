@@ -79,7 +79,7 @@ def send_message():
 
         db.commit()
 
-        return {"info": "Beskeden er blevet sendt."}
+        return {"info": "Beskeden er blevet sendt!"}
 
     except ValueError as ve:
         response.status = 400

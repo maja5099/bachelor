@@ -21,13 +21,12 @@
               class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
             >
               <div id="icon_medium" class="fill-unidPurple">
-                <!-- prettier-ignore -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="icon" aria-label="Education icon">
-                <path 
-                    fill="currentColor" 
-                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44"/
-                />
-              </svg>
+                  <path 
+                      fill="currentColor" 
+                      d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44"/
+                  />
+                </svg>
               </div>
               <p class="font-bold text-lg">{{ message["message_subject"] }}</p>
             </div>
