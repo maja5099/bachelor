@@ -65,7 +65,7 @@ def login():
 def login_get():
     try:
         db = master.db()
-
+       
 
         return template("login", title="Log in", form_inputs=form_inputs, section_login_content=section_login_content, unid_logo=unid_logo)
     
