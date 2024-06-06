@@ -6,8 +6,6 @@ import logging
 import json
 import git
 import os
-import secrets
-
 
 
 #   Local application imports
@@ -16,7 +14,8 @@ from colored_logging import setup_logger
 import content
 import master
 
-
+#   Initialising app at module level
+application = default_app()
 
 
 ##############################
