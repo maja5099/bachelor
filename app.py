@@ -19,9 +19,15 @@ application = default_app()
 
 
 ##############################
-#   COLERED LOGGING
-logger = setup_logger(__name__, level=logging.INFO)
-logger.setLevel(logging.INFO)
+#   COLORED LOGGING
+try:
+    logger = setup_logger(__name__, level=logging.INFO)
+    logger.setLevel(logging.INFO)
+    logger.success("Logging imported successfully.")
+except Exception as e:
+    logger.error(f"Error importing logging: {e}")
+finally:
+    logger.info("Logging import process completed.")
 
 
 ##############################
@@ -183,6 +189,7 @@ def index():
             user = username = None
             logger.warning(f"No valid user cookie found for /{page_name}, perhaps user is not logged in yet")
 
+        logger.success(f"Succesfully showed template for {page_name}")
         return template(page_name, 
                         title="UNID Studio", 
                         error_content=error_content, 
