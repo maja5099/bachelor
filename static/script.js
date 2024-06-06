@@ -298,18 +298,19 @@ $(document).ready(function () {
 
 // ##############################
 // PASSWORD_FIELD.TPL
-function pwd_visibility_toggle() {
-  var input = document.getElementById("password_input");
-  var icons = document.querySelectorAll("#visibility_button .visibility_icon");
-  input.type = input.type === "password" ? "text" : "password";
-  icons.forEach(function (icon) {
-    icon.classList.toggle("object_hidden");
+$(document).ready(function () {
+  $("body").on("click", "#visibility_button", function () {
+    var input = document.getElementById("password_input");
+    var icons = document.querySelectorAll(
+      "#visibility_button .visibility_icon"
+    );
+    input.type = input.type === "password" ? "text" : "password";
+    icons.forEach(function (icon) {
+      icon.classList.toggle("object_hidden");
+    });
   });
-}
+});
 
-document.addEventListener("DOMContentLoaded", function () {
-  var visibilityButton = document.getElementById("visibility_button");
-  if (visibilityButton) {
-    visibilityButton.addEventListener("click", pwd_visibility_toggle);
-  }
+$(document).ready(function () {
+  $("body").on("click", "#visibility_button", pwd_visibility_toggle);
 });
