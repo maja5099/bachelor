@@ -23,7 +23,6 @@
       id="visibility_button"
       type="button"
       class="visibility_button flex items-center absolute inset-y-0 end-0 px-6 text-unidLightBlue"
-      onclick="pwd_visibility_toggle()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

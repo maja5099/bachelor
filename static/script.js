@@ -299,18 +299,10 @@ $(document).ready(function () {
 // ##############################
 // PASSWORD_FIELD.TPL
 $(document).ready(function () {
-  $("body").on("click", "#visibility_button", function () {
-    var input = document.getElementById("password_input");
-    var icons = document.querySelectorAll(
-      "#visibility_button .visibility_icon"
-    );
-    input.type = input.type === "password" ? "text" : "password";
-    icons.forEach(function (icon) {
-      icon.classList.toggle("object_hidden");
-    });
+  $("#visibility_button").on("click", function () {
+    var input = $("#password_input");
+    var icons = $(".visibility_icon");
+    input.attr("type", input.attr("type") === "password" ? "text" : "password");
+    icons.toggleClass("object_hidden");
   });
-});
-
-$(document).ready(function () {
-  $("body").on("click", "#visibility_button", pwd_visibility_toggle);
 });
