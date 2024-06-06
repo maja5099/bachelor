@@ -68,6 +68,7 @@ def contact():
             user = username = None
             logger.warning(f"No valid user cookie found for /{page_name}, perhaps user is not logged in yet")
 
+        logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                         title="UNID Studio - Services og priser", 
                         footer_info=footer_info, 
@@ -82,8 +83,14 @@ def contact():
                         )
     
     except Exception as e:
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during request for /{page_name}: {e}")
         raise
-
+    
     finally:
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
         logger.info(f"Completed request for /{page_name}")

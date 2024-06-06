@@ -122,7 +122,7 @@ def login_get():
     page_name = "login"
 
     try:
-        logger.success(f"Succesfully showed template for {page_name}")
+        logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                     title="Log in", 
                     form_inputs=form_inputs, 
