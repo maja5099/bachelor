@@ -109,15 +109,10 @@ async function signUp() {
   ).value;
   const website_url = document.querySelector("input[name='website_url']").value;
 
-  // Hent CSRF-token fra det skjulte inputfelt
-  const csrf_token = document.querySelector("input[name='csrf_token']").value;
-
   console.log("this is the username", username);
 
   const formData = new FormData();
 
-  // Tilføj CSRF-token til formdata
-  formData.append("csrf_token", csrf_token);
   formData.append("first_name", first_name);
   formData.append("last_name", last_name);
   formData.append("email", email);
