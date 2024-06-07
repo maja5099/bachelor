@@ -1,17 +1,13 @@
-<!-- Check if user has active clipcard -->
+<!-- IF USER DOES NOT HAS CLIPCARD -->
 % if current_user and not current_user.get('has_active_clipcard'):
-<div>
-  <h2>KLIPPEKORT</h2>
-  <h1>Hvorfor købe et klippekort?</h1>
-  <p>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the
-    1500s,. When an unknown printer took a galley of type and scrambled it to
-    make a type specimen book. It has survived not only five centuries, but also
-    the leap into electronic typesetting, remaining essentially unchanged. It
-    was popularised in the 1960s with the release of Letraset sheets containing.
-  </p>
-  <!-- prettier-ignore -->
+<div class="space-y-8">
+  <div class="space-y-2">
+    <p class="text-md tracking-widest text-unidPurple">KLIPPEKORT</p>
+    <h2>Køb et klippekort</h2>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-8">
+
+          <!-- prettier-ignore -->
   % for card in clipcards: 
   % for clipcard_key, clipcard_value in pricing_default.items():
   <div>
@@ -31,7 +27,7 @@
       </div>
     </div>
     <div
-      class="rounded-l-lg rounded-br-lg border-2 bg-unidBeige border-unidLightBlue flex flex-col"
+      class="rounded-l-lg rounded-br-lg border-2 bg-unidYellow border-unidLightBlue flex flex-col"
     >
       <div class="flex flex-col lg:flex-row justify-between gap-6">
         <div class="text-unidPurple space-y-1 p-6">
@@ -84,17 +80,54 @@
   <!-- prettier-ignore -->
   % end 
   % end
-</div>
-% else:
-<!-- Display message -->
-% for task in tasks:
-<h2>Timeregistrering</h2>
-<div class="task">
-  <h3>{{ task["task_title"] }}</h3>
-  <p>{{ task["task_description"] }}</p>
-  <p>Tid brugt: {{ task["formatted_time_spent"] }}</p>
-  <p>Dato: {{ task["formatted_created_at"] }}</p>
+
+  </div>
 </div>
 <!-- prettier-ignore -->
-% end 
+
+% else:
+  <div class="space-y-8">
+    <div class="space-y-2">
+      <p class="text-md tracking-widest text-unidPurple">TIMEREGISTRERING</p>
+      <h2>Det, har du fået lavet</h2>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-8">
+      % for task in tasks:
+      <div
+        class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
+      >
+        <div class="bg-unidLightBlue text-center p-6 items-center">
+          <p class="font-bold text-lg">{{ task["task_title"] }}</p>
+        </div>
+        <div class="flex flex-col gap-8 p-6 text-unidPurple">
+          <!-- USER -->
+          <div class="space-y-2 text-sm">
+            <div class="space-y-1">
+              <h3 class="text-lg font-bold">Opgave oplysninger</h3>
+              <hr />
+            </div>
+            <div class="space-y-2">
+              <div class="flex gap-2">
+                <p class="font-semibold">Emne:</p>
+                <p>{{ task["task_title"] }}</p>
+              </div>
+              <div class="space-y-2">
+                <p class="font-semibold">Beskrivelse:</p>
+                <p>{{ task["task_description"] }}</p>
+              </div>
+              <div class="flex gap-2">
+                <p class="font-semibold">Tid brugt:</p>
+                <p>{{ task["formatted_time_spent"] }}</p>
+              </div>
+              <div class="flex gap-2">
+                <p class="font-semibold">Fuldført den:</p>
+                <p>{{ task["formatted_created_at"] }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      % end
+    </div>
+  </div>
 % end
