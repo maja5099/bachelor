@@ -131,8 +131,14 @@ async function signUp() {
     body: formData,
   });
   const data = await response.json();
-  console.log("This is the right username", username);
-  console.log("This is the data", data);
+  
+  if (data.error) {
+    document.getElementById("error_message").innerText = data.error;
+    document.getElementById("form_input_error_message").style.display = "flex";
+  } else {
+    console.log("Signup successful");
+    window.location.href = "/";
+  }
 }
 
 // ##############################

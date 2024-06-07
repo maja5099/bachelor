@@ -125,6 +125,7 @@ def login_get():
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                     title="Log in", 
+                    ui_icons=ui_icons,
                     form_inputs=form_inputs, 
                     section_login_content=section_login_content, 
                     unid_logo=unid_logo

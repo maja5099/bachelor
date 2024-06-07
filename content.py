@@ -13,6 +13,7 @@ ui_icons = {
     "open_folder_icon": "open_folder.svg",
     "closed_folder_icon": "closed_folder.svg",
     "message": "letter.svg",
+    "error_icon": "exclamation_mark.svg",
 }
 
 selling_points = [       
@@ -68,22 +69,22 @@ form_inputs = {
         "placeholder": "••••••••",
         "form_info": "Use at least 8 characters, one uppercase, one lowercase and one number.",
     },
-    "fname": {
-        "label_for": "fname",
+    "first_name": {
+        "label_for": "first_name",
         "text": "Fornavn", 
         "icon": "user_name_semi.svg", 
         "type": "text",
-        "name": "fname",
+        "name": "first_name",
         "inputmode":"text",
         "placeholder": "Lorem",
         "form_info": "",    
     },
-    "lname": {
-        "label_for": "lname",
+    "last_name": {
+        "label_for": "last_name",
         "text": "Efternavn", 
         "icon": "user_name_full.svg", 
         "type": "text",
-        "name": "lname",
+        "name": "last_name",
         "inputmode":"text",
         "placeholder": "Ipsum",
         "form_info": "",    
@@ -143,10 +144,15 @@ form_inputs = {
 section_login_content = {
     "header_text": "Log ind",
     "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
-    "error_icon": "exclamation_mark.svg",
     "button_text": "Log ind",
     "image": "unid_universe.svg",
     "logo": "primary_logo.svg",
+}
+
+section_signup_content = {
+    "header_text": "Opret bruger",
+    "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
+    "button_text": "Opret bruger",
 }
 
 section_profile_admin = [

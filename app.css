@@ -1259,10 +1259,6 @@ h3 {
   height: 100vh;
 }
 
-.w-1\/3 {
-  width: 33.333333%;
-}
-
 .w-11\/12 {
   width: 91.666667%;
 }
@@ -1336,16 +1332,12 @@ h3 {
   width: 100vw;
 }
 
-.w-1\/2 {
-  width: 50%;
+.w-1\/4 {
+  width: 25%;
 }
 
 .max-w-0 {
   max-width: 0px;
-}
-
-.max-w-xl {
-  max-width: 36rem;
 }
 
 .flex-auto {
@@ -1473,6 +1465,18 @@ h3 {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-0 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0px * var(--tw-space-y-reverse));
+}
+
+.space-y-0\.5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.125rem * var(--tw-space-y-reverse));
 }
 
 .space-y-1 > :not([hidden]) ~ :not([hidden]) {
@@ -1694,6 +1698,11 @@ h3 {
   padding: 2rem;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1870,14 +1879,6 @@ h3 {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.underline {
-  text-decoration-line: underline;
-}
-
-.underline-offset-2 {
-  text-underline-offset: 2px;
-}
-
 .opacity-0 {
   opacity: 0;
 }
@@ -2045,6 +2046,10 @@ input[type="checkbox"] {
     width: 33.333333%;
   }
 
+  .md\:w-1\/4 {
+    width: 25%;
+  }
+
   .md\:w-2\/3 {
     width: 66.666667%;
   }
@@ -2085,10 +2090,6 @@ input[type="checkbox"] {
     justify-content: center;
   }
 
-  .md\:justify-between {
-    justify-content: space-between;
-  }
-
   .md\:gap-10 {
     gap: 2.5rem;
   }
@@ -2115,6 +2116,12 @@ input[type="checkbox"] {
 
   .md\:gap-y-8 {
     row-gap: 2rem;
+  }
+
+  .md\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse));
   }
 
   .md\:space-y-10 > :not([hidden]) ~ :not([hidden]) {
@@ -2224,6 +2231,18 @@ input[type="checkbox"] {
 
   .lg\:w-full {
     width: 100%;
+  }
+
+  .lg\:w-1\/4 {
+    width: 25%;
+  }
+
+  .lg\:w-2\/4 {
+    width: 50%;
+  }
+
+  .lg\:w-4\/6 {
+    width: 66.666667%;
   }
 
   .lg\:max-w-lg {

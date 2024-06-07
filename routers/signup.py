@@ -1,15 +1,58 @@
-from bottle import post, request, get, template
-import master
-import uuid
+##############################
+#   IMPORTS
+#   Library imports
+from bottle import post, request, template, get
+from dotenv import load_dotenv
 import time
+import uuid
 import bcrypt
+import logging
+
+#   Local application imports
+from colored_logging import setup_logger
+import master
+import content
 
 
+##############################
+#   COLORED LOGGING
+try:
+    logger = setup_logger(__name__, level=logging.INFO)
+    logger.setLevel(logging.INFO)
+    logger.success("Logging imported successfully.")
+except Exception as e:
+    logger.error(f"Error importing logging: {e}")
+finally:
+    logger.info("Logging import process completed.")
 
+
+##############################
+#   CONTENT VARIABLES
+try:
+    # Global
+    ui_icons = content.ui_icons
+    unid_logo = content.unid_logo
+    # Content for this page
+    section_login_content = content.section_login_content
+    form_inputs=content.form_inputs
+    logger.success("Content imported successfully.")
+except Exception as e:
+    logger.error(f"Error importing content: {e}")
+finally:
+    logger.info("Content import process completed.")
+
+
+##############################
+#   SIGNUP - POST
 @post("/signup")
-def _():
+def signup():
+    page_name = "signup"
     try:
+        load_dotenv('.env')
+        logger.info(f"Starting signup request")
+
         db = master.db()
+        logger.debug("Database connection opened for signup")
 
         user_id = str(uuid.uuid4().hex)
         first_name = request.forms.get("first_name")
@@ -36,6 +79,7 @@ def _():
             db.execute("INSERT INTO customers (customer_id, user_role_id, website_name, website_url) VALUES (?, ?, ?, ?)", (customer_id, user_role_id, website_name, website_url))
 
         salt = bcrypt.gensalt()
+        password_hashed = bcrypt.hashpw(password.encode("utf-8"), salt)
 
         user = {
             "user_id" : user_id,
@@ -44,7 +88,7 @@ def _():
             "last_name": last_name,
             "email": email,
             "phone": phone,
-            "password" : bcrypt.hashpw(password.encode("utf-8"), salt),
+            "password" : password_hashed,
             "is_active" : is_active,
             "created_at" : created_at,
             "updated_at" : updated_at,
@@ -55,24 +99,45 @@ def _():
         db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_role_id)", user)
 
         db.commit()
-
-        return {"info": "Signup succesful!"}
+        logger.success("Signup successful")
+    
     except Exception as e:
-        print(e)
-        if "db" in locals(): db.rollback()
-        return {"info":str(e)}
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during request for /{page_name}: {e}")
+        raise
+    
     finally:
-        if "db" in locals(): db.close()
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed request for /{page_name}")
 
+
+##############################
+#   SIGNUP - GET
 @get("/signup")
 def signup_get():
-    try:
-        db = master.db()
 
-        return template("signup.html")
+    page_name = "signup"
+
+    try:
+        logger.success(f"Succesfully showing template for {page_name}")
+        return template(page_name, 
+                    title="Sign up", 
+                    ui_icons=ui_icons,
+                    form_inputs=form_inputs, 
+                    section_signup_content=section_login_content, 
+                    unid_logo=unid_logo
+                    )
+    
     except Exception as e:
-        print(e)
-        if "db" in locals(): db.rollback() 
-        return {"info":str(e)}
+        logger.error(f"Error during request for /{page_name}: {e}")
+        raise
+
     finally:
-        if "db" in locals(): db.close()
+        logger.info(f"Completed request for /{page_name}")
+
+
+

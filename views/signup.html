@@ -48,75 +48,106 @@
   </head>
 
   <body>
-    <section id="signup" class="">
-      <div class="">
-        <span class="">Opret en bruger</span>
-
-        <div class="mt-4 flex flex-col justify-center">
-          <input
-            type="text"
-            name="first_name"
-            id="first_name"
-            placeholder="Fornavn"
-            class=""
-          />
-          <input
-            type="text"
-            name="last_name"
-            id="last_name"
-            placeholder="Efternavn"
-            class=""
-          />
-          <input
-            type="text"
-            name="email"
-            id="email"
-            placeholder="E-mail"
-            class=""
-          />
-          <input
-            type="text"
-            name="phone"
-            id="phone"
-            placeholder="Telefon"
-            class=""
-          />
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Brugernavn"
-            class=""
-          />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Adgangskode"
-            class=""
-          />
-          <input
-            type="text"
-            name="website_name"
-            id="website_name"
-            placeholder="Website navn"
-            class=""
-          />
-          <input
-            type="text"
-            name="website_url"
-            id="website_url"
-            placeholder="Website URL"
-            class=""
-          />
+    <section
+      id="signup"
+      class="grid grid-cols-1 lg:grid-cols-3 xl:h-screen xl:min-w-screen bg-unidYellow bg-wave bg-cover overflow-clip"
+    >
+      <div class="lg:col-span-2 flex flex-col items-center justify-center">
+        <div
+          class="space-y-6 justify-center flex flex-col mx-auto width_standard py-20 lg:py-16 xl:py-0"
+        >
+          <div class="space-y-10 lg:space-y-12">
+            <div class="space-y-3 lg:space-y-6">
+              <h1>{{section_signup_content['header_text']}}</h1>
+              <p id="subheader">{{section_signup_content['subheader_text']}}</p>
+            </div>
+            <form class="grid lg:grid-cols-2 gap-x-14 gap-y-6 lg:gap-y-0">
+              <div class="space-y-4 lg:space-y-6">
+                <!-- FIRST NAME -->
+                <!-- prettier-ignore -->
+                % include('utilities/input_field', label_for=form_inputs['first_name']['label_for'], form_label=form_inputs['first_name']['text'], form_svg=form_inputs['first_name']['icon'], type=form_inputs['first_name']['type'], name=form_inputs['first_name']['name'], inputmode=form_inputs['first_name']['inputmode'], placeholder=form_inputs['first_name']['placeholder'], form_info=form_inputs['first_name']['form_info'])
+                <!-- LAST NAME -->
+                <!-- prettier-ignore -->
+                % include('utilities/input_field', label_for=form_inputs['last_name']['label_for'], form_label=form_inputs['last_name']['text'], form_svg=form_inputs['last_name']['icon'], type=form_inputs['last_name']['type'], name=form_inputs['last_name']['name'], inputmode=form_inputs['last_name']['inputmode'], placeholder=form_inputs['last_name']['placeholder'], form_info=form_inputs['last_name']['form_info'])
+                <!-- USERNAME -->
+                <!-- prettier-ignore -->
+                % include('utilities/input_field', label_for=form_inputs['username']['label_for'], form_label=form_inputs['username']['text'], form_svg=form_inputs['username']['icon'], type=form_inputs['username']['type'], name=form_inputs['username']['name'], inputmode=form_inputs['username']['inputmode'], placeholder=form_inputs['username']['placeholder'], form_info=form_inputs['username']['form_info'])
+                <!-- PASSWORD -->
+                <!-- prettier-ignore -->
+                % include('utilities/password_field')
+              </div>
+              <div class="space-y-4 lg:space-y-6">
+                <!-- EMAIL -->
+                <!-- prettier-ignore -->
+                % include('utilities/input_field', label_for=form_inputs['email']['label_for'], form_label=form_inputs['email']['text'], form_svg=form_inputs['email']['icon'], type=form_inputs['phone']['type'], name=form_inputs['email']['name'], inputmode=form_inputs['email']['inputmode'], placeholder=form_inputs['email']['placeholder'], form_info=form_inputs['email']['form_info'])
+                <!-- PHONE -->
+                <!-- prettier-ignore -->
+                % include('utilities/input_field', label_for=form_inputs['phone']['label_for'], form_label=form_inputs['phone']['text'], form_svg=form_inputs['phone']['icon'], type=form_inputs['phone']['type'], name=form_inputs['phone']['name'], inputmode=form_inputs['phone']['inputmode'], placeholder=form_inputs['phone']['placeholder'], form_info=form_inputs['phone']['form_info'])
+                <!-- WEBSITE NAME -->
+                <!-- prettier-ignore -->
+                % include('utilities/input_field', label_for=form_inputs['website_name']['label_for'], form_label=form_inputs['website_name']['text'], form_svg=form_inputs['website_name']['icon'], type=form_inputs['website_name']['type'], name=form_inputs['website_name']['name'], inputmode=form_inputs['website_name']['inputmode'], placeholder=form_inputs['website_name']['placeholder'], form_info=form_inputs['website_name']['form_info'])
+                <!-- WEBSITE URL -->
+                <!-- prettier-ignore -->
+                % include('utilities/input_field', label_for=form_inputs['website_url']['label_for'], form_label=form_inputs['website_url']['text'], form_svg=form_inputs['website_url']['icon'], type=form_inputs['website_url']['type'], name=form_inputs['website_url']['name'], inputmode=form_inputs['website_url']['inputmode'], placeholder=form_inputs['website_url']['placeholder'], form_info=form_inputs['website_url']['form_info'])
+              </div>
+            </form>
+          </div>
+          <div
+            class="flex pt-2 text-sm gap-4 text-unidLightBlue border-t border-unidLightBlue"
+          >
+            <div class="flex items-center h-5">
+              <input
+                type="checkbox"
+                id="form_checkbox"
+                class="w-4 h-4"
+                required
+              />
+            </div>
+            <div class="flex gap-1.5">
+              <p>Jeg accepterer</p>
+              <a
+                href="#"
+                class="group transition duration-300 cursor-pointer text-sm hover:scale-105 font-bold ease-in-out"
+              >
+                vilkår & betingelser
+                <span
+                  class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-unidPurple"
+                ></span>
+              </a>
+            </div>
+          </div>
+          <!-- ERROR MESSAGE -->
+          <div
+            id="form_input_error_message"
+            class="object_hidden items-center gap-3"
+          >
+            <div class="w-5 h-5">
+              <!-- prettier-ignore -->
+              % include(ui_icons['error_icon'])
+            </div>
+            <div class="flex-col">
+              <p class="font-bold">Hov!</p>
+              <p id="error_message"></p>
+            </div>
+          </div>
+          <div
+            class="lg:w-2/6 w-full pt-4 items-center mx-auto flex justify-center"
+          >
+            <div onclick="signUp()">
+              <!-- prettier-ignore -->
+              % include('utilities/buttons/primary_button', type='submit', link='/', button_text=section_signup_content['button_text'])
+            </div>
+          </div>
         </div>
-
-        <button onclick="signUp()" class="">Opret bruger</button>
-
-        <div class="">
-          <p class="">Har du allerede en bruger?</p>
-          <a id="#bottom-login" onclick="" class="" href="">Log ind</a>
-        </div>
+      </div>
+      <div
+        class="bg-unidLightBlue h-full w-full flex flex-col py-20 lg:py-0 justify-center mx-auto"
+      >
+        <img
+          class="w-8/12 mx-auto"
+          src="/assets/logos/{{ unid_logo['primary_logo'] }}"
+          alt=""
+        />
       </div>
     </section>
 
