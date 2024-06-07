@@ -1,12 +1,13 @@
 ##############################
 #   IMPORTS
 #   Library imports
-from bottle import post, request, template, get
+from bottle import post, request, template, get, response
 from dotenv import load_dotenv
 import time
 import uuid
 import bcrypt
 import logging
+import json
 
 #   Local application imports
 from colored_logging import setup_logger
@@ -33,7 +34,7 @@ try:
     ui_icons = content.ui_icons
     unid_logo = content.unid_logo
     # Content for this page
-    section_login_content = content.section_login_content
+    section_signup_content = content.section_signup_content
     form_inputs=content.form_inputs
     logger.success("Content imported successfully.")
 except Exception as e:
@@ -47,6 +48,7 @@ finally:
 @post("/signup")
 def signup():
     page_name = "signup"
+    response.content_type = 'application/json'
     try:
         load_dotenv('.env')
         logger.info(f"Starting signup request")
@@ -82,32 +84,34 @@ def signup():
         password_hashed = bcrypt.hashpw(password.encode("utf-8"), salt)
 
         user = {
-            "user_id" : user_id,
-            "username" : username,
+            "user_id": user_id,
+            "username": username,
             "first_name": first_name,
             "last_name": last_name,
             "email": email,
             "phone": phone,
-            "password" : password_hashed,
-            "is_active" : is_active,
-            "created_at" : created_at,
-            "updated_at" : updated_at,
-            "deleted_at" : deleted_at,
-            "user_role_id" : user_role_id,
+            "password": password_hashed,
+            "is_active": is_active,
+            "created_at": created_at,
+            "updated_at": updated_at,
+            "deleted_at": deleted_at,
+            "user_role_id": user_role_id,
         }
 
         db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_role_id)", user)
 
         db.commit()
         logger.success("Signup successful")
-    
+        return json.dumps({"message": "Signup successful"})
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during request for /{page_name}: {e}")
-        raise
-    
+        response.status = 500
+        return json.dumps({"error": "Internal Server Error"})
+
     finally:
         if "db" in locals():
             db.close()
@@ -119,16 +123,14 @@ def signup():
 #   SIGNUP - GET
 @get("/signup")
 def signup_get():
-
     page_name = "signup"
-
     try:
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                     title="Sign up", 
                     ui_icons=ui_icons,
                     form_inputs=form_inputs, 
-                    section_signup_content=section_login_content, 
+                    section_signup_content=section_signup_content, 
                     unid_logo=unid_logo
                     )
     

@@ -99,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // ##############################
 // SIGNUP.HTML
 
-// Handles user signup form submission and processing.
 async function signUp() {
   // Retrieve user input values from the signup form
   const first_name = document.querySelector("input[name='first_name']").value;
@@ -131,23 +130,39 @@ async function signUp() {
     console.log(value);
   }
 
-  // Send a POST request to the server with the form data
-  const response = await fetch("/signup", {
-    method: "POST",
-    body: formData,
-  });
+  try {
+    // Send a POST request to the server with the form data
+    const response = await fetch("/signup", {
+      method: "POST",
+      body: formData,
+    });
 
-  // Parse the response JSON data
-  const data = await response.json();
+    // Log status and headers
+    console.log("Response status:", response.status);
+    console.log("Response headers:", response.headers);
 
-  // If the response contains an error, display it on the signup form
-  if (data.error) {
-    document.getElementById("error_message").innerText = data.error;
+    // Log the raw response text to see what the server returned
+    const text = await response.text();
+    console.log("Raw response:", text);
+
+    // Parse the response JSON data
+    const data = JSON.parse(text);
+
+    // If the response contains an error, display it on the signup form
+    if (data.error) {
+      document.getElementById("error_message").innerText = data.error;
+      document.getElementById("form_input_error_message").style.display =
+        "flex";
+    } else {
+      // If signup is successful, log a success message and redirect to the homepage
+      console.log("Signup successful");
+      window.location.href = "/";
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    document.getElementById("error_message").innerText =
+      "An unexpected error occurred.";
     document.getElementById("form_input_error_message").style.display = "flex";
-    // If signup is successful, log a success message and redirect to the homepage
-  } else {
-    console.log("Signup successful");
-    window.location.href = "/";
   }
 }
 
