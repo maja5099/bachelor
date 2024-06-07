@@ -66,21 +66,7 @@ def user():
         raise
     finally:
         logger.info("User function completed.")
-  
-
-##############################
-#   CSRF TOKEN
-def generate_csrf_token():
-    try:
-        token = secrets.token_hex(16)
-        logger.success("CSRF token generated successfully.")
-        return token
-    except Exception as e:
-        logger.error(f"Error generating CSRF token: {e}")
-        raise
-    finally:
-        logger.info("CSRF token generation process completed.")
-  
+    
 
 ##############################
 #   VALIDATION - EMAIL
