@@ -45,37 +45,130 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Køb Klippekort</title>
   </head>
-  <body>
-    <h1>Køb Klippekort</h1>
-    <form action="/process_payment" method="post">
-      <input type="hidden" name="clipcard_type" value="{{ clipcard_type }}" />
-      <input type="hidden" name="clipcard_price" value="{{ clipcard_price }}" />
-      <p><strong>Klippekorttype:</strong> {{ clipcard_type }}</p>
-      <p><strong>Pris:</strong> {{ clipcard_price }} kr</p>
-
-      <h2>Betalingsoplysninger</h2>
-      <label for="cardnumber">Kortnummer:</label>
-      <input type="text" id="cardnumber" name="cardnumber" required /><br />
-      <label for="expiration_date">Gyldigt til (mm/åå):</label>
-      <input
-        type="text"
-        id="expiration_date"
-        name="expiration_date"
-        required
-      /><br />
-      <label for="security_code">Kontrolcifre:</label>
-      <input
-        type="text"
-        id="security_code"
-        name="security_code"
-        required
-      /><br />
-      <label for="name">Kortholderens navn:</label>
-      <input type="text" id="name" name="name" required /><br />
-
-      <button type="submit">Bekræft køb</button>
-    </form>
-
+  <body class="lg:h-screen xl:min-w-screen bg-unidYellow bg-wave bg-cover">
+    <div
+      class="width_small flex flex-col space-y-10 lg:space-y-12 justify-center mx-auto py-20 lg:py-16"
+    >
+      <div class="space-y-8">
+        <div class="space-y-2">
+          <p class="text-md tracking-widest text-unidPurple">KLIPPEKORT</p>
+          <h2>Køb af klippekort</h2>
+        </div>
+        <div>
+          <div
+            class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
+          >
+            <div class="bg-unidLightBlue text-center p-6 items-center">
+              <div
+                class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
+              >
+                <div id="icon_medium" class="fill-unidPurple">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    role="icon"
+                    aria-label="Card icon"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M22 6v12q0 .825-.587 1.413T20 20H4q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6M4 8h16V6H4zm0 4v6h16v-6zm0 6V6z"
+                    />
+                  </svg>
+                </div>
+                <p class="font-bold text-lg">Klippekort {{ clipcard_type }}</p>
+              </div>
+            </div>
+            <div class="flex flex-col gap-10 p-6 text-unidPurple">
+              <form
+                action="/process_payment"
+                method="post"
+                class="space-y-8 w-full"
+              >
+                <div class="flex flex-col gap-2 text-sm">
+                  <div class="space-y-1">
+                    <h3 class="text-lg font-bold">
+                      Oplysninger om klippekortet
+                    </h3>
+                    <hr />
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                      <p class="font-semibold">Antal timer:</p>
+                      <p>{{ clipcard_type }}</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <p class="font-semibold">Pris:</p>
+                      <p>{{ clipcard_price }} DKK</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-2 text-sm">
+                  <div class="space-y-1">
+                    <h3 class="text-lg font-bold">Betalingsoplysninger</h3>
+                    <hr />
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 items-center">
+                    <label class="font-semibold" for="cardnumber"
+                      >Kortnummer:</label
+                    >
+                    <input
+                      class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                      type="text"
+                      id="cardnumber"
+                      name="cardnumber"
+                      required
+                      placeholder="Eks. 1234 5678 9000 0000"
+                    />
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 items-center">
+                    <label class="font-semibold" for="expiration_date"
+                      >Gyldigt til (mm/åå):</label
+                    >
+                    <input
+                      class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                      type="text"
+                      id="expiration_date"
+                      name="expiration_date"
+                      required
+                      placeholder="Eks. 12/24"
+                    />
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 items-center">
+                    <label class="font-semibold" for="security_code"
+                      >Kontrolcifre:</label
+                    >
+                    <input
+                      class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                      type="text"
+                      id="security_code"
+                      name="security_code"
+                      required
+                      placeholder="Eks. 123"
+                    />
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 items-center">
+                    <label class="font-semibold" for="name"
+                      >Kortholderens navn:</label
+                    >
+                    <input
+                      class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Eks. Jens Jensen"
+                    />
+                  </div>
+                </div>
+              </form>
+              <div class="mx-auto">
+                <button type="submit" id="primary_button">Bekræft køb</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- SCRIPT -->
     <script src="/static/script.js"></script>
   </body>
