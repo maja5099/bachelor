@@ -1,3 +1,5 @@
+<!-- Check if user has active clipcard -->
+% if current_user and not current_user.get('has_active_clipcard'):
 <div>
   <h2>KLIPPEKORT</h2>
   <h1>Hvorfor købe et klippekort?</h1>
@@ -66,6 +68,7 @@
             </div>
           </div>
         </div>
+        <!-- Display button -->
         <button
           type="button"
           id="primary_button"
@@ -82,3 +85,16 @@
   % end 
   % end
 </div>
+% else:
+<!-- Display message -->
+% for task in tasks:
+<h2>Timeregistrering</h2>
+<div class="task">
+  <h3>{{ task["task_title"] }}</h3>
+  <p>{{ task["task_description"] }}</p>
+  <p>Tid brugt: {{ task["formatted_time_spent"] }}</p>
+  <p>Dato: {{ task["formatted_created_at"] }}</p>
+</div>
+<!-- prettier-ignore -->
+% end 
+% end
