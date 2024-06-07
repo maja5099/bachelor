@@ -152,6 +152,7 @@ def load_profile_data():
 def profile():
     try:
         data = load_profile_data()
+        current_user = get_current_user()
 
         return template('profile', title="Din profil",
                         user=data['user'],
@@ -168,6 +169,7 @@ def profile():
                         selling_points=selling_points,
                         social_media=social_media,
                         ui_icons=ui_icons,
+                        current_user=current_user,
                         active_clipcards_count=data['active_clipcards_count'],
                         inactive_clipcards_count=data['inactive_clipcards_count'],
                         time_used_hours=data['time_used_hours'],
@@ -189,11 +191,44 @@ def profile_template(template_name):
     try:
         #   Include profile data if the template is profile_overview
         data = load_profile_data()
+        current_user = get_current_user()
+
         if template_name == "profile_overview":
             template_path = find_template(template_name, template_dirs)
             if template_path is None:
                 return "Template not found."
+            
+            if current_user:
+                user_id = current_user['user_id']
+                db = master.db()
+                clipcard_id = db.execute("SELECT clipcard_id FROM payments WHERE user_id = ? LIMIT 1", (user_id,)).fetchone()
+                if clipcard_id:
+                    clipcard_id_value = clipcard_id['clipcard_id']
+                    print("Clipcard ID:", clipcard_id_value)
+                    
+                    # Check if the user has any active clipcards
+                    has_active_clipcard_query = """
+                    SELECT COUNT(*) AS active_clipcards 
+                    FROM clipcards 
+                    WHERE clipcard_id IN (
+                        SELECT clipcard_id 
+                        FROM payments 
+                        WHERE user_id = ?) 
+                    AND is_active = 1
+                    """
+                    
+                    has_active_clipcard_result = db.execute(has_active_clipcard_query, (user_id,)).fetchone()
+                    
+                    if has_active_clipcard_result and has_active_clipcard_result['active_clipcards'] > 0:
+                        current_user['has_active_clipcard'] = True
+                    else:
+                        current_user['has_active_clipcard'] = False
+
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
+
+            print("Current User:", current_user)
+            if current_user:
+                print("Has active clipcard:", current_user.get('has_active_clipcard'))
 
             logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", data['active_clipcards_count'], data['inactive_clipcards_count'])
 
@@ -203,6 +238,7 @@ def profile_template(template_name):
                             last_name=data['last_name'],
                             username=data['username'],
                             ui_icons=ui_icons,
+                            current_user=current_user, 
                             active_clipcards_count=data['active_clipcards_count'],
                             inactive_clipcards_count=data['inactive_clipcards_count'],
                             time_used_hours=data['time_used_hours'],
@@ -239,7 +275,9 @@ def profile_template(template_name):
                             unid_logo=unid_logo, 
                             selling_points=selling_points, 
                             social_media=social_media, 
-                            ui_icons=ui_icons)
+                            ui_icons=ui_icons,
+                            current_user=current_user, 
+                            )
     except Exception as e:
         logger.error("Error loading template '%s': %s", template_name, e)
         return f"Error loading template {template_name}: {e}"
