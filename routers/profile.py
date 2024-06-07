@@ -6,7 +6,7 @@ import logging
 from colored_logging import setup_logger
 import routers.messages as messages
 from math import floor
-from datetime import datetime
+
 
 
 ##############################
@@ -70,32 +70,7 @@ def minutes_to_hours_minutes(minutes):
 
 
 ##############################
-#   Adds minutes and hours depending on the time
-def format_time_spent(minutes):
-    if minutes <= 60:
-        return f"{minutes} minutter"
-    else:
-        hours = minutes // 60
-        remaining_minutes = minutes % 60
-        return f"{hours} timer og {remaining_minutes} minutter"
-
-
-##############################
-#   Formats timestamp
-def format_created_at(timestamp):
-    if isinstance(timestamp, str):
-        try:
-            timestamp = int(timestamp)
-        except ValueError:
-            print("Fejl: Timestamp kan ikke konverteres til en integer.")
-            return None
-    created_at_dt = datetime.fromtimestamp(timestamp)
-    formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
-    return formatted_created_at
-
-
-##############################
-#   Fetching information to be included in the admin/customer profile
+#   Fetching information to be included in customer clipcards / timeregistration
 def load_profile_data():
     current_user = get_current_user()
     if not current_user:
@@ -149,28 +124,13 @@ def load_profile_data():
         remaining_hours = 0
         remaining_minutes = 0
 
+
     #   Fetching active and inactive clipcards
     active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
     inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
 
     active_clipcards_count = active_clipcards_result['count']
     inactive_clipcards_count = inactive_clipcards_result['count']
-
-    #   Fetching tasks
-    tasks_query = """
-        SELECT task_title, task_description, time_spent, created_at
-        FROM tasks
-        WHERE customer_id = ?
-        ORDER BY created_at DESC
-    """
-    tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
-
-    #   Formats time_spent and created_at in tasks
-    formatted_tasks = []
-    for task in tasks:
-        task['formatted_time_spent'] = format_time_spent(task['time_spent'])
-        task['formatted_created_at'] = format_created_at(task['created_at'])
-        formatted_tasks.append(task)
 
     return {
         'user': user,
@@ -183,7 +143,6 @@ def load_profile_data():
         'time_used_minutes': time_used_minutes,
         'remaining_hours': remaining_hours,
         'remaining_minutes': remaining_minutes,
-        'tasks': formatted_tasks
     }
 
 
@@ -214,8 +173,7 @@ def profile():
                         time_used_hours=data['time_used_hours'],
                         time_used_minutes=data['time_used_minutes'],
                         remaining_hours=data['remaining_hours'],
-                        remaining_minutes=data['remaining_minutes'],
-                        tasks=data['tasks'])
+                        remaining_minutes=data['remaining_minutes'])
 
     except Exception as e:
         logger.error("Error loading profile: %s", e)
@@ -250,8 +208,7 @@ def profile_template(template_name):
                             time_used_hours=data['time_used_hours'],
                             time_used_minutes=data['time_used_minutes'],
                             remaining_hours=data['remaining_hours'],
-                            remaining_minutes=data['remaining_minutes'],
-                            tasks=data['tasks'])
+                            remaining_minutes=data['remaining_minutes'])
         else:
             # General template logic
             template_path = find_template(template_name, template_dirs)
