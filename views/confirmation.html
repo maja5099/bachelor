@@ -45,14 +45,62 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Betalingsbekræftelse</title>
   </head>
-  <body>
-    <h1>Betalingsbekræftelse</h1>
-    <p>Tak for dit køb!</p>
-    <p>Ordrenummer: {{payment_id}}</p>
-    <p>Betalt beløb: {{amount_paid}} kr</p>
-    <p>Du kan nu se dit klippekort på din profilside.</p>
-    <a href="/">Tilbage til forsiden</a>
-
+  <body class="h-screen w-screen flex justify-center bg-unidYellow bg-wave bg-cover">
+    <div
+      class="width_small flex flex-col space-y-10 lg:space-y-12 justify-center mx-auto"
+    >
+      <div class="space-y-8">
+        <div class="space-y-2">
+          <p class="text-md tracking-widest text-unidPurple">BEKRÆFTELSE</p>
+          <h2>Betalingsbekræftelse</h2>
+        </div>
+        <div>
+          <div
+            class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
+          >
+            <div class="bg-unidLightBlue text-center p-6 items-center">
+              <p class="font-bold text-lg">Tak for dit køb!</p>
+            </div>
+            <div class="flex flex-col gap-10 p-6 text-unidPurple">
+              <form
+                action="/process_payment"
+                method="post"
+                class="space-y-8 w-full"
+              >
+                <div class="flex flex-col gap-2 text-sm">
+                  <div class="space-y-1">
+                    <h3 class="text-lg font-bold">Oplysninger om dit køb</h3>
+                    <hr />
+                  </div>
+                  <div class="space-y-2">
+                    <div class="space-y-0.5 md:space-y-0 md:flex justify-between items-center">
+                      <p class="font-semibold">Ordrenummer:</p>
+                      <p>{{payment_id}}</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <p class="font-semibold">Betalt beløb:</p>
+                      <p>{{amount_paid}} DKK</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <p class="font-semibold">Type klippekort:</p>
+                      <p>{{clipcard_type_title}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex justify-center font-medium text-sm">
+                  <p>Du kan nu se dit klippekort på din profilside.</p>
+                </div>
+                <div class="mx-auto w-fit">
+                  <a href="/">
+                    <button id="primary_button">Tilbage til forsiden</button>
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- SCRIPT -->
     <script src="/static/script.js"></script>
   </body>

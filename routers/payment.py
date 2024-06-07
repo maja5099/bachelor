@@ -66,7 +66,7 @@ def process_payment():
         
         print("Payment processed successfully.")
         
-        return template("confirmation", title="Confirmation", payment_id=payment_id, amount_paid=amount_paid, created_at=created_at)
+        return template("confirmation", title="Confirmation", clipcard_type_title=clipcard_type_title, payment_id=payment_id, amount_paid=amount_paid, created_at=created_at)
     
     except Exception as e:
         print(e)
