@@ -132,7 +132,7 @@ async function signUp() {
 
   try {
     // Send a POST request to the server with the form data
-    const response = await fetch("/signup", {
+    await fetch("/signup", {
       method: "POST",
       body: formData,
     });
