@@ -12,7 +12,7 @@
         class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
       >
         <div
-          class="bg-unidLightBlue text-center p-6 items-center flex justify-between"
+          class="bg-unidLightBlue text-center p-6 items-center space-y-1 lg:space-y-0 lg:flex justify-between"
         >
           <div
             class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
@@ -38,7 +38,7 @@
           <div class="space-y-8 text-sm">
             <div class="space-y-2 text-sm">
               <div class="space-y-1">
-                <div class="flex justify-between items-center">
+                <div class="lg:flex space-y-1 lg:space-y-0 justify-between items-center">
                   <div class="flex gap-2 items-center">
                     <h3 class="text-lg font-bold">Afsender:</h3>
                     <p class="text-base font-medium">
@@ -57,7 +57,7 @@
                   <p class="font-semibold">Emne:</p>
                   <p>{{ message["message_subject"] }}</p>
                 </div>
-                <div class="md:flex gap-2">
+                <div class="lg:flex gap-2">
                   <p class="font-semibold">Besked:</p>
                   <p>{{ message["message_text"] }}</p>
                 </div>

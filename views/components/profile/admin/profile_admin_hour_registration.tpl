@@ -35,14 +35,14 @@
               <hr />
             </div>
             <div class="">
-              <div class="grid grid-cols-2 gap-2 items-center">
-                <label for="customer">
+              <div class="grid grid-cols-6 gap-2 items-center">
+                <label for="customer" class="grid col-span-2">
                   <p class="font-semibold">Vælg kunde:</p>
                 </label>
                 <select
                   id="customer"
                   name="customer"
-                  class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300 focus:ring-2 focus:ring-unidYellow focus:outline-none"
+                  class="w-full py-2 px-5 grid col-span-4 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300 focus:ring-2 focus:ring-unidYellow focus:outline-none"
                   placeholder="Choose a customer…"
                 >
                   % for customer in active_customers:
@@ -59,24 +59,24 @@
               <h3 class="text-lg font-bold">Opgaveoplysninger</h3>
               <hr />
             </div>
-            <div class="grid grid-cols-2 gap-2 items-center">
-              <label for="title">
+            <div class="grid lg:grid-cols-6 gap-2 items-center">
+              <label for="title" class="grid lg:col-span-2">
                 <p class="font-semibold">Opgavetitel:</p>
               </label>
               <textarea
-                class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                class="w-full py-2 px-5 grid lg:col-span-4 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
                 id="title"
                 name="title"
                 accept-charset="UTF-8"
                 placeholder="Titel på udførte opgave"
               ></textarea>
             </div>
-            <div class="grid grid-cols-2 gap-2 items-center">
-              <label for="description">
+            <div class="grid lg:grid-cols-6 gap-2 items-center">
+              <label for="description" class="grid lg:col-span-2">
                 <p class="font-semibold">Opgavebeskrivelse:</p>
               </label>
               <textarea
-                class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                class="w-full py-2 px-5 grid lg:col-span-4 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
                 id="description"
                 name="description"
                 accept-charset="UTF-8"
@@ -89,41 +89,43 @@
               <h3 class="text-lg font-bold">Tid</h3>
               <hr />
             </div>
-            <div class="grid md:grid-cols-2 space-y-2 items-center">
-              <label for="hours">
+            <div class="grid md:grid-cols-6 space-y-2 items-center">
+              <label for="hours" class="grid col-span-2">
                 <p class="font-semibold">Tid brugt:</p>
               </label>
-              <div class="flex justify-between w-fit md:justify-normal gap-4">
-                <div class="flex items-center gap-2">
-                  <input
-                    class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
-                    type="number"
-                    id="hours"
-                    name="hours"
-                    min="0"
-                    step="1"
-                    placeholder="0"
-                  />
-                  <p>timer</p>
-                </div>
-                <div class="flex items-center gap-2">
-                  <input
-                    class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
-                    type="number"
-                    id="minutes"
-                    name="minutes"
-                    min="0"
-                    max="59"
-                    step="1"
-                    placeholder="0"
-                  />
-                  <p>minutter</p>
+              <div class="grid col-span-4">
+                <div class="flex justify-between w-fit md:justify-normal gap-4">
+                  <div class="flex items-center gap-2">
+                    <input
+                      class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                      type="number"
+                      id="hours"
+                      name="hours"
+                      min="0"
+                      step="1"
+                      placeholder="0"
+                    />
+                    <p>timer</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <input
+                      class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                      type="number"
+                      id="minutes"
+                      name="minutes"
+                      min="0"
+                      max="59"
+                      step="1"
+                      placeholder="0"
+                    />
+                    <p>minutter</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </form>
-        <div id="submitTaskButton" class="md:w-1/3 mx-auto">
+        <div id="submitTaskButton" class="w-fit mx-auto">
           <button type="button" id="primary_button">Registrer</button>
         </div>
         <div id="taskSubmissionMessage" style="display: none"></div>
