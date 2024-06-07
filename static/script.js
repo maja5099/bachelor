@@ -137,14 +137,6 @@ async function signUp() {
       body: formData,
     });
 
-    // Log status and headers
-    console.log("Response status:", response.status);
-    console.log("Response headers:", response.headers);
-
-    // Log the raw response text to see what the server returned
-    const text = await response.text();
-    console.log("Raw response:", text);
-
     // Parse the response JSON data
     const data = JSON.parse(text);
 
