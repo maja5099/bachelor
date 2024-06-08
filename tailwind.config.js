@@ -1,7 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: "jit",
-  content: ["./views/**/*.*", "./assets/**/*.*"],
+  content: [
+    "./views/**/*.*",
+    "./assets/**/*.*",
+    "./views/components/**/*.*",
+    "./views/components/profile/**/*.*",
+    "./views/components/profile/customer/**/*.*",
+    "./views/components/profile/admin/**/*.*",
+    "./views/elements/**/*.*",
+    "./views/sections/**/*.*",
+    "./views/utilities/**/*.*",
+    "./views/utilities/buttons/**/*.*",
+  ],
   theme: {
     extend: {
       colors: {
