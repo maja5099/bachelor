@@ -3,7 +3,6 @@
 #   Library imports
 from bottle import request, response
 from dotenv import load_dotenv
-import secrets
 import logging
 import sqlite3
 import pathlib

@@ -132,13 +132,13 @@ async function signUp() {
 
   try {
     // Send a POST request to the server with the form data
-    await fetch("/signup", {
+    const response = await fetch("/signup", {
       method: "POST",
       body: formData,
     });
 
     // Parse the response JSON data
-    const data = JSON.parse(text);
+    const data = await response.json();
 
     // If the response contains an error, display it on the signup form
     if (data.error) {
