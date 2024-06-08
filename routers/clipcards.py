@@ -2,19 +2,19 @@ from bottle import template, get, post, request, delete, template, redirect
 import master
 import time
 import uuid
-from math import floor
 from colored_logging import setup_logger
 import content
 import logging
-import os
-from datetime import datetime
 from common.get_current_user import get_current_user
+from common.find_template import *
+from common.time_formatting import *
 
 
 ##############################
 #   COLORED LOGGING
 logger = setup_logger(__name__, level=logging.INFO)
 logger.setLevel(logging.INFO)
+
 
 ##############################
 #   Content from content.py
@@ -38,39 +38,6 @@ finally:
 
 db = master.db()
     
-
-##############################
-#   Converts minutes to hours and minutes
-def minutes_to_hours_minutes(minutes):
-    hours = floor(minutes / 60)
-    remaining_minutes = minutes % 60
-    return hours, remaining_minutes
-
-
-##############################
-#   Adds minutes and hours depending on the time
-def format_time_spent(minutes):
-    if minutes <= 60:
-        return f"{minutes} minutter"
-    else:
-        hours = minutes // 60
-        remaining_minutes = minutes % 60
-        return f"{hours} timer og {remaining_minutes} minutter"
-
-
-##############################
-#   Formats timestamp
-def format_created_at(timestamp):
-    if isinstance(timestamp, str):
-        try:
-            timestamp = int(timestamp)
-        except ValueError:
-            print("Fejl: Timestamp kan ikke konverteres til en integer.")
-            return None
-    created_at_dt = datetime.fromtimestamp(timestamp)
-    formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
-    return formatted_created_at
-
 
 ##############################
 #   Fetching information to be included in the admin/customer profile
@@ -233,11 +200,6 @@ def buy_clipcard(clipcard_type, clipcard_price):
     return template('buy_clipcard.html', clipcard_type=clipcard_type, clipcard_price=clipcard_price)
 
 
-def minutes_to_hours_minutes(minutes):
-    hours = floor(minutes / 60)
-    remaining_minutes = minutes % 60
-    return hours, remaining_minutes
-
 @get('/profile/profile_admin_clipcard')
 def admin_clipcards_get():
     try:
@@ -302,6 +264,7 @@ def admin_clipcards_get():
     finally:
         if "db" in locals(): db.close()
 
+
 @get('/profile/profile_admin_hour_registration')
 def admin_clipcards_get():
     try:
@@ -361,22 +324,6 @@ def admin_clipcards_get():
     finally:
         if "db" in locals(): db.close()
 
-
-template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin']
-
-def find_template(template_name, directories):
-    base_path = 'views'
-    for directory in directories:
-        path = os.path.join(base_path, directory)
-        print(f"Checking directory: {path}")
-        for root, dirs, files in os.walk(path):
-            print(f"Visited {root}")
-            if f'{template_name}.tpl' in files:
-                template_path = os.path.join(root, template_name + '.tpl')
-                print(f"Found template at: {template_path}")
-                return template_path
-    print("Template not found")
-    return None
 
 @delete('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
@@ -481,11 +428,3 @@ def submit_task():
         db.rollback()
         print("Error in submit_task:", e)
         return {"info": str(e)}
-
-
-
-
-
-
-
-
