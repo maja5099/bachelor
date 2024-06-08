@@ -8,6 +8,7 @@ import content
 import logging
 import os
 from datetime import datetime
+from common.get_current_user import get_current_user
 
 
 ##############################
@@ -36,26 +37,6 @@ finally:
 
 
 db = master.db()
-
-##############################
-#   Get current user
-def get_current_user():
-    try:
-        user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
-        if not user_info:
-            return None
-        
-        username = user_info.get('username')
-        if username:
-            db = master.db()
-            current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
-            db.close()
-            return current_user
-        else:
-            return None
-    except Exception as e:
-        print(e)
-        return None
     
 
 ##############################

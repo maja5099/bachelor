@@ -6,6 +6,7 @@ import logging
 from colored_logging import setup_logger
 import routers.messages as messages
 from math import floor
+from common.get_current_user import get_current_user
 
 
 
@@ -38,27 +39,6 @@ finally:
 ##############################
 #   List of directories to search for templates
 template_dirs = ['components', 'elements', 'sections', 'utilities']
-
-
-##############################
-#   Get current user
-def get_current_user():
-    try:
-        user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
-        if not user_info:
-            return None
-        
-        username = user_info.get('username')
-        if username:
-            db = master.db()
-            current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
-            db.close()
-            return current_user
-        else:
-            return None
-    except Exception as e:
-        print(e)
-        return None
 
 
 ##############################

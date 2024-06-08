@@ -5,6 +5,8 @@ import time
 import master
 from math import floor
 from datetime import datetime
+from common.get_current_user import get_current_user
+
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
 UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
@@ -57,24 +59,6 @@ def format_created_at(timestamp):
     formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
     return formatted_created_at
 
-
-def get_current_user():
-    try:
-        user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
-        if not user_info:
-            return None
-        
-        username = user_info.get('username')
-        if username:
-            db = master.db()
-            current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
-            db.close()
-            return current_user
-        else:
-            return None
-    except Exception as e:
-        print(e)
-        return None
 
 @post('/send_message')
 def send_message():
