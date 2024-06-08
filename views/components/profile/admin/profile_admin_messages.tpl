@@ -32,7 +32,7 @@
             </div>
             <p class="font-bold text-lg">{{ message["message_subject"] }}</p>
           </div>
-          <p>Sendt den: {{ message["created_at"] }}</p>
+          <p>Sendt den: {{ message["formatted_created_at"] }}</p>
         </div>
         <div class="flex flex-col gap-8 p-6 text-unidPurple">
           <div class="space-y-8 text-sm">

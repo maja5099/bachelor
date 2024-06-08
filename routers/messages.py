@@ -3,6 +3,8 @@ import os
 import uuid
 import time
 import master
+from math import floor
+from datetime import datetime
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
 UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
@@ -22,6 +24,38 @@ def save_file(upload=None):
             return "/uploads/" + file_name
     return None
  
+
+ ##############################
+#   Converts minutes to hours and minutes
+def minutes_to_hours_minutes(minutes):
+    hours = floor(minutes / 60)
+    remaining_minutes = minutes % 60
+    return hours, remaining_minutes
+
+
+##############################
+#   Adds minutes and hours depending on the time
+def format_time_spent(minutes):
+    if minutes <= 60:
+        return f"{minutes} minutter"
+    else:
+        hours = minutes // 60
+        remaining_minutes = minutes % 60
+        return f"{hours} timer og {remaining_minutes} minutter"
+
+
+##############################
+#   Formats timestamp
+def format_created_at(timestamp):
+    if isinstance(timestamp, str):
+        try:
+            timestamp = int(timestamp)
+        except ValueError:
+            print("Fejl: Timestamp kan ikke konverteres til en integer.")
+            return None
+    created_at_dt = datetime.fromtimestamp(timestamp)
+    formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
+    return formatted_created_at
 
 
 def get_current_user():
@@ -119,6 +153,8 @@ def messages_get():
 template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin']
 
 
+
+
 def find_template(template_name, directories):
     base_path = 'views'
     for directory in directories:
@@ -160,6 +196,12 @@ def admin_messages_get():
 
         messages = cursor.fetchall()
         print(messages)
+
+        #   Formats created_at in
+        formatted_messages = []
+        for message in messages:
+            message['formatted_created_at'] = format_created_at(message['created_at'])
+            formatted_messages.append(message)
 
         template_path = find_template('profile_admin_messages', template_dirs)
         if template_path is None:
