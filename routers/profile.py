@@ -7,6 +7,7 @@ from colored_logging import setup_logger
 import routers.messages as messages
 from math import floor
 from common.get_current_user import get_current_user
+from common.find_template import find_template, template_dirs
 
 
 
@@ -35,10 +36,6 @@ except Exception as e:
 finally:
     logger.info("Content import process completed.")
 
-
-##############################
-#   List of directories to search for templates
-template_dirs = ['components', 'elements', 'sections', 'utilities']
 
 
 ##############################
@@ -263,19 +260,5 @@ def profile_template(template_name):
         return f"Error loading template {template_name}: {e}"
     finally:
         logger.info("Template request for '%s' completed.", template_name)
-
-def find_template(template_name, directories):
-    base_path = 'views'
-    for directory in directories:
-        path = os.path.join(base_path, directory)
-        print(f"Checking directory: {path}")
-        for root, dirs, files in os.walk(path):
-            print(f"Visited {root}")
-            if f'{template_name}.tpl' in files:
-                template_path = os.path.join(root, template_name + '.tpl')
-                print(f"Found template at: {template_path}")
-                return template_path
-    print("Template not found")
-    return None
 
  # type: ignore

@@ -9,6 +9,7 @@ import logging
 import os
 from datetime import datetime
 from common.get_current_user import get_current_user
+from common.find_template import find_template, template_dirs
 
 
 ##############################
@@ -361,22 +362,6 @@ def admin_clipcards_get():
     finally:
         if "db" in locals(): db.close()
 
-
-template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin']
-
-def find_template(template_name, directories):
-    base_path = 'views'
-    for directory in directories:
-        path = os.path.join(base_path, directory)
-        print(f"Checking directory: {path}")
-        for root, dirs, files in os.walk(path):
-            print(f"Visited {root}")
-            if f'{template_name}.tpl' in files:
-                template_path = os.path.join(root, template_name + '.tpl')
-                print(f"Found template at: {template_path}")
-                return template_path
-    print("Template not found")
-    return None
 
 @delete('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
