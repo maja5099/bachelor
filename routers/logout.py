@@ -1,53 +1,68 @@
+##############################
+#   IMPORTS
+#   Library imports
 from bottle import post, redirect, response, request
-import master
 import logging
 import os
+
+#   Local application imports
 from colored_logging import setup_logger
+import master
 
 
 ##############################
-#   LOGGING
-logger = setup_logger(__name__, level=logging.INFO)
-logger.setLevel(logging.INFO)
+#   COLORED LOGGING
+try:
+    logger = setup_logger(__name__, level=logging.INFO)
+    logger.setLevel(logging.INFO)
+    logger.success("Logging imported successfully.")
+except Exception as e:
+    logger.error(f"Error importing logging: {e}")
+finally:
+    logger.info("Logging import process completed.")
 
 
 ##############################
 #   LOGOUT
 @post("/logout")
 def logout():
+
+    function_name = "logout"
+
     try:
-        # Retrieve the user cookie
+        # Securely retrieve user cookie
         user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
-        
-        # If cookie is found / user is logged in
+
         if not user_cookie:
             logger.info("No user cookie found, no user to log out")
             return redirect("/")
 
-        # Database connection
+        # Database connection and user validation
         db = master.db()
+        logger.debug(f"Database connection opened for {function_name}")
         user = db.execute("SELECT * FROM users WHERE username = ?", (user_cookie['username'],)).fetchone()
-        
-        # User is not found in the database
+
+        # Handle user not found in the database
         if not user:
-            logger.error("User not found in database: %s", user_cookie['username'])
+            logger.error(f"User not found in database: {user_cookie['username']}")
             return redirect("/")
-        
-        # User and cookie found
+
+        # User and cookie found, perform logout
         username = user['username']
-        logger.info("Attempting to log out user: %s", username)
-        # Delete user cookie
+        logger.info(f"Attempting to log out user: {username}")
         response.delete_cookie("user")
-        logger.success("Successfully logged out user: %s", username)
+        logger.success(f"Successfully logged out user: {username}")
         return redirect("/")
     
-    # Error logging out
     except Exception as e:
-        if str(e):
-            logger.error("Error logging out user: %s, Error: %s", username, e)
-        raise e
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name} of user {username}. Error: {e}")
+        raise
     
-    # Always executed  
     finally:
-        logger.info("Logout process completed.")
-
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed request for {function_name}")
