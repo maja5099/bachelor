@@ -76,7 +76,7 @@
     @apply w-10/12 md:w-8/12 lg:w-6/12 2xl:w-4/12;
   }
   .width_standard {
-    @apply w-10/12 2xl:w-6/12;
+    @apply w-10/12 2xl:w-8/12;
   }
   .width_big {
     @apply w-10/12 2xl:w-8/12;
