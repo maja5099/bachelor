@@ -21,10 +21,9 @@ logger.setLevel(logging.INFO)
 try:
     header_nav_items = content.header_nav_items
     footer_info = content.footer_info
-    unid_logo = content.unid_logo
+    global_content = content.global_content
     selling_points = content.selling_points
     social_media = content.social_media
-    ui_icons = content.ui_icons
     pricing_default = content.pricing_default
     pricing_accent = content.pricing_accent
     section_profile_admin = content.section_profile_admin
@@ -171,6 +170,7 @@ def clipcards():
             print("Has active clipcard:", current_user.get('has_active_clipcard'))
 
         return template(relative_path, 
+                        global_content=global_content,
                         clipcards=clipcards, 
                         pricing_default=pricing_default, 
                         pricing_accent=pricing_accent, 
@@ -197,7 +197,7 @@ def clipcards():
 
 @get('/buy_clipcard/<clipcard_type>/<clipcard_price>')
 def buy_clipcard(clipcard_type, clipcard_price):
-    return template('buy_clipcard.html', clipcard_type=clipcard_type, clipcard_price=clipcard_price)
+    return template('buy_clipcard.html', global_content=global_content, clipcard_type=clipcard_type, clipcard_price=clipcard_price)
 
 
 @get('/profile/profile_admin_clipcard')
@@ -255,7 +255,7 @@ def admin_clipcards_get():
             else:
                 clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
        
-        return template(relative_path, formatted_clipcards=formatted_clipcards, active_clipcards=active_clipcards, active_customers=active_customers)
+        return template(relative_path, global_content=global_content, formatted_clipcards=formatted_clipcards, active_clipcards=active_clipcards, active_customers=active_customers)
     
     except Exception as e:
         print("Error in admin_clipcards:", e) 
@@ -315,7 +315,7 @@ def admin_clipcards_get():
             else:
                 clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
        
-        return template(relative_path, active_clipcards=active_clipcards, active_customers=active_customers)
+        return template(relative_path, global_content=global_content, active_clipcards=active_clipcards, active_customers=active_customers)
     
     except Exception as e:
         print("Error in admin_clipcards:", e) 

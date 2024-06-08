@@ -11,6 +11,7 @@ from common.get_current_user import get_current_user
 #   Local application imports
 from colored_logging import setup_logger
 import master
+import content
 
 
 ##############################
@@ -23,6 +24,9 @@ except Exception as e:
     logger.error(f"Error importing logging: {e}")
 finally:
     logger.info("Logging import process completed.")
+
+
+global_content=content.global_content
 
 
 ##############################
@@ -79,7 +83,7 @@ def process_payment():
 
         logger.success("Payment processed successfully, redirecting to confirmation.")
         
-        return template("confirmation", title="Confirmation", clipcard_type_title=clipcard_type_title, payment_id=payment_id, amount_paid=amount_paid, created_at=created_at)
+        return template("confirmation", title="Confirmation", global_content=global_content, clipcard_type_title=clipcard_type_title, payment_id=payment_id, amount_paid=amount_paid, created_at=created_at)
     
     except Exception as e:
         if "db" in locals():

@@ -1,19 +1,27 @@
-unid_logo = {       
-    "primary_logo": "primary_logo.svg",
-    "secondary_logo": "primary_logo.svg",
-    "logo_alt": "UNID Studio's logo",
-}
-
-ui_icons = {       
-    "user_icon": "user.svg", 
-    "admin_icon": "admin.svg",
-    "burger_icon": "burger.svg",
-    "hourglass_icon": "hourglass.svg",
-    "stop_watch_icon": "stop_watch.svg",
-    "open_folder_icon": "open_folder.svg",
-    "closed_folder_icon": "closed_folder.svg",
-    "message": "letter.svg",
-    "error_icon": "exclamation_mark.svg",
+##############################
+#   GLOBALS
+global_content = {
+    "unid_logos": {
+        "primary_logo": "primary_logo.svg",
+        "secondary_logo": "primary_logo.svg",
+        "logo_alt": "UNID Studio's logo",
+    },
+    "ui_icons": {       
+        "admin": "admin.svg",
+        "burger": "burger.svg",
+        "card": "card.svg",
+        "closed_folder": "closed_folder.svg",
+        "education": "education.svg",
+        "error": "exclamation_mark.svg",
+        "hourglass": "hourglass.svg",
+        "message": "letter.svg",
+        "open_folder": "open_folder.svg",
+        "stop_watch": "stop_watch.svg",
+        "user": "user.svg",
+        "trashcan": "trashcan.svg",
+        "documents": "documents.svg",
+        "info": "info.svg",
+    },
 }
 
 selling_points = [       

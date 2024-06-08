@@ -123,7 +123,7 @@
           >
             <div class="w-5 h-5">
               <!-- prettier-ignore -->
-              % include(ui_icons['error_icon'])
+              % include(global_content['ui_icons']['error'])
             </div>
             <div class="flex-col">
               <p class="font-bold">Hov!</p>
@@ -145,8 +145,8 @@
       >
         <img
           class="w-8/12 mx-auto"
-          src="/assets/logos/{{ unid_logo['primary_logo'] }}"
-          alt=""
+          src="/assets/logos/{{ global_content['unid_logos']['primary_logo'] }}"
+          alt="{{ global_content['unid_logos']['logo_alt'] }}"
         />
       </div>
     </section>

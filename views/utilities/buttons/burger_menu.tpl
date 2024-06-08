@@ -1,4 +1,4 @@
 <button id="icon_large">
   <!-- prettier-ignore -->
-  % include(ui_icons['burger_icon'])
+  % include(global_content['ui_icons']['burger'])
 </button>

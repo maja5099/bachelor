@@ -6,10 +6,14 @@ import master
 from common.get_current_user import get_current_user
 from common.find_template import *
 from common.time_formatting import *
+import content
 
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
 UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
+
+
+global_content = content.global_content
 
 
 # upload=None solves missing 1 required positional argument: 'upload' error
@@ -92,7 +96,7 @@ def messages_get():
         # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
-        return template(relative_path)
+        return template(relative_path, global_content=global_content)
     except Exception as e:
         print(e)
         if "db" in locals(): db.rollback() 
@@ -140,7 +144,7 @@ def admin_messages_get():
         # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
-        return template(relative_path, messages=messages)
+        return template(relative_path, messages=messages, global_content=global_content)
 
     except Exception as e:
         print(e)

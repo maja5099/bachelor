@@ -146,8 +146,7 @@ finally:
 #   CONTENT (FROM CONTENT.PY)
 try:
     # Global
-    ui_icons = content.ui_icons
-    unid_logo = content.unid_logo
+    global_content = content.global_content
     error_content = content.error_content
     # Header
     header_nav_items = content.header_nav_items
@@ -200,8 +199,7 @@ def index():
                         selling_points=selling_points, 
                         social_media=social_media, 
                         testimonials=section_testimonial_content['testimonials'], 
-                        ui_icons=ui_icons, 
-                        unid_logo=unid_logo, 
+                        global_content=global_content,
                         user=user, 
                         username=username
                         )

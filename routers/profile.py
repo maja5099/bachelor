@@ -20,10 +20,9 @@ logger.setLevel(logging.INFO)
 try:
     header_nav_items = content.header_nav_items
     footer_info = content.footer_info
-    unid_logo = content.unid_logo
+    global_content = content.global_content
     selling_points = content.selling_points
     social_media = content.social_media
-    ui_icons = content.ui_icons
     pricing_default = content.pricing_default
     pricing_accent = content.pricing_accent
     section_profile_admin = content.section_profile_admin
@@ -131,10 +130,9 @@ def profile():
                         username=data['username'],
                         header_nav_items=header_nav_items,
                         footer_info=footer_info,
-                        unid_logo=unid_logo,
+                        global_content=global_content,
                         selling_points=selling_points,
                         social_media=social_media,
-                        ui_icons=ui_icons,
                         current_user=current_user,
                         active_clipcards_count=data['active_clipcards_count'],
                         inactive_clipcards_count=data['inactive_clipcards_count'],
@@ -203,7 +201,7 @@ def profile_template(template_name):
                             first_name=data['first_name'],
                             last_name=data['last_name'],
                             username=data['username'],
-                            ui_icons=ui_icons,
+                            global_content=global_content,
                             current_user=current_user, 
                             active_clipcards_count=data['active_clipcards_count'],
                             inactive_clipcards_count=data['inactive_clipcards_count'],
@@ -238,10 +236,9 @@ def profile_template(template_name):
                             username=data['username'], 
                             header_nav_items=header_nav_items, 
                             footer_info=footer_info, 
-                            unid_logo=unid_logo, 
+                            global_content=global_content, 
                             selling_points=selling_points, 
                             social_media=social_media, 
-                            ui_icons=ui_icons,
                             current_user=current_user, 
                             )
     except Exception as e:

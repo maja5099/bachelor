@@ -27,8 +27,7 @@ finally:
 #   CONTENT VARIABLES
 try:
     # Global
-    ui_icons = content.ui_icons
-    unid_logo = content.unid_logo
+    global_content = content.global_content
     # Header
     header_nav_items = content.header_nav_items
     selling_points = content.selling_points
@@ -78,8 +77,7 @@ def services_and_prices():
                         pricing_accent = pricing_accent,
                         selling_points=selling_points, 
                         social_media=social_media, 
-                        ui_icons=ui_icons,
-                        unid_logo=unid_logo, 
+                        global_content=global_content,
                         user=user, 
                         username=username
                         )

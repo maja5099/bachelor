@@ -9,12 +9,12 @@
       <!-- prettier-ignore -->
       % if user and "user_role_id" in user:
         % if user["user_role_id"] == 1:
-          % include(ui_icons['user_icon'])
+          % include(global_content['ui_icons']['user'])
         % elif user["user_role_id"] == 2:
-          % include(ui_icons['admin_icon'])
+          % include(global_content['ui_icons']['admin'])
         % end
       % else:
-        % include(ui_icons['user_icon'])
+        % include(global_content['ui_icons']['user'])
       % end
     </div>
     {{ button_text }}
@@ -27,12 +27,12 @@
         <!-- prettier-ignore -->
         % if user and "user_role_id" in user:
         % if user["user_role_id"] == 1:
-          % include(ui_icons['user_icon'])
+          % include(global_content['ui_icons']['user'])
         % elif user["user_role_id"] == 2:
-          % include(ui_icons['admin_icon'])
+          % include(global_content['ui_icons']['admin'])
         % end
         % else:
-          % include(ui_icons['user_icon'])
+          % include(global_content['ui_icons']['user'])
         % end
       </div>
     </button>
