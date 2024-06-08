@@ -49,7 +49,92 @@
     <!-- prettier-ignore -->
     % include('components/header_bar')
     % include('components/header')
-    % include('sections/pricing')
+    <section class="bg-unidBeige">
+      <div
+        class="width_standard padding_y_standard space_y_standard space-y-24 mx-auto"
+      >
+        <div class="flex justify-center">
+          <div
+            class="lg:w-2/3 flex justify-center flex-col text-center gap-y-4 md:gap-y-6"
+          >
+            <h1>Services og priser</h1>
+            <p id="subheader">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+              inventore nam eos incidunt, consequatur animi libero modi
+              doloremque esse? Amet qui doloribus nam saepe vitae.
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-y-6 md:gap-y-8">
+          <div
+            class="w-full gap-10 grid items-center grid-cols-1 md:grid-cols-2"
+          >
+            <div class="flex flex-col gap-y-6 md:gap-y-8">
+              <div class="space-y-2">
+                <p class="text-md tracking-widest text-unidPurple">SERVICES</p>
+                <h2>Det kan vi hjælpe dig med</h2>
+              </div>
+              <div class="space-y-6">
+                <div class="space-y-2">
+                  <p class="text-2xl font-saira font-semibold">Websites</p>
+                  <p class="text-base">
+                    Vi bruger WordPress, til at udvikle websites. Hvis du har
+                    specifikke ønsker, kan vi i det fleste tilfælde efterleve
+                    disse, da vi kan foretage ændringer direkte i koden – og
+                    udvikle sitet efter dit ønske og tilpasse det dine behov.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <p class="text-2xl font-saira font-semibold">
+                    Design af prototyper
+                  </p>
+                  <p class="text-base">
+                    Skal du udvikle en app og mangler et design? Eller har du
+                    brug for en prototype til dit website? Vi designer
+                    professionelle interaktive prototyper i Figma, som kan
+                    bruges til brugertests, eller til at sende direkte til din
+                    udvikler.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <p class="text-2xl font-saira font-semibold">
+                    Visuel identitet
+                  </p>
+                  <p class="text-base">
+                    Mangler du en visuel identitet, vil være letgenkendelig og
+                    skille dig ud fra mængden? Så kan vi hjælpe dig med at skabe
+                    en unik identitet. På baggrund af dine ønsker, kan vi
+                    udforme et logo, en farvepalette, finde typografier og evt.
+                    designe et 5. element, der matcher din virksomeheds
+                    identitet – og det budskab du ønsker at sende til kunden.
+                  </p>
+                </div>
+                <div class="space-y-2">
+                  <p class="text-2xl font-saira font-semibold">
+                    Grafisk design
+                  </p>
+                  <p class="text-base">
+                    Vi har ekspertise indenfor grafisk design, og kan hjælpe med
+                    grafisk opsætning af layout, visitkort, brochurer, plakater
+                    samt udarbejdelse af SoMe content.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-center items-center">
+              <!-- prettier-ignore -->
+              <img
+                class="h-auto w-3/4"
+                src="/assets/illustrations/graphic_design.png"
+                alt="lorem"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      % include('sections/pricing')
+    </section>
+
     % include('components/footer')
 
     <!-- SCRIPT -->

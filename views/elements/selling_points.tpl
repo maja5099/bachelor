@@ -6,6 +6,6 @@
     <!-- prettier-ignore -->
     % include(f'{selling_point["icon"]}')
   </div>
-  <p id="selling_point">{{selling_point['text']}}</p>
+  <p id="selling_point">{{ selling_point["text"] }}</p>
 </li>
 % end

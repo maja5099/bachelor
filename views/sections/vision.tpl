@@ -3,11 +3,11 @@
     <div class="flex flex-col gap-y-6 md:gap-y-8">
       <div class="flex">
         <div class="space-y-2 md:w-1/2">
-        <p class="text-md tracking-widest text-unidPurple">
-          {{ about_us_content["section_vision"]["subheader"] }}
-        </p>
-        <h2>{{ about_us_content["section_vision"]["title"] }}</h2>
-      </div>
+          <p class="text-md tracking-widest text-unidPurple">
+            {{ about_us_content["section_vision"]["subheader"] }}
+          </p>
+          <h2>{{ about_us_content["section_vision"]["title"] }}</h2>
+        </div>
       </div>
       <div class="w-full gap-10 grid grid-cols-1 md:grid-cols-2">
         <div class="space-y-6">

@@ -1,7 +1,9 @@
 % for clipcard_key, clipcard_value in pricing_accent.items():
 <div class="col-span-1 md:col-span-2 xl:col-span-1">
   <div class="flex justify-end">
-    <div class="w-2/3 md:w-1/3 xl:w-2/3 bg-unidPurple text-white rounded-t-lg">
+    <div
+      class="w-2/3 md:w-1/3 xl:w-2/3 bg-unidLightPurple text-unidPurple rounded-t-lg"
+    >
       <div class="flex gap-3 p-3 items-center justify-center">
         <div class="w-6 h-6">
           % include(f"{clipcard_value['info']['discount_icon']}")
@@ -13,9 +15,9 @@
     </div>
   </div>
   <div
-    class="rounded-l-lg rounded-br-lg border-2 bg-unidBeige border-unidBlue flex flex-col"
+    class="rounded-l-lg rounded-br-lg border-2 bg-unidBeige border-unidPurple flex flex-col"
   >
-    <div class="bg-unidBlue flex flex-col lg:flex-row justify-between gap-6">
+    <div class="bg-unidPurple flex flex-col lg:flex-row justify-between gap-6">
       <div class="text-white space-y-1 p-6">
         <p class="text-sm tracking-widest title-font font-medium">
           {{ clipcard_value["info"]["title"] }}

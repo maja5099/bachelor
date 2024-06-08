@@ -38,7 +38,9 @@
           <div class="space-y-8 text-sm">
             <div class="space-y-2 text-sm">
               <div class="space-y-1">
-                <div class="lg:flex space-y-1 lg:space-y-0 justify-between items-center">
+                <div
+                  class="lg:flex space-y-1 lg:space-y-0 justify-between items-center"
+                >
                   <div class="flex gap-2 items-center">
                     <h3 class="text-lg font-bold">Afsender:</h3>
                     <p class="text-base font-medium">

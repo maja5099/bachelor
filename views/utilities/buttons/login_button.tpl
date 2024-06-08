@@ -2,7 +2,7 @@
   <!-- DESKTOP -->
   <button
     id="login_button"
-    onclick="location.href='{{link}}'"
+    onclick="location.href='{{ link }}'"
     class="hidden lg:flex"
   >
     <div id="icon_small">
@@ -17,12 +17,12 @@
         % include(ui_icons['user_icon'])
       % end
     </div>
-    {{button_text}}
+    {{ button_text }}
   </button>
 
   <!-- MOBILE -->
   <div class="flex lg:hidden">
-    <button id="icon_hover" onclick="location.href='{{link}}'">
+    <button id="icon_hover" onclick="location.href='{{ link }}'">
       <div id="icon_small">
         <!-- prettier-ignore -->
         % if user and "user_role_id" in user:

@@ -1611,24 +1611,19 @@ h3 {
   border-top-width: 1px;
 }
 
-.border-unidBlue {
-  --tw-border-opacity: 1;
-  border-color: rgb(29 27 110 / var(--tw-border-opacity));
-}
-
 .border-unidLightBlue {
   --tw-border-opacity: 1;
   border-color: rgb(160 180 211 / var(--tw-border-opacity));
 }
 
+.border-unidPurple {
+  --tw-border-opacity: 1;
+  border-color: rgb(89 67 123 / var(--tw-border-opacity));
+}
+
 .bg-unidBeige {
   --tw-bg-opacity: 1;
   background-color: rgb(242 235 237 / var(--tw-bg-opacity));
-}
-
-.bg-unidBlue {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 27 110 / var(--tw-bg-opacity));
 }
 
 .bg-unidLightBlue {
@@ -1891,11 +1886,6 @@ h3 {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-unidYellow {
-  --tw-text-opacity: 1;
-  color: rgb(247 240 230 / var(--tw-text-opacity));
-}
-
 .opacity-0 {
   opacity: 0;
 }
@@ -2145,12 +2135,6 @@ input[type="checkbox"] {
     --tw-space-y-reverse: 0;
     margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
-  }
-
-  .md\:space-y-12 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(3rem * var(--tw-space-y-reverse));
   }
 
   .md\:space-y-4 > :not([hidden]) ~ :not([hidden]) {
