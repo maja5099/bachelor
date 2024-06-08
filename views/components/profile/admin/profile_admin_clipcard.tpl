@@ -91,7 +91,7 @@
               </div>
               <div class="flex gap-2">
                 <p class="font-semibold">Købt den:</p>
-                <p>{{ clipcard["created_at"] }}</p>
+                <p>{{ clipcard["formatted_created_at"] }}</p>
               </div>
             </div>
           </div>

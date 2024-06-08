@@ -297,6 +297,11 @@ def admin_clipcards_get():
             clipcard['time_used_hours'], clipcard['time_used_minutes'] = minutes_to_hours_minutes(clipcard['time_used'])
             clipcard['remaining_time_hours'], clipcard['remaining_time_minutes'] = minutes_to_hours_minutes(clipcard['remaining_time'])
 
+            #   Formats created_at
+            formatted_clipcards = []
+            clipcard['formatted_created_at'] = format_created_at(clipcard['created_at'])
+            formatted_clipcards.append(clipcard)
+
             if clipcard['time_used_minutes'] > 0:
                 clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer og {clipcard['time_used_minutes']} minutter"
             else:
@@ -307,7 +312,7 @@ def admin_clipcards_get():
             else:
                 clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
        
-        return template(relative_path, active_clipcards=active_clipcards, active_customers=active_customers)
+        return template(relative_path, formatted_clipcards=formatted_clipcards, active_clipcards=active_clipcards, active_customers=active_customers)
     
     except Exception as e:
         print("Error in admin_clipcards:", e) 
