@@ -1,14 +1,12 @@
-from bottle import request, redirect, template, get, route
-import os
+from bottle import redirect, template, get, route
 import master
 import content
 import logging
 from colored_logging import setup_logger
 import routers.messages as messages
-from math import floor
-from common.get_current_user import get_current_user
-from common.find_template import find_template, template_dirs
-
+from common.get_current_user import *
+from common.find_template import *
+from common.time_formatting import *
 
 
 ##############################
@@ -35,15 +33,6 @@ except Exception as e:
     logger.error("Error importing content: %s", e)
 finally:
     logger.info("Content import process completed.")
-
-
-
-##############################
-#   Converts minutes to hours and minutes
-def minutes_to_hours_minutes(minutes):
-    hours = floor(minutes / 60)
-    remaining_minutes = minutes % 60
-    return hours, remaining_minutes
 
 
 ##############################
