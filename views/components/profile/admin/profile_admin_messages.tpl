@@ -7,7 +7,7 @@
     <!-- prettier-ignore -->
     % if messages: 
       % for message in messages:
-    <div>
+    <div class="message-block">
       <div
         class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
       >

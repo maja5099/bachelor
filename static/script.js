@@ -276,11 +276,15 @@ function deleteMessage(button) {
       console.log("Response data:", data);
       // If the message was successfully deleted, remove it from the DOM
       if (data.info === "Message deleted.") {
-        var messageDiv = button.closest("div");
-        messageDiv.parentNode.removeChild(messageDiv);
-        console.log("Message deleted successfully.");
-        // If an error occurred, display an alert with the error message
+        var messageBlock = button.closest(".message-block");
+        if (messageBlock) {
+          messageBlock.parentNode.removeChild(messageBlock);
+          console.log("Message deleted successfully.");
+        } else {
+          console.log("Message block not found.");
+        }
       } else {
+        // If an error occurred, display an alert with the error message
         alert(data.info);
         console.log("Error:", data.info);
       }
