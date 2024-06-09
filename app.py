@@ -149,8 +149,7 @@ try:
     global_content = content.global_content
     error_content = content.error_content
     # Content for this page
-    section_landingpage_hero_content = content.section_landingpage_hero_content
-    section_testimonial_content = content.section_testimonial_content
+    frontpage_content = content.frontpage_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -185,11 +184,9 @@ def index():
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                         title="UNID Studio", 
-                        error_content=error_content, 
-                        section_landingpage_hero_content=section_landingpage_hero_content, 
-                        section_testimonial_content=section_testimonial_content, 
-                        testimonials=section_testimonial_content['testimonials'], 
                         global_content=global_content,
+                        frontpage_content=frontpage_content,
+                        error_content=error_content, 
                         user=user, 
                         username=username
                         )

@@ -4,9 +4,9 @@
       <div
         class="lg:w-2/3 flex justify-center flex-col text-center gap-y-4 md:gap-y-6"
       >
-        <h2>{{ section_testimonial_content["header_text"] }}</h2>
+        <h2>{{ frontpage_content["testimonial_section"]["header_text"] }}</h2>
         <p id="subheader">
-          {{ section_testimonial_content["subheader_text"] }}
+          {{ frontpage_content["testimonial_section"]["subheader_text"] }}
         </p>
       </div>
     </div>

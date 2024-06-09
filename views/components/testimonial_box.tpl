@@ -1,8 +1,9 @@
-% for testimonial in testimonials:
+% for testimonial in frontpage_content['testimonial_section']['testimonials']:
 <div class="bg-unidYellow p-8 rounded-lg space-y-12">
   <div class="space-y-6">
     <div id="icon_medium" class="size-6 text-unidLightBlue">
-      % include(f'{section_testimonial_content["testimonial_icon"]}')
+      <!-- prettier-ignore -->
+      % include(f'{frontpage_content["testimonial_section"]["testimonial_icon"]}')
     </div>
     <p class="text-unidPurple md:text-center">{{ testimonial["text"] }}</p>
   </div>

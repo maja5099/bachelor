@@ -1,3 +1,4 @@
+% include('components/header_bar')
 <header
   class="text-white text-base bg-unidLightBlue drop-shadow-xl sticky top-0 z-50 transition-all duration-300 ease-in-out"
 >
@@ -5,6 +6,7 @@
     <div class="flex">
       % if user:
       <a href="/">
+        <!-- prettier-ignore -->
         <img
           class="w-28"
           src="/assets/logos/{{ global_content['logos']['unid']['secondary_logo'] }}"
@@ -13,6 +15,7 @@
       </a>
       % else:
       <a href="/">
+        <!-- prettier-ignore -->
         <img
           class="w-28"
           src="/assets/logos/{{ global_content['logos']['unid']['primary_logo'] }}"

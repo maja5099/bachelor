@@ -168,13 +168,34 @@ global_content = {
     }
 }
 
-
-section_landingpage_hero_content = {       
-    "header_text": "Unikke & skræddersyede løsninger",
-    "subheader_text": "Vi bestræber os på, at lave unikke og kvalitets løsninger som opfylder hver enkel kundes behov.",
-    "button_text": "Kontakt os",
-    "image": "digital_design.svg",
+frontpage_content = {
+    "hero_section": {       
+        "header_text": "Unikke & skræddersyede løsninger",
+        "subheader_text": "Vi bestræber os på, at lave unikke og kvalitets løsninger som opfylder hver enkel kundes behov.",
+        "button_text": "Kontakt os",
+        "image": "digital_design.svg",
+    },
+    "testimonial_section": {
+        "header_text": "Det siger vores kunder",
+        "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+        "testimonial_icon": "quote.svg",
+        "testimonials": [
+            {
+                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+                "author_name": "Lorem ipsum", 
+                "author_job_title": "Lorem ipsum", 
+                "author_image": "user.svg",
+            },
+            {
+                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+                "author_name": "Lorem ipsum", 
+                "author_job_title": "Lorem ipsum", 
+                "author_image": "user.svg",
+            },
+        ],
+    }
 }
+
 
 section_login_content = {
     "header_text": "Log ind",
@@ -245,25 +266,7 @@ pricing_accent = {
     },
 }
 
-section_testimonial_content = {
-    "header_text": "Det siger vores kunder",
-    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-    "testimonial_icon": "quote.svg",
-    "testimonials": [
-        {
-            "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-            "author_name": "Lorem ipsum", 
-            "author_job_title": "Lorem ipsum", 
-            "author_image": "user.svg",
-        },
-        {
-            "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-            "author_name": "Lorem ipsum", 
-            "author_job_title": "Lorem ipsum", 
-            "author_image": "user.svg",
-        },
-    ],
-}
+
 
 error_content = {
     "title": "Hov! Der skete en fejl",
