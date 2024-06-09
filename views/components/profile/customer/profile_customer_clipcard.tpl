@@ -8,7 +8,7 @@
   <div class="grid lg:grid-cols-2 gap-8">
     <!-- prettier-ignore -->
     % for card in clipcards: 
-    % for clipcard_key, clipcard_value in pricing_default.items():
+    % for clipcard_key, clipcard_value in services_and_prices_content['prices_section']['pricings']['pricing_default'].items():
     <div>
       <div class="flex justify-end">
         <div

@@ -7,8 +7,8 @@
         <div
           class="space-y-2 flex flex-col items-center mx-auto justify-center"
         >
-          <p class="text-md tracking-widest text-unidPurple">PRISER</p>
-          <h2>Find det rette klippekort til dig</h2>
+          <p class="text-md tracking-widest text-unidPurple">{{ services_and_prices_content["prices_section"]["subheader_text"] }}</p>
+          <h2>{{ services_and_prices_content["prices_section"]["subheader_text"] }}</h2>
         </div>
       </div>
       <div

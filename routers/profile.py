@@ -19,8 +19,7 @@ logger.setLevel(logging.INFO)
 #   Content from content.py
 try:
     global_content = content.global_content
-    pricing_default = content.pricing_default
-    pricing_accent = content.pricing_accent
+    services_and_prices_content = content.services_and_prices_content
     section_profile_admin = content.section_profile_admin
     section_profile_customer = content.section_profile_customer
     logger.success("Content imported successfully.")
@@ -117,14 +116,13 @@ def profile():
 
         return template('profile', title="Din profil",
                         user=data['user'],
-                        pricing_default=pricing_default,
-                        pricing_accent=pricing_accent,
                         section_profile_admin=section_profile_admin,
                         section_profile_customer=section_profile_customer,
                         first_name=data['first_name'],
                         last_name=data['last_name'],
                         username=data['username'],
                         global_content=global_content,
+                        services_and_prices_content=services_and_prices_content,
                         current_user=current_user,
                         active_clipcards_count=data['active_clipcards_count'],
                         inactive_clipcards_count=data['inactive_clipcards_count'],
@@ -193,7 +191,10 @@ def profile_template(template_name):
                             first_name=data['first_name'],
                             last_name=data['last_name'],
                             username=data['username'],
+                            section_profile_admin=section_profile_admin, 
+                            section_profile_customer=section_profile_customer, 
                             global_content=global_content,
+                            services_and_prices_content=services_and_prices_content,
                             current_user=current_user, 
                             active_clipcards_count=data['active_clipcards_count'],
                             inactive_clipcards_count=data['inactive_clipcards_count'],
@@ -219,14 +220,13 @@ def profile_template(template_name):
                             admin_messages_get=messages.admin_messages_get,
                             delete_message=messages.delete_message,
                             user=data['user'], 
-                            pricing_default=pricing_default, 
-                            pricing_accent=pricing_accent, 
                             section_profile_admin=section_profile_admin, 
                             section_profile_customer=section_profile_customer, 
                             first_name=data['first_name'], 
                             last_name=data['last_name'], 
                             username=data['username'], 
-                            global_content=global_content, 
+                            global_content=global_content,
+                            services_and_prices_content=services_and_prices_content,
                             current_user=current_user, 
                             )
     except Exception as e:

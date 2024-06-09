@@ -1,4 +1,4 @@
-% for clipcard_key, clipcard_value in pricing_accent.items():
+% for clipcard_key, clipcard_value in services_and_prices_content['prices_section']['pricings']['pricing_accent'].items():
 <div class="col-span-1 md:col-span-2 xl:col-span-1">
   <div class="flex justify-end">
     <div

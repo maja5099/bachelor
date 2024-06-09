@@ -8,7 +8,7 @@
       <img
         class="w-16"
         src="/assets/logos/{{ global_content['logos']['unid']['secondary_logo'] }}"
-        alt="{{ global_content['logos']['logo_alt'] }}"
+        alt="{{ global_content['logos']['unid']['logo_alt'] }}"
       />
     </a>
     % else:

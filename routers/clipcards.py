@@ -20,8 +20,6 @@ logger.setLevel(logging.INFO)
 #   Content from content.py
 try:
     global_content = content.global_content
-    pricing_default = content.pricing_default
-    pricing_accent = content.pricing_accent
     section_profile_admin = content.section_profile_admin
     section_profile_customer = content.section_profile_customer
     logger.success("Content imported successfully.")
@@ -167,9 +165,9 @@ def clipcards():
 
         return template(relative_path, 
                         global_content=global_content,
+                        section_profile_admin = section_profile_admin,
+                        section_profile_customer = section_profile_customer,
                         clipcards=clipcards, 
-                        pricing_default=pricing_default, 
-                        pricing_accent=pricing_accent, 
                         current_user=current_user, 
                         first_name=data['first_name'],
                         last_name=data['last_name'],

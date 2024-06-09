@@ -29,8 +29,7 @@ try:
     # Global
     global_content = content.global_content
     # Content for this page
-    pricing_default = content.pricing_default
-    pricing_accent = content.pricing_accent
+    services_and_prices_content=content.services_and_prices_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -65,9 +64,8 @@ def services_and_prices():
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                         title="UNID Studio - Services og priser", 
-                        pricing_default = pricing_default,
-                        pricing_accent = pricing_accent,
                         global_content=global_content,
+                        services_and_prices_content=services_and_prices_content,
                         user=user, 
                         username=username
                         )

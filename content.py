@@ -1,6 +1,5 @@
 ##############################
 #   GLOBALS
-
 global_content = {
     # LOGOS
     "logos": {
@@ -168,13 +167,18 @@ global_content = {
     }
 }
 
+
+##############################
+#   FRONTPAGE / INDEX
 frontpage_content = {
+    # Hero section
     "hero_section": {       
         "header_text": "Unikke & skræddersyede løsninger",
         "subheader_text": "Vi bestræber os på, at lave unikke og kvalitets løsninger som opfylder hver enkel kundes behov.",
         "button_text": "Kontakt os",
         "image": "digital_design.svg",
     },
+    # Testimonial section
     "testimonial_section": {
         "header_text": "Det siger vores kunder",
         "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
@@ -196,6 +200,81 @@ frontpage_content = {
     }
 }
 
+
+##############################
+#   SERVICES_AND_PRICES
+services_and_prices_content = {
+    "header_text": "Services og priser",
+    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+    # Services section
+    "services_section": {
+        "header_text": "Det kan vi hjælpe dig med",
+        "subheader_text": "SERVICES",
+        "illustration": "graphic_design.png",
+        "illustration_alt": "Illustration af digitalt design",
+        "paragraphs": [
+            {
+                "title": "Websites",
+                "text": "Vi bruger WordPress, til at udvikle websites. Hvis du har specifikke ønsker, kan vi i det fleste tilfælde efterleve disse, da vi kan foretage ændringer direkte i koden – og udvikle sitet efter dit ønske og tilpasse det dine behov.",
+            },
+            {
+                "title": "Design af prototyper",
+                "text": "Skal du udvikle en app og mangler et design? Eller har du brug for en prototype til dit website? Vi designer professionelle interaktive prototyper i Figma, som kan bruges til brugertests, eller til at sende direkte til din udvikler.",
+            },
+            {
+                "title": "Visuel identitet",
+                "text": "Mangler du en visuel identitet, vil være letgenkendelig og skille dig ud fra mængden? Så kan vi hjælpe dig med at skabe en unik identitet. På baggrund af dine ønsker, kan vi udforme et logo, en farvepalette, finde typografier og evt. designe et 5. element, der matcher din virksomeheds identitet – og det budskab du ønsker at sende til kunden.",
+            },
+            {
+                "title": "Grafisk design",
+                "text": "Vi har ekspertise indenfor grafisk design, og kan hjælpe med grafisk opsætning af layout, visitkort, brochurer, plakater samt udarbejdelse af SoMe content.",
+            },
+        ],
+    },
+    # Prices section
+    "prices_section":{
+        "header_text": "Find det rette klippekort til dig",
+        "subheader_text": "PRISER",
+        "pricings": {
+            "pricing_default": {
+                "clipcard_a": {
+                    "info": {
+                        "title": "Klippekort",
+                        "hours": "10 timer",
+                        "discount": "Spar 1.234 DKK",
+                        "discount_icon": "discount.svg",
+                        "price": "12.345 DKK",
+                    },
+                    "selling_points": [
+                        {"icon": "checkmark.svg", "text": "Selling point 1"},
+                        {"icon": "checkmark.svg", "text": "Selling point 2"},
+                        {"icon": "checkmark.svg", "text": "Selling point 3"},
+                        {"icon": "checkmark.svg", "text": "Selling point 4"},
+                    ]
+                },
+            },
+            "pricing_accent": {
+                "clipcard_c": {
+                    "info": {
+                        "title": "Klippekort C",
+                        "hours": "30 timer",
+                        "discount": "Spar 1.234 DKK",
+                        "discount_icon": "discount_full.svg",
+                        "price": "12.345 DKK",
+                    },
+                    "selling_points": [
+                        {"icon": "checkmark_full.svg", "text": "Selling point 1"},
+                        {"icon": "checkmark_full.svg", "text": "Selling point 2"},
+                        {"icon": "checkmark_full.svg", "text": "Selling point 3"},
+                        {"icon": "checkmark_full.svg", "text": "Selling point 4"},
+                        {"icon": "checkmark_full.svg", "text": "Selling point 5"},
+                        {"icon": "checkmark_full.svg", "text": "Selling point 6"},
+                    ]
+                },
+            }
+        }
+    },
+}
 
 section_login_content = {
     "header_text": "Log ind",
@@ -228,43 +307,7 @@ section_profile_customer = [
     {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
 ]
 
-pricing_default = {
-    "clipcard_a": {
-        "info": {
-            "title": "Klippekort",
-            "hours": "10 timer",
-            "discount": "Spar 1.234 DKK",
-            "discount_icon": "discount.svg",
-            "price": "12.345 DKK",
-        },
-        "selling_points": [
-            {"icon": "checkmark.svg", "text": "Selling point 1"},
-            {"icon": "checkmark.svg", "text": "Selling point 2"},
-            {"icon": "checkmark.svg", "text": "Selling point 3"},
-            {"icon": "checkmark.svg", "text": "Selling point 4"},
-        ]
-    },
-}
 
-pricing_accent = {
-    "clipcard_c": {
-        "info": {
-            "title": "Klippekort C",
-            "hours": "30 timer",
-            "discount": "Spar 1.234 DKK",
-            "discount_icon": "discount_full.svg",
-            "price": "12.345 DKK",
-        },
-        "selling_points": [
-            {"icon": "checkmark_full.svg", "text": "Selling point 1"},
-            {"icon": "checkmark_full.svg", "text": "Selling point 2"},
-            {"icon": "checkmark_full.svg", "text": "Selling point 3"},
-            {"icon": "checkmark_full.svg", "text": "Selling point 4"},
-            {"icon": "checkmark_full.svg", "text": "Selling point 5"},
-            {"icon": "checkmark_full.svg", "text": "Selling point 6"},
-        ]
-    },
-}
 
 
 
