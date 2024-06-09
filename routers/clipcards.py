@@ -19,11 +19,7 @@ logger.setLevel(logging.INFO)
 ##############################
 #   Content from content.py
 try:
-    header_nav_items = content.header_nav_items
-    footer_info = content.footer_info
     global_content = content.global_content
-    selling_points = content.selling_points
-    social_media = content.social_media
     pricing_default = content.pricing_default
     pricing_accent = content.pricing_accent
     section_profile_admin = content.section_profile_admin

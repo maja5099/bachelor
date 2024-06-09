@@ -148,12 +148,6 @@ try:
     # Global
     global_content = content.global_content
     error_content = content.error_content
-    # Header
-    header_nav_items = content.header_nav_items
-    selling_points = content.selling_points
-    # Footer
-    footer_info = content.footer_info
-    social_media = content.social_media
     # Content for this page
     section_landingpage_hero_content = content.section_landingpage_hero_content
     section_testimonial_content = content.section_testimonial_content
@@ -192,12 +186,8 @@ def index():
         return template(page_name, 
                         title="UNID Studio", 
                         error_content=error_content, 
-                        footer_info=footer_info, 
-                        header_nav_items=header_nav_items, 
                         section_landingpage_hero_content=section_landingpage_hero_content, 
                         section_testimonial_content=section_testimonial_content, 
-                        selling_points=selling_points, 
-                        social_media=social_media, 
                         testimonials=section_testimonial_content['testimonials'], 
                         global_content=global_content,
                         user=user, 

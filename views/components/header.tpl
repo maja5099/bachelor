@@ -7,16 +7,16 @@
       <a href="/">
         <img
           class="w-28"
-          src="/assets/logos/{{ global_content['unid_logos']['secondary_logo'] }}"
-          alt="{{ global_content['unid_logos']['logo_alt'] }}"
+          src="/assets/logos/{{ global_content['logos']['unid']['secondary_logo'] }}"
+          alt="{{ global_content['logos']['unid']['logo_alt'] }}"
         />
       </a>
       % else:
       <a href="/">
         <img
           class="w-28"
-          src="/assets/logos/{{ global_content['unid_logos']['primary_logo'] }}"
-          alt="{{ global_content['unid_logos']['logo_alt'] }}"
+          src="/assets/logos/{{ global_content['logos']['unid']['primary_logo'] }}"
+          alt="{{ global_content['logos']['unid']['logo_alt'] }}"
         />
       </a>
       % end

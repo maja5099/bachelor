@@ -1,11 +1,16 @@
 ##############################
 #   GLOBALS
+
 global_content = {
-    "unid_logos": {
-        "primary_logo": "primary_logo.svg",
-        "secondary_logo": "primary_logo.svg",
-        "logo_alt": "UNID Studio's logo",
+    # LOGOS
+    "logos": {
+        "unid": {
+            "primary_logo": "primary_logo.svg",
+            "secondary_logo": "primary_logo.svg",
+            "logo_alt": "UNID Studio's logo",
+        },
     },
+    # ICONS
     "ui_icons": {       
         "admin": "admin.svg",
         "burger": "burger.svg",
@@ -24,131 +29,151 @@ global_content = {
         "trashcan": "trashcan.svg",
         "user": "user.svg",
     },
+    # SOME
+    "social_media": {     
+        "unid": {     
+            "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
+            "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
+        },
+        "employees": {     
+            "denise": {     
+                "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
+                "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
+            },
+            "isabella": {     
+                "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
+                "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
+            },
+        },
+    },
+    # HEADER
+    "header": {
+        "nav_bar": {
+            "nav_items": [
+                {"text": "Services & Priser", "link": "/services_and_prices"},
+                {"text": "Om UNID Studio", "link": "/about_us"},
+                {"text": "Case portfolio", "link": "/portfolio"},
+                {"text": "Kontakt", "link": "/contact"},
+            ],
+        },
+        "header_bar": {
+            "selling_points": [  
+                {"icon": "heart.svg", "text": "Tilfredshedsgaranti"},
+                {"icon": "discount.svg", "text": "Studierabat"},
+                {"icon": "pen.svg", "text": "Skræddersyet løsning"},
+                {"icon": "chat.svg", "text": "Hurtig kundeservice"}
+            ],
+        },
+    },
+    # FOOTER
+    "footer": {       
+        "footer_info": [
+            "UNID Studio © 2023",
+            "All rights reserved",
+            "CVR nr. 43924451",
+        ],
+    },
+    # FORMS
+    "form_inputs": {
+        "username": {
+            "label_for": "username",
+            "text": "Brugernavn", 
+            "icon": "user_circle.svg", 
+            "type": "text",
+            "name": "username",
+            "inputmode":"text",
+            "placeholder": "LoremIpsum",
+            "form_info": "",
+        },
+        "password": {
+            "label_for": "pwd",
+            "text": "Adgangskode", 
+            "icon": "lock.svg", 
+            "type": "password",
+            "name": "pwd",
+            "inputmode":"text",
+            "placeholder": "••••••••",
+            "form_info": "Use at least 8 characters, one uppercase, one lowercase and one number.",
+        },
+        "first_name": {
+            "label_for": "first_name",
+            "text": "Fornavn", 
+            "icon": "user_name_semi.svg", 
+            "type": "text",
+            "name": "first_name",
+            "inputmode":"text",
+            "placeholder": "Lorem",
+            "form_info": "",    
+        },
+        "last_name": {
+            "label_for": "last_name",
+            "text": "Efternavn", 
+            "icon": "user_name_full.svg", 
+            "type": "text",
+            "name": "last_name",
+            "inputmode":"text",
+            "placeholder": "Ipsum",
+            "form_info": "",    
+        },
+        "email": {
+            "label_for": "email",
+            "text": "Email", 
+            "icon": "email.svg", 
+            "type": "email",
+            "name": "email",
+            "inputmode":"email",
+            "placeholder": "loremipsum@mail.com",
+            "form_info": "",    
+        },
+        "phone": {
+            "label_for": "phone",
+            "text": "Telefon nummer", 
+            "icon": "phone.svg", 
+            "type": "tel",
+            "name": "phone",
+            "inputmode":"tel",
+            "placeholder": "12 34 56 67",
+            "form_info": "",    
+        },
+        "website_name": {
+            "label_for": "website_name",
+            "text": "Navn på din hjemmeside", 
+            "icon": "pen_line.svg", 
+            "type": "text",
+            "name": "website_name",
+            "inputmode":"text",
+            "placeholder": "Lorem-Ipsum.dk",
+            "form_info": "",    
+        },
+        "website_url": {
+            "label_for": "website_url",
+            "text": "URL til din hjemmeside", 
+            "icon": "www.svg", 
+            "type": "url",
+            "name": "website_url",
+            "inputmode":"url",
+            "placeholder": "https://www.lorem-ipsum.dk",
+            "form_info": "",    
+        },
+        "full_name": {
+            "label_for": "name",
+            "text": "Navn", 
+            "icon": "user_circle.svg", 
+            "type": "name",
+            "name": "name",
+            "inputmode":"text",
+            "placeholder": "Lorem Ipsum",
+            "form_info": "",
+        },
+    }
 }
 
-selling_points = [       
-    {"icon": "heart.svg", "text": "Tilfredshedsgaranti"},
-    {"icon": "discount.svg", "text": "Studierabat"},
-    {"icon": "pen.svg", "text": "Skræddersyet løsning"},
-    {"icon": "chat.svg", "text": "Hurtig kundeservice"}
-]
-
-header_nav_items = [
-    {"text": "Services & Priser", "link": "/services_and_prices"},
-    {"text": "Om UNID Studio", "link": "/about_us"},
-    {"text": "Case portfolio", "link": "/portfolio"},
-    {"text": "Kontakt", "link": "/contact"},
-]
-
-footer_info = [
-    "UNID Studio © 2023",
-    "All rights reserved",
-    "CVR nr. 43924451",
-]
-
-social_media = {       
-    "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
-    "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
-}
 
 section_landingpage_hero_content = {       
     "header_text": "Unikke & skræddersyede løsninger",
     "subheader_text": "Vi bestræber os på, at lave unikke og kvalitets løsninger som opfylder hver enkel kundes behov.",
     "button_text": "Kontakt os",
     "image": "digital_design.svg",
-}
-
-form_inputs = {
-    "username": {
-        "label_for": "username",
-        "text": "Brugernavn", 
-        "icon": "user_circle.svg", 
-        "type": "text",
-        "name": "username",
-        "inputmode":"text",
-        "placeholder": "LoremIpsum",
-        "form_info": "",
-    },
-    "password": {
-        "label_for": "pwd",
-        "text": "Adgangskode", 
-        "icon": "lock.svg", 
-        "type": "password",
-        "name": "pwd",
-        "inputmode":"text",
-        "placeholder": "••••••••",
-        "form_info": "Use at least 8 characters, one uppercase, one lowercase and one number.",
-    },
-    "first_name": {
-        "label_for": "first_name",
-        "text": "Fornavn", 
-        "icon": "user_name_semi.svg", 
-        "type": "text",
-        "name": "first_name",
-        "inputmode":"text",
-        "placeholder": "Lorem",
-        "form_info": "",    
-    },
-    "last_name": {
-        "label_for": "last_name",
-        "text": "Efternavn", 
-        "icon": "user_name_full.svg", 
-        "type": "text",
-        "name": "last_name",
-        "inputmode":"text",
-        "placeholder": "Ipsum",
-        "form_info": "",    
-    },
-    "email": {
-        "label_for": "email",
-        "text": "Email", 
-        "icon": "email.svg", 
-        "type": "email",
-        "name": "email",
-        "inputmode":"email",
-        "placeholder": "loremipsum@mail.com",
-        "form_info": "",    
-    },
-    "phone": {
-        "label_for": "phone",
-        "text": "Telefon nummer", 
-        "icon": "phone.svg", 
-        "type": "tel",
-        "name": "phone",
-        "inputmode":"tel",
-        "placeholder": "12 34 56 67",
-        "form_info": "",    
-    },
-    "website_name": {
-        "label_for": "website_name",
-        "text": "Navn på din hjemmeside", 
-        "icon": "pen_line.svg", 
-        "type": "text",
-        "name": "website_name",
-        "inputmode":"text",
-        "placeholder": "Lorem-Ipsum.dk",
-        "form_info": "",    
-    },
-    "website_url": {
-        "label_for": "website_url",
-        "text": "URL til din hjemmeside", 
-        "icon": "www.svg", 
-        "type": "url",
-        "name": "website_url",
-        "inputmode":"url",
-        "placeholder": "https://www.lorem-ipsum.dk",
-        "form_info": "",    
-    },
-    "full_name": {
-        "label_for": "name",
-        "text": "Navn", 
-        "icon": "user_circle.svg", 
-        "type": "name",
-        "name": "name",
-        "inputmode":"text",
-        "placeholder": "Lorem Ipsum",
-        "form_info": "",
-    },
 }
 
 section_login_content = {

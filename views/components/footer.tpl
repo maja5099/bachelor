@@ -7,16 +7,16 @@
     <a href="/">
       <img
         class="w-16"
-        src="/assets/logos/{{ global_content['unid_logos']['secondary_logo'] }}"
-        alt="{{ global_content['unid_logos']['logo_alt'] }}"
+        src="/assets/logos/{{ global_content['logos']['unid']['secondary_logo'] }}"
+        alt="{{ global_content['logos']['logo_alt'] }}"
       />
     </a>
     % else:
     <a href="/">
       <img
         class="w-16"
-        src="/assets/logos/{{ global_content['unid_logos']['primary_logo'] }}"
-        alt="{{ global_content['unid_logos']['logo_alt'] }}"
+        src="/assets/logos/{{ global_content['logos']['unid']['primary_logo'] }}"
+        alt="{{ global_content['logos']['unid']['logo_alt'] }}"
       />
     </a>
     % end
@@ -24,7 +24,7 @@
     <div
       class="text-xs flex-col cursor-default flex lg:flex-row justify-center text-center gap-2 lg:gap-6"
     >
-      % for footer_info in footer_info:
+      % for footer_info in global_content['footer']['footer_info']:
       <p>{{ footer_info }}</p>
       % end
     </div>

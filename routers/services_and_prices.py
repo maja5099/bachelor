@@ -28,12 +28,6 @@ finally:
 try:
     # Global
     global_content = content.global_content
-    # Header
-    header_nav_items = content.header_nav_items
-    selling_points = content.selling_points
-    # Footer
-    footer_info = content.footer_info
-    social_media = content.social_media
     # Content for this page
     pricing_default = content.pricing_default
     pricing_accent = content.pricing_accent
@@ -71,12 +65,8 @@ def services_and_prices():
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                         title="UNID Studio - Services og priser", 
-                        footer_info=footer_info, 
-                        header_nav_items=header_nav_items, 
                         pricing_default = pricing_default,
                         pricing_accent = pricing_accent,
-                        selling_points=selling_points, 
-                        social_media=social_media, 
                         global_content=global_content,
                         user=user, 
                         username=username

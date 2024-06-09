@@ -1,4 +1,4 @@
-% for selling_point in selling_points:
+% for selling_point in global_content['header']['header_bar']['selling_points']:
 <li
   class="flex items-center cursor-default text-center text-unidPurple justify-center gap-2"
 >

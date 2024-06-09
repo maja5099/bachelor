@@ -28,12 +28,6 @@ finally:
 try:
     # Global
     global_content = content.global_content
-    # Header
-    header_nav_items = content.header_nav_items
-    selling_points = content.selling_points
-    # Footer
-    footer_info = content.footer_info
-    social_media = content.social_media
     # Content for this page
     about_us_content = content.about_us_content
     logger.success("Content imported successfully.")
@@ -70,12 +64,8 @@ def about_us():
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                         title="Om UNID Studio", 
-                        about_us_content=about_us_content, 
-                        footer_info=footer_info, 
-                        header_nav_items=header_nav_items, 
-                        selling_points=selling_points, 
-                        social_media=social_media, 
                         global_content=global_content,
+                        about_us_content=about_us_content, 
                         user=user, 
                         username=username
                         )
