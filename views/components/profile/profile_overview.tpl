@@ -76,8 +76,8 @@
     <!-- prettier-ignore -->
     % if "user_role_id" in user: 
       % if  user["user_role_id"] == 2: 
-      % include('components/profile/profile_box', box_icon=global_content['ui_icons']['open_folder'], box_title='Åbne klippekort', box_content_big=active_clipcards_count, box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
-      % include('components/profile/profile_box', box_icon=global_content['ui_icons']['closed_folder'], box_title='Lukkede klippekort', box_content_big=inactive_clipcards_count, box_content_medium='klippekort', box_content_small='', box_content_xsmall='') 
+      % include('components/profile/profile_box', box_icon=global_content['ui_icons']['folder_open'], box_title='Åbne klippekort', box_content_big=active_clipcards_count, box_content_medium='klippekort', box_content_small='', box_content_xsmall='')
+      % include('components/profile/profile_box', box_icon=global_content['ui_icons']['folder_closed'], box_title='Lukkede klippekort', box_content_big=inactive_clipcards_count, box_content_medium='klippekort', box_content_small='', box_content_xsmall='') 
     % end 
   % end
   </div>
