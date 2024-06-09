@@ -1,4 +1,4 @@
-from bottle import redirect, template, get, route
+from bottle import redirect, template, get, route, HTTPResponse
 import master
 import content
 import logging
@@ -35,7 +35,7 @@ def load_profile_data():
     current_user = get_current_user()
     if not current_user:
         logger.info("No current user found, redirecting to login.")
-        redirect("/login")
+        return HTTPResponse(status=303, headers={"Location": "/"})
 
     db = master.db()
     user = current_user
@@ -112,7 +112,11 @@ def load_profile_data():
 def profile():
     try:
         data = load_profile_data()
+        if isinstance(data, HTTPResponse):
+            return data
+        
         current_user = get_current_user()
+        
 
         return template('profile', title="Din profil",
                         user=data['user'],
