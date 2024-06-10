@@ -1,6 +1,6 @@
 from bottle import redirect, template, get, route, HTTPResponse
 import master
-import content
+import common.content as content
 import logging
 from common.colored_logging import setup_logger
 import routers.messages as messages

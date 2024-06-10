@@ -3,7 +3,7 @@ import master
 import time
 import uuid
 from common.colored_logging import setup_logger
-import content
+import common.content as content
 import logging
 from common.get_current_user import get_current_user
 from common.find_template import *

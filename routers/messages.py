@@ -6,7 +6,7 @@ import master
 from common.get_current_user import get_current_user
 from common.find_template import *
 from common.time_formatting import *
-import content
+import common.content as content
 
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  

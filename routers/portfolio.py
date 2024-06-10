@@ -8,7 +8,7 @@ import os
 #   Local application imports
 from common.colored_logging import setup_logger
 import master
-import content
+import common.content as content
 
 
 ##############################

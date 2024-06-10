@@ -9,7 +9,7 @@ import os
 #   Local application imports
 from routers.messages import UPLOADS_FOLDER
 from common.colored_logging import setup_logger
-import content
+import common.content as content
 import master
 
 
