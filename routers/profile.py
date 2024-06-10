@@ -2,7 +2,7 @@ from bottle import redirect, template, get, route, HTTPResponse
 import master
 import content
 import logging
-from colored_logging import setup_logger
+from common.colored_logging import setup_logger
 import routers.messages as messages
 from common.get_current_user import *
 from common.find_template import *

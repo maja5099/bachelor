@@ -8,7 +8,7 @@ import os
 
 #   Local application imports
 from routers.messages import UPLOADS_FOLDER
-from colored_logging import setup_logger
+from common.colored_logging import setup_logger
 import content
 import master
 

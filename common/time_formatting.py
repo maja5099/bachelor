@@ -6,7 +6,7 @@ from math import floor
 import logging
 
 #   Local application imports
-from colored_logging import setup_logger
+from common.colored_logging import setup_logger
 
 
 ##############################

@@ -10,7 +10,7 @@ import logging
 import json
 
 #   Local application imports
-from colored_logging import setup_logger
+from common.colored_logging import setup_logger
 import master
 import content
 

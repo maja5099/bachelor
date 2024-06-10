@@ -9,7 +9,7 @@ import os
 from common.get_current_user import get_current_user
 
 #   Local application imports
-from colored_logging import setup_logger
+from common.colored_logging import setup_logger
 import master
 import content
 

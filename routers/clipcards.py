@@ -2,7 +2,7 @@ from bottle import template, get, post, request, delete, template, redirect
 import master
 import time
 import uuid
-from colored_logging import setup_logger
+from common.colored_logging import setup_logger
 import content
 import logging
 from common.get_current_user import get_current_user

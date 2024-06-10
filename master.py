@@ -10,7 +10,7 @@ import os
 import re
 
 #   Local application imports
-from colored_logging import setup_logger
+from common.colored_logging import setup_logger
 
 
 ##############################
