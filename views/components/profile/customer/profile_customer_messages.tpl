@@ -16,7 +16,7 @@
           class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
         >
           <div id="icon_medium" class="fill-unidPurple">
-            % include(global_content['ui_icons']['education'])
+            % include(global_content['ui_icons']['message'])
           </div>
           <p class="font-bold text-lg">
             {{ profile_content["customer_specific_content"]["profile_customer_messages"]["box_header_text"] }}
