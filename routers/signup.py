@@ -54,28 +54,46 @@ def signup():
         db = master.db()
         logger.debug("Database connection opened for signup")
 
-        user_id = str(uuid.uuid4().hex)
+        # Validate inputs
         first_name = request.forms.get("first_name")
         last_name = request.forms.get("last_name")
         email = master.validate_email()
         phone = master.validate_phone()
         username = master.validate_username()
         password = master.validate_password()
+        website_name = request.forms.get("website_name", "")
+        website_url = request.forms.get("website_url", "")
+
+        # Check if email, phone, and username already exist
+        existing_user_email = db.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+        existing_user_phone = db.execute("SELECT * FROM users WHERE phone = ?", (phone,)).fetchone()
+        existing_user_username = db.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+
+        if existing_user_email:
+            logger.error("Email already exists")
+            return {"error": "Den indtastede email eksisterer allerede."}
+        if existing_user_phone:
+            logger.error("Phone already exists")
+            return {"error": "Det indtastede telefonnummer eksisterer allerede."}
+        if existing_user_username:
+            logger.error("Username already exists")
+            return {"error": "Det indtastede brugernavn eksisterer allerede."}
+
+        # Continue with user creation
+        user_id = str(uuid.uuid4().hex)
         is_active = 1
         created_at = int(time.time())
         updated_at = int(time.time())
         deleted_at = ""
-        website_name = request.forms.get("website_name", "")
-        website_url = request.forms.get("website_url", "")
 
         staff_emails = ["kontakt@unidstudio.dk", "denise@unidstudio.dk", "isabella@unidstudio.dk"]
         if email in staff_emails:
-            user_role_id = "2" 
-            staff_id = user_id  
+            user_role_id = "2"
+            staff_id = user_id
             db.execute("INSERT INTO staff (staff_id, user_role_id) VALUES (?, ?)", (staff_id, user_role_id))
         else:
-            user_role_id = "1" 
-            customer_id = user_id  
+            user_role_id = "1"
+            customer_id = user_id
             db.execute("INSERT INTO customers (customer_id, user_role_id, website_name, website_url) VALUES (?, ?, ?, ?)", (customer_id, user_role_id, website_name, website_url))
 
         salt = bcrypt.gensalt()
@@ -100,7 +118,7 @@ def signup():
 
         db.commit()
         logger.success("Signup successful")
-        return json.dumps({"message": "Signup successful"})
+        return {"message": "Signup successful"}
 
     except Exception as e:
         if "db" in locals():
@@ -108,13 +126,14 @@ def signup():
             logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during request for /{page_name}: {e}")
         response.status = 500
-        return json.dumps({"error": "Internal Server Error"})
+        return {"error": "Internal Server Error"}
 
     finally:
         if "db" in locals():
             db.close()
             logger.info("Database connection closed")
         logger.info(f"Completed request for /{page_name}")
+
 
 
 ##############################
