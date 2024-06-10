@@ -364,8 +364,12 @@ def submit_task():
         task_title = request.forms.get('title')
         task_description = request.forms.get('description')
 
-        hours = int(request.forms.get('hours'))
-        minutes = int(request.forms.get('minutes'))
+        hours_str = request.forms.get('hours')
+        minutes_str = request.forms.get('minutes')
+
+        hours = int(hours_str) if hours_str.strip() != '' else 0
+        minutes = int(minutes_str) if minutes_str.strip() != '' else 0
+
         time_spent = hours * 60 + minutes
         created_at = int(time.time())
 

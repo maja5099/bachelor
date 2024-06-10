@@ -119,10 +119,18 @@
             </div>
           </div>
         </form>
-        <div id="submitTaskButton" class="w-fit mx-auto">
+
+
+
+      <div class="mx-auto flex-col space-y-4">
+        <div id="submitTaskButton" class="">
           <button type="button" id="primary_button">Registrer</button>
         </div>
-        <div id="taskSubmissionMessage" style="display: none"></div>
+        <p
+          id="taskSubmissionMessage"
+          style="display: none"
+          class="text-unidLightBlue text-sm"
+        ></p>
       </div>
     </div>
   </div>
