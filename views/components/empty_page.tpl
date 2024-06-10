@@ -14,9 +14,9 @@
       </div>
       <div class="flex flex-col gap-10 p-6 text-unidPurple">
         <div class="justify-center items-center py-8 lg:py-10 text-center">
-          <p class="text-sm font-bold">Hov, der er ikke noget her endnu...</p>
+          <p class="text-sm font-bold">{{ global_content["empty_page"]["header_text"] }}</p>
           <p class="text-sm">
-            Vi arbejder på noget spændende, så kom tilbage senere!
+            {{ global_content["empty_page"]["subheader_text"] }}
           </p>
         </div>
       </div>

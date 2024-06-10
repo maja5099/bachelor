@@ -192,7 +192,12 @@ global_content = {
             "placeholder": "Lorem Ipsum",
             "form_info": "",
         },
-    }
+    },
+    #  EMPTY PAGE
+    "empty_page": {
+        "header_text": "Hov, der er ikke noget her endnu...",
+        "subheader_text": "Vi arbejder på noget spændende, så kom tilbage senere!",
+    },
 }
 
 
@@ -364,6 +369,7 @@ portfolio_content = {
 ##############################
 #   PROFILE
 profile_content = {
+
     # ADMIN PROFILE SECTION
     "admin_profile_section": [
         {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
@@ -380,7 +386,15 @@ profile_content = {
         {"icon": "education.svg", "text": "Kurser", "template": "profile_courses"},
         {"icon": "letter.svg", "text": "Beskeder", "template": "profile_customer_messages"},
         {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
-    ]
+    ],
+    "logout": {
+        "header_text": "Log ud",
+        "subheader_text": "Du er ved at logge ud, er du sikker?",
+        "button_texts": {
+            "cancel": "Annuller",
+            "proceed": "Log ud"
+        }
+    }
 }
 
 
