@@ -28,7 +28,8 @@ finally:
 try:
     # Global
     global_content = content.global_content
-    # Header
+    # Content for this page
+    portfolio_content = content.portfolio_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -64,6 +65,7 @@ def portfolio():
         return template(page_name, 
                         title="UNID Studio - Services og priser",  
                         global_content=global_content,
+                        portfolio_content=portfolio_content,
                         user=user, 
                         username=username
                         )

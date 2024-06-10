@@ -409,7 +409,7 @@ error_content = {
 
 
 ##############################
-#   SIGNUP
+#   CONTACT
 contact_content = {
     "header_text": "Kontakt",
     "subheader_text": "Uanset om du har et eller flere spørgsmål, så er vi altid parate, til at hjælpe dig. Lad os høre om din idé, og vi vil herefter i fælleskab skræddersy én løsning, der passer perfekt til dig og din virksomhed. Vi ser frem, til at høre fra dig!",
@@ -420,10 +420,16 @@ contact_content = {
         "header_text": "Skriv til os her",
         "subheader_text": "Vi stræber efter at vende tilbage hurtigst muligt.",
         "button_text": "Send besked",
-    
-}
+    }
 }
 
+
+##############################
+#   PORTFOLIO
+portfolio_content = {
+    "header_text": "Case portfolio",
+    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+}
 
 
 
