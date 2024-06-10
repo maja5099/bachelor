@@ -69,80 +69,24 @@ def user():
 
 ##############################
 #   VALIDATION - EMAIL
-EMAIL_MIN = 6
-EMAIL_MAX = 100
 EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
 def validate_email():
-    try:
-        error = "User email is not valid"
-        email = request.forms.get("email", "").strip()
-        if len(email) < EMAIL_MIN:
-            response.status = 400
-            logger.warning("Email too short.")
-            raise Exception(error)
-        if len(email) > EMAIL_MAX:
-            response.status = 400
-            logger.warning("Email too long.")
-            raise Exception(error)
-        if not re.match(EMAIL_REGEX, email):
-            response.status = 400
-            logger.error("Email does not match regex.")
-            raise Exception(error)
-        logger.info("Email validated successfully.")
-        return email
-    except Exception as e:
-        logger.error(f"Error validating email: {e}")
-        raise
-    finally:
-        logger.info("Email validation process completed.")
+    email = request.forms.get("email", "").strip()
+    if not re.match(EMAIL_REGEX, email):
+        return "Den indtastede email er ikke gyldig."
+    return None
 
 
 ##############################
 #   VALIDATION - USERNAME
-USERNAME_MIN = 4
-USERNAME_MAX = 15
 USERNAME_REGEX = "^[a-zA-Z0-9_]{4,15}$"
 
 def validate_username():
-    try:
-        error = "Your username has to be between 4 and 15 lowercase English letters"
-        username = request.forms.get("username", "").strip()
-        if not re.match(USERNAME_REGEX, username):
-            logger.error("Username does not match regex.")
-            raise Exception(error)
-        logger.info("Username validated successfully.")
-        return username
-    except Exception as e:
-        logger.error(f"Error validating username: {e}")
-        raise
-    finally:
-        logger.info("Username validation process completed.")
-
-
-##############################
-#   VALIDATION - PASSWORD
-PASSWORD_MIN = 10
-PASSWORD_MAX = 128
-PASSWORD_REGEX = "^[a-zA-Z0-9]{10,128}$"
-
-def validate_password():
-    try:
-        error = "Your password must be between 10 to 128 characters long"
-        password = request.forms.get("password", "").strip()
-        if len(password) < PASSWORD_MIN or len(password) > PASSWORD_MAX:
-            logger.error("Password length is out of bounds.")
-            raise Exception(error)
-        if not re.match(PASSWORD_REGEX, password):
-            logger.error("Password does not match regex.")
-            raise Exception(error)
-        logger.info("Password validated successfully.")
-        return password
-    except Exception as e:
-        logger.error(f"Error validating password: {e}")
-        raise
-    finally:
-        logger.info("Password validation process completed.")
+    username = request.forms.get("username", "").strip()
+    if not re.match(USERNAME_REGEX, username):
+        return "Brugernavnet skal være mellem 4 og 15 tegn."
+    return None
 
 
 ##############################
@@ -150,16 +94,18 @@ def validate_password():
 PHONE_REGEX = "^\d{8}$" 
 
 def validate_phone():
-    try:
-        error = "Phone number must be exactly 8 digits"
-        phone = request.forms.get("phone", "").strip()
-        if not re.match(PHONE_REGEX, phone):
-            logger.error("Phone does not match regex.")
-            raise ValueError(error)
-        logger.info("Phone validated successfully.")
-        return phone
-    except Exception as e:
-        logger.error(f"Error validating phone: {e}")
-        raise
-    finally:
-        logger.info("Phone validation process completed.")
+    phone = request.forms.get("phone", "").strip()
+    if not re.match(PHONE_REGEX, phone):
+        return "Telefonnummeret skal bestå af 8 cifre."
+    return None
+
+
+##############################
+#   VALIDATION - PASSWORD
+PASSWORD_REGEX = "^[a-zA-Z0-9]{10,128}$"
+
+def validate_password():
+    password = request.forms.get("password", "").strip()
+    if not re.match(PASSWORD_REGEX, password):
+        return "Adgangskoden skal være mellem 10 og 128 tegn lang."
+    return None

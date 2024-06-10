@@ -55,12 +55,30 @@ def signup():
         logger.debug("Database connection opened for signup")
 
         # Validate inputs
+        email_error = master.validate_email()
+        phone_error = master.validate_phone()
+        username_error = master.validate_username()
+        password_error = master.validate_password()
+
+        if email_error:
+            logger.error(email_error)
+            return {"error": email_error}
+        if phone_error:
+            logger.error(phone_error)
+            return {"error": phone_error}
+        if username_error:
+            logger.error(username_error)
+            return {"error": username_error}
+        if password_error:
+            logger.error(password_error)
+            return {"error": password_error}
+
+        email = request.forms.get("email")
+        phone = request.forms.get("phone")
+        username = request.forms.get("username")
+        password = request.forms.get("password")
         first_name = request.forms.get("first_name")
         last_name = request.forms.get("last_name")
-        email = master.validate_email()
-        phone = master.validate_phone()
-        username = master.validate_username()
-        password = master.validate_password()
         website_name = request.forms.get("website_name", "")
         website_url = request.forms.get("website_url", "")
 
@@ -79,7 +97,7 @@ def signup():
             logger.error("Username already exists")
             return {"error": "Det indtastede brugernavn eksisterer allerede."}
 
-        # Continue with user creation
+    
         user_id = str(uuid.uuid4().hex)
         is_active = 1
         created_at = int(time.time())
@@ -133,8 +151,6 @@ def signup():
             db.close()
             logger.info("Database connection closed")
         logger.info(f"Completed request for /{page_name}")
-
-
 
 ##############################
 #   SIGNUP - GET
