@@ -58,11 +58,11 @@
             >
               <div class="space-y-2">
                 <p class="text-sm tracking-widest text-unidPurple">
-                  {{ error_title }}
+                  {{ error_title_text }}
                 </p>
                 <div class="space-y-6">
-                  <h2>{{ title }}</h2>
-                  <p id="subheader">{{ error_message }}</p>
+                  <h2>{{ header_text }}</h2>
+                  <p id="subheader">{{ error_message_text }}</p>
                 </div>
               </div>
               <div class="lg:w-3/6">
@@ -74,8 +74,8 @@
             </div>
             <div class="w-2/3">
               <img
-                src="/assets/illustrations/{{ error_image }}"
-                alt="Error Illustration"
+                src="/assets/illustrations/{{ illustration }}"
+                alt="{{ illustration_alt }}"
               />
             </div>
           </div>

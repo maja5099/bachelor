@@ -388,6 +388,34 @@ signup_content = {
     "button_text": "Opret bruger",
 }
 
+
+##############################
+#   ERROR
+error_content = {
+    "header_text": "Hov! Der skete en fejl",
+    "illustration": "unid_universe.svg",
+    "illustration_alt": "Illustration af UNID Universe",
+    "button_link": "/", 
+    "button_text": "Gå til forsiden",
+    "404": {
+        "error_title_text": "Fejl 404: Siden blev ikke fundet",
+        "error_message_text": "Beklager, men den side, du forsøgte at tilgå, eksisterer ikke. Tjek venligst URL'en og prøv igen, eller kontakt os, hvis problemet fortsætter."
+    },
+    "500": {
+        "error_title_text": "Fejl 500: Intern Serverfejl",
+        "error_message_text": "Vi beklager, men der er sket en fejl på serveren, som forhindrer udførelsen af din anmodning. Prøv venligst igen senere, eller kontakt os, hvis problemet fortsætter."
+    },
+}
+
+
+
+
+
+
+
+
+
+
 section_profile_admin = [
     {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
     {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
@@ -409,18 +437,5 @@ section_profile_customer = [
 
 
 
-error_content = {
-    "title": "Hov! Der skete en fejl",
-    "image": "unid_universe.svg",
-    "button_link": "/", 
-    "button_text": "Gå til forsiden",
-    "404": {
-        "error_title": "Fejl 404: Siden blev ikke fundet",
-        "error_message": "Beklager, men den side, du forsøgte at tilgå, eksisterer ikke. Tjek venligst URL'en og prøv igen, eller kontakt os, hvis problemet fortsætter."
-    },
-    "500": {
-        "error_title": "Fejl 500: Intern Serverfejl",
-        "error_message": "Vi beklager, men der er sket en fejl på serveren, som forhindrer udførelsen af din anmodning. Prøv venligst igen senere, eller kontakt os, hvis problemet fortsætter."
-    },
-}
+
 

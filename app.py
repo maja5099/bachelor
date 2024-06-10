@@ -52,14 +52,16 @@ def handle_error(error_code, error):
     try:
         if error:
             logger.error(f"Handled {error_code} succesfully with following error details: {error}")
-            return template('error', 
-                            title=error_content['title'], 
+            return template('error',
+                            title="Fejl", 
                             error=error, 
-                            error_image=error_content['image'], 
+                            header_text=error_content['header_text'], 
+                            illustration=error_content['illustration'], 
+                            illustration_alt=error_content['illustration_alt'], 
                             button_link=error_content['button_link'], 
                             button_text=error_content['button_text'], 
-                            error_title=error_content[str(error_code)]['error_title'], 
-                            error_message=error_content[str(error_code)]['error_message'])
+                            error_title_text=error_content[str(error_code)]['error_title_text'], 
+                            error_message_text=error_content[str(error_code)]['error_message_text'])
         else:
             logger.success(f"Handled {error_code} response successfully with no errors.")
     except Exception as e:
