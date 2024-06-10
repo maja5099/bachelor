@@ -20,6 +20,7 @@ logger.setLevel(logging.INFO)
 #   Content from content.py
 try:
     global_content = content.global_content
+    services_and_prices_content = content.services_and_prices_content
     profile_content = content.profile_content
     logger.success("Content imported successfully.")
 except Exception as e:
@@ -165,6 +166,7 @@ def clipcards():
         return template(relative_path, 
                         global_content=global_content,
                         profile_content=profile_content,
+                        services_and_prices_content=services_and_prices_content,
                         clipcards=clipcards, 
                         current_user=current_user, 
                         first_name=data['first_name'],

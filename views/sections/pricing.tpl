@@ -7,8 +7,14 @@
         <div
           class="space-y-2 flex flex-col items-center mx-auto justify-center"
         >
-          <p class="text-md tracking-widest text-unidPurple">{{ services_and_prices_content["prices_section"]["subheader_text"] }}</p>
-          <h2>{{ services_and_prices_content["prices_section"]["subheader_text"] }}</h2>
+          <p class="text-md tracking-widest text-unidPurple">
+            <!-- prettier-ignore -->
+            {{services_and_prices_content["prices_section"]["subheader_text"]}}
+          </p>
+          <h2>
+            <!-- prettier-ignore -->
+            {{services_and_prices_content["prices_section"]["subheader_text"]}}
+          </h2>
         </div>
       </div>
       <div
@@ -18,6 +24,11 @@
         % include('components/pricing_default')
         % include('components/pricing_default')
         % include('components/pricing_accent')
+      </div>
+      <div class="flex justify-center text-center">
+        <p class="italic text-sm">
+          Du skal være logget ind, for at købe et klippekort
+        </p>
       </div>
     </div>
   </div>

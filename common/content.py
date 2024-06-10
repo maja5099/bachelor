@@ -27,6 +27,10 @@ global_content = {
         "admin": "admin.svg",
         "burger": "burger.svg",
         "card": "card.svg",
+        "checkmark": "checkmark.svg",
+        "checkmark_full": "checkmark_full.svg",
+        "discount": "discount.svg",
+        "discount_full": "discount_full.svg",
         "documents": "documents.svg",
         "education": "education.svg",
         "error": "exclamation_mark.svg",
@@ -419,38 +423,53 @@ services_and_prices_content = {
             # Pricing default
             "pricing_default": {
                 "clipcard_a": {
+                    "button_text": "Køb nu",
                     "info": {
                         "title": "Klippekort",
                         "hours": "10 timer",
                         "discount": "Spar 1.234 DKK",
-                        "discount_icon": "discount.svg",
                         "price": "12.345 DKK",
                     },
                     "selling_points": [
-                        {"icon": "checkmark.svg", "text": "Selling point 1"},
-                        {"icon": "checkmark.svg", "text": "Selling point 2"},
-                        {"icon": "checkmark.svg", "text": "Selling point 3"},
-                        {"icon": "checkmark.svg", "text": "Selling point 4"},
+                        {"text": "Selling point 1"},
+                        {"text": "Selling point 2"},
+                        {"text": "Selling point 3"},
+                        {"text": "Selling point 4"},
                     ]
                 },
+                # "clipcard_b": {
+                #     "button_text": "Køb nu",
+                #     "info": {
+                #         "title": "Klippekort",
+                #         "hours": "20 timer",
+                #         "discount": "Spar 1.234 DKK",
+                #         "price": "12.345 DKK",
+                #     },
+                #     "selling_points": [
+                #         {"text": "Selling point 1"},
+                #         {"text": "Selling point 2"},
+                #         {"text": "Selling point 3"},
+                #         {"text": "Selling point 4"},
+                #     ]
+                # },
             },
             # Pricing accent
             "pricing_accent": {
                 "clipcard_c": {
+                    "button_text": "Køb nu",
                     "info": {
                         "title": "Klippekort C",
                         "hours": "30 timer",
                         "discount": "Spar 1.234 DKK",
-                        "discount_icon": "discount_full.svg",
                         "price": "12.345 DKK",
                     },
                     "selling_points": [
-                        {"icon": "checkmark_full.svg", "text": "Selling point 1"},
-                        {"icon": "checkmark_full.svg", "text": "Selling point 2"},
-                        {"icon": "checkmark_full.svg", "text": "Selling point 3"},
-                        {"icon": "checkmark_full.svg", "text": "Selling point 4"},
-                        {"icon": "checkmark_full.svg", "text": "Selling point 5"},
-                        {"icon": "checkmark_full.svg", "text": "Selling point 6"},
+                        {"text": "Selling point 1"},
+                        {"text": "Selling point 2"},
+                        {"text": "Selling point 3"},
+                        {"text": "Selling point 4"},
+                        {"text": "Selling point 5"},
+                        {"text": "Selling point 6"},
                     ]
                 },
             }

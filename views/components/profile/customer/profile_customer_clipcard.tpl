@@ -19,7 +19,7 @@
           >
             <div class="w-5 h-5">
               <!-- prettier-ignore -->
-              % include(f"{clipcard_value['info']['discount_icon']}")
+              % include(global_content['ui_icons']['discount'])
             </div>
             <p class="font-medium text-sm tracking-wider">
               {{ clipcard_value["info"]["discount"] }}
@@ -45,7 +45,7 @@
             % for point in clipcard_value['selling_points']:
             <div class="flex items-center gap-2 text-unidLightBlue">
               <div class="text-unidPurple w-5 h-5">
-                % include(f"{point['icon']}")
+                % include(global_content['ui_icons']['checkmark'])
               </div>
               <p>{{ point["text"] }}</p>
             </div>
