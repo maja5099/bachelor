@@ -223,7 +223,7 @@ services_and_prices_content = {
         "header_text": "Det kan vi hjælpe dig med",
         "subheader_text": "SERVICES",
         "illustration": "graphic_design.png",
-        "illustration_alt": "Illustration af digitalt design",
+        "illustration_alt": "Illustration af grafisk design",
         # Paragraphs
         "paragraphs": [
             {
@@ -408,7 +408,21 @@ error_content = {
 }
 
 
-
+##############################
+#   SIGNUP
+contact_content = {
+    "header_text": "Kontakt",
+    "subheader_text": "Uanset om du har et eller flere spørgsmål, så er vi altid parate, til at hjælpe dig. Lad os høre om din idé, og vi vil herefter i fælleskab skræddersy én løsning, der passer perfekt til dig og din virksomhed. Vi ser frem, til at høre fra dig!",
+    "illustration": "graphic_design.png",
+    "illustration_alt": "Illustration af grafisk design",
+    # CONTACT FORM SECTION
+    "contact_form_section": {
+        "header_text": "Skriv til os her",
+        "subheader_text": "Vi stræber efter at vende tilbage hurtigst muligt.",
+        "button_text": "Send besked",
+    
+}
+}
 
 
 

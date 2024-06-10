@@ -28,6 +28,8 @@ finally:
 try:
     # Global
     global_content = content.global_content
+    # Content for this page
+    contact_content = content.contact_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -63,6 +65,7 @@ def contact():
         return template(page_name, 
                         title="UNID Studio - Services og priser", 
                         global_content=global_content,
+                        contact_content=contact_content,
                         user=user, 
                         username=username
                         )

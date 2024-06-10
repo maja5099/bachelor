@@ -56,28 +56,26 @@
           <div
             class="lg:w-2/3 flex justify-center flex-col text-center gap-y-4"
           >
-            <h1>Kontakt</h1>
-            <p id="subheader">
-              Uanset om du har et eller flere spørgsmål, så er vi altid parate,
-              til at hjælpe dig. Lad os høre om din idé, og vi vil herefter i
-              fælleskab skræddersy én løsning, der passer perfekt til dig og din
-              virksomhed. Vi ser frem, til at høre fra dig!
-            </p>
+            <h1>{{ contact_content["header_text"] }}</h1>
+            <p id="subheader">{{ contact_content["subheader_text"] }}</p>
           </div>
         </div>
         <div
           class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 justify-center items-center"
         >
           <div class="w-2/3 flex items-center justify-center mx-auto">
-            <img src="/assets/illustrations/graphic_design.png" alt="" />
+            <img
+              src="/assets/illustrations/{{ contact_content['illustration'] }}"
+              alt="{{ contact_content['illustration_alt'] }}"
+            />
           </div>
           <div
             class="bg-unidPink order-first lg:order-last mx-auto flex flex-col w-full p-10 space-y-8 rounded-lg"
           >
             <div class="space-y-4">
-              <h3 class="">Skriv til os her</h3>
+              <h3 class="">{{ contact_content["contact_form_section"]["header_text"] }}</h3>
               <p class="leading-relaxed text-gray-600">
-                Vi stræber efter at vende tilbage hurtigst muligt.
+                {{ contact_content["contact_form_section"]["subheader_text"] }}
               </p>
             </div>
             <div class="space-y-4">
@@ -91,7 +89,7 @@
             </div>
             <div class="mx-auto md:w-3/6 lg:w-full xl:w-3/6 pt-6">
               <!-- prettier-ignore -->
-              % include('utilities/buttons/primary_button', link='/', type='submit', button_text='Send besked')
+              % include('utilities/buttons/primary_button', link='/', type='submit', button_text=contact_content["contact_form_section"]["button_text"])
             </div>
           </div>
         </div>
