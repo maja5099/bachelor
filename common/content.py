@@ -368,12 +368,15 @@ about_us_content = {
     },
 }
 
-section_login_content = {
+
+##############################
+#   LOGIN
+login_content = {
     "header_text": "Log ind",
     "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
     "button_text": "Log ind",
-    "image": "unid_universe.svg",
-    "logo": "primary_logo.svg",
+    "illustration": "unid_universe.svg",
+    "illustration_alt": "Illustration af UNID Universe",
 }
 
 section_signup_content = {

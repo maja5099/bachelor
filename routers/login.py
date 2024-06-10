@@ -31,7 +31,7 @@ try:
     # Global
     global_content = content.global_content
     # Content for this page
-    section_login_content = content.section_login_content
+    login_content = content.login_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -124,7 +124,7 @@ def login_get():
         return template(page_name, 
                     title="Log in", 
                     global_content=global_content,
-                    section_login_content=section_login_content, 
+                    login_content=login_content, 
                     )
     
     except Exception as e:

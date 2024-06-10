@@ -55,8 +55,8 @@
         class="width_small flex flex-col lg:col-span-2 space-y-10 lg:space-y-12 justify-center mx-auto py-20 lg:py-16"
       >
         <div class="space-y-3 lg:space-y-6">
-          <h1>{{section_login_content['header_text']}}</h1>
-          <p id="subheader">{{section_login_content['subheader_text']}}</p>
+          <h1>{{login_content['header_text']}}</h1>
+          <p id="subheader">{{login_content['subheader_text']}}</p>
         </div>
         <form class="space-y-6 lg:space-y-8">
           <div id="username">
@@ -87,7 +87,7 @@
           </div>
           <div class="w-full pt-4 items-center mx-auto flex justify-center">
             <!-- prettier-ignore -->
-            % include('utilities/buttons/primary_button', link='login(event)', type='submit', button_text=section_login_content['button_text'])
+            % include('utilities/buttons/primary_button', link='login(event)', type='submit', button_text=login_content['button_text'])
           </div>
           <div
             class="flex pt-2 text-sm gap-2 text-unidLightBlue border-t border-unidLightBlue"
@@ -111,14 +111,14 @@
         <a href="/">
           <img
             class="absolute top-10 right-10 hidden lg:block w-40"
-            src="/assets/logos/primary_logo.svg"
-            alt=""
+            src="/assets/logos/{{global_content['logos']['unid']['primary_logo']}}"
+            alt="{{global_content['logos']['unid']['logo_alt']}}"
           />
         </a>
         <img
           class="w-8/12 lg:w-10/12 mx-auto -mt-20 lg:-mt-0 lg:-ml-20"
-          src="/assets/illustrations/{{section_login_content['image']}}"
-          alt=""
+          src="/assets/illustrations/{{login_content['illustration']}}"
+          alt="{{login_content['illustration_alt']}}"
         />
       </div>
     </section>
