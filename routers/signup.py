@@ -33,7 +33,7 @@ try:
     # Global
     global_content = content.global_content
     # Content for this page
-    section_signup_content = content.section_signup_content
+    signup_content = content.signup_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -127,7 +127,7 @@ def signup_get():
         return template(page_name, 
                     title="Sign up", 
                     global_content=global_content,
-                    section_signup_content=section_signup_content, 
+                    signup_content=signup_content, 
                     )
     
     except Exception as e:

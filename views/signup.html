@@ -58,8 +58,8 @@
         >
           <div class="space-y-10 lg:space-y-12">
             <div class="space-y-3 lg:space-y-6">
-              <h1>{{section_signup_content['header_text']}}</h1>
-              <p id="subheader">{{section_signup_content['subheader_text']}}</p>
+              <h1>{{signup_content['header_text']}}</h1>
+              <p id="subheader">{{signup_content['subheader_text']}}</p>
             </div>
             <form class="grid lg:grid-cols-2 gap-x-14 gap-y-6 lg:gap-y-0">
               <div class="space-y-4 lg:space-y-6">
@@ -135,7 +135,7 @@
           >
             <div onclick="signUp()">
               <!-- prettier-ignore -->
-              % include('utilities/buttons/primary_button', type='submit', link='signUp()', button_text=section_signup_content['button_text'])
+              % include('utilities/buttons/primary_button', type='submit', link='signUp()', button_text=signup_content['button_text'])
             </div>
           </div>
         </div>

@@ -379,7 +379,10 @@ login_content = {
     "illustration_alt": "Illustration af UNID Universe",
 }
 
-section_signup_content = {
+
+##############################
+#   SIGNUP
+signup_content = {
     "header_text": "Opret bruger",
     "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
     "button_text": "Opret bruger",
