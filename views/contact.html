@@ -80,11 +80,11 @@
             </div>
             <div class="space-y-4">
               <!-- prettier-ignore -->
-              % include('utilities/input_field', label_for=global_content['form_inputs']['full_name']['label_for'], form_label=global_content['form_inputs']['full_name']['text'], form_svg=global_content['form_inputs']['full_name']['icon'], type=global_content['form_inputs']['full_name']['type'], name=global_content['form_inputs']['full_name']['name'], inputmode=global_content['form_inputs']['full_name']['inputmode'], placeholder=global_content['form_inputs']['full_name']['placeholder'], form_info=global_content['form_inputs']['full_name']['form_info'])
-              % include('utilities/input_field', label_for=global_content['form_inputs']['email']['label_for'], form_label=global_content['form_inputs']['email']['text'], form_svg=global_content['form_inputs']['email']['icon'], type=global_content['form_inputs']['email']['type'], name=global_content['form_inputs']['email']['name'], inputmode=global_content['form_inputs']['email']['inputmode'], placeholder=global_content['form_inputs']['email']['placeholder'], form_info=global_content['form_inputs']['email']['form_info'])
+              % include('utilities/input_fields/default_input_field', label_for=global_content['form_inputs']['full_name']['label_for'], form_label=global_content['form_inputs']['full_name']['text'], form_svg=global_content['form_inputs']['full_name']['icon'], type=global_content['form_inputs']['full_name']['type'], name=global_content['form_inputs']['full_name']['name'], inputmode=global_content['form_inputs']['full_name']['inputmode'], placeholder=global_content['form_inputs']['full_name']['placeholder'], form_info=global_content['form_inputs']['full_name']['form_info'])
+              % include('utilities/input_fields/default_input_field', label_for=global_content['form_inputs']['email']['label_for'], form_label=global_content['form_inputs']['email']['text'], form_svg=global_content['form_inputs']['email']['icon'], type=global_content['form_inputs']['email']['type'], name=global_content['form_inputs']['email']['name'], inputmode=global_content['form_inputs']['email']['inputmode'], placeholder=global_content['form_inputs']['email']['placeholder'], form_info=global_content['form_inputs']['email']['form_info'])
               <div>
                 <!-- prettier-ignore -->
-                % include('utilities/message_input_field')
+                % include('utilities/input_fields/message_input_field')
               </div>
             </div>
             <div class="mx-auto md:w-3/6 lg:w-full xl:w-3/6 pt-6">
