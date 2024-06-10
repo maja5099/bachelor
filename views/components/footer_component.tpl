@@ -30,7 +30,7 @@
     </div>
     <!-- SOME -->
     <div class="flex items-center text-center justify-center gap-2">
-      % include('elements/social_media')
+      % include('elements/social_media_element')
     </div>
   </div>
 </footer>

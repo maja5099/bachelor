@@ -32,7 +32,7 @@
         <div class="flex items-center justify-center">
           <div class="grid gap-14 md:gap-10 md:grid-cols-2">
             <!-- prettier-ignore -->
-            % include('components/employee_box', employees=about_us_content['team_section']['employees'])
+            % include('components/employee_component', employees=about_us_content['team_section']['employees'])
           </div>
         </div>
       </div>

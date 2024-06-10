@@ -1,4 +1,4 @@
-% include('components/header_bar')
+% include('components/header_bar_component')
 <header
   class="text-white text-base bg-unidLightBlue drop-shadow-xl sticky top-0 z-50 transition-all duration-300 ease-in-out"
 >
@@ -25,7 +25,7 @@
       % end
     </div>
     <nav class="hidden lg:flex gap-4 xl:gap-8 items-center justify-center">
-      % include('elements/header_nav_items')
+      % include('elements/nav_items_element')
     </nav>
     <div class="gap-2 lg:gap-4 flex items-center">
       % if user:

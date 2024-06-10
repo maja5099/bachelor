@@ -48,7 +48,7 @@
   <body>
     <!-- prettier-ignore -->
     % if user is not None and "user_role_id" in user:
-    % include('components/header')
+    % include('components/header_component')
     <section
       class="bg-unidYellow bg-wave bg-cover py-20 space-y-8 lg:space-y-10"
     >
@@ -71,7 +71,7 @@
     % end
 
     <!-- prettier-ignore -->
-    % include('components/footer')
+    % include('components/footer_component')
 
     <!-- Logout pop up (hidden by default) -->
     % include('components/profile/logout_pop_up')

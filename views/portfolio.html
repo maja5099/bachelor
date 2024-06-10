@@ -47,7 +47,7 @@
   </head>
   <body>
     <!-- prettier-ignore -->
-    % include('components/header')
+    % include('components/header_component')
     <section class="bg-unidBeige">
       <div class="width_standard padding_y_standard space_y_standard mx-auto">
         <div class="flex justify-center">
@@ -60,37 +60,10 @@
             </p>
           </div>
         </div>
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-3 gap-y-6 md:gap-4"
-        >
-          <div>
-            <!-- prettier-ignore -->
-            % include('elements/portfolio_element')
-          </div>
-          <div>
-            <!-- prettier-ignore -->
-            % include('elements/portfolio_element')
-          </div>
-          <div class="col-span-1 md:col-span-2 row-span-1 md:row-span-2">
-            <!-- prettier-ignore -->
-            % include('elements/portfolio_element')
-          </div>
-          <div class="col-span-1 md:col-span-2 row-span-1 md:row-span-2">
-            <!-- prettier-ignore -->
-            % include('elements/portfolio_element')
-          </div>
-          <div>
-            <!-- prettier-ignore -->
-            % include('elements/portfolio_element')
-          </div>
-          <div>
-            <!-- prettier-ignore -->
-            % include('elements/portfolio_element')
-          </div>
-        </div>
+        % include('sections/cases_section')
       </div>
     </section>
-    % include('components/footer')
+    % include('components/footer_component')
 
     <!-- SCRIPT -->
     <script src="/static/script.js"></script>

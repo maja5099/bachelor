@@ -11,6 +11,6 @@
     class="w-full gap-10 grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 text-center"
   >
     <!-- prettier-ignore -->
-    % include('components/highlight_component', highlights=about_us_content['highlights_section']['highlights'])
+    % include('elements/highlights_element', highlights=about_us_content['highlights_section']['highlights'])
   </div>
 </div>

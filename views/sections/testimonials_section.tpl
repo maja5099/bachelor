@@ -4,15 +4,15 @@
       <div
         class="lg:w-2/3 flex justify-center flex-col text-center gap-y-4 md:gap-y-6"
       >
-        <h2>{{ frontpage_content["testimonial_section"]["header_text"] }}</h2>
+        <h2>{{ frontpage_content["testimonials_section"]["header_text"] }}</h2>
         <p id="subheader">
-          {{ frontpage_content["testimonial_section"]["subheader_text"] }}
+          {{ frontpage_content["testimonials_section"]["subheader_text"] }}
         </p>
       </div>
     </div>
     <div class="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-16">
       <!-- prettier-ignore -->
-      % include('components/testimonial_box')
+      % include('components/testimonial_component')
     </div>
   </div>
 </section>

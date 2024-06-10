@@ -17,7 +17,7 @@
         class="w-full gap-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 text-center"
       >
         <!-- prettier-ignore -->
-        % include('components/skill_component', skills=about_us_content['skills_section']['skills'])
+        % include('elements/skills_element', skills=about_us_content['skills_section']['skills'])
       </div>
     </div>
   </div>

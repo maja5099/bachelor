@@ -21,9 +21,9 @@
         class="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 justify-center items-end gap-10"
       >
         <!-- prettier-ignore -->
-        % include('components/pricing_default')
-        % include('components/pricing_default')
-        % include('components/pricing_accent')
+        % include('components/pricing_default_component')
+        % include('components/pricing_default_component')
+        % include('components/pricing_accent_component')
       </div>
       <div class="flex justify-center text-center">
         <p class="italic text-sm">

@@ -212,7 +212,7 @@ frontpage_content = {
         "image": "digital_design.svg",
     },
     # TESTIMONIAL SECTION
-    "testimonial_section": {
+    "testimonials_section": {
         "header_text": "Det siger vores kunder",
         "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
         "testimonial_icon": "quote.svg",
@@ -363,6 +363,13 @@ login_content = {
 portfolio_content = {
     "header_text": "Case portfolio",
     "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+    "cases_section": [
+        {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
+        {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
+        {"icon": "stop_watch.svg", "text": "Timeregistrering", "template": "profile_admin_hour_registration"},
+        {"icon": "letter.svg", "text": "Beskeder", "template": "profile_admin_messages"},
+        {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
+    ],
 }
 
 
