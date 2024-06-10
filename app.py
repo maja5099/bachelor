@@ -31,6 +31,27 @@ finally:
 
 
 ##############################
+#   ROUTERS
+try:
+    import routers.clipcards
+    import routers.contact
+    import routers.login
+    import routers.logout
+    import routers.messages
+    import routers.payment
+    import routers.portfolio
+    import routers.about_us
+    import routers.profile
+    import routers.services_and_prices
+    import routers.signup
+    logger.success("Routers imported successfully.")
+except Exception as e:
+    logger.error(f"Error importing routers: {e}")
+finally:
+    logger.info("Router import process completed.")
+
+
+##############################
 #   GIT AND PYTHONANYWHERE HOOK
 def git_update():
     try:
@@ -121,27 +142,6 @@ def static_folder(filepath):
 @get('/uploads/<filename:path>')
 def uploads_folder_static(filename):
     return serve_static(filename, UPLOADS_FOLDER)
-
-
-##############################
-#   ROUTERS
-try:
-    import routers.clipcards
-    import routers.contact
-    import routers.login
-    import routers.logout
-    import routers.messages
-    import routers.payment
-    import routers.portfolio
-    import routers.about_us
-    import routers.profile
-    import routers.services_and_prices
-    import routers.signup
-    logger.success("Routers imported successfully.")
-except Exception as e:
-    logger.error(f"Error importing routers: {e}")
-finally:
-    logger.info("Router import process completed.")
 
 
 ##############################
