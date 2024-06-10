@@ -4,30 +4,30 @@
   <!-- prettier-ignore -->
   % if user and "user_role_id" in user:
     % if user["user_role_id"] == 1:
-      % for section_profile_customer in section_profile_customer:
+      % for customer_profile_section in profile_content["customer_profile_section"]:
   <button
     class="secondary_button w-full flex cursor-pointer"
-    data-template="{{ section_profile_customer['template'] }}"
+    data-template="{{ customer_profile_section['template'] }}"
   >
     <div class="h-6 w-6">
       <!-- prettier-ignore -->
-      % include(f'{section_profile_customer["icon"]}')
+      % include(f'{customer_profile_section["icon"]}')
     </div>
-    <p class="font-bold">{{ section_profile_customer["text"] }}</p>
+    <p class="font-bold">{{ customer_profile_section["text"] }}</p>
   </button>
   % end
   <!-- prettier-ignore -->
   % elif user["user_role_id"] == 2:
-      % for section_profile_admin in section_profile_admin:
+      % for admin_profile_section in profile_content["admin_profile_section"]:
   <button
     class="secondary_button w-full flex cursor-pointer"
-    data-template="{{ section_profile_admin['template'] }}"
+    data-template="{{ admin_profile_section['template'] }}"
   >
     <div class="h-6 w-6">
       <!-- prettier-ignore -->
-      % include(f'{section_profile_admin["icon"]}')
+      % include(f'{admin_profile_section["icon"]}')
     </div>
-    <p class="font-bold">{{ section_profile_admin["text"] }}</p>
+    <p class="font-bold">{{ admin_profile_section["text"] }}</p>
   </button>
   <!-- prettier-ignore -->
   % end 

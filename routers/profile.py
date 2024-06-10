@@ -20,8 +20,7 @@ logger.setLevel(logging.INFO)
 try:
     global_content = content.global_content
     services_and_prices_content = content.services_and_prices_content
-    section_profile_admin = content.section_profile_admin
-    section_profile_customer = content.section_profile_customer
+    profile_content = content.profile_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error("Error importing content: %s", e)
@@ -119,15 +118,14 @@ def profile():
         
 
         return template('profile', title="Din profil",
+                        current_user=current_user,
+                        global_content=global_content,
+                        services_and_prices_content=services_and_prices_content,
+                        profile_content=profile_content,
                         user=data['user'],
-                        section_profile_admin=section_profile_admin,
-                        section_profile_customer=section_profile_customer,
                         first_name=data['first_name'],
                         last_name=data['last_name'],
                         username=data['username'],
-                        global_content=global_content,
-                        services_and_prices_content=services_and_prices_content,
-                        current_user=current_user,
                         active_clipcards_count=data['active_clipcards_count'],
                         inactive_clipcards_count=data['inactive_clipcards_count'],
                         time_used_hours=data['time_used_hours'],
@@ -191,15 +189,14 @@ def profile_template(template_name):
             logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", data['active_clipcards_count'], data['inactive_clipcards_count'])
 
             return template(relative_path,
+                            current_user=current_user,
+                            global_content=global_content,
+                            services_and_prices_content=services_and_prices_content,
+                            profile_content=profile_content,
                             user=data['user'],
                             first_name=data['first_name'],
                             last_name=data['last_name'],
                             username=data['username'],
-                            section_profile_admin=section_profile_admin, 
-                            section_profile_customer=section_profile_customer, 
-                            global_content=global_content,
-                            services_and_prices_content=services_and_prices_content,
-                            current_user=current_user, 
                             active_clipcards_count=data['active_clipcards_count'],
                             inactive_clipcards_count=data['inactive_clipcards_count'],
                             time_used_hours=data['time_used_hours'],
@@ -223,15 +220,14 @@ def profile_template(template_name):
                             messages_get=messages.messages_get,
                             admin_messages_get=messages.admin_messages_get,
                             delete_message=messages.delete_message,
+                            current_user=current_user,
+                            global_content=global_content,
+                            services_and_prices_content=services_and_prices_content,
+                            profile_content=profile_content,
                             user=data['user'], 
-                            section_profile_admin=section_profile_admin, 
-                            section_profile_customer=section_profile_customer, 
                             first_name=data['first_name'], 
                             last_name=data['last_name'], 
                             username=data['username'], 
-                            global_content=global_content,
-                            services_and_prices_content=services_and_prices_content,
-                            current_user=current_user, 
                             )
     except Exception as e:
         logger.error("Error loading template '%s': %s", template_name, e)

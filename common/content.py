@@ -1,4 +1,17 @@
 ##############################
+#   TABLE OF CONTENTS (A-Z)
+#   - Globals
+#   - Frontpage / index
+#   - About us
+#   - Contact
+#   - Error
+#   - Portfolio
+#   - Profile
+#   - Services and prices
+#   - Signup
+
+
+##############################
 #   GLOBALS
 global_content = {
     # LOGOS
@@ -214,6 +227,160 @@ frontpage_content = {
 
 
 ##############################
+#   ABOUT_US
+about_us_content = {
+    "header_text": "Om UNID Studio",
+    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+    # HIGHLIGHTS SECTION
+    "highlights_section": {
+        "header_text": "Lille studio - med store idéer",
+        "subheader_text": "OM UNID STUDIO",
+        # Highlights
+        "highlights": [
+            {"illustration": "tools.png", "illustration_alt": "Illustration med kreative værktøjer", "title": "Erfaring", "text": "Vi har stor erfaring indenfor grafisk design og udvikling af websites. Med vores ekspertise, kan vi skræddersy en løsning efter dine ønsker og behov."},
+            {"illustration": "book.png", "illustration_alt": "Illustration med en bog", "title": "KEA Ignite", "text": "Vi har et samarbejde med KEA. Hvis du er iværksætter, og går på KEA, så giver vi rabat på vores ydelser."},
+            {"illustration": "screen.png", "illustration_alt": "Illustration med en skærm med former på", "title": "Tidligere cases", "text": "Vi vægter tilfredshedgaranti højt, og afslutter ikke en case, før kunden er tilfreds. Vores tidligere cases, kan ses i vores portfolio."},
+            {"illustration": "phone_mail.png", "illustration_alt": "Illustration med en telefon og et brev", "title": "Kontakt os", "text": "Lad os høre om din idé. Vi er altid parate, til at hjælpe - og vi skræddersyer gerne én løsning til netop din virksomhed."},
+        ],
+    },
+    # VISION SECTION
+    "vision_section": {
+        "header_text": "Vores vision",
+        "subheader_text": "VISION",
+        "introduction_text": "Vi glæder os over at støtte ambitiøse studerende på deres iværksætterrejse.",
+        "illustration": "digital_design.svg",
+        "illustration_alt": "Illustration af digitalt design",
+        # Paragraphs
+        "paragraphs": [
+            {
+                "title": "",
+                "text": "Vi tror på, at en stærk start er nøglen til vedvarende vækst – og for at gøre denne start så tilgængelig som muligt, tilbyder vi særlige studierabatter på vores hjemmesidepakker. På den måde ønsker vi at lette byrden for nye forretningsfolk og give dem den nødvendige digitale platform, til at realisere deres visioner.",
+            },
+            {
+                "title": "Hvordan opnår du studierabat?",
+                "text": "Jonglerer du med både iværksætteri og uddannelse, så tilbyder vi særlige studierabatter på vores hjemmesidepakker. Det eneste krav vi har til dig, er at du skal være iværksætter samt være indskrevet på en uddannelsesinstitution – og kunne fremvise et gyldigt studiekort. Opnå din studierabat i dag, og lad os sammen bygge fundamentet for din fremtidige succes.",
+            },
+        ],
+    },
+    # SKILLS SECTION
+    "skills_section": {
+        "header_text": "Et udpluk af vores kompetencer",
+        "subheader_text": "KOMPETENCER",
+        # Skills
+        "skills": [
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+            {"icon": "heart.svg", "title": "Lorem ipsum"},
+        ],
+    },
+    # TEAM SECTION
+    "team_section": {
+        "header_text": "Bag om teamet - hvem er vi?",
+        "subheader_text": "TEAM",
+        "introduction_text": "Vi er et dedikeret og kreativt team, som har sans for selv de mindste detaljer. For os er det vigtigt at levere den bedste og mest konkurrencedygtige løsning.",
+        # Paragraphs
+        "paragraphs": [
+            {
+                "title": "",
+                "text": "Vi, Denise & Isabella, står bag UNID Studio. Vi har begge et stort flair, for at designe og udvikle digitale løsninger. Vi har udarbejdet og leveret mange digitale løsninger, og sammen udgør vi et team, hvor vores forskellige færdigheder og kompetencer komplementerer hinanden godt – og danner grobund for kreative løsninger, der skiller sig ud. Når vi udvikler websites og andre løsninger, vægter vi dine ønsker og behov højt, og på baggrund af det, kommer vi med vores forslag på, hvordan vi sammen kan komme i mål – og få udviklet den bedste løsning til lige netop dig.",
+            },
+        ],
+        # Employees
+        "employees": [
+            {"employee_image": "denise.jpg", "image_alt": "Portræt af Denise", "employee_name": "Denise Dalvang Hansen", "employee_job_title": "Designer & grafiker", "employee_information": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, fuga?"},
+            {"employee_image": "isabella.jpg", "image_alt": "Portræt af Isabella", "employee_name": "Isabella Hilarius Nielsen", "employee_job_title": "Webudvikler", "employee_information": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, fuga?"},
+        ],
+    },
+}
+
+
+##############################
+#   CONTACT
+contact_content = {
+    "header_text": "Kontakt",
+    "subheader_text": "Uanset om du har et eller flere spørgsmål, så er vi altid parate, til at hjælpe dig. Lad os høre om din idé, og vi vil herefter i fælleskab skræddersy én løsning, der passer perfekt til dig og din virksomhed. Vi ser frem, til at høre fra dig!",
+    "illustration": "graphic_design.png",
+    "illustration_alt": "Illustration af grafisk design",
+    # CONTACT FORM SECTION
+    "contact_form_section": {
+        "header_text": "Skriv til os her",
+        "subheader_text": "Vi stræber efter at vende tilbage hurtigst muligt.",
+        "button_text": "Send besked",
+    }
+}
+
+
+##############################
+#   ERROR
+error_content = {
+    "header_text": "Hov! Der skete en fejl",
+    "illustration": "unid_universe.svg",
+    "illustration_alt": "Illustration af UNID Universe",
+    "button_link": "/", 
+    "button_text": "Gå til forsiden",
+    "404": {
+        "error_title_text": "Fejl 404: Siden blev ikke fundet",
+        "error_message_text": "Beklager, men den side, du forsøgte at tilgå, eksisterer ikke. Tjek venligst URL'en og prøv igen, eller kontakt os, hvis problemet fortsætter."
+    },
+    "500": {
+        "error_title_text": "Fejl 500: Intern Serverfejl",
+        "error_message_text": "Vi beklager, men der er sket en fejl på serveren, som forhindrer udførelsen af din anmodning. Prøv venligst igen senere, eller kontakt os, hvis problemet fortsætter."
+    },
+}
+
+
+##############################
+#   LOGIN
+login_content = {
+    "header_text": "Log ind",
+    "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
+    "button_text": "Log ind",
+    "illustration": "unid_universe.svg",
+    "illustration_alt": "Illustration af UNID Universe",
+}
+
+
+##############################
+#   PORTFOLIO
+portfolio_content = {
+    "header_text": "Case portfolio",
+    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
+}
+
+
+##############################
+#   PROFILE
+profile_content = {
+    # ADMIN PROFILE SECTION
+    "admin_profile_section": [
+        {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
+        {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
+        {"icon": "stop_watch.svg", "text": "Timeregistrering", "template": "profile_admin_hour_registration"},
+        {"icon": "letter.svg", "text": "Beskeder", "template": "profile_admin_messages"},
+        {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
+    ],
+    # CUSTOMER PROFILE SECTION
+    "customer_profile_section": [
+        {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
+        {"icon": "card.svg", "text": "Klippekort", "template": "profile_customer_clipcard"},
+        {"icon": "cart.svg", "text": "Tilkøb", "template": "profile_additional_purchase"},
+        {"icon": "education.svg", "text": "Kurser", "template": "profile_courses"},
+        {"icon": "letter.svg", "text": "Beskeder", "template": "profile_customer_messages"},
+        {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
+    ]
+}
+
+
+##############################
 #   SERVICES_AND_PRICES
 services_and_prices_content = {
     "header_text": "Services og priser",
@@ -293,169 +460,9 @@ services_and_prices_content = {
 
 
 ##############################
-#   ABOUT_US
-about_us_content = {
-    "header_text": "Om UNID Studio",
-    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-    # HIGHLIGHTS SECTION
-    "highlights_section": {
-        "header_text": "Lille studio - med store idéer",
-        "subheader_text": "OM UNID STUDIO",
-        # Highlights
-        "highlights": [
-            {"illustration": "tools.png", "illustration_alt": "Illustration med kreative værktøjer", "title": "Erfaring", "text": "Vi har stor erfaring indenfor grafisk design og udvikling af websites. Med vores ekspertise, kan vi skræddersy en løsning efter dine ønsker og behov."},
-            {"illustration": "book.png", "illustration_alt": "Illustration med en bog", "title": "KEA Ignite", "text": "Vi har et samarbejde med KEA. Hvis du er iværksætter, og går på KEA, så giver vi rabat på vores ydelser."},
-            {"illustration": "screen.png", "illustration_alt": "Illustration med en skærm med former på", "title": "Tidligere cases", "text": "Vi vægter tilfredshedgaranti højt, og afslutter ikke en case, før kunden er tilfreds. Vores tidligere cases, kan ses i vores portfolio."},
-            {"illustration": "phone_mail.png", "illustration_alt": "Illustration med en telefon og et brev", "title": "Kontakt os", "text": "Lad os høre om din idé. Vi er altid parate, til at hjælpe - og vi skræddersyer gerne én løsning til netop din virksomhed."},
-        ],
-    },
-    # VISION SECTION
-    "vision_section": {
-        "header_text": "Vores vision",
-        "subheader_text": "VISION",
-        "introduction_text": "Vi glæder os over at støtte ambitiøse studerende på deres iværksætterrejse.",
-        "illustration": "digital_design.svg",
-        "illustration_alt": "Illustration af digitalt design",
-        # Paragraphs
-        "paragraphs": [
-            {
-                "title": "",
-                "text": "Vi tror på, at en stærk start er nøglen til vedvarende vækst – og for at gøre denne start så tilgængelig som muligt, tilbyder vi særlige studierabatter på vores hjemmesidepakker. På den måde ønsker vi at lette byrden for nye forretningsfolk og give dem den nødvendige digitale platform, til at realisere deres visioner.",
-            },
-            {
-                "title": "Hvordan opnår du studierabat?",
-                "text": "Jonglerer du med både iværksætteri og uddannelse, så tilbyder vi særlige studierabatter på vores hjemmesidepakker. Det eneste krav vi har til dig, er at du skal være iværksætter samt være indskrevet på en uddannelsesinstitution – og kunne fremvise et gyldigt studiekort. Opnå din studierabat i dag, og lad os sammen bygge fundamentet for din fremtidige succes.",
-            },
-        ],
-    },
-    # SKILLS SECTION
-    "skills_section": {
-        "header_text": "Et udpluk af vores kompetencer",
-        "subheader_text": "KOMPETENCER",
-        # Skills
-        "skills": [
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-            {"icon": "heart.svg", "title": "Lorem ipsum"},
-        ],
-    },
-    # TEAM SECTION
-    "team_section": {
-        "header_text": "Bag om teamet - hvem er vi?",
-        "subheader_text": "TEAM",
-        "introduction_text": "Vi er et dedikeret og kreativt team, som har sans for selv de mindste detaljer. For os er det vigtigt at levere den bedste og mest konkurrencedygtige løsning.",
-        # Paragraphs
-        "paragraphs": [
-            {
-                "title": "",
-                "text": "Vi, Denise & Isabella, står bag UNID Studio. Vi har begge et stort flair, for at designe og udvikle digitale løsninger. Vi har udarbejdet og leveret mange digitale løsninger, og sammen udgør vi et team, hvor vores forskellige færdigheder og kompetencer komplementerer hinanden godt – og danner grobund for kreative løsninger, der skiller sig ud. Når vi udvikler websites og andre løsninger, vægter vi dine ønsker og behov højt, og på baggrund af det, kommer vi med vores forslag på, hvordan vi sammen kan komme i mål – og få udviklet den bedste løsning til lige netop dig.",
-            },
-        ],
-        # Employees
-        "employees": [
-            {"employee_image": "denise.jpg", "image_alt": "Portræt af Denise", "employee_name": "Denise Dalvang Hansen", "employee_job_title": "Designer & grafiker", "employee_information": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, fuga?"},
-            {"employee_image": "isabella.jpg", "image_alt": "Portræt af Isabella", "employee_name": "Isabella Hilarius Nielsen", "employee_job_title": "Webudvikler", "employee_information": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, fuga?"},
-        ],
-    },
-}
-
-
-##############################
-#   LOGIN
-login_content = {
-    "header_text": "Log ind",
-    "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
-    "button_text": "Log ind",
-    "illustration": "unid_universe.svg",
-    "illustration_alt": "Illustration af UNID Universe",
-}
-
-
-##############################
 #   SIGNUP
 signup_content = {
     "header_text": "Opret bruger",
     "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
     "button_text": "Opret bruger",
 }
-
-
-##############################
-#   ERROR
-error_content = {
-    "header_text": "Hov! Der skete en fejl",
-    "illustration": "unid_universe.svg",
-    "illustration_alt": "Illustration af UNID Universe",
-    "button_link": "/", 
-    "button_text": "Gå til forsiden",
-    "404": {
-        "error_title_text": "Fejl 404: Siden blev ikke fundet",
-        "error_message_text": "Beklager, men den side, du forsøgte at tilgå, eksisterer ikke. Tjek venligst URL'en og prøv igen, eller kontakt os, hvis problemet fortsætter."
-    },
-    "500": {
-        "error_title_text": "Fejl 500: Intern Serverfejl",
-        "error_message_text": "Vi beklager, men der er sket en fejl på serveren, som forhindrer udførelsen af din anmodning. Prøv venligst igen senere, eller kontakt os, hvis problemet fortsætter."
-    },
-}
-
-
-##############################
-#   CONTACT
-contact_content = {
-    "header_text": "Kontakt",
-    "subheader_text": "Uanset om du har et eller flere spørgsmål, så er vi altid parate, til at hjælpe dig. Lad os høre om din idé, og vi vil herefter i fælleskab skræddersy én løsning, der passer perfekt til dig og din virksomhed. Vi ser frem, til at høre fra dig!",
-    "illustration": "graphic_design.png",
-    "illustration_alt": "Illustration af grafisk design",
-    # CONTACT FORM SECTION
-    "contact_form_section": {
-        "header_text": "Skriv til os her",
-        "subheader_text": "Vi stræber efter at vende tilbage hurtigst muligt.",
-        "button_text": "Send besked",
-    }
-}
-
-
-##############################
-#   PORTFOLIO
-portfolio_content = {
-    "header_text": "Case portfolio",
-    "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-}
-
-
-
-
-
-
-section_profile_admin = [
-    {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
-    {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
-    {"icon": "stop_watch.svg", "text": "Timeregistrering", "template": "profile_admin_hour_registration"},
-    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_admin_messages"},
-    {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
-]
-
-section_profile_customer = [
-    {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
-    {"icon": "card.svg", "text": "Klippekort", "template": "profile_customer_clipcard"},
-    {"icon": "cart.svg", "text": "Tilkøb", "template": "profile_additional_purchase"},
-    {"icon": "education.svg", "text": "Kurser", "template": "profile_courses"},
-    {"icon": "letter.svg", "text": "Beskeder", "template": "profile_customer_messages"},
-    {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
-]
-
-
-
-
-
-
-
