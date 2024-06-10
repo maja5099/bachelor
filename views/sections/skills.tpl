@@ -6,10 +6,10 @@
           class="space-y-2 flex flex-col items-center mx-auto justify-center"
         >
           <p class="text-md md:w-1/2 tracking-widest">
-            {{ about_us_content["section_skills"]["subheader"] }}
+            {{ about_us_content["skills_section"]["subheader_text"] }}
           </p>
           <h2 class="text-white">
-            {{ about_us_content["section_skills"]["title"] }}
+            {{ about_us_content["skills_section"]["header_text"] }}
           </h2>
         </div>
       </div>
@@ -17,7 +17,7 @@
         class="w-full gap-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 text-center"
       >
         <!-- prettier-ignore -->
-        % include('components/skill_component', skills=about_us_content['section_skills']['skills'])
+        % include('components/skill_component', skills=about_us_content['skills_section']['skills'])
       </div>
     </div>
   </div>

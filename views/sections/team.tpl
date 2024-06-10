@@ -8,18 +8,23 @@
           <div class="flex">
             <div class="space-y-2">
               <p class="text-md tracking-widest text-unidPurple">
-                {{ about_us_content["section_team"]["subheader"] }}
+                {{ about_us_content["team_section"]["subheader_text"] }}
               </p>
-              <h2>{{ about_us_content["section_team"]["title"] }}</h2>
+              <h2>{{ about_us_content["team_section"]["header_text"] }}</h2>
             </div>
           </div>
           <div class="space-y-6">
             <p class="text-lg font-medium">
-              {{ about_us_content["section_team"]["introduction"] }}
+              {{ about_us_content["team_section"]["introduction_text"] }}
             </p>
-            <p class="text-base">
-              {{ about_us_content["section_team"]["text"] }}
-            </p>
+            % for paragraph in about_us_content['team_section']['paragraphs']:
+            <div class="space-y-2">
+              <p class="text-2xl font-saira font-semibold">{{ paragraph["title"] }}</p>
+              <p class="text-base">
+                {{ paragraph["text"] }}
+              </p>
+            </div>
+            % end
           </div>
         </div>
       </div>
@@ -27,7 +32,7 @@
         <div class="flex items-center justify-center">
           <div class="grid gap-14 md:gap-10 md:grid-cols-2">
             <!-- prettier-ignore -->
-            % include('components/employee_box', employees=about_us_content['section_team']['employees'])
+            % include('components/employee_box', employees=about_us_content['team_section']['employees'])
           </div>
         </div>
       </div>
