@@ -7,8 +7,8 @@ import os
 
 #   Local application imports
 from common.colored_logging import setup_logger
-import master
 import common.content as content
+import master
 
 
 ##############################
@@ -61,9 +61,11 @@ def portfolio():
             user = username = None
             logger.warning(f"No valid user cookie found for /{page_name}, perhaps user is not logged in yet")
 
+        # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                         title="UNID Studio - Services og priser",  
+                        # A-Z
                         global_content=global_content,
                         portfolio_content=portfolio_content,
                         user=user, 

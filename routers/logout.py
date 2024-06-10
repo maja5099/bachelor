@@ -34,7 +34,7 @@ def logout():
         user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
 
         if not user_cookie:
-            logger.info("No user cookie found, no user to log out")
+            logger.info(f"No user cookie found, no user to {function_name}")
             return redirect("/")
 
         # Database connection and user validation
@@ -49,7 +49,7 @@ def logout():
 
         # User and cookie found, perform logout
         username = user['username']
-        logger.info(f"Attempting to log out user: {username}")
+        logger.info(f"Attempting {function_name} user: {username}")
         response.delete_cookie("user")
         logger.success(f"Successfully logged out user: {username}")
         return redirect("/")
@@ -65,4 +65,4 @@ def logout():
         if "db" in locals():
             db.close()
             logger.info("Database connection closed")
-        logger.info(f"Completed request for {function_name}")
+        logger.info(f"Completed {function_name}")

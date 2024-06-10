@@ -7,12 +7,11 @@ import time
 import uuid
 import bcrypt
 import logging
-import json
 
 #   Local application imports
 from common.colored_logging import setup_logger
-import master
 import common.content as content
+import master
 
 
 ##############################
@@ -45,14 +44,18 @@ finally:
 #   SIGNUP - POST
 @post("/signup")
 def signup():
-    page_name = "signup"
-    response.content_type = 'application/json'
-    try:
-        load_dotenv('.env')
-        logger.info(f"Starting signup request")
 
+    function_name = "signup"
+    response.content_type = 'application/json'
+
+    try:
+        # Load environment variables
+        load_dotenv('.env')
+        logger.info(f"Starting {function_name} request")
+
+        # Establish database connection
         db = master.db()
-        logger.debug("Database connection opened for signup")
+        logger.debug(f"Database connection opened for {function_name}")
 
         # Validate inputs
         email_error = master.validate_email()
@@ -60,6 +63,7 @@ def signup():
         username_error = master.validate_username()
         password_error = master.validate_password()
 
+        # Return error messages for invalid inputs
         if email_error:
             logger.error(email_error)
             return {"error": email_error}
@@ -73,6 +77,7 @@ def signup():
             logger.error(password_error)
             return {"error": password_error}
 
+        # Retrieve form data
         email = request.forms.get("email")
         phone = request.forms.get("phone")
         username = request.forms.get("username")
@@ -82,7 +87,7 @@ def signup():
         website_name = request.forms.get("website_name", "")
         website_url = request.forms.get("website_url", "")
 
-        # Check if email, phone, and username already exist
+        # Check if email, phone, and username already exists in db (prevent dublicates)
         existing_user_email = db.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
         existing_user_phone = db.execute("SELECT * FROM users WHERE phone = ?", (phone,)).fetchone()
         existing_user_username = db.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
@@ -97,13 +102,14 @@ def signup():
             logger.error("Username already exists")
             return {"error": "Det indtastede brugernavn eksisterer allerede."}
 
-    
+        # Generate unique identifiers and timestamps
         user_id = str(uuid.uuid4().hex)
         is_active = 1
         created_at = int(time.time())
         updated_at = int(time.time())
         deleted_at = ""
 
+        # Check if email is staff emails (determines user roles)
         staff_emails = ["kontakt@unidstudio.dk", "denise@unidstudio.dk", "isabella@unidstudio.dk"]
         if email in staff_emails:
             user_role_id = "2"
@@ -114,9 +120,11 @@ def signup():
             customer_id = user_id
             db.execute("INSERT INTO customers (customer_id, user_role_id, website_name, website_url) VALUES (?, ?, ?, ?)", (customer_id, user_role_id, website_name, website_url))
 
+        # Hash password using bcrypt and salt
         salt = bcrypt.gensalt()
         password_hashed = bcrypt.hashpw(password.encode("utf-8"), salt)
-
+        
+        # Prepare user dictionary for insertion into database
         user = {
             "user_id": user_id,
             "username": username,
@@ -132,17 +140,19 @@ def signup():
             "user_role_id": user_role_id,
         }
 
+        # Insert user data into users table
         db.execute("INSERT INTO users (user_id, first_name, last_name, email, phone, username, password, is_active, created_at, updated_at, deleted_at, user_role_id) VALUES (:user_id, :first_name, :last_name, :email, :phone, :username, :password, :is_active, :created_at, :updated_at, :deleted_at, :user_role_id)", user)
 
+        # Commit changes to the database
         db.commit()
-        logger.success("Signup successful")
-        return {"message": "Signup successful"}
+        logger.success(f"{function_name} successful")
+        return {"message": f"{function_name} successful"}
 
     except Exception as e:
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
-        logger.error(f"Error during request for /{page_name}: {e}")
+        logger.error(f"Error during {function_name}: {e}")
         response.status = 500
         return {"error": "Internal Server Error"}
 
@@ -150,17 +160,22 @@ def signup():
         if "db" in locals():
             db.close()
             logger.info("Database connection closed")
-        logger.info(f"Completed request for /{page_name}")
+        logger.info(f"Completed {function_name}")
+
 
 ##############################
 #   SIGNUP - GET
 @get("/signup")
 def signup_get():
+
     page_name = "signup"
+
     try:
+        # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                     title="Sign up", 
+                    # A-Z
                     global_content=global_content,
                     signup_content=signup_content, 
                     )
@@ -171,6 +186,3 @@ def signup_get():
 
     finally:
         logger.info(f"Completed request for /{page_name}")
-
-
-

@@ -9,8 +9,8 @@ import os
 
 #   Local application imports
 from common.colored_logging import setup_logger
-import master
 import common.content as content
+import master
 
 
 ##############################
@@ -43,11 +43,16 @@ finally:
 #  SET COOKIE
 def set_cookie_secure(cookie_name, cookie_value):
     try:
+        # Fetch host environment variable
         host = os.getenv('HOST')
         logger.success(f"Successfully set cookie: {cookie_name}")
+
+        # Set cookies with strict policies if not on localhost
         if host != 'localhost':
             response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True, secure=True, samesite='Strict')
             logger.info(f"Set secure cookie {cookie_name} with strict policies.")
+        
+        # Set less strict cookies on localhost (development)
         else:
             response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
             logger.info(f"Set cookie {cookie_name} with httponly.")
@@ -65,33 +70,39 @@ def set_cookie_secure(cookie_name, cookie_value):
 @post("/login")
 def login():
 
-    page_name = "login"
+    function_name = "login"
 
     try:
+        # Load environment variables
         load_dotenv('.env')
-        logger.info(f"Starting login request")
+        logger.info(f"Starting {function_name} request")
         
+        # Retrieve username and password from form
         username = request.forms.get("username")
         password = request.forms.get("password")
-    
+
+        # Ensure both username and password are given
         if not username or not password:
             logger.warning("Both username and password must be filled out")
             return {"error": "Både brugernavn og adgangskode skal udfyldes"}
         
+        # Establish database connection
         db = master.db()
-        logger.debug("Database connection opened for login")
+        logger.debug(f"Database connection opened for {function_name}")
         
+        # Check if user exists in database
         user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
         if not user:
             logger.error("User does not exist")
             return {"error": "Brugernavnet eksisterer ikke"}
         
+        # Verify the password
         hashed_password_from_db = user["password"]
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
             set_cookie_secure("user", user)
-            logger.success(f"Login successful for user {username}. Redirected user.")
-            return {"info": "Login successful", "redirect": "/"}
+            logger.success(f"{function_name} successful for user {username}. Redirected user.")
+            return {"info": f"{function_name} successful", "redirect": "/"}
         
         else:
             logger.error("Incorrect password")
@@ -101,15 +112,14 @@ def login():
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
-        logger.error(f"Error during request for /{page_name}: {e}")
+        logger.error(f"Error during request for /{function_name}: {e}")
         raise
     
     finally:
         if "db" in locals():
             db.close()
             logger.info("Database connection closed")
-        logger.info(f"Completed request for /{page_name}")
-
+        logger.info(f"Completed request for /{function_name}")
 
 
 ##############################
@@ -120,9 +130,11 @@ def login_get():
     page_name = "login"
 
     try:
+        # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, 
                     title="Log in", 
+                    # A-Z
                     global_content=global_content,
                     login_content=login_content, 
                     )
