@@ -376,24 +376,12 @@ portfolio_content = {
 ##############################
 #   PROFILE
 profile_content = {
-
-    # ADMIN PROFILE SECTION
-    "admin_profile_section": [
-        {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
-        {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
-        {"icon": "stop_watch.svg", "text": "Timeregistrering", "template": "profile_admin_hour_registration"},
-        {"icon": "letter.svg", "text": "Beskeder", "template": "profile_admin_messages"},
-        {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
-    ],
-    # CUSTOMER PROFILE SECTION
-    "customer_profile_section": [
-        {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
-        {"icon": "card.svg", "text": "Klippekort", "template": "profile_customer_clipcard"},
-        {"icon": "cart.svg", "text": "Tilkøb", "template": "profile_additional_purchase"},
-        {"icon": "education.svg", "text": "Kurser", "template": "profile_courses"},
-        {"icon": "letter.svg", "text": "Beskeder", "template": "profile_customer_messages"},
-        {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
-    ],
+    # GLOBAL
+    "profile_settings": {
+        "header_text": "Brugerindstillinger",
+        "subheader_text": "INDSTILLINGER",
+        "box_header_text": "Indstillinger",
+    },
     "logout": {
         "header_text": "Log ud",
         "subheader_text": "Du er ved at logge ud, er du sikker?",
@@ -401,7 +389,61 @@ profile_content = {
             "cancel": "Annuller",
             "proceed": "Log ud"
         }
-    }
+    },
+    # ADMIN SPECIFIC
+    "admin_specific_content": {
+        "profile_admin_clipcard": {
+            "header_text": "Aktive klippekort",
+            "subheader_text": "KLIPPEKORT",
+        },
+        "profile_admin_hour_registration": {
+            "header_text": "Timeregistrering",
+            "subheader_text": "REGISTRERING",
+        },
+        "profile_admin_messages": {
+            "header_text": "Indsendte beskeder",
+            "subheader_text": "BESKEDER",
+        },
+        # Menu
+        "admin_profile_menu": [
+            {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
+            {"icon": "card.svg", "text": "Klippekort", "template": "profile_admin_clipcard"},
+            {"icon": "stop_watch.svg", "text": "Timeregistrering", "template": "profile_admin_hour_registration"},
+            {"icon": "letter.svg", "text": "Beskeder", "template": "profile_admin_messages"},
+            {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
+        ],
+    },
+    # CUSTOMER SPECIFIC
+    "customer_specific_content": {
+        "profile_customer_additional_purchase": {
+            "header_text": "Tilkøb",
+            "subheader_text": "TILKØB",
+            "box_header_text": "Tilkøb",
+        },
+        "profile_customer_clipcard": {
+            "header_text": "Det, har du fået lavet",
+            "subheader_text": "TIMEREGISTRERING",
+        },
+        "profile_customer_courses": {
+            "header_text": "Kurser",
+            "subheader_text": "KURSER",
+            "box_header_text": "Kurser",
+        },
+        "profile_customer_messages": {
+            "header_text": "Skriv til os her",
+            "subheader_text": "BESKEDER",
+            "box_header_text": "Send en besked",
+        },
+        # Menu
+        "customer_profile_menu": [
+            {"icon": "user.svg", "text": "Oversigt", "template": "profile_overview"},
+            {"icon": "card.svg", "text": "Klippekort", "template": "profile_customer_clipcard"},
+            {"icon": "cart.svg", "text": "Tilkøb", "template": "profile_customer_additional_purchase"},
+            {"icon": "education.svg", "text": "Kurser", "template": "profile_customer_courses"},
+            {"icon": "letter.svg", "text": "Beskeder", "template": "profile_customer_messages"},
+            {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
+        ],
+    },
 }
 
 

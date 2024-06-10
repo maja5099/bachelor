@@ -119,9 +119,9 @@ def profile():
 
         return template('profile', title="Din profil",
                         current_user=current_user,
+                        profile_content=profile_content,
                         global_content=global_content,
                         services_and_prices_content=services_and_prices_content,
-                        profile_content=profile_content,
                         user=data['user'],
                         first_name=data['first_name'],
                         last_name=data['last_name'],
@@ -189,10 +189,10 @@ def profile_template(template_name):
             logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", data['active_clipcards_count'], data['inactive_clipcards_count'])
 
             return template(relative_path,
+                            profile_content=profile_content,
                             current_user=current_user,
                             global_content=global_content,
                             services_and_prices_content=services_and_prices_content,
-                            profile_content=profile_content,
                             user=data['user'],
                             first_name=data['first_name'],
                             last_name=data['last_name'],
@@ -214,6 +214,7 @@ def profile_template(template_name):
 
             return template(template_path, 
                             title="Din profil", 
+                            profile_content=profile_content,
                             save_file=messages.save_file,
                             get_current_user=messages.get_current_user,
                             send_message=messages.send_message,
@@ -223,7 +224,6 @@ def profile_template(template_name):
                             current_user=current_user,
                             global_content=global_content,
                             services_and_prices_content=services_and_prices_content,
-                            profile_content=profile_content,
                             user=data['user'], 
                             first_name=data['first_name'], 
                             last_name=data['last_name'], 

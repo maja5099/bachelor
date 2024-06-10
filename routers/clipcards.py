@@ -191,7 +191,7 @@ def clipcards():
 
 @get('/buy_clipcard/<clipcard_type>/<clipcard_price>')
 def buy_clipcard(clipcard_type, clipcard_price):
-    return template('buy_clipcard.html', global_content=global_content, clipcard_type=clipcard_type, clipcard_price=clipcard_price)
+    return template('buy_clipcard.html', global_content=global_content, profile_content=profile_content, clipcard_type=clipcard_type, clipcard_price=clipcard_price)
 
 
 @get('/profile/profile_admin_clipcard')
@@ -249,7 +249,7 @@ def admin_clipcards_get():
             else:
                 clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
        
-        return template(relative_path, global_content=global_content, formatted_clipcards=formatted_clipcards, active_clipcards=active_clipcards, active_customers=active_customers)
+        return template(relative_path, global_content=global_content, profile_content=profile_content, formatted_clipcards=formatted_clipcards, active_clipcards=active_clipcards, active_customers=active_customers)
     
     except Exception as e:
         print("Error in admin_clipcards:", e) 
@@ -309,7 +309,7 @@ def admin_clipcards_get():
             else:
                 clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
        
-        return template(relative_path, global_content=global_content, active_clipcards=active_clipcards, active_customers=active_customers)
+        return template(relative_path, global_content=global_content, profile_content=profile_content, active_clipcards=active_clipcards, active_customers=active_customers)
     
     except Exception as e:
         print("Error in admin_clipcards:", e) 

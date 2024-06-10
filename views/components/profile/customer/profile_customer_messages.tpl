@@ -1,7 +1,11 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">BESKEDER</p>
-    <h2>Skriv til os her</h2>
+    <p class="text-md tracking-widest text-unidPurple">
+      {{ profile_content["customer_specific_content"]["profile_customer_messages"]["subheader_text"] }}
+    </p>
+    <h2>
+      {{ profile_content["customer_specific_content"]["profile_customer_messages"]["header_text"] }}
+    </h2>
   </div>
   <div>
     <div
@@ -14,7 +18,9 @@
           <div id="icon_medium" class="fill-unidPurple">
             % include(global_content['ui_icons']['education'])
           </div>
-          <p class="font-bold text-lg">Send en besked</p>
+          <p class="font-bold text-lg">
+            {{ profile_content["customer_specific_content"]["profile_customer_messages"]["box_header_text"] }}
+          </p>
         </div>
       </div>
       <div class="flex flex-col gap-10 p-6 text-unidPurple">

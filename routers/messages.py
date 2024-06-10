@@ -9,6 +9,8 @@ from common.time_formatting import *
 import common.content as content
 
 
+profile_content = content.profile_content
+
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
 UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
 
@@ -96,7 +98,7 @@ def messages_get():
         # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
-        return template(relative_path, global_content=global_content)
+        return template(relative_path, global_content=global_content, profile_content=profile_content,)
     except Exception as e:
         print(e)
         if "db" in locals(): db.rollback() 
@@ -144,7 +146,7 @@ def admin_messages_get():
         # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
-        return template(relative_path, messages=messages, global_content=global_content)
+        return template(relative_path, messages=messages, global_content=global_content, profile_content=profile_content,)
 
     except Exception as e:
         print(e)

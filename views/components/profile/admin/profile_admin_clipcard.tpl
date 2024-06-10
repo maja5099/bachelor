@@ -1,7 +1,11 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">KLIPPEKORT</p>
-    <h2>Aktive klippekort</h2>
+    <p class="text-md tracking-widest text-unidPurple">
+      {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["subheader_text"] }}
+    </p>
+    <h2>
+      {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["header_text"] }}
+    </h2>
   </div>
   <div class="grid lg:grid-cols-2 gap-8">
     % for clipcard in active_clipcards:

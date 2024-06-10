@@ -1,7 +1,11 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">BESKEDER</p>
-    <h2>Indsendte beskeder</h2>
+    <p class="text-md tracking-widest text-unidPurple">
+      {{ profile_content["admin_specific_content"]["profile_admin_messages"]["subheader_text"] }}
+    </p>
+    <h2>
+      {{ profile_content["admin_specific_content"]["profile_admin_messages"]["header_text"] }}
+    </h2>
   </div>
   <div class="grid gap-8">
     <!-- prettier-ignore -->

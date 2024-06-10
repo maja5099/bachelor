@@ -1,0 +1,2 @@
+<!-- prettier-ignore -->
+% include('components/empty_page_component', subheader=profile_content["customer_specific_content"]["profile_customer_additional_purchase"]["subheader_text"], header=profile_content["customer_specific_content"]["profile_customer_additional_purchase"]["header_text"], box_header=profile_content["customer_specific_content"]["profile_customer_additional_purchase"]["box_header_text"])

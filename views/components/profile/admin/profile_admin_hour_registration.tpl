@@ -1,7 +1,11 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">REGISTRERING</p>
-    <h2>Timeregistrering</h2>
+    <p class="text-md tracking-widest text-unidPurple">
+      {{ profile_content["admin_specific_content"]["profile_admin_hour_registration"]["subheader_text"] }}
+    </p>
+    <h2>
+      {{ profile_content["admin_specific_content"]["profile_admin_hour_registration"]["header_text"] }}
+    </h2>
   </div>
   <div>
     <div

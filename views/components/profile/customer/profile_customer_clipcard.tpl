@@ -88,8 +88,12 @@
 % else:
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">TIMEREGISTRERING</p>
-    <h2>Det, har du fået lavet</h2>
+    <p class="text-md tracking-widest text-unidPurple">
+      {{ profile_content["customer_specific_content"]["profile_customer_clipcard"]["subheader_text"] }}
+    </p>
+    <h2>
+      {{ profile_content["customer_specific_content"]["profile_customer_clipcard"]["header_text"] }}
+    </h2>
   </div>
   <div class="grid lg:grid-cols-2 gap-8">
     % for task in tasks:
