@@ -1,18 +1,29 @@
-from bottle import redirect, template, get, route, HTTPResponse
-import master
-import common.content as content
+##############################
+#   IMPORTS
+#   Library imports
+from bottle import get, template, route, HTTPResponse
 import logging
+
+#   Local application imports
 from common.colored_logging import setup_logger
-import routers.messages as messages
 from common.get_current_user import *
 from common.find_template import *
 from common.time_formatting import *
+import common.content as content
+import routers.messages as messages
+import master
 
 
 ##############################
 #   COLORED LOGGING
-logger = setup_logger(__name__, level=logging.INFO)
-logger.setLevel(logging.INFO)
+try:
+    logger = setup_logger(__name__, level=logging.INFO)
+    logger.setLevel(logging.INFO)
+    logger.success("Logging imported successfully.")
+except Exception as e:
+    logger.error(f"Error importing logging: {e}")
+finally:
+    logger.info("Logging import process completed.")
 
 
 ##############################
@@ -29,94 +40,109 @@ finally:
 
 
 ##############################
+#   LOAD PROFILE DATA
 #   Fetching information to be included in customer clipcards / timeregistration
 def load_profile_data():
-    current_user = get_current_user()
-    if not current_user:
-        logger.info("No current user found, redirecting to login.")
-        return HTTPResponse(status=303, headers={"Location": "/"})
 
-    db = master.db()
-    user = current_user
+    function_name = "load_profile_data"
 
-    first_name = user['first_name']
-    last_name = user['last_name']
-    username = user['username']
+    try:
+        # Retrieve current user details
+        current_user = get_current_user()
 
-    #   Fetching clipcard_id from payments
-    payment_query = """
-        SELECT payments.clipcard_id
-        FROM payments
-        JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
-        WHERE payments.user_id = ? AND clipcards.is_active = 1
-        LIMIT 1
-    """
-    payment = db.execute(payment_query, (user['user_id'],)).fetchone()
+        # Redirect if not logged in
+        if not current_user:
+            logger.info("No current user found, redirecting to login.")
+            return HTTPResponse(status=303, headers={"Location": "/"})
 
-    #   Fetching time_used and remaining_time from active clipcards
-    if payment:
-        clipcard_id = payment['clipcard_id']
+        # Establish database connection
+        db = master.db()
+        logger.debug(f"Database connection opened for {function_name}")
         
-        clipcard_query = """
-            SELECT time_used, remaining_time
-            FROM clipcards
-            WHERE clipcard_id = ? AND is_active = 1
-        """
-        clipcard_data = db.execute(clipcard_query, (clipcard_id,)).fetchone()
+        user = current_user
 
-        #   Converts time_used and remaining_time to hours and minutes
-        if clipcard_data:
-            time_used = clipcard_data['time_used']
-            remaining_time = clipcard_data['remaining_time']
-            time_used_hours, time_used_minutes = minutes_to_hours_minutes(time_used)
-            remaining_hours, remaining_minutes = minutes_to_hours_minutes(remaining_time)
+        # Retrieve active clipcard ID for the current user
+        payment_query = """
+            SELECT payments.clipcard_id
+            FROM payments
+            WHERE payments.user_id = ? AND payments.clipcard_id IN (SELECT clipcard_id FROM clipcards WHERE is_active = 1)
+            LIMIT 1
+        """ 
+
+        # Fetch the result
+        payment = db.execute(payment_query, (user['user_id'],)).fetchone()
+
+        # Initialize variables for time
+        time_used_hours = time_used_minutes = remaining_hours = remaining_minutes = 0
+
+        # If a valid payment and clipcard are found, retrieve detailed clipcard data
+        if payment and payment['clipcard_id']:
+            clipcard_data = db.execute("""
+                SELECT time_used, remaining_time
+                FROM clipcards
+                WHERE clipcard_id = ? AND is_active = 1
+            """, (payment['clipcard_id'],)).fetchone()
+
+            # If clipcard data is found, convert time
+            if clipcard_data:
+                time_used_hours, time_used_minutes = minutes_to_hours_minutes(clipcard_data['time_used'])
+                remaining_hours, remaining_minutes = minutes_to_hours_minutes(clipcard_data['remaining_time'])
+            else:
+                logger.info("Active clipcard data not found for user.")
         else:
-            logger.info("Clipcard data not found or inactive for user.")
-            time_used_hours = 0
-            time_used_minutes = 0
-            remaining_hours = 0
-            remaining_minutes = 0
-    else:
-        logger.info("Payment not found for user.")
-        time_used_hours = 0
-        time_used_minutes = 0
-        remaining_hours = 0
-        remaining_minutes = 0
+            logger.info("No active payment found for user.")
 
+        # Count active and inactive clipcards
+        active_clipcards_count = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()['count']
+        inactive_clipcards_count = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()['count']
 
-    #   Fetching active and inactive clipcards
-    active_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 1").fetchone()
-    inactive_clipcards_result = db.execute("SELECT COUNT(*) AS count FROM clipcards WHERE is_active = 0").fetchone()
+        # Return a dictionary of all relevant information
+        return {
+            'user': user,
+            'first_name': user['first_name'],
+            'last_name': user['last_name'],
+            'username': user['username'],
+            'active_clipcards_count': active_clipcards_count,
+            'inactive_clipcards_count': inactive_clipcards_count,
+            'time_used_hours': time_used_hours,
+            'time_used_minutes': time_used_minutes,
+            'remaining_hours': remaining_hours,
+            'remaining_minutes': remaining_minutes,
+        }
 
-    active_clipcards_count = active_clipcards_result['count']
-    inactive_clipcards_count = inactive_clipcards_result['count']
+    except Exception as e:
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
 
-    return {
-        'user': user,
-        'first_name': first_name,
-        'last_name': last_name,
-        'username': username,
-        'active_clipcards_count': active_clipcards_count,
-        'inactive_clipcards_count': inactive_clipcards_count,
-        'time_used_hours': time_used_hours,
-        'time_used_minutes': time_used_minutes,
-        'remaining_hours': remaining_hours,
-        'remaining_minutes': remaining_minutes,
-    }
+    finally:
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {function_name}")
 
 
 ##############################
 #   Get user profile
 @get("/profile")
 def profile():
-    try:
+
+    page_name = "profile"
+
+    try:    
+        # Check if response is HTTP response
         data = load_profile_data()
         if isinstance(data, HTTPResponse):
             return data
         
+        # Retrieve current user details
         current_user = get_current_user()
         
-
+        # Show template
+        logger.success(f"Succesfully showing template for {page_name}")
         return template('profile', title="Din profil",
                         current_user=current_user,
                         profile_content=profile_content,
@@ -134,60 +160,50 @@ def profile():
                         remaining_minutes=data['remaining_minutes'])
 
     except Exception as e:
-        logger.error("Error loading profile: %s", e)
+        logger.error(f"Error during request for /{page_name}: {e}")
+        raise
+
     finally:
-        logger.info("Profile request completed.")
+        logger.info(f"Completed request for /{page_name}")
 
 
 ##############################
 #   Get user profile and template
 @route('/profile/<template_name>')
 def profile_template(template_name):
-    logger.info(f"Request for template: {template_name}")
+
+    function_name = "profile_template"
+
     try:
-        #   Include profile data if the template is profile_overview
+        # Check if response is HTTP response
         data = load_profile_data()
+        if isinstance(data, HTTPResponse):
+            return data
+
+        # Retrieve current user details
         current_user = get_current_user()
 
+        # Determine and load template
+        template_path = find_template(template_name, template_dirs)
+        if template_path is None:
+            logger.error(f"Template '{template_name}' not found.")
+            return "Template not found."
+
+        # Handle cases for 'profile_overview' that require detailed user information
         if template_name == "profile_overview":
-            template_path = find_template(template_name, template_dirs)
-            if template_path is None:
-                return "Template not found."
-            
             if current_user:
-                user_id = current_user['user_id']
                 db = master.db()
-                clipcard_id = db.execute("SELECT clipcard_id FROM payments WHERE user_id = ? LIMIT 1", (user_id,)).fetchone()
-                if clipcard_id:
-                    clipcard_id_value = clipcard_id['clipcard_id']
-                    print("Clipcard ID:", clipcard_id_value)
-                    
-                    # Check if the user has any active clipcards
-                    has_active_clipcard_query = """
-                    SELECT COUNT(*) AS active_clipcards 
-                    FROM clipcards 
-                    WHERE clipcard_id IN (
-                        SELECT clipcard_id 
-                        FROM payments 
-                        WHERE user_id = ?) 
-                    AND is_active = 1
-                    """
-                    
-                    has_active_clipcard_result = db.execute(has_active_clipcard_query, (user_id,)).fetchone()
-                    
-                    if has_active_clipcard_result and has_active_clipcard_result['active_clipcards'] > 0:
-                        current_user['has_active_clipcard'] = True
-                    else:
-                        current_user['has_active_clipcard'] = False
+                clipcard_info = db.execute("SELECT clipcard_id FROM payments WHERE user_id = ? LIMIT 1", (current_user['user_id'],)).fetchone()
+                if clipcard_info and clipcard_info['clipcard_id']:
+                    has_active_clipcard = db.execute("""
+                        SELECT COUNT(*) AS active_clipcards 
+                        FROM clipcards 
+                        WHERE clipcard_id = ? AND is_active = 1
+                    """, (clipcard_info['clipcard_id'],)).fetchone()['active_clipcards'] > 0
+                    current_user['has_active_clipcard'] = has_active_clipcard
 
+            # Adjust relative path for rendering
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
-
-            print("Current User:", current_user)
-            if current_user:
-                print("Has active clipcard:", current_user.get('has_active_clipcard'))
-
-            logger.info("Variables before rendering template: active_clipcards_count=%s, inactive_clipcards_count=%s", data['active_clipcards_count'], data['inactive_clipcards_count'])
-
             return template(relative_path,
                             profile_content=profile_content,
                             current_user=current_user,
@@ -202,35 +218,41 @@ def profile_template(template_name):
                             time_used_hours=data['time_used_hours'],
                             time_used_minutes=data['time_used_minutes'],
                             remaining_hours=data['remaining_hours'],
-                            remaining_minutes=data['remaining_minutes'])
-        else:
-            # General template logic
-            template_path = find_template(template_name, template_dirs)
-            if template_path is None:
-                raise Exception(f"Template '{template_name}' not found in any of the directories.")
-            template_path = template_path.replace('views/', '').replace('.tpl', '')
-
-            logger.info(f"Serving template: {template_path}")
-
-            return template(template_path, 
-                            title="Din profil", 
-                            profile_content=profile_content,
-                            save_file=messages.save_file,
-                            get_current_user=messages.get_current_user,
-                            send_message=messages.send_message,
-                            messages_get=messages.messages_get,
-                            admin_messages_get=messages.admin_messages_get,
-                            delete_message=messages.delete_message,
-                            current_user=current_user,
-                            global_content=global_content,
-                            services_and_prices_content=services_and_prices_content,
-                            user=data['user'], 
-                            first_name=data['first_name'], 
-                            last_name=data['last_name'], 
-                            username=data['username'], 
+                            remaining_minutes=data['remaining_minutes']
                             )
+
+        # General template rendering for other templates
+        else:
+            relative_path = template_path.replace('views/', '').replace('.tpl', '')
+            logger.info(f"Serving template: {relative_path}")
+            return template(relative_path, 
+                        title="Din profil", 
+                        profile_content=profile_content,
+                        save_file=messages.save_file,
+                        get_current_user=messages.get_current_user,
+                        send_message=messages.send_message,
+                        messages_get=messages.messages_get,
+                        admin_messages_get=messages.admin_messages_get,
+                        delete_message=messages.delete_message,
+                        current_user=current_user,
+                        global_content=global_content,
+                        services_and_prices_content=services_and_prices_content,
+                        user=data['user'], 
+                        first_name=data['first_name'], 
+                        last_name=data['last_name'], 
+                        username=data['username'], 
+                        )
+
     except Exception as e:
-        logger.error("Error loading template '%s': %s", template_name, e)
-        return f"Error loading template {template_name}: {e}"
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
+
     finally:
-        logger.info("Template request for '%s' completed.", template_name)
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {function_name}")

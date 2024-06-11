@@ -16,7 +16,6 @@ import common.content as content
 import master
 
 
-
 ##############################
 #   COLORED LOGGING
 try:
