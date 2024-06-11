@@ -30,6 +30,7 @@ finally:
 try:
     # Global
     global_content=content.global_content
+    profile_content = content.profile_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -104,6 +105,7 @@ def process_payment():
                         created_at=created_at,
                         global_content=global_content, 
                         payment_id=payment_id, 
+                        profile_content=profile_content,
                         )
     
     except Exception as e:

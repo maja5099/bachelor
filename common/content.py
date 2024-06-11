@@ -445,6 +445,16 @@ profile_content = {
             {"icon": "settings.svg", "text": "Indstillinger", "template": "profile_settings"},
         ],
     },
+    # BUY CLIPCARD
+    "buy_clipcard": {
+        "header_text": "Køb af klippekort",
+        "decorative_header_text": "Klippekort",
+    },
+    # CONFIRMATION
+    "confirmation": {
+        "header_text": "Betalingsbekræftelse",
+        "decorative_header_text": "Bekræftelse",
+    }
 }
 
 
@@ -548,20 +558,4 @@ signup_content = {
     "header_text": "Opret bruger",
     "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
     "button_text": "Opret bruger",
-}
-
-
-##############################
-#   BUY CLIPCARD
-buy_clipcard_content = {
-    "header_text": "Køb af klippekort",
-    "decorative_header_text": "Klippekort",
-}
-
-
-##############################
-#   CONFIRMATION
-confirmation_content = {
-    "header_text": "Betalingsbekræftelse",
-    "decorative_header_text": "Bekræftelse",
 }
