@@ -126,7 +126,7 @@ def load_profile_data():
 
 
 ##############################
-#   Get user profile
+#   PROFILE
 @get("/profile")
 def profile():
 
@@ -168,7 +168,7 @@ def profile():
 
 
 ##############################
-#   Get user profile and template
+#   PROFILE TEMPLATE
 @route('/profile/<template_name>')
 def profile_template(template_name):
 
@@ -224,7 +224,7 @@ def profile_template(template_name):
         # General template rendering for other templates
         else:
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
-            logger.info(f"Serving template: {relative_path}")
+            logger.success(f"Succesfully showing template for {function_name}")
             return template(relative_path, 
                         title="Din profil", 
                         profile_content=profile_content,
