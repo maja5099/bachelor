@@ -7,20 +7,20 @@
         <div class="flex flex-col gap-y-6 md:gap-y-8">
           <div class="flex">
             <div class="space-y-2">
-              <p class="text-md tracking-widest text-unidPurple">
-                {{ about_us_content["team_section"]["subheader_text"] }}
+              <p id="decorative_header">
+                {{ about_us_content["team_section"]["decorative_header_text"] }}
               </p>
               <h2>{{ about_us_content["team_section"]["header_text"] }}</h2>
             </div>
           </div>
           <div class="space-y-6">
-            <p class="text-lg font-medium">
+            <p id="introduction_text">
               {{ about_us_content["team_section"]["introduction_text"] }}
             </p>
             % for paragraph in about_us_content['team_section']['paragraphs']:
             <div class="space-y-2">
-              <p class="text-2xl font-saira font-semibold">{{ paragraph["title"] }}</p>
-              <p class="text-base">
+              <p id="paragraph_title">{{ paragraph["title"] }}</p>
+              <p id="paragraph_text">
                 {{ paragraph["text"] }}
               </p>
             </div>

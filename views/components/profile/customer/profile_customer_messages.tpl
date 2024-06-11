@@ -1,10 +1,18 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">
-      {{ profile_content["customer_specific_content"]["profile_customer_messages"]["subheader_text"] }}
+    <p id="decorative_header">
+      {{
+        profile_content["customer_specific_content"][
+          "profile_customer_messages"
+        ]["decorative_header_text"]
+      }}
     </p>
     <h2>
-      {{ profile_content["customer_specific_content"]["profile_customer_messages"]["header_text"] }}
+      {{
+        profile_content["customer_specific_content"][
+          "profile_customer_messages"
+        ]["header_text"]
+      }}
     </h2>
   </div>
   <div>
@@ -19,7 +27,11 @@
             % include(global_content['ui_icons']['message'])
           </div>
           <p class="font-bold text-lg">
-            {{ profile_content["customer_specific_content"]["profile_customer_messages"]["box_header_text"] }}
+            {{
+              profile_content["customer_specific_content"][
+                "profile_customer_messages"
+              ]["box_header_text"]
+            }}
           </p>
         </div>
       </div>
@@ -31,18 +43,18 @@
         >
           <div class="flex flex-col space-y-3 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Emne</h3>
+              <p id="form_label">Emne</p>
               <hr />
             </div>
             <div class="flex-col space-y-1.5 items-center">
               <label for="subject">
-                <p class="">
+                <p>
                   Skriv emnet på, hvad vi kan hjælpe dig med, eller den opgave,
                   du vil have udført:
                 </p>
               </label>
               <input
-                class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                class="form_input_no_icon"
                 type="text"
                 id="subject"
                 name="subject"
@@ -53,18 +65,18 @@
           </div>
           <div class="flex flex-col space-y-3 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Besked</h3>
+              <p id="form_label">Besked</p>
               <hr />
             </div>
             <div class="flex-col space-y-1.5 items-center">
               <label for="message">
-                <p class="">
+                <p>
                   Skriv hvad vi kan hjælpe dig med, eller hvilken opgave, vi
                   skal udføre for dig:
                 </p>
               </label>
               <textarea
-                class="w-full py-2 px-5 rounded-md border border-unidLightBlue placeholder:italic placeholder:text-unidLightBlue text-unidBlue transition ease-in-out duration-300"
+                class="form_input_no_icon"
                 id="message"
                 name="message"
                 required

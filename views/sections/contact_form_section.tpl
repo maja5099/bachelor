@@ -11,8 +11,8 @@
             class="bg-unidPink order-first lg:order-last mx-auto flex flex-col w-full p-10 space-y-8 rounded-lg"
           >
             <div class="space-y-4">
-              <h3 class="">{{ contact_content["contact_form_section"]["header_text"] }}</h3>
-              <p class="leading-relaxed text-gray-600">
+              <h3>{{ contact_content["contact_form_section"]["header_text"] }}</h3>
+              <p>
                 {{ contact_content["contact_form_section"]["subheader_text"] }}
               </p>
             </div>
@@ -25,7 +25,7 @@
                 % include('utilities/input_fields/message_input_field')
               </div>
             </div>
-            <div class="mx-auto md:w-3/6 lg:w-full xl:w-3/6 pt-6">
+            <div class="mx-auto w-full md:w-fit lg:w-full xl:w-fit pt-6">
               <!-- prettier-ignore -->
               % include('utilities/buttons/primary_button', link='/', type='submit', button_text=contact_content["contact_form_section"]["button_text"])
             </div>

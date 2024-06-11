@@ -1,7 +1,7 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">
-      {{ profile_content["admin_specific_content"]["profile_admin_messages"]["subheader_text"] }}
+    <p id="decorative_header">
+      {{ profile_content["admin_specific_content"]["profile_admin_messages"]["decorative_header_text"] }}
     </p>
     <h2>
       {{ profile_content["admin_specific_content"]["profile_admin_messages"]["header_text"] }}
@@ -36,7 +36,7 @@
                   class="lg:flex space-y-1 lg:space-y-0 justify-between items-center"
                 >
                   <div class="flex gap-2 items-center">
-                    <h3 class="text-lg font-bold">Afsender:</h3>
+                    <p id="form_label">Afsender:</p>
                     <p class="text-base font-medium">
                       {{ message["first_name"] }} {{ message["last_name"] }}
                     </p>

@@ -1,6 +1,6 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple uppercase">
+    <p id="decorative_header">
       {{ subheader }}
     </p>
     <h2 class="capitalize">{{ header }}</h2>

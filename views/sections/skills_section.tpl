@@ -5,8 +5,8 @@
         <div
           class="space-y-2 flex flex-col items-center mx-auto justify-center"
         >
-          <p class="text-md md:w-1/2 tracking-widest">
-            {{ about_us_content["skills_section"]["subheader_text"] }}
+          <p id="decorative_header" class="text-white">
+            {{ about_us_content["skills_section"]["decorative_header_text"] }}
           </p>
           <h2 class="text-white">
             {{ about_us_content["skills_section"]["header_text"] }}

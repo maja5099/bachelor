@@ -562,6 +562,33 @@ h3 {
   }
 }
 
+#decorative_header {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  --tw-text-opacity: 1;
+  color: rgb(89 67 123 / var(--tw-text-opacity));
+}
+
+#introduction_text {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
+#paragraph_title {
+  font-family: 'Saira', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+#paragraph_text {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 #selling_point {
   display: flex;
   font-size: 0.75rem;
@@ -761,6 +788,14 @@ h3 {
   color: rgb(89 67 123 / var(--tw-text-opacity));
 }
 
+#profile_form_label {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(89 67 123 / var(--tw-text-opacity));
+}
+
 #form_input {
   width: 100%;
   border-radius: 0.375rem;
@@ -787,6 +822,37 @@ h3 {
 }
 
 #form_input::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(160 180 211 / var(--tw-text-opacity));
+}
+
+.form_input_no_icon {
+  width: 100%;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(160 180 211 / var(--tw-border-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(29 27 110 / var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form_input_no_icon::-moz-placeholder {
+  font-style: italic;
+  --tw-text-opacity: 1;
+  color: rgb(160 180 211 / var(--tw-text-opacity));
+}
+
+.form_input_no_icon::placeholder {
+  font-style: italic;
   --tw-text-opacity: 1;
   color: rgb(160 180 211 / var(--tw-text-opacity));
 }
@@ -1285,10 +1351,6 @@ h3 {
 
 .w-3\/4 {
   width: 75%;
-}
-
-.w-3\/6 {
-  width: 50%;
 }
 
 .w-4 {
@@ -1827,20 +1889,12 @@ h3 {
   font-weight: 600;
 }
 
-.uppercase {
-  text-transform: uppercase;
-}
-
 .capitalize {
   text-transform: capitalize;
 }
 
 .italic {
   font-style: italic;
-}
-
-.leading-relaxed {
-  line-height: 1.625;
 }
 
 .tracking-wide {
@@ -1853,11 +1907,6 @@ h3 {
 
 .tracking-widest {
   letter-spacing: 0.1em;
-}
-
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-red-600 {
@@ -2061,8 +2110,9 @@ input[type="checkbox"] {
     width: 66.666667%;
   }
 
-  .md\:w-3\/6 {
-    width: 50%;
+  .md\:w-fit {
+    width: -moz-fit-content;
+    width: fit-content;
   }
 
   .md\:grid-cols-2 {
@@ -2398,16 +2448,13 @@ input[type="checkbox"] {
     width: 66.666667%;
   }
 
-  .xl\:w-2\/6 {
-    width: 33.333333%;
-  }
-
-  .xl\:w-3\/6 {
-    width: 50%;
-  }
-
   .xl\:w-8\/12 {
     width: 66.666667%;
+  }
+
+  .xl\:w-fit {
+    width: -moz-fit-content;
+    width: fit-content;
   }
 
   .xl\:grid-cols-12 {
