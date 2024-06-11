@@ -24,6 +24,15 @@
   #decorative_header {
     @apply text-unidPurple text-base tracking-widest uppercase;
   }
+  #content_box_header_text {
+    @apply font-bold text-lg;
+  }
+  #content_box_header_styling {
+    @apply bg-unidLightBlue text-center p-6 items-center;
+  }
+  #content_box_styling {
+    @apply w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue;
+  }
   #introduction_text {
     @apply text-lg font-medium;
   }

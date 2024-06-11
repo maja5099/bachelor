@@ -1,26 +1,26 @@
 <div class="space-y-8">
   <div class="space-y-2">
     <p id="decorative_header">
+      <!-- prettier-ignore -->
       {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["decorative_header_text"] }}
     </p>
     <h2>
-      {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["header_text"] }}
+      <!-- prettier-ignore -->
+      {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["header_text"]}}
     </h2>
   </div>
   <div class="grid lg:grid-cols-2 gap-8">
     % for clipcard in active_clipcards:
     <div id="clipcard_{{ clipcard['clipcard_id'] }}">
-      <div
-        class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
-      >
-        <div class="bg-unidLightBlue text-center p-6 items-center">
+      <div id="content_box_styling">
+        <div id="content_box_header_styling">
           <div
             class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
           >
             <div id="icon_medium" class="fill-unidPurple">
               % include(global_content['ui_icons']['card'])
             </div>
-            <p class="font-bold text-lg">
+            <p id="content_box_header_text">
               {{ clipcard["first_name"] }} {{ clipcard["last_name"] }}
             </p>
           </div>

@@ -14,7 +14,7 @@
       % include(f'{testimonial["author_image"]}')
     </div>
     <div class="justify-center flex flex-col">
-      <p class="font-bold text-lg tracking-wider font-saira text-unidPurple">
+      <p id="content_box_header_text">
         {{ testimonial["author_name"] }}
       </p>
       <p class="text-unidPurple text-sm">

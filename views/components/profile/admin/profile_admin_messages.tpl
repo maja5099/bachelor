@@ -1,10 +1,12 @@
 <div class="space-y-8">
   <div class="space-y-2">
     <p id="decorative_header">
-      {{ profile_content["admin_specific_content"]["profile_admin_messages"]["decorative_header_text"] }}
+      <!-- prettier-ignore -->
+      {{profile_content["admin_specific_content"]["profile_admin_messages"]["decorative_header_text"]}}
     </p>
     <h2>
-      {{ profile_content["admin_specific_content"]["profile_admin_messages"]["header_text"] }}
+      <!-- prettier-ignore -->
+      {{profile_content["admin_specific_content"]["profile_admin_messages"]["header_text"]}}
     </h2>
   </div>
   <div class="grid gap-8">
@@ -12,11 +14,10 @@
     % if messages: 
       % for message in messages:
     <div class="message-block">
-      <div
-        class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
-      >
+      <div id="content_box_styling">
         <div
-          class="bg-unidLightBlue text-center p-6 items-center space-y-1 lg:space-y-0 lg:flex justify-between"
+          id="content_box_header_styling"
+          class="space-y-1 lg:space-y-0 lg:flex justify-between"
         >
           <div
             class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
@@ -24,7 +25,7 @@
             <div id="icon_medium" class="fill-unidPurple">
               % include(global_content['ui_icons']['message'])
             </div>
-            <p class="font-bold text-lg">{{ message["message_subject"] }}</p>
+            <p id="content_box_header_text">{{ message["message_subject"] }}</p>
           </div>
           <p>Sendt den: {{ message["formatted_created_at"] }}</p>
         </div>
