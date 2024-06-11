@@ -571,6 +571,35 @@ h3 {
   color: rgb(89 67 123 / var(--tw-text-opacity));
 }
 
+#content_box_header_text {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+#content_box_header_styling {
+  align-items: center;
+  --tw-bg-opacity: 1;
+  background-color: rgb(160 180 211 / var(--tw-bg-opacity));
+  padding: 1.5rem;
+  text-align: center;
+}
+
+#content_box_styling {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(160 180 211 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 240 230 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 #introduction_text {
   font-size: 1.125rem;
   line-height: 1.75rem;

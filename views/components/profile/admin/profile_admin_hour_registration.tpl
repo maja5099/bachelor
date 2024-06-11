@@ -1,24 +1,24 @@
 <div class="space-y-8">
   <div class="space-y-2">
     <p id="decorative_header">
-      {{ profile_content["admin_specific_content"]["profile_admin_hour_registration"]["decorative_header_text"] }}
+      <!-- prettier-ignore -->
+      {{profile_content["admin_specific_content"]["profile_admin_hour_registration"]["decorative_header_text"]}}
     </p>
     <h2>
-      {{ profile_content["admin_specific_content"]["profile_admin_hour_registration"]["header_text"] }}
+      <!-- prettier-ignore -->
+      {{profile_content["admin_specific_content"]["profile_admin_hour_registration"]["header_text"]}}
     </h2>
   </div>
   <div>
-    <div
-      class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
-    >
-      <div class="bg-unidLightBlue text-center p-6 items-center">
+    <div id="content_box_styling">
+      <div id="content_box_header_styling">
         <div
           class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
         >
           <div id="icon_medium" class="fill-unidPurple">
             % include(global_content['ui_icons']['stop_watch'])
           </div>
-          <p class="font-bold text-lg">Timeregistrering</p>
+          <p id="content_box_header_text">Timeregistrering</p>
         </div>
       </div>
       <div class="flex flex-col gap-10 p-6 text-unidPurple">
@@ -120,17 +120,16 @@
           </div>
         </form>
 
-
-
-      <div class="mx-auto flex-col space-y-4">
-        <div id="submitTaskButton" class="">
-          <button type="button" id="primary_button">Registrer</button>
+        <div class="mx-auto flex-col space-y-4">
+          <div id="submitTaskButton" class="">
+            <button type="button" id="primary_button">Registrer</button>
+          </div>
+          <p
+            id="taskSubmissionMessage"
+            style="display: none"
+            class="text-unidLightBlue text-sm"
+          ></p>
         </div>
-        <p
-          id="taskSubmissionMessage"
-          style="display: none"
-          class="text-unidLightBlue text-sm"
-        ></p>
       </div>
     </div>
   </div>

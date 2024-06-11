@@ -59,17 +59,17 @@
           <h2>{{ buy_clipcard_content["header_text"] }}</h2>
         </div>
         <div>
-          <div
-            class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
-          >
-            <div class="bg-unidLightBlue text-center p-6 items-center">
+          <div id="content_box_styling">
+            <div id="content_box_header_styling">
               <div
                 class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
               >
                 <div id="icon_medium" class="fill-unidPurple">
                   % include(global_content['ui_icons']['card'])
                 </div>
-                <p class="font-bold text-lg">Klippekort {{ clipcard_type }}</p>
+                <p id="content_box_header_text">
+                  Klippekort {{ clipcard_type }}
+                </p>
               </div>
             </div>
             <div class="flex flex-col gap-10 p-6 text-unidPurple">
@@ -80,9 +80,7 @@
               >
                 <div class="flex flex-col gap-2 text-sm">
                   <div class="space-y-1">
-                    <p id="form_label">
-                      Oplysninger om klippekortet
-                    </p>
+                    <p id="form_label">Oplysninger om klippekortet</p>
                     <hr />
                   </div>
                   <div class="space-y-2">

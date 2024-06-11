@@ -1,6 +1,4 @@
-<div
-  class="w-full h-full rounded-lg text-white justify-center text-center items-center bg-unidYellow border-2 border-unidLightBlue"
->
+<div id="content_box_styling">
   <div class="bg-unidLightBlue p-6 items-center">
     <div
       class="flex md:flex-col lg:flex-row gap-4 md:gap-2 lg:gap-4 items-center justify-center"
@@ -8,7 +6,7 @@
       <div id="icon_medium" class="fill-unidPurple">
         % include(f'{box_icon}')
       </div>
-      <p class="font-bold text-lg">{{ box_title }}</p>
+      <p id="content_box_header_text">{{ box_title }}</p>
     </div>
   </div>
   <div class="flex flex-col gap-4 p-6 items-center">

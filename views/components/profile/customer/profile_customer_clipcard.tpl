@@ -83,25 +83,23 @@
     % end
   </div>
 </div>
-<!-- prettier-ignore -->
-
 % else:
 <div class="space-y-8">
   <div class="space-y-2">
     <p id="decorative_header">
+      <!-- prettier-ignore -->
       {{ profile_content["customer_specific_content"]["profile_customer_clipcard"]["decorative_header_text"] }}
     </p>
     <h2>
+      <!-- prettier-ignore -->
       {{ profile_content["customer_specific_content"]["profile_customer_clipcard"]["header_text"] }}
     </h2>
   </div>
   <div class="grid lg:grid-cols-2 gap-8">
     % for task in tasks:
-    <div
-      class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
-    >
-      <div class="bg-unidLightBlue text-center p-6 items-center">
-        <p class="font-bold text-lg">{{ task["task_title"] }}</p>
+    <div id="content_box_styling">
+      <div id="content_box_header_styling">
+        <p id="content_box_header_text">{{ task["task_title"] }}</p>
       </div>
       <div class="flex flex-col gap-8 p-6 text-unidPurple">
         <!-- USER -->

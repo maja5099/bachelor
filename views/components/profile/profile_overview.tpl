@@ -5,7 +5,7 @@
     <!-- prettier-ignore -->
     % if "user_role_id" in user:
       % if user["user_role_id"] == 1:
-    <p class="font-bold text-lg">
+    <p id="content_box_header_text">
       Velkommen, {{ first_name }} {{ last_name }}!
     </p>
     % if current_user and not current_user.get('has_active_clipcard'):
@@ -21,7 +21,7 @@
     <!-- prettier-ignore -->
     % end
       % elif user["user_role_id"] == 2:
-    <p class="font-bold text-lg">
+    <p id="content_box_header_text">
       Velkommen, {{ first_name }} {{ last_name }}!
     </p>
     <div class="flex gap-1 text-sm">
@@ -37,11 +37,9 @@
   % if current_user and not current_user.get('has_active_clipcard') and "user_role_id" in user:
   <div class="space-y-8">
     <div>
-      <div
-        class="w-full h-full rounded-lg text-white justify-center items-center bg-unidYellow border-2 border-unidLightBlue"
-      >
-        <div class="bg-unidLightBlue text-center p-6 items-center">
-          <p class="font-bold text-lg capitalize">Klippekort</p>
+      <div id="content_box_styling">
+        <div id="content_box_header_styling">
+          <p id="content_box_header_text">Klippekort</p>
         </div>
         <div class="flex flex-col gap-10 p-6 text-unidPurple">
           <div
