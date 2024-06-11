@@ -1,7 +1,7 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">
-      {{ profile_content["admin_specific_content"]["profile_admin_hour_registration"]["subheader_text"] }}
+    <p id="decorative_header">
+      {{ profile_content["admin_specific_content"]["profile_admin_hour_registration"]["decorative_header_text"] }}
     </p>
     <h2>
       {{ profile_content["admin_specific_content"]["profile_admin_hour_registration"]["header_text"] }}
@@ -25,7 +25,7 @@
         <form id="taskForm" class="space-y-8 w-full">
           <div class="flex flex-col gap-2 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Brugeroplysninger</h3>
+              <p id="form_label">Brugeroplysninger</p>
               <hr />
             </div>
             <div class="">
@@ -50,7 +50,7 @@
           </div>
           <div class="flex flex-col gap-2 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Opgaveoplysninger</h3>
+              <p id="form_label">Opgaveoplysninger</p>
               <hr />
             </div>
             <div class="grid lg:grid-cols-6 gap-2 items-center">
@@ -80,7 +80,7 @@
           </div>
           <div class="flex flex-col gap-2 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Tid</h3>
+              <p id="form_label">Tid</p>
               <hr />
             </div>
             <div class="grid md:grid-cols-6 space-y-2 items-center">

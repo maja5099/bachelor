@@ -4,7 +4,14 @@
       <div
         class="lg:w-2/3 flex justify-center flex-col text-center gap-y-4 md:gap-y-6"
       >
-        <h2>{{ frontpage_content["testimonials_section"]["header_text"] }}</h2>
+        <div
+          class="space-y-2 flex flex-col items-center mx-auto justify-center"
+        >
+          <p id="decorative_header" class="text-white">{{ frontpage_content["testimonials_section"]["decorative_header_text"] }}</p>
+          <h2>
+            {{ frontpage_content["testimonials_section"]["header_text"] }}
+          </h2>
+        </div>
         <p id="subheader">
           {{ frontpage_content["testimonials_section"]["subheader_text"] }}
         </p>

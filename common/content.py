@@ -214,6 +214,7 @@ frontpage_content = {
     # TESTIMONIAL SECTION
     "testimonials_section": {
         "header_text": "Det siger vores kunder",
+        "decorative_header_text": "Testimonials",
         "subheader_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
         "testimonial_icon": "quote.svg",
         # Testiomonials
@@ -243,7 +244,7 @@ about_us_content = {
     # HIGHLIGHTS SECTION
     "highlights_section": {
         "header_text": "Lille studio - med store idéer",
-        "subheader_text": "OM UNID STUDIO",
+        "decorative_header_text": "Om UNID Studio",
         # Highlights
         "highlights": [
             {"illustration": "tools.png", "illustration_alt": "Illustration med kreative værktøjer", "title": "Erfaring", "text": "Vi har stor erfaring indenfor grafisk design og udvikling af websites. Med vores ekspertise, kan vi skræddersy en løsning efter dine ønsker og behov."},
@@ -255,7 +256,7 @@ about_us_content = {
     # VISION SECTION
     "vision_section": {
         "header_text": "Vores vision",
-        "subheader_text": "VISION",
+        "decorative_header_text": "Vision",
         "introduction_text": "Vi glæder os over at støtte ambitiøse studerende på deres iværksætterrejse.",
         "illustration": "digital_design.svg",
         "illustration_alt": "Illustration af digitalt design",
@@ -274,7 +275,7 @@ about_us_content = {
     # SKILLS SECTION
     "skills_section": {
         "header_text": "Et udpluk af vores kompetencer",
-        "subheader_text": "KOMPETENCER",
+        "decorative_header_text": "Kompetencer",
         # Skills
         "skills": [
             {"icon": "heart.svg", "title": "Lorem ipsum"},
@@ -294,7 +295,7 @@ about_us_content = {
     # TEAM SECTION
     "team_section": {
         "header_text": "Bag om teamet - hvem er vi?",
-        "subheader_text": "TEAM",
+        "decorative_header_text": "Team",
         "introduction_text": "Vi er et dedikeret og kreativt team, som har sans for selv de mindste detaljer. For os er det vigtigt at levere den bedste og mest konkurrencedygtige løsning.",
         # Paragraphs
         "paragraphs": [
@@ -379,7 +380,7 @@ profile_content = {
     # GLOBAL
     "profile_settings": {
         "header_text": "Brugerindstillinger",
-        "subheader_text": "INDSTILLINGER",
+        "decorative_header_text": "Indstillinger",
         "box_header_text": "Indstillinger",
     },
     "logout": {
@@ -394,15 +395,15 @@ profile_content = {
     "admin_specific_content": {
         "profile_admin_clipcard": {
             "header_text": "Aktive klippekort",
-            "subheader_text": "KLIPPEKORT",
+            "decorative_header_text": "Klippekort",
         },
         "profile_admin_hour_registration": {
             "header_text": "Timeregistrering",
-            "subheader_text": "REGISTRERING",
+            "decorative_header_text": "Registrering",
         },
         "profile_admin_messages": {
             "header_text": "Indsendte beskeder",
-            "subheader_text": "BESKEDER",
+            "decorative_header_text": "Beskeder",
         },
         # Menu
         "admin_profile_menu": [
@@ -417,21 +418,21 @@ profile_content = {
     "customer_specific_content": {
         "profile_customer_additional_purchase": {
             "header_text": "Tilkøb",
-            "subheader_text": "TILKØB",
+            "decorative_header_text": "Tilkøb",
             "box_header_text": "Tilkøb",
         },
         "profile_customer_clipcard": {
             "header_text": "Det, har du fået lavet",
-            "subheader_text": "TIMEREGISTRERING",
+            "decorative_header_text": "Timeregistrering",
         },
         "profile_customer_courses": {
             "header_text": "Kurser",
-            "subheader_text": "KURSER",
+            "decorative_header_text": "Kurser",
             "box_header_text": "Kurser",
         },
         "profile_customer_messages": {
             "header_text": "Skriv til os her",
-            "subheader_text": "BESKEDER",
+            "decorative_header_text": "Beskeder",
             "box_header_text": "Send en besked",
         },
         # Menu
@@ -455,7 +456,7 @@ services_and_prices_content = {
     # SERVICES SECTION
     "services_section": {
         "header_text": "Det kan vi hjælpe dig med",
-        "subheader_text": "SERVICES",
+        "decorative_header_text": "Services",
         "illustration": "graphic_design.png",
         "illustration_alt": "Illustration af grafisk design",
         # Paragraphs
@@ -481,7 +482,7 @@ services_and_prices_content = {
     # PRICES SECTION
     "prices_section":{
         "header_text": "Find det rette klippekort til dig",
-        "subheader_text": "PRISER",
+        "decorative_header_text": "Priser",
         "pricings": {
             # Pricing default
             "pricing_default": {
@@ -547,4 +548,20 @@ signup_content = {
     "header_text": "Opret bruger",
     "subheader_text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptatum!",
     "button_text": "Opret bruger",
+}
+
+
+##############################
+#   BUY CLIPCARD
+buy_clipcard_content = {
+    "header_text": "Køb af klippekort",
+    "decorative_header_text": "Klippekort",
+}
+
+
+##############################
+#   CONFIRMATION
+confirmation_content = {
+    "header_text": "Betalingsbekræftelse",
+    "decorative_header_text": "Bekræftelse",
 }

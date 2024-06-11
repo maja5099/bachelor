@@ -7,13 +7,13 @@
         <div
           class="space-y-2 flex flex-col items-center mx-auto justify-center"
         >
-          <p class="text-md tracking-widest text-unidPurple">
+          <p id="decorative_header">
             <!-- prettier-ignore -->
-            {{services_and_prices_content["prices_section"]["subheader_text"]}}
+            {{services_and_prices_content["prices_section"]["decorative_header_text"]}}
           </p>
           <h2>
             <!-- prettier-ignore -->
-            {{services_and_prices_content["prices_section"]["subheader_text"]}}
+            {{services_and_prices_content["prices_section"]["header_text"]}}
           </h2>
         </div>
       </div>

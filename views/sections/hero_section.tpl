@@ -12,7 +12,7 @@
         </p>
       </div>
       <!-- BUTTON -->
-      <div class="w-3/6 xl:w-2/6">
+      <div class="w-fit">
         <!-- prettier-ignore -->
         % include('utilities/buttons/primary_button', type='button', link='/', button_text=frontpage_content["hero_section"]['button_text'])
       </div>

@@ -1,8 +1,8 @@
 <div class="flex flex-col gap-y-14">
   <div class="flex md:justify-end md:text-right">
     <div class="space-y-2 md:w-1/2">
-      <p class="text-md tracking-widest text-unidPurple">
-        {{ about_us_content["highlights_section"]["subheader_text"] }}
+      <p id="decorative_header">
+        {{ about_us_content["highlights_section"]["decorative_header_text"] }}
       </p>
       <h2>{{ about_us_content["highlights_section"]["header_text"] }}</h2>
     </div>

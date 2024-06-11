@@ -2,7 +2,7 @@
 % if current_user and not current_user.get('has_active_clipcard'):
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">KLIPPEKORT</p>
+    <p id="decorative_header">KLIPPEKORT</p>
     <h2>Køb et klippekort</h2>
   </div>
   <div class="grid lg:grid-cols-2 gap-8">
@@ -88,8 +88,8 @@
 % else:
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">
-      {{ profile_content["customer_specific_content"]["profile_customer_clipcard"]["subheader_text"] }}
+    <p id="decorative_header">
+      {{ profile_content["customer_specific_content"]["profile_customer_clipcard"]["decorative_header_text"] }}
     </p>
     <h2>
       {{ profile_content["customer_specific_content"]["profile_customer_clipcard"]["header_text"] }}
@@ -107,7 +107,7 @@
         <!-- USER -->
         <div class="space-y-2 text-sm">
           <div class="space-y-1">
-            <h3 class="text-lg font-bold">Opgave oplysninger</h3>
+            <p id="form_label">Opgave oplysninger</p>
             <hr />
           </div>
           <div class="space-y-2">

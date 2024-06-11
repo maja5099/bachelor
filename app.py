@@ -212,7 +212,7 @@ def index():
 if __name__ == "__main__":
     try:
         logger.success("Running local server")
-        run(host="127.0.0.1", port=2000, debug=True, reloader=True)
+        run(host="127.0.0.1", port=2500, debug=True, reloader=True)
     except Exception as e:
         logger.error(f"Error running local server: {e}")
     finally:

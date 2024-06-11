@@ -1,7 +1,7 @@
 <div class="space-y-8">
   <div class="space-y-2">
-    <p class="text-md tracking-widest text-unidPurple">
-      {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["subheader_text"] }}
+    <p id="decorative_header">
+      {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["decorative_header_text"] }}
     </p>
     <h2>
       {{ profile_content["admin_specific_content"]["profile_admin_clipcard"]["header_text"] }}
@@ -29,7 +29,7 @@
           <!-- USER -->
           <div class="space-y-2 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Brugeroplysninger</h3>
+              <p id="form_label">Brugeroplysninger</p>
               <hr />
             </div>
             <div class="space-y-2">
@@ -54,7 +54,7 @@
           <!-- WEBSITE -->
           <div class="space-y-2 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Website</h3>
+              <p id="form_label">Website</p>
               <hr />
             </div>
             <div class="space-y-2">
@@ -71,7 +71,7 @@
           <!-- CLIPCARD -->
           <div class="space-y-2 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Klippekortoplysninger</h3>
+              <p id="form_label">Klippekortoplysninger</p>
               <hr />
             </div>
             <div class="space-y-2">
@@ -92,7 +92,7 @@
           <!-- TIME -->
           <div class="space-y-2 text-sm">
             <div class="space-y-1">
-              <h3 class="text-lg font-bold">Timeoverblik</h3>
+              <p id="form_label">Timeoverblik</p>
               <hr />
             </div>
             <div class="space-y-2">
