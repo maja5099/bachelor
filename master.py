@@ -91,7 +91,7 @@ def validate_username():
 
 ##############################
 #   VALIDATION - PHONE
-PHONE_REGEX = "^\d{8}$" 
+PHONE_REGEX = "^\\d{8}$" 
 
 def validate_phone():
     phone = request.forms.get("phone", "").strip()
