@@ -41,7 +41,7 @@ try:
     import routers.payment
     import routers.portfolio
     import routers.about_us
-    import routers.profile
+    import routers.profile_page
     import routers.services_and_prices
     import routers.signup
     logger.success("Routers imported successfully.")

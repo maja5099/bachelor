@@ -234,5 +234,3 @@ def profile_template(template_name):
         return f"Error loading template {template_name}: {e}"
     finally:
         logger.info("Template request for '%s' completed.", template_name)
-
- # type: ignore
