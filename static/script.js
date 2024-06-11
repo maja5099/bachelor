@@ -18,64 +18,53 @@
 // PROFILE.HTML
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Button style and dynamic templates
-  const buttons = document.querySelectorAll(".secondary_button");
+
+  const buttons = document.querySelectorAll(".menu_button");
+
+  // Add styling to the first menu button
+  if (buttons.length > 0) {
+    buttons[0].classList.add("secondary_button_selected");
+  }
+
+  // Function to remove stylingn
+  function removeSelectedClass() {
+    buttons.forEach((button) => {
+      button.classList.remove("secondary_button_selected");
+    });
+  }
+
+  // Add event listener to each button
   buttons.forEach((button) => {
     button.addEventListener("click", function () {
-      buttons.forEach((btn) =>
-        btn.classList.remove("secondary_button_selected")
-      );
-      this.classList.add("secondary_button_selected");
-      const templateName = this.getAttribute("data-template");
+      // Remove 'selected' styling from all buttons (only the clicked button is styled)
+      removeSelectedClass();
+      // Apply 'selected' styling to clicked menu button
+      button.classList.add("secondary_button_selected");
 
-      // Update URL with template name
+      // Load the content and update URL based on the template of the clicked button
+      const templateName = button.getAttribute("data-template");
       if (templateName) {
-        updateURL(templateName);
         loadTemplate(templateName);
-      } else {
-        console.log("No template associated with this button.");
+        updateURL(templateName);
       }
     });
   });
 
-  // First button selected by default
-  if (buttons.length > 0) {
-    buttons[0].classList.add("secondary_button_selected");
-    const defaultTemplate = buttons[0].getAttribute("data-template");
-    updateURL(defaultTemplate);
-    loadTemplate(defaultTemplate);
-  }
-
   // Update URL with template name
   function updateURL(templateName) {
-    const newURL = `/profile/${templateName}`;
-    window.history.pushState({ templateName }, "", newURL);
+    window.location.hash = `/${templateName}`;
   }
 
   // Load templates dynamically
   function loadTemplate(templateName) {
-    console.log(`Fetching template: ${templateName}`);
     fetch(`/profile/${templateName}`)
-      .then((response) => {
-        console.log(`Response status: ${response.status}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
-      })
+      .then((response) => response.text())
       .then((html) => {
         console.log(`Template loaded successfully`);
         document.getElementById("profile_content").innerHTML = html;
       })
       .catch((error) => console.error("Error loading template:", error));
   }
-
-  // Add an event listener to handle back/forward navigation
-  window.addEventListener("popstate", (event) => {
-    if (event.state && event.state.templateName) {
-      loadTemplate(event.state.templateName);
-    }
-  });
 
   // Open pop up button
   const openButton = document.getElementById("open_logout_pop_up");

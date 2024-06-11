@@ -6,7 +6,7 @@
     % if user["user_role_id"] == 1:
       % for customer_profile_menu in profile_content["customer_specific_content"]["customer_profile_menu"]:
   <button
-    class="secondary_button w-full flex cursor-pointer"
+    class="menu_button secondary_button w-full flex cursor-pointer"
     data-template="{{ customer_profile_menu['template'] }}"
   >
     <div class="h-6 w-6">
@@ -20,7 +20,7 @@
   % elif user["user_role_id"] == 2:
       % for admin_profile_menu in profile_content["admin_specific_content"]["admin_profile_menu"]:
   <button
-    class="secondary_button w-full flex cursor-pointer"
+    class="menu_button secondary_button w-full flex cursor-pointer"
     data-template="{{ admin_profile_menu['template'] }}"
   >
     <div class="h-6 w-6">
