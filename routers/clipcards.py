@@ -1,19 +1,30 @@
-from bottle import template, get, post, request, delete, template, redirect
-import master
+##############################
+#   IMPORTS
+#   Library imports
+from bottle import template, get, post, request, delete, template, redirect, HTTPResponse
 import time
 import uuid
+import logging
+
+#   Local application imports
 from common.colored_logging import setup_logger
 import common.content as content
-import logging
-from common.get_current_user import get_current_user
+from common.get_current_user import *
 from common.find_template import *
 from common.time_formatting import *
+import master
 
 
 ##############################
 #   COLORED LOGGING
-logger = setup_logger(__name__, level=logging.INFO)
-logger.setLevel(logging.INFO)
+try:
+    logger = setup_logger(__name__, level=logging.INFO)
+    logger.setLevel(logging.INFO)
+    logger.success("Logging imported successfully.")
+except Exception as e:
+    logger.error(f"Error importing logging: {e}")
+finally:
+    logger.info("Logging import process completed.")
 
 
 ##############################
@@ -29,91 +40,110 @@ finally:
     logger.info("Content import process completed.")
 
 
+##############################
+#   DATABASE INITIALIZATION
 db = master.db()
-    
+
 
 ##############################
+#   LOAD PROFILE DATA
 #   Fetching information to be included in the admin/customer profile
 def load_profile_data():
-    current_user = get_current_user()
-    if not current_user:
-        logger.info("No current user found, redirecting to login.")
-        redirect("/login")
 
-    db = master.db()
-    user = current_user
+    function_name = "load_profile_data"
 
-    first_name = user['first_name']
-    last_name = user['last_name']
-    username = user['username']
+    try:
+        # Retrieve current user details
+        current_user = get_current_user()
 
-    #   Fetching clipcard_id from payments
-    payment_query = """
-        SELECT payments.clipcard_id
-        FROM payments
-        JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
-        WHERE payments.user_id = ? AND clipcards.is_active = 1
-        LIMIT 1
-    """
-    payment = db.execute(payment_query, (user['user_id'],)).fetchone()
+        # Redirect if not logged in
+        if not current_user:
+            logger.info("No current user found, redirecting to login.")
+            return HTTPResponse(status=303, headers={"Location": "/"})
 
-    #   Fetching time_used and remaining_time from active clipcards
-    if payment:
-        clipcard_id = payment['clipcard_id']
+        # Establish database connection
+        db = master.db()
+        logger.debug(f"Database connection opened for {function_name}")
         
-        clipcard_query = """
-            SELECT time_used, remaining_time
-            FROM clipcards
-            WHERE clipcard_id = ? AND is_active = 1
-        """
-        clipcard_data = db.execute(clipcard_query, (clipcard_id,)).fetchone()
+        user = current_user
 
-        #   Converts time_used and remaining_time to hours and minutes
-        if clipcard_data:
-            time_used = clipcard_data['time_used']
-            remaining_time = clipcard_data['remaining_time']
-            time_used_hours, time_used_minutes = minutes_to_hours_minutes(time_used)
-            remaining_hours, remaining_minutes = minutes_to_hours_minutes(remaining_time)
+        # Retrieve active clipcard ID for the current user
+        payment_query = """
+            SELECT payments.clipcard_id
+            FROM payments
+            WHERE payments.user_id = ? AND payments.clipcard_id IN (SELECT clipcard_id FROM clipcards WHERE is_active = 1)
+            LIMIT 1
+        """ 
+
+        # Fetch the result
+        payment = db.execute(payment_query, (user['user_id'],)).fetchone()
+
+        # Initialize variables for time
+        time_used_hours = time_used_minutes = remaining_hours = remaining_minutes = 0
+
+        # If a valid payment and clipcard are found, retrieve detailed clipcard data
+        if payment and payment['clipcard_id']:
+            clipcard_data = db.execute("""
+                SELECT time_used, remaining_time
+                FROM clipcards
+                WHERE clipcard_id = ? AND is_active = 1
+            """, (payment['clipcard_id'],)).fetchone()
+
+            # If clipcard data is found, convert time
+            if clipcard_data:
+                time_used_hours, time_used_minutes = minutes_to_hours_minutes(clipcard_data['time_used'])
+                remaining_hours, remaining_minutes = minutes_to_hours_minutes(clipcard_data['remaining_time'])
+            else:
+                logger.info("Active clipcard data not found for user.")
         else:
-            logger.info("Clipcard data not found or inactive for user.")
-            time_used_hours = 0
-            time_used_minutes = 0
-            remaining_hours = 0
-            remaining_minutes = 0
-    else:
-        logger.info("Payment not found for user.")
-        time_used_hours = 0
-        time_used_minutes = 0
-        remaining_hours = 0
-        remaining_minutes = 0
+            logger.info("No active payment found for user.")
 
-    #   Fetching tasks
-    tasks_query = """
-        SELECT task_title, task_description, time_spent, created_at
-        FROM tasks
-        WHERE customer_id = ?
-        ORDER BY created_at DESC
-    """
-    tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
+        # Retrieve task details for the current user, ordered by creation date
+        tasks_query = """
+            SELECT task_title, task_description, time_spent, created_at
+            FROM tasks
+            WHERE customer_id = ?
+            ORDER BY created_at DESC
+        """
 
-    #   Formats time_spent and created_at in tasks
-    formatted_tasks = []
-    for task in tasks:
-        task['formatted_time_spent'] = format_time_spent(task['time_spent'])
-        task['formatted_created_at'] = format_created_at(task['created_at'])
-        formatted_tasks.append(task)
+        # Fetch tasks using the current user's ID
+        tasks = db.execute(tasks_query, (user['user_id'],)).fetchall()
 
-    return {
+        # Task details
+        formatted_tasks = [{
+            'task_title': task['task_title'],
+            'task_description': task['task_description'],
+            'formatted_time_spent': format_time_spent(task['time_spent']),
+            'formatted_created_at': format_created_at(task['created_at'])
+        } for task in tasks]
+
+        # Return a dictionary of all relevant information
+        return {
             'user': user,
-            'first_name': first_name,
-            'last_name': last_name,
-            'username': username,
+            'first_name': user['first_name'],
+            'last_name': user['last_name'],
+            'username': user['username'],
             'time_used_hours': time_used_hours,
             'time_used_minutes': time_used_minutes,
             'remaining_hours': remaining_hours,
             'remaining_minutes': remaining_minutes,
             'tasks': formatted_tasks
         }
+
+    except Exception as e:
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
+
+    finally:
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {function_name}")
+
 
 @get('/profile/profile_customer_clipcard')
 def clipcards():
