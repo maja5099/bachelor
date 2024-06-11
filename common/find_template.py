@@ -41,7 +41,7 @@ def find_template(template_name, directories):
                 print(f"Visited {root}")
                 if f'{template_name}.tpl' in files:
                     template_path = os.path.join(root, template_name + '.tpl')
-                    print(f"Function {function_name} was successfull and found template at: {template_path}")
+                    print(f"Executed {function_name} successfully and found template at: {template_path}")
                     return template_path
                 
         # If the template is not found in any of the specified directories

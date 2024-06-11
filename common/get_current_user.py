@@ -1,7 +1,7 @@
 ##############################
 #   IMPORTS
 #   Library imports
-from bottle import request
+from bottle import request, response
 import logging
 import os
 
@@ -25,23 +25,45 @@ finally:
 ##############################
 #   GET CURRENT USER
 def get_current_user():
+
+    function_name = "get_current_user"
+
     try:
+        # Get user information from cookie
         user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
         if not user_info:
             return None
         
+        # Extract username from the user information
         username = user_info.get('username')
+
+        # If username is present
         if username:
+
+            # Establish database connection
             db = master.db()
+            logger.debug(f"Database connection opened for {function_name}")
+
+            # Get user details from the database
             current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
+
             db.close()
-            logger.success("Fetch current user successfully.")
+            logger.success(f"Executed {function_name} successfully: user was fetcged")
             return current_user
+        
         else:
             return None
         
     except Exception as e:
-        logger.error(f"Failed to fetch current user: {e}")
-        return None
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
+
     finally:
-        logger.info("Get current user process completed.")
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {function_name}")
