@@ -69,7 +69,7 @@ def user():
 
 ##############################
 #   VALIDATION - EMAIL
-EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 
 def validate_email():
     email = request.forms.get("email", "").strip()
