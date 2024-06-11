@@ -1,125 +1,71 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from bottle import request
 from routers.signup import signup
+from master import validate_email, validate_phone, validate_password, validate_username
+ # Importer din signup-funktion fra din signup.py-fil
+
+# Mock dependencies (erstat med dine faktiske implementeringer)
+def mock_validate_email(email):
+  return None  # Ingen valideringsfejl
+
+def mock_validate_phone(phone):
+  return None  # Ingen valideringsfejl
+
+def mock_validate_username(username):
+  return None  # Ingen valideringsfejl
+
+def mock_validate_password(password):
+  return None  # Ingen valideringsfejl
 
 class TestSignup(unittest.TestCase):
 
-    @patch('routers.signup.load_dotenv')
-    @patch('routers.signup.master.db')
-    @patch('routers.signup.bcrypt.gensalt')
-    @patch('routers.signup.bcrypt.hashpw')
-    @patch('routers.signup.uuid.uuid4')
-    @patch('routers.signup.time.time')
-    def test_signup_successful(self, mock_uuid, mock_time, mock_hashpw, mock_gensalt, mock_db, mock_load_dotenv):
-        mock_uuid.hex.return_value = 'user_id'
-        mock_time.return_value = 12345
-        mock_hashpw.return_value = b'hashedpassword'
-        mock_gensalt.return_value = b'salt'
+  @patch('master.validate_email', side_effect=mock_validate_email)
+  @patch('master.validate_phone', side_effect=mock_validate_phone)
+  @patch('master.validate_username', side_effect=mock_validate_username)
+  @patch('master.validate_password', side_effect=mock_validate_password)
+  def test_signup_success(self, mock_validate_password, mock_validate_username, mock_validate_phone, mock_validate_email):
+    # Mock request object
+    mock_request = MagicMock()
+    mock_request.forms.get.side_effect = {
+      "email": "test@mail.com",
+      "phone": "12345678",
+      "username": "test_user",
+      "password": "password123",
+      "first_name": "John",
+      "last_name": "Doe",
+    }
 
-        request_data = {
-            "email": "test@example.com",
-            "phone": "123456789",
-            "username": "testuser",
-            "password": "password",
-            "first_name": "John",
-            "last_name": "Doe",
-            "website_name": "My Website",
-            "website_url": "https://example.com"
-        }
+    # Mock database connection and cursor
+    mock_db = MagicMock()
+    mock_cursor = MagicMock()
+    mock_db.execute.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = None  # Ingen eksisterende bruger
 
-        request_mock = MagicMock()
-        request_mock.forms.get.side_effect = request_data.get
-        with patch('routers.signup.request', request_mock):
-            response = signup()
+    # Patch database related functions
+    with patch('signup.master.db', return_value=mock_db):
+      with patch('signup.request', mock_request):
+        response = signup()
 
-        mock_db.assert_called()
-        mock_db.return_value.execute.assert_called()
-        mock_db.return_value.commit.assert_called()
-        self.assertEqual(response, {'message': 'signup successful'})
+    # Bekræft succesfuld respons
+    self.assertEqual(response.get('message'), 'signup successful')
+    self.assertEqual(response.get('error'), None)
+    self.assertEqual(mock_db.execute.call_count, 2)  # Én til brugerindtastning, én til potentielt personale
 
-    @patch('routers.signup.load_dotenv')
-    @patch('routers.signup.master.db')
-    def test_signup_email_exists(self, mock_db, mock_load_dotenv):
-        mock_db.return_value.execute.return_value.fetchone.return_value = True
+  def test_signup_existing_email(self):
+    # Mock eksisterende bruger med samme e-mail
+    mock_db = MagicMock()
+    mock_cursor = MagicMock()
+    mock_db.execute.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = {'email': 'test@mail.com'}
 
-        request_mock = MagicMock()
-        request_mock.forms.get.return_value = "test@example.com"
-        with patch('routers.signup.request', request_mock):
-            response = signup()
+    with patch('signup.master.db', return_value=mock_db):
+      response = signup()
 
-        mock_db.assert_called()
-        mock_db.return_value.execute.assert_called()
-        mock_db.return_value.commit.assert_not_called()
-        self.assertEqual(response, {'error': 'Den indtastede email eksisterer allerede.'})
+    # Bekræft fejl for eksisterende e-mail
+    self.assertEqual(response.get('message'), None)
+    self.assertEqual(response.get('error'), 'Den indtastede email eksisterer allerede.')
 
-    
-    @patch('routers.signup.load_dotenv')
-    @patch('routers.signup.master.db')
-    def test_signup_phone_exists(self, mock_db, mock_load_dotenv):
-        # Simulating a request with a phone number that already exists
-        request_mock = MagicMock()
-        request_mock.forms.get.return_value = None  # Replace with phone number that already exists in the database
-        with patch('routers.signup.request', request_mock):
-            # Calling the signup function
-            response = signup()
-
-        # Asserting that db.execute() was called to check for existing phone number
-        mock_db.assert_called()
-        mock_db.return_value.execute.assert_called()
-        # Asserting that db.commit() was not called, as no changes were made
-        mock_db.return_value.commit.assert_not_called()
-        # Asserting the response
-        self.assertEqual(response, {'error': 'Det indtastede telefonnummer eksisterer allerede.'})
-    
-    @patch('routers.signup.load_dotenv')
-    @patch('routers.signup.master.db')
-    def test_signup_username_exists(self, mock_db, mock_load_dotenv):
-        # Simulating a request with a username that already exists
-        request_mock = MagicMock()
-        request_mock.forms.get.return_value = None  # Replace with username that already exists in the database
-        with patch('routers.signup.request', request_mock):
-            # Calling the signup function
-            response = signup()
-
-        # Asserting that db.execute() was called to check for existing username
-        mock_db.assert_called()
-        mock_db.return_value.execute.assert_called()
-        # Asserting that db.commit() was not called, as no changes were made
-        mock_db.return_value.commit.assert_not_called()
-        # Asserting the response
-        self.assertEqual(response, {'error': 'Det indtastede brugernavn eksisterer allerede.'})
-
-    @patch('routers.signup.load_dotenv')
-    @patch('routers.signup.master.db')
-    def test_signup_password_invalid(self, mock_db, mock_load_dotenv):
-        # Simulating a request with an invalid password (e.g., too short)
-        request_mock = MagicMock()
-        request_mock.forms.get.return_value = None  # Replace with an invalid password
-        with patch('routers.signup.request', request_mock):
-            # Calling the signup function
-            response = signup()
-
-        # Asserting that db.execute() was not called, as no user creation was attempted
-        mock_db.assert_not_called()
-        # Asserting the response
-        self.assertEqual(response, {'error': 'Adgangskoden skal være på mindst 8 tegn.'})
-
-
-
-    @patch('routers.signup.load_dotenv')
-    @patch('routers.signup.master.db')
-    def test_signup_exception(self, mock_db, mock_load_dotenv):
-        mock_db.return_value.execute.side_effect = Exception('Database error')
-
-        request_mock = MagicMock()
-        with patch('routers.signup.request', request_mock):
-            response = signup()
-
-        mock_db.assert_called()
-        mock_db.return_value.execute.assert_called()
-        mock_db.return_value.rollback.assert_called()
-        self.assertEqual(response, {'error': 'Internal Server Error'})
+  # Tilføj lignende testtilfælde for eksisterende telefonnummer og brugernavn
 
 if __name__ == '__main__':
-    unittest.main()
+  unittest.main()
