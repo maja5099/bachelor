@@ -32,6 +32,7 @@ def logout():
     try:
         # Securely retrieve user cookie
         user_cookie = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
+        print("User cookie:", user_cookie)
 
         if not user_cookie:
             logger.info(f"No user cookie found, no user to {function_name}")
@@ -41,6 +42,7 @@ def logout():
         db = master.db()
         logger.debug(f"Database connection opened for {function_name}")
         user = db.execute("SELECT * FROM users WHERE username = ?", (user_cookie['username'],)).fetchone()
+        print("User:", user)
 
         # Handle user not found in the database
         if not user:
@@ -51,6 +53,7 @@ def logout():
         username = user['username']
         logger.info(f"Attempting {function_name} user: {username}")
         response.delete_cookie("user")
+        print("User cookie deleted")
         logger.success(f"Successfully logged out user: {username}")
         return redirect("/")
     
@@ -66,3 +69,4 @@ def logout():
             db.close()
             logger.info("Database connection closed")
         logger.info(f"Completed {function_name}")
+
