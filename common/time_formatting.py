@@ -23,33 +23,78 @@ finally:
 
 ##############################
 #   TIME FORMATTING
-#   Converts minutes to hours and minutes
+#   Format minutes to hours and minutes
 def minutes_to_hours_minutes(minutes):
-    hours = floor(minutes / 60)
-    remaining_minutes = minutes % 60
-    return hours, remaining_minutes
 
-
-##############################
-#   Adds minutes and hours depending on the time
-def format_time_spent(minutes):
-    if minutes <= 60:
-        return f"{minutes} minutter"
-    else:
-        hours = minutes // 60
+    function_name = "minutes_to_hours_minutes"
+    
+    try:
+        # Calculate hours from total minutes, and determine remaining minutes
+        hours = floor(minutes / 60)
         remaining_minutes = minutes % 60
-        return f"{hours} timer og {remaining_minutes} minutter"
+
+        logger.success(f"Executed {function_name} successfully")
+        return hours, remaining_minutes
+    
+    except Exception as e:
+        logger.error(f"Error during {function_name}: {e}")
+        return None
+    
+    finally:
+        logger.info(f"Completed {function_name}")
 
 
-##############################
-#   Formats timestamp
+#   Format time spent
+def format_time_spent(minutes):
+
+    function_name = "format_time_spent"
+
+    try:
+        # Check if total minutes are less than or equal to 60
+        if minutes <= 60:
+            logger.success(f"Executed {function_name} successfully")
+            return f"{minutes} minutter"
+        
+        # Calculate hours and remaining minutes if total minutes is over 60
+        else:
+            hours = minutes // 60
+            remaining_minutes = minutes % 60
+
+            logger.success(f"Executed {function_name} successfully")
+            return f"{hours} timer og {remaining_minutes} minutter"
+        
+    except Exception as e:
+        logger.error(f"Error during {function_name}: {e}")
+        return "Fejl i format"
+    
+    finally:
+        logger.info(f"Completed {function_name}")
+
+
+#   Format timestamp
 def format_created_at(timestamp):
-    if isinstance(timestamp, str):
-        try:
-            timestamp = int(timestamp)
-        except ValueError:
-            print("Fejl: Timestamp kan ikke konverteres til en integer.")
-            return None
-    created_at_dt = datetime.fromtimestamp(timestamp)
-    formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
-    return formatted_created_at
+
+    function_name = "format_time_spent"
+
+    try:
+        # Check if timestamp is a string and convert to integer
+        if isinstance(timestamp, str):
+            try:
+                timestamp = int(timestamp)
+            except ValueError:
+                logger.error("Timestamp can not be converted to an integer.")
+                return None
+            
+        # Convert timestamp to datetime, and format it into a readable date
+        created_at_dt = datetime.fromtimestamp(timestamp)
+        formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
+
+        logger.success(f"Executed {function_name} successfully")
+        return formatted_created_at
+    
+    except Exception as e:
+        logger.error(f"Error during {function_name}: {e}")
+        return None
+    
+    finally:
+        logger.info(f"Completed {function_name}")
