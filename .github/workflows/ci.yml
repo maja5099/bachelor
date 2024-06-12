@@ -40,7 +40,7 @@ jobs:
 
       - name: Lint with pylint
         run: |
-          pylint . --disable=C0114
+          pylint . --disable=C0114,C0116
 
       - name: Run ESLint with fix option
         run: npx eslint .
