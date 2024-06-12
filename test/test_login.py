@@ -66,7 +66,7 @@ class TestLogin(unittest.TestCase):
                 response = login()
 
         self.assertEqual(str(cm.exception), 'Database error')
-  
+
 
 if __name__ == '__main__':
     unittest.main()
