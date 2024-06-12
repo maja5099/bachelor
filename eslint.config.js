@@ -1,7 +1,7 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
+const globals = require("globals");
+const pluginJs = require("@eslint/js");
 
-export default [
+export const eslintConfig = [
   { files: ["static/**/*.js"], languageOptions: { sourceType: "module" } },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
