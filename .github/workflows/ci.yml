@@ -42,7 +42,7 @@ jobs:
 
       - name: Run ESLint with fix option
         run: npx eslint .
-          --config .eslintrc.js
+          --config static/eslint/.eslintrc.js
           --ext .js,.jsx
           --format stylish
           --fix
