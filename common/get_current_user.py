@@ -33,7 +33,7 @@ def get_current_user():
         user_info = request.get_cookie('user', secret=os.getenv('MY_SECRET'))
         if not user_info:
             return None
-        
+
         # Extract username from the user information
         username = user_info.get('username')
 
@@ -50,10 +50,10 @@ def get_current_user():
             db.close()
             logger.success(f"Executed {function_name} successfully: user was fetcged")
             return current_user
-        
+
         else:
             return None
-        
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
