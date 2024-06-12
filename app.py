@@ -86,10 +86,10 @@ def handle_error(error_code, error):
 def error404(error):
     return handle_error(404, error)
 
+
 @error(500)
 def error500(error):
     return handle_error(500, error)
-
 
 
 ##############################
@@ -121,15 +121,18 @@ def serve_static(filepath, root):
 def css_file_static():
     return serve_static('app.css', '.')
 
+
 # Assets folder
 @route('/assets/<filepath:path>')
 def assets_folder_static(filepath):
     return serve_static(filepath, './assets')
 
+
 # Static folder
 @route('/static/<filepath:path>')
 def static_folder(filepath):
     return serve_static(filepath, './static')
+
 
 # Uploads folder
 @get('/uploads/<filename:path>')
@@ -179,6 +182,7 @@ def index():
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, title="UNID Studio", global_content=global_content, frontpage_content=frontpage_content, error_content=error_content, user=user, username=username)
     
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
@@ -186,6 +190,7 @@ def index():
         logger.error(f"Error during request for /{page_name}: {e}")
         raise
     
+
     finally:
         if "db" in locals():
             db.close()
