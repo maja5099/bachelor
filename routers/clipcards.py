@@ -1,7 +1,7 @@
 ##############################
 #   IMPORTS
 #   Library imports
-from bottle import template, get, post, request, delete, template, HTTPResponse
+from bottle import get, post, request, delete, template, HTTPResponse
 import time
 import uuid
 import logging
@@ -367,7 +367,7 @@ def admin_clipcards_get():
 ##############################
 #   ADMIN HOUR REGISTRATION
 @get('/profile/profile_admin_hour_registration')
-def admin_clipcards_get():
+def admin_hour_registration_get():
 
     page_name = "profile_admin_hour_registration"
 

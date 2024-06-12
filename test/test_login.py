@@ -63,7 +63,7 @@ class TestLogin(unittest.TestCase):
         request_mock = MagicMock()
         with patch('routers.login.request', request_mock):
             with self.assertRaises(Exception) as cm:
-                response = login()
+                login()
 
         self.assertEqual(str(cm.exception), 'Database error')
 

@@ -71,7 +71,7 @@ def about_us():
                         user=user,
                         username=username
                         )
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
