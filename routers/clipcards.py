@@ -145,22 +145,43 @@ def load_profile_data():
         logger.info(f"Completed {function_name}")
 
 
+##############################
+#   CUSTOMER CLIPCARD
 @get('/profile/profile_customer_clipcard')
 def clipcards():
-    try:
-        data = load_profile_data()
 
-        # Check if the current user has an active clipcard
+    page_name = "clipcards"
+    
+    try:
+        # Check if response is HTTP response
+        data = load_profile_data()
+        if isinstance(data, HTTPResponse):
+            return data
+
+        if not data:
+            logger.error("Failed to load profile data.")
+            return "Error loading data."
+
+        # Retrieve current user details
         current_user = get_current_user()
         if current_user:
-            user_id = current_user['user_id']
+            # Establish database connection
             db = master.db()
+            logger.debug(f"Database connection opened for {page_name}")
+
+            # Retrieve current user and fetch clipcard ID if available
+            user_id = current_user['user_id']
             clipcard_id = db.execute("SELECT clipcard_id FROM payments WHERE user_id = ? LIMIT 1", (user_id,)).fetchone()
+
+            # Default to no active clipcard
+            current_user['has_active_clipcard'] = False 
+
+            # If active clipcard
             if clipcard_id:
                 clipcard_id_value = clipcard_id['clipcard_id']
                 print("Clipcard ID:", clipcard_id_value)
                 
-                # Check if the user has any active clipcards
+                # Prepare the query to check for active clipcards   
                 has_active_clipcard_query = """
                 SELECT COUNT(*) AS active_clipcards 
                 FROM clipcards 
@@ -170,29 +191,28 @@ def clipcards():
                     WHERE user_id = ?) 
                 AND is_active = 1
                 """
-                
+                # Execute the query and fetch the result
                 has_active_clipcard_result = db.execute(has_active_clipcard_query, (user_id,)).fetchone()
                 
+                # If the count over 0, then user has active clipcard
                 if has_active_clipcard_result and has_active_clipcard_result['active_clipcards'] > 0:
                     current_user['has_active_clipcard'] = True
-                else:
-                    current_user['has_active_clipcard'] = False
 
+         # Get clipcard types and prices
         cursor = db.cursor()
         cursor.execute("SELECT clipcard_type_title, clipcard_price FROM card_types")
         clipcards = cursor.fetchall()
         cursor.close()
+
+        # Determine and load template
         template_path = find_template('profile_customer_clipcard', template_dirs)
         if template_path is None:
+            logger.error("Clipcard template not found.")
             return "Template not found."
-            
-        # Extract the relative path from views directory if necessary
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
-
-        print("Current User:", current_user)
-        if current_user:
-            print("Has active clipcard:", current_user.get('has_active_clipcard'))
-
+        
+        # Show template
+        logger.success(f"Succesfully showing template for {page_name}")
         return template(relative_path, 
                         global_content=global_content,
                         profile_content=profile_content,
@@ -206,17 +226,22 @@ def clipcards():
                         time_used_minutes=data['time_used_minutes'],
                         remaining_hours=data['remaining_hours'],
                         remaining_minutes=data['remaining_minutes'],
-                        tasks=data['tasks'])
-       
+                        tasks=data['tasks']
+                        )
 
     except Exception as e:
-        print("Error in clipcards:", e)
-        return {"info": str(e)}
-    
-    finally:
-        if 'cursor' in locals(): cursor.close()
-        if 'db' in locals(): db.close()
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {page_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
 
+    finally:
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {page_name}")
 
 
 @get('/buy_clipcard/<clipcard_type>/<clipcard_price>')
