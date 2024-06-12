@@ -226,22 +226,22 @@ def profile_template(template_name):
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
             logger.success(f"Succesfully showing template for {function_name}")
             return template(relative_path,
-                        title="Din profil",
-                        profile_content=profile_content,
-                        save_file=messages.save_file,
-                        get_current_user=messages.get_current_user,
-                        send_message=messages.send_message,
-                        messages_get=messages.messages_get,
-                        admin_messages_get=messages.admin_messages_get,
-                        delete_message=messages.delete_message,
-                        current_user=current_user,
-                        global_content=global_content,
-                        services_and_prices_content=services_and_prices_content,
-                        user=data['user'],
-                        first_name=data['first_name'],
-                        last_name=data['last_name'],
-                        username=data['username'],
-                        )
+                            title="Din profil",
+                            profile_content=profile_content,
+                            save_file=messages.save_file,
+                            get_current_user=messages.get_current_user,
+                            send_message=messages.send_message,
+                            messages_get=messages.messages_get,
+                            admin_messages_get=messages.admin_messages_get,
+                            delete_message=messages.delete_message,
+                            current_user=current_user,
+                            global_content=global_content,
+                            services_and_prices_content=services_and_prices_content,
+                            user=data['user'],
+                            first_name=data['first_name'],
+                            last_name=data['last_name'],
+                            username=data['username'],
+                            )
 
     except Exception as e:
         if "db" in locals():

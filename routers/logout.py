@@ -56,17 +56,16 @@ def logout():
         print("User cookie deleted")
         logger.success(f"Successfully logged out user: {username}")
         return redirect("/")
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during {function_name} of user {username}. Error: {e}")
         raise
-    
+
     finally:
         if "db" in locals():
             db.close()
             logger.info("Database connection closed")
         logger.info(f"Completed {function_name}")
-
