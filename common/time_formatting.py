@@ -27,7 +27,7 @@ finally:
 def minutes_to_hours_minutes(minutes):
 
     function_name = "minutes_to_hours_minutes"
-    
+
     try:
         # Calculate hours from total minutes, and determine remaining minutes
         hours = floor(minutes / 60)
@@ -35,11 +35,11 @@ def minutes_to_hours_minutes(minutes):
 
         logger.success(f"Executed {function_name} successfully")
         return hours, remaining_minutes
-    
+
     except Exception as e:
         logger.error(f"Error during {function_name}: {e}")
         return None
-    
+
     finally:
         logger.info(f"Completed {function_name}")
 
@@ -54,7 +54,7 @@ def format_time_spent(minutes):
         if minutes <= 60:
             logger.success(f"Executed {function_name} successfully")
             return f"{minutes} minutter"
-        
+
         # Calculate hours and remaining minutes if total minutes is over 60
         else:
             hours = minutes // 60
@@ -62,11 +62,11 @@ def format_time_spent(minutes):
 
             logger.success(f"Executed {function_name} successfully")
             return f"{hours} timer og {remaining_minutes} minutter"
-        
+
     except Exception as e:
         logger.error(f"Error during {function_name}: {e}")
         return "Fejl i format"
-    
+
     finally:
         logger.info(f"Completed {function_name}")
 
@@ -84,17 +84,17 @@ def format_created_at(timestamp):
             except ValueError:
                 logger.error("Timestamp can not be converted to an integer.")
                 return None
-            
+
         # Convert timestamp to datetime, and format it into a readable date
         created_at_dt = datetime.fromtimestamp(timestamp)
         formatted_created_at = created_at_dt.strftime('%d-%m-%Y %H:%M')
 
         logger.success(f"Executed {function_name} successfully")
         return formatted_created_at
-    
+
     except Exception as e:
         logger.error(f"Error during {function_name}: {e}")
         return None
-    
+
     finally:
         logger.info(f"Completed {function_name}")

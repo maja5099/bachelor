@@ -163,7 +163,7 @@ global_content = {
         "website_name": {
             "label_for": "website_name",
             "text": "Navn på din hjemmeside",
-            "icon": "pen_line.svg", 
+            "icon": "pen_line.svg",
             "type": "text",
             "name": "website_name",
             "inputmode": "text",
@@ -205,7 +205,7 @@ global_content = {
 #   FRONTPAGE / INDEX
 frontpage_content = {
     # HERO SECTION
-    "hero_section": {    
+    "hero_section": {  
         "header_text": "Unikke & skræddersyede løsninger",
         "subheader_text": "Vi bestræber os på, at lave unikke og kvalitets løsninger som opfylder hver enkel kundes behov.",
         "button_text": "Kontakt os",
