@@ -443,40 +443,62 @@ def admin_clipcards_get():
             logger.info("Database connection closed")
         logger.info(f"Completed {page_name}")
 
+
+##############################
+#   DELETE CLIPCARD
 @delete('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
+
+    function_name = "delete_clipcard"
+
     try:
+        # Establish database connection
+        db = master.db()
+        logger.debug(f"Database connection opened for {function_name}")
+
         cursor = db.cursor()
 
+        # Check if the clipcard exists
         cursor.execute("SELECT * FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
         existing_clipcard = cursor.fetchone()
+        
+        # Error if no clipcard
         if existing_clipcard is None:
+            logger.error(f"No clipcard found with ID: {clipcard_id}")
             return {"info": f"The clip card with id {clipcard_id} does not exist."}
 
+        # Info if already has been deleted
         if existing_clipcard["is_active"] == "0":
+            logger.info(f"Clipcard {clipcard_id} has already been deleted.")
             return {"info": f"The clip card with id {clipcard_id} has already been deleted."}
 
+        # Update clipcard as deleted
         updated_at = int(time.time())
         deleted_at = int(time.time())
-
         cursor.execute("""
             UPDATE clipcards 
-            SET updated_at = ?, deleted_at = ?, is_active = ? 
+            SET updated_at = ?, deleted_at = ?, is_active = 0 
             WHERE clipcard_id = ?
-        """, (updated_at, deleted_at, 0, clipcard_id))
+        """, (updated_at, deleted_at, clipcard_id))
         
+        # Commit changes to the database
         db.commit()
-
-        return {"info": "The clip card has been deleted."}
+        logger.success(f"{function_name} successful, clipcard {clipcard_id} deleted successfully")
+        return {"message": f"{function_name} successful"}
 
     except Exception as e:
-        db.rollback()
-        print("Error in delete_clipcard:", e)
-        return {"info": str(e)}
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
 
     finally:
-        if 'cursor' in locals(): cursor.close()
-        if 'db' in locals(): db.close()
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {function_name}")
 
 
 @post('/submit_task')
