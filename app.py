@@ -182,7 +182,7 @@ def index():
 
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, title="UNID Studio", global_content=global_content, frontpage_content=frontpage_content, error_content=error_content, user=user, username=username)
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
