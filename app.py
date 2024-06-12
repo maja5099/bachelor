@@ -73,22 +73,14 @@ def handle_error(error_code, error):
     try:
         if error:
             logger.error(f"Handled {error_code} succesfully with following error details: {error}")
-            return template('error',
-                            title="Fejl", 
-                            error=error, 
-                            header_text=error_content['header_text'], 
-                            illustration=error_content['illustration'], 
-                            illustration_alt=error_content['illustration_alt'], 
-                            button_link=error_content['button_link'], 
-                            button_text=error_content['button_text'], 
-                            error_title_text=error_content[str(error_code)]['error_title_text'], 
-                            error_message_text=error_content[str(error_code)]['error_message_text'])
+            return template('error', title="Fejl", error=error, header_text=error_content['header_text'], illustration=error_content['illustration'], illustration_alt=error_content['illustration_alt'], button_link=error_content['button_link'], button_text=error_content['button_text'], error_title_text=error_content[str(error_code)]['error_title_text'], error_message_text=error_content[str(error_code)]['error_message_text'])
         else:
             logger.success(f"Handled {error_code} response successfully with no errors.")
     except Exception as e:
         logger.error(f"Error handling {error_code} response: {e}")
     finally:
         logger.info(f"{error_code} error handling completed.")
+
 
 @error(404)
 def error404(error):
@@ -97,6 +89,7 @@ def error404(error):
 @error(500)
 def error500(error):
     return handle_error(500, error)
+
 
 
 ##############################
@@ -184,14 +177,7 @@ def index():
             logger.warning(f"No valid user cookie found for /{page_name}, perhaps user is not logged in yet")
 
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(page_name, 
-                        title="UNID Studio", 
-                        global_content=global_content,
-                        frontpage_content=frontpage_content,
-                        error_content=error_content, 
-                        user=user, 
-                        username=username
-                        )
+        return template(page_name, title="UNID Studio", global_content=global_content, frontpage_content=frontpage_content, error_content=error_content, user=user, username=username)
     
     except Exception as e:
         if "db" in locals():
