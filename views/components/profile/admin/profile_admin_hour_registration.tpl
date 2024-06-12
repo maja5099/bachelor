@@ -40,7 +40,11 @@
                   placeholder="Choose a customer…"
                 >
                   % for customer in active_customers:
-                  <option id="form_input" value="{{ customer['user_id'] }}">
+                  <option
+                    required
+                    id="form_input"
+                    value="{{ customer['user_id'] }}"
+                  >
                     {{ customer["first_name"] }} {{ customer["last_name"] }}
                   </option>
                   % end
@@ -63,6 +67,7 @@
                 name="title"
                 accept-charset="UTF-8"
                 placeholder="Titel på udførte opgave"
+                required
               ></textarea>
             </div>
             <div class="grid lg:grid-cols-6 gap-2 items-center">
@@ -75,6 +80,7 @@
                 name="description"
                 accept-charset="UTF-8"
                 placeholder="Beskrivelse af udførte opgave..."
+                required
               ></textarea>
             </div>
           </div>
@@ -118,18 +124,19 @@
               </div>
             </div>
           </div>
+          <div class="space-y-4 w-fit mx-auto">
+            <div id="submitTaskButton">
+              <button type="button" id="primary_button">Registrer</button>
+            </div>
+            <p
+              id="taskSubmissionMessage"
+              style="display: none"
+              class="text-unidLightBlue text-sm"
+            ></p>
+          </div>
         </form>
 
-        <div class="mx-auto flex-col space-y-4">
-          <div id="submitTaskButton" class="">
-            <button type="button" id="primary_button">Registrer</button>
-          </div>
-          <p
-            id="taskSubmissionMessage"
-            style="display: none"
-            class="text-unidLightBlue text-sm"
-          ></p>
-        </div>
+
       </div>
     </div>
   </div>

@@ -322,6 +322,16 @@ function deleteClipcard(clipcardId) {
 $(document).ready(function () {
   $("body").on("click", "#submitTaskButton", function () {
     console.log("Button clicked");
+
+    // Validate the time form inputs
+    var hours = $("#hours").val();
+    var minutes = $("#minutes").val();
+
+    if (hours === '' && minutes === '') {
+      alert('Du skal udfylde mindst et af felterne i tidsregistrering');
+      return false;
+    }
+
     // Retrieve form data
     var formData = new FormData($("#taskForm")[0]);
     // Send an AJAX request to submit the task

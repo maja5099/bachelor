@@ -501,74 +501,88 @@ def delete_clipcard(clipcard_id):
         logger.info(f"Completed {function_name}")
 
 
+##############################
+#   SUBMIT TASK
 @post('/submit_task')
 def submit_task():
+
+    function_name = "signup"
+
     try:
+        # Establish database connection
+        db = master.db()
+        logger.debug(f"Database connection opened for {function_name}")
+
         cursor = db.cursor()
-        
+
+        # Retrieve form data
         user_id = request.forms.get('customer')
         task_title = request.forms.get('title')
         task_description = request.forms.get('description')
+        hours = int(request.forms.get('hours', '0') or '0')
+        minutes = int(request.forms.get('minutes', '0') or '0')
 
-        hours_str = request.forms.get('hours')
-        minutes_str = request.forms.get('minutes')
-
-        hours = int(hours_str) if hours_str.strip() != '' else 0
-        minutes = int(minutes_str) if minutes_str.strip() != '' else 0
-
+        # Calculate total time spent in minutes
         time_spent = hours * 60 + minutes
         created_at = int(time.time())
 
-        print("Form data:")
-        print("user_id:", user_id)
-        print("task_title:", task_title)
-        print("task_description:", task_description)
-        print("hours:", hours)
-        print("minutes:", minutes)
+        logger.debug(f"Form data received: user_id={user_id}, task_title={task_title}, hours={hours}, minutes={minutes}")
 
-        cursor.execute("""
+        # Check for an active clipcard associated with the user
+        result = cursor.execute("""
             SELECT payments.clipcard_id
             FROM payments
             JOIN clipcards ON payments.clipcard_id = clipcards.clipcard_id
-            WHERE payments.user_id = ? AND clipcards.is_active = "1"
-        """, (user_id,))
-        result = cursor.fetchone()
+            WHERE payments.user_id = ? AND clipcards.is_active = 1
+        """, (user_id,)).fetchone()
 
         if result is None:
+            logger.warning("No active clipcard found for the user")
             return {"info": "No active clipcard found for the provided user_id."}
 
-        clipcard_id = result["clipcard_id"]
-
-        task_id = str(uuid.uuid4().hex) 
+        # Insert new task into the database
+        task_id = str(uuid.uuid4().hex)
         cursor.execute("""
-            INSERT INTO tasks (task_id, clipcard_id, customer_id, task_title, task_description, created_at, time_spent) 
+            INSERT INTO tasks (task_id, clipcard_id, customer_id, task_title, task_description, created_at, time_spent)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (task_id, clipcard_id, user_id, task_title, task_description, created_at, time_spent))
+        """, (task_id, result["clipcard_id"], user_id, task_title, task_description, created_at, time_spent))
 
+        # Commit changes to the database
         db.commit()
-        
-        cursor.execute("""
+
+        # Update clipcard usage
+        time_data = cursor.execute("""
             SELECT time_used, remaining_time
             FROM clipcards 
             WHERE clipcard_id = ?
-        """, (clipcard_id,))
-        time_data = cursor.fetchone()
+        """, (result["clipcard_id"],)).fetchone()
 
-        if time_data is not None and time_data["time_used"] is not None:
-            time_used_minutes = int(time_data["time_used"]) + time_spent
-            remaining_time_minutes = int(time_data["remaining_time"]) - time_spent
+        # Update if time data exists
+        if time_data:
+            time_used_minutes = time_data["time_used"] + time_spent
+            remaining_time_minutes = time_data["remaining_time"] - time_spent
             cursor.execute("""
                 UPDATE clipcards 
-                SET time_used = ?, remaining_time = ? 
+                SET time_used = ?, remaining_time = ?
                 WHERE clipcard_id = ?
-            """, (time_used_minutes, remaining_time_minutes, clipcard_id))
+            """, (time_used_minutes, remaining_time_minutes, result["clipcard_id"]))
 
+            # Commit changes to the database
             db.commit()
 
- 
-        return {"info": "Opgaven er blevet indsendt."}
+        logger.success(f"{function_name} successful, task successfully submitted")
+        return {"info": "Opgaven er registreret!"}
 
     except Exception as e:
-        db.rollback()
-        print("Error in submit_task:", e)
-        return {"info": str(e)}
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
+
+    finally:
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {function_name}")
