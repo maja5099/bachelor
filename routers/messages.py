@@ -211,11 +211,11 @@ def admin_messages_get():
         # Set up cursor and execute query to fetch message details
         cursor = db.cursor()
         cursor.execute("""
-            SELECT 
+            SELECT
                 messages.message_id,
                 messages.created_at,
                 messages.message_subject,
-                messages.message_text, 
+                messages.message_text,
                 messages.message_file,
                 users.first_name,
                 users.last_name,
@@ -297,9 +297,9 @@ def delete_message():
 
         # Set the deleted_at for specified message
         cursor.execute("""
-            UPDATE messages 
+            UPDATE messages
             SET deleted_at = ?
-            WHERE message_id = ? 
+            WHERE message_id = ?
         """, (deleted_at, message_id))
 
         # Commit changes to the database

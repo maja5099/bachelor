@@ -123,7 +123,7 @@ def signup():
         # Hash password using bcrypt and salt
         salt = bcrypt.gensalt()
         password_hashed = bcrypt.hashpw(password.encode("utf-8"), salt)
-        
+
         # Prepare user dictionary for insertion into database
         user = {
             "user_id": user_id,
@@ -173,13 +173,12 @@ def signup_get():
     try:
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(page_name, 
-                    title="Sign up", 
+        return template(page_name,
+                    title="Sign up",
                     # A-Z
                     global_content=global_content,
-                    signup_content=signup_content, 
-                    )
-    
+                    signup_content=signup_content)
+
     except Exception as e:
         logger.error(f"Error during request for /{page_name}: {e}")
         raise

@@ -29,7 +29,7 @@ try:
     # Global
     global_content = content.global_content
     # Content for this page
-    services_and_prices_content=content.services_and_prices_content
+    services_and_prices_content = content.services_and_prices_content
     logger.success("Content imported successfully.")
 except Exception as e:
     logger.error(f"Error importing content: {e}")
@@ -63,22 +63,22 @@ def services_and_prices():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(page_name, 
-                        title="UNID Studio - Services og priser", 
+        return template(page_name,
+                        title="UNID Studio - Services og priser",
                         # A-Z
                         global_content=global_content,
                         services_and_prices_content=services_and_prices_content,
-                        user=user, 
+                        user=user,
                         username=username
                         )
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during request for /{page_name}: {e}")
         raise
-    
+
     finally:
         if "db" in locals():
             db.close()

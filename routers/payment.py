@@ -29,7 +29,7 @@ finally:
 #   CONTENT VARIABLES
 try:
     # Global
-    global_content=content.global_content
+    global_content = content.global_content
     profile_content = content.profile_content
     logger.success("Content imported successfully.")
 except Exception as e:
@@ -59,7 +59,7 @@ def process_payment():
 
         # Retrieve payment details from the form
         clipcard_price = request.forms.get('clipcard_price')
-        amount_paid = clipcard_price 
+        amount_paid = clipcard_price
         payment_id = str(uuid.uuid4())
         clipcard_id = str(uuid.uuid4())
         created_at = int(time.time())
@@ -81,15 +81,15 @@ def process_payment():
             logger.error("Clipcard type not found.")
             raise Exception('Clipcard type not found')
 
-        clipcard_type_id = row['clipcard_type_id'] 
-        remaining_time = row['clipcard_type_time']  
+        clipcard_type_id = row['clipcard_type_id']
+        remaining_time = row['clipcard_type_time'] 
 
         # Insert payment and clipcard records into the database
         cursor.execute("INSERT INTO payments (payment_id, user_id, clipcard_id, amount_paid, created_at) VALUES (?, ?, ?, ?, ?)",
                        (payment_id, user_id, clipcard_id, amount_paid, created_at))
         cursor.execute("INSERT INTO clipcards (clipcard_id, clipcard_type_id, time_used, remaining_time, created_at, updated_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                       (clipcard_id, clipcard_type_id, time_used, remaining_time, created_at, updated_at, is_active)) 
-        
+                       (clipcard_id, clipcard_type_id, time_used, remaining_time, created_at, updated_at, is_active))
+
         # Commit changes to the database
         db.commit()
         logger.success(f"{function_name} successful")
@@ -97,24 +97,24 @@ def process_payment():
 
         # Show template
         logger.success("Payment processed successfully, redirecting to confirmation.")
-        return template("confirmation", 
-                        title="Confirmation", 
+        return template("confirmation",
+                        title="Confirmation",
                         # A-Z
-                        amount_paid=amount_paid, 
-                        clipcard_type_title=clipcard_type_title, 
+                        amount_paid=amount_paid,
+                        clipcard_type_title=clipcard_type_title,
                         created_at=created_at,
-                        global_content=global_content, 
-                        payment_id=payment_id, 
+                        global_content=global_content,
+                        payment_id=payment_id,
                         profile_content=profile_content,
                         )
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during {function_name}: {e}")
         raise
-    
+
     finally:
         if "db" in locals():
             db.close()

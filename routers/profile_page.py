@@ -58,7 +58,7 @@ def load_profile_data():
         # Establish database connection
         db = master.db()
         logger.debug(f"Database connection opened for {function_name}")
-        
+
         user = current_user
 
         # Retrieve active clipcard ID for the current user
@@ -67,7 +67,7 @@ def load_profile_data():
             FROM payments
             WHERE payments.user_id = ? AND payments.clipcard_id IN (SELECT clipcard_id FROM clipcards WHERE is_active = 1)
             LIMIT 1
-        """ 
+        """
 
         # Fetch the result
         payment = db.execute(payment_query, (user['user_id'],)).fetchone()
@@ -132,15 +132,15 @@ def profile():
 
     page_name = "profile"
 
-    try:    
+    try:
         # Check if response is HTTP response
         data = load_profile_data()
         if isinstance(data, HTTPResponse):
             return data
-        
+
         # Retrieve current user details
         current_user = get_current_user()
-        
+
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template('profile', title="Din profil",
@@ -196,8 +196,8 @@ def profile_template(template_name):
                 clipcard_info = db.execute("SELECT clipcard_id FROM payments WHERE user_id = ? LIMIT 1", (current_user['user_id'],)).fetchone()
                 if clipcard_info and clipcard_info['clipcard_id']:
                     has_active_clipcard = db.execute("""
-                        SELECT COUNT(*) AS active_clipcards 
-                        FROM clipcards 
+                        SELECT COUNT(*) AS active_clipcards
+                        FROM clipcards
                         WHERE clipcard_id = ? AND is_active = 1
                     """, (clipcard_info['clipcard_id'],)).fetchone()['active_clipcards'] > 0
                     current_user['has_active_clipcard'] = has_active_clipcard
@@ -225,8 +225,8 @@ def profile_template(template_name):
         else:
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
             logger.success(f"Succesfully showing template for {function_name}")
-            return template(relative_path, 
-                        title="Din profil", 
+            return template(relative_path,
+                        title="Din profil",
                         profile_content=profile_content,
                         save_file=messages.save_file,
                         get_current_user=messages.get_current_user,
@@ -237,10 +237,10 @@ def profile_template(template_name):
                         current_user=current_user,
                         global_content=global_content,
                         services_and_prices_content=services_and_prices_content,
-                        user=data['user'], 
-                        first_name=data['first_name'], 
-                        last_name=data['last_name'], 
-                        username=data['username'], 
+                        user=data['user'],
+                        first_name=data['first_name'],
+                        last_name=data['last_name'],
+                        username=data['username'],
                         )
 
     except Exception as e:
