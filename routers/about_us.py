@@ -63,12 +63,12 @@ def about_us():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(page_name, 
+        return template(page_name,
                         title="Om UNID Studio",
                         # A-Z
-                        about_us_content=about_us_content,  
+                        about_us_content=about_us_content,
                         global_content=global_content,
-                        user=user, 
+                        user=user,
                         username=username
                         )
     
@@ -78,7 +78,7 @@ def about_us():
             logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during request for /{page_name}: {e}")
         raise
-    
+
     finally:
         if "db" in locals():
             db.close()

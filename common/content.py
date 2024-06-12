@@ -205,7 +205,7 @@ global_content = {
 #   FRONTPAGE / INDEX
 frontpage_content = {
     # HERO SECTION
-    "hero_section": {  
+    "hero_section": {
         "header_text": "Unikke & skræddersyede løsninger",
         "subheader_text": "Vi bestræber os på, at lave unikke og kvalitets løsninger som opfylder hver enkel kundes behov.",
         "button_text": "Kontakt os",

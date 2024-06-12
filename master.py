@@ -1,7 +1,7 @@
 ##############################
 #   IMPORTS
 #   Library imports
-from bottle import request, response
+from bottle import request
 from dotenv import load_dotenv
 import logging
 import sqlite3
@@ -28,8 +28,8 @@ finally:
 ##############################
 #   DICT FACTORY
 def dict_factory(cursor, row):
-  col_names = [col[0] for col in cursor.description]
-  return {key: value for key, value in zip(col_names, row)}
+    col_names = [col[0] for col in cursor.description]
+    return {key: value for key, value in zip(col_names, row)}
 
 
 ##############################
@@ -65,11 +65,12 @@ def user():
         raise
     finally:
         logger.info("User function completed.")
-    
+
 
 ##############################
 #   VALIDATION - EMAIL
 EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+
 
 def validate_email():
     email = request.forms.get("email", "").strip()
@@ -82,6 +83,7 @@ def validate_email():
 #   VALIDATION - USERNAME
 USERNAME_REGEX = "^[a-zA-Z0-9_]{4,15}$"
 
+
 def validate_username():
     username = request.forms.get("username", "").strip()
     if not re.match(USERNAME_REGEX, username):
@@ -93,6 +95,7 @@ def validate_username():
 #   VALIDATION - PHONE
 PHONE_REGEX = "^\\d{8}$" 
 
+
 def validate_phone():
     phone = request.forms.get("phone", "").strip()
     if not re.match(PHONE_REGEX, phone):
@@ -103,6 +106,7 @@ def validate_phone():
 ##############################
 #   VALIDATION - PASSWORD
 PASSWORD_REGEX = "^[a-zA-Z0-9]{10,128}$"
+
 
 def validate_password():
     password = request.forms.get("password", "").strip()

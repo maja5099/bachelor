@@ -1,7 +1,7 @@
 ##############################
 #   IMPORTS
 #   Library imports
-from bottle import template, get, post, request, delete, template, redirect, HTTPResponse
+from bottle import template, get, post, request, delete, template, HTTPResponse
 import time
 import uuid
 import logging
@@ -64,7 +64,7 @@ def load_profile_data():
         # Establish database connection
         db = master.db()
         logger.debug(f"Database connection opened for {function_name}")
-        
+
         user = current_user
 
         # Retrieve active clipcard ID for the current user
@@ -73,7 +73,7 @@ def load_profile_data():
             FROM payments
             WHERE payments.user_id = ? AND payments.clipcard_id IN (SELECT clipcard_id FROM clipcards WHERE is_active = 1)
             LIMIT 1
-        """ 
+        """
 
         # Fetch the result
         payment = db.execute(payment_query, (user['user_id'],)).fetchone()
@@ -151,7 +151,7 @@ def load_profile_data():
 def clipcards():
 
     page_name = "clipcards"
-    
+
     try:
         # Check if response is HTTP response
         data = load_profile_data()
@@ -174,31 +174,31 @@ def clipcards():
             clipcard_id = db.execute("SELECT clipcard_id FROM payments WHERE user_id = ? LIMIT 1", (user_id,)).fetchone()
 
             # Default to no active clipcard
-            current_user['has_active_clipcard'] = False 
+            current_user['has_active_clipcard'] = False
 
             # If active clipcard
             if clipcard_id:
                 clipcard_id_value = clipcard_id['clipcard_id']
                 print("Clipcard ID:", clipcard_id_value)
-                
-                # Prepare the query to check for active clipcards   
+
+                # Prepare the query to check for active clipcards
                 has_active_clipcard_query = """
-                SELECT COUNT(*) AS active_clipcards 
-                FROM clipcards 
+                SELECT COUNT(*) AS active_clipcards
+                FROM clipcards
                 WHERE clipcard_id IN (
-                    SELECT clipcard_id 
-                    FROM payments 
-                    WHERE user_id = ?) 
+                    SELECT clipcard_id
+                    FROM payments
+                    WHERE user_id = ?)
                 AND is_active = 1
                 """
                 # Execute the query and fetch the result
                 has_active_clipcard_result = db.execute(has_active_clipcard_query, (user_id,)).fetchone()
-                
+
                 # If the count over 0, then user has active clipcard
                 if has_active_clipcard_result and has_active_clipcard_result['active_clipcards'] > 0:
                     current_user['has_active_clipcard'] = True
 
-         # Get clipcard types and prices
+        # Get clipcard types and prices
         cursor = db.cursor()
         cursor.execute("SELECT clipcard_type_title, clipcard_price FROM card_types")
         clipcards = cursor.fetchall()
@@ -210,15 +210,15 @@ def clipcards():
             logger.error("Clipcard template not found.")
             return "Template not found."
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
-        
+
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(relative_path, 
+        return template(relative_path,
                         global_content=global_content,
                         profile_content=profile_content,
                         services_and_prices_content=services_and_prices_content,
-                        clipcards=clipcards, 
-                        current_user=current_user, 
+                        clipcards=clipcards,
+                        current_user=current_user,
                         first_name=data['first_name'],
                         last_name=data['last_name'],
                         username=data['username'],
@@ -253,10 +253,10 @@ def buy_clipcard(clipcard_type, clipcard_price):
 
     # Show template
     logger.success(f"Succesfully showing template for {page_name}")
-    return template('buy_clipcard.html', 
-                    global_content=global_content, 
-                    profile_content=profile_content, 
-                    clipcard_type=clipcard_type, 
+    return template('buy_clipcard.html',
+                    global_content=global_content,
+                    profile_content=profile_content,
+                    clipcard_type=clipcard_type,
                     clipcard_price=clipcard_price
                     )
 
@@ -283,8 +283,8 @@ def admin_clipcards_get():
         # Retrieve information about active clipcards
         cursor = db.cursor()
         cursor.execute("""
-            SELECT clipcards.clipcard_id, clipcards.remaining_time, clipcards.time_used, clipcards.created_at, 
-                   users.user_id, users.first_name, users.last_name, users.username, users.email, users.phone, 
+            SELECT clipcards.clipcard_id, clipcards.remaining_time, clipcards.time_used, clipcards.created_at,
+                   users.user_id, users.first_name, users.last_name, users.username, users.email, users.phone,
                    customers.website_name, customers.website_url, card_types.clipcard_type_title
             FROM clipcards
             JOIN payments ON clipcards.clipcard_id = payments.clipcard_id
@@ -315,7 +315,7 @@ def admin_clipcards_get():
                     clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer og {clipcard['time_used_minutes']} minutter"
                 else:
                     clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer"
-                
+
                 # Format the text for remaining time
                 if clipcard['remaining_time_minutes'] > 0:
                     clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer og {clipcard['remaining_time_minutes']} minutter"
@@ -341,14 +341,14 @@ def admin_clipcards_get():
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(
-            relative_path, 
-            global_content=global_content, 
-            profile_content=profile_content, 
-            formatted_clipcards=formatted_clipcards, 
+            relative_path,
+            global_content=global_content,
+            profile_content=profile_content,
+            formatted_clipcards=formatted_clipcards,
             active_clipcards=active_clipcards,
             active_customers=active_customers
         )
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
@@ -382,7 +382,7 @@ def admin_clipcards_get():
             logger.error("Hour registration template not found")
             return "Template not found."
         relative_path = template_path.replace('views/', '').replace('.tpl', '')  # Normalize template path
-        
+
         # Fetch active clipcards and user information
         cursor = db.cursor()
         cursor.execute("""
@@ -422,13 +422,13 @@ def admin_clipcards_get():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(relative_path, 
-                        global_content=global_content, 
-                        profile_content=profile_content, 
-                        active_clipcards=formatted_clipcards, 
+        return template(relative_path,
+                        global_content=global_content,
+                        profile_content=profile_content,
+                        active_clipcards=formatted_clipcards,
                         active_customers=active_customers
                         )
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
@@ -461,7 +461,7 @@ def delete_clipcard(clipcard_id):
         # Check if the clipcard exists
         cursor.execute("SELECT * FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
         existing_clipcard = cursor.fetchone()
-        
+
         # Error if no clipcard
         if existing_clipcard is None:
             logger.error(f"No clipcard found with ID: {clipcard_id}")
@@ -476,11 +476,11 @@ def delete_clipcard(clipcard_id):
         updated_at = int(time.time())
         deleted_at = int(time.time())
         cursor.execute("""
-            UPDATE clipcards 
-            SET updated_at = ?, deleted_at = ?, is_active = 0 
+            UPDATE clipcards
+            SET updated_at = ?, deleted_at = ?, is_active = 0
             WHERE clipcard_id = ?
         """, (updated_at, deleted_at, clipcard_id))
-        
+
         # Commit changes to the database
         db.commit()
         logger.success(f"{function_name} successful, clipcard {clipcard_id} deleted successfully")
@@ -553,7 +553,7 @@ def submit_task():
         # Update clipcard usage
         time_data = cursor.execute("""
             SELECT time_used, remaining_time
-            FROM clipcards 
+            FROM clipcards
             WHERE clipcard_id = ?
         """, (result["clipcard_id"],)).fetchone()
 
@@ -562,7 +562,7 @@ def submit_task():
             time_used_minutes = time_data["time_used"] + time_spent
             remaining_time_minutes = time_data["remaining_time"] - time_spent
             cursor.execute("""
-                UPDATE clipcards 
+                UPDATE clipcards
                 SET time_used = ?, remaining_time = ?
                 WHERE clipcard_id = ?
             """, (time_used_minutes, remaining_time_minutes, result["clipcard_id"]))
