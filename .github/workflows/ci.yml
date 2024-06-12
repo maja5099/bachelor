@@ -24,9 +24,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest autopep8
-          npm install eslint@8.10.0
+          pip install flake8 pytest autopep8 black
+          npm install eslint@8.10.0 prettier
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Format code with Prettier
+        run: npx prettier --write .
+
+      - name: Format Python code with Black
+        run: black .
 
       - name: Lint with flake8 and fix issues with autopep8
         run: |
