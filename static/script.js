@@ -202,9 +202,15 @@ $(document).ready(function () {
       processData: false,
       contentType: false,
       success: function (response) {
+        // Log and display success message
         console.log("Success response:", response);
         $("#messageSent").text(response.info).show();
         $("#contactForm")[0].reset();
+
+        // Hide the success message after 2 seconds
+        setTimeout(function() {
+          $("#messageSent").fadeOut();
+        }, 2000);
       },
       // Callback function executed when the request fails
       error: function (xhr) {
@@ -346,6 +352,11 @@ $(document).ready(function () {
         console.log("Success response:", response);
         $("#taskSubmissionMessage").text(response.info).show();
         $("#taskForm")[0].reset();
+
+        // Hide the success message after 2 seconds
+        setTimeout(function() {
+          $("#taskSubmissionMessage").fadeOut();
+        }, 2000);
       },
       error: function (xhr) {
         // Log and display error message if there's an error in the request
