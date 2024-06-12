@@ -11,6 +11,7 @@ import logging
 #   Local application imports
 from common.colored_logging import setup_logger
 import common.content as content
+import common.validation as validation
 import master
 
 
@@ -58,10 +59,10 @@ def signup():
         logger.debug(f"Database connection opened for {function_name}")
 
         # Validate inputs
-        email_error = master.validate_email()
-        phone_error = master.validate_phone()
-        username_error = master.validate_username()
-        password_error = master.validate_password()
+        email_error = validation.validate_email()
+        phone_error = validation.validate_phone()
+        username_error = validation.validate_username()
+        password_error = validation.validate_password()
 
         # Return error messages for invalid inputs
         if email_error:
