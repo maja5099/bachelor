@@ -116,6 +116,7 @@ def serve_static(filepath, root):
     finally:
         logger.info(f"Static file request completed for {filepath}.")
 
+
 # CSS file
 @get("/app.css")
 def css_file_static():
@@ -182,14 +183,12 @@ def index():
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name, title="UNID Studio", global_content=global_content, frontpage_content=frontpage_content, error_content=error_content, user=user, username=username)
     
-
     except Exception as e:
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
         logger.error(f"Error during request for /{page_name}: {e}")
         raise
-    
 
     finally:
         if "db" in locals():
