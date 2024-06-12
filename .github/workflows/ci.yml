@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest autopep8 black
+          pip install flake8 pytest autopep8 black pylint
           npm install eslint@8.10.0 prettier
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
@@ -37,6 +37,10 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=node_modules
           flake8 . --count --exit-zero --max-complexity=10 --ignore=E501,F403,F405 --statistics --exclude=node_modules
           autopep8 --in-place --recursive .
+
+      - name: Lint with pylint
+        run: |
+          pylint .
 
       - name: Run ESLint with fix option
         run: npx eslint .
