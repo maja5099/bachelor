@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest
+          pip install flake8 pytest autopep8
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           npm install eslint@8.10.0
 
@@ -34,8 +34,8 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-          # Fix linting issues with flake8
-          flake8 . --in-place --jobs=auto
+          # Fix linting issues with autopep8
+          autopep8 --in-place --recursive .
 
       - name: Run ESLint with fix option
         run: npx eslint .
