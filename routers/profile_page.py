@@ -221,6 +221,7 @@ def profile_template(template_name):
                             remaining_minutes=data['remaining_minutes']
                             )
 
+        
         # General template rendering for other templates
         else:
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
