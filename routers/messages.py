@@ -45,10 +45,10 @@ finally:
 ###############################
 #   DIR CONFIGS
 # Application base directory
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Uploaded files path
-UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads") 
+UPLOADS_FOLDER = os.path.join(ROOT_DIR, "uploads")
 
 
 ###############################
@@ -73,19 +73,19 @@ def save_file(upload=None):
                     open_file.write(upload.file.read())
                 logger.info(f"File saved successfully: {file_name}")
                 return "/uploads/" + file_name
-            
+
             else:
                 logger.error("File extension not allowed.")
 
         return None
-    
+
     except Exception as e:
         logger.error(f"Error during {function_name}: {e}")
         return None
-    
+
     finally:
         logger.info(f"Completed {function_name}.")
- 
+
 
 ##############################
 #   SEND MESSAGE
@@ -127,7 +127,7 @@ def send_message():
         #  Prepare timestamp for the the new message
         created_at = int(time.time())
         deleted_at = ""
-        
+
         # Insert user data into messages table
         cursor.execute("""
             INSERT INTO messages (message_id, user_id, message_subject, message_text, message_file, created_at, deleted_at)
@@ -143,7 +143,7 @@ def send_message():
         logger.error(f"ValueError during {function_name}: {ve}")
         response.status = 400
         return {"info": str(ve)}
-    
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
@@ -179,11 +179,8 @@ def messages_get():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(relative_path, 
-                        global_content=global_content, 
-                        profile_content=profile_content
-                        )
-    
+        return template(relative_path, global_content=global_content, profile_content=profile_content)
+
     except Exception as e:
         if "db" in locals():
             db.rollback()
@@ -217,11 +214,11 @@ def admin_messages_get():
             SELECT 
                 messages.message_id,
                 messages.created_at,
-                messages.message_subject, 
+                messages.message_subject,
                 messages.message_text, 
                 messages.message_file,
-                users.first_name, 
-                users.last_name, 
+                users.first_name,
+                users.last_name,
                 customers.website_name,
                 customers.website_url
             FROM messages
@@ -249,11 +246,7 @@ def admin_messages_get():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(relative_path, 
-                        messages=messages, 
-                        global_content=global_content, 
-                        profile_content=profile_content
-                        )
+        return template(relative_path, messages=messages, global_content=global_content, profile_content=profile_content)
 
     except Exception as e:
         if "db" in locals():
