@@ -1,12 +1,13 @@
 ##############################
 #   IMPORTS
 #   Library imports
-from bottle import request
-from dotenv import load_dotenv
 import logging
 import sqlite3
 import pathlib
 import os
+from bottle import request
+from dotenv import load_dotenv
+
 
 #   Local application imports
 from common.colored_logging import setup_logger
