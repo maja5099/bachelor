@@ -212,6 +212,7 @@ def clipcards():
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
+        
         return template(relative_path,
                         global_content=global_content,
                         profile_content=profile_content,
