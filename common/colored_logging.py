@@ -14,12 +14,14 @@ class ColoredFormatter(logging.Formatter):
         'INFO': 36, 'WARNING': 33, 'ERROR': 31,
         'CRITICAL': 41, 'DEBUG': 100, 'SUCCESS': 32
     }
+
     def format(self, record):
         # Retrieve colors code for the log levels (default white)
         color_code = self.colors.get(record.levelname, 37)
-        
+
         # Format the log message with level name and color
         return f"\033[{color_code}m{record.levelname}\033[0m: {record.getMessage()}"
+
 
 def setup_logger(name, level=logging.INFO):
     # Set up logger to show logs with the colors
