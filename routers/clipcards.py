@@ -364,100 +364,141 @@ def admin_clipcards_get():
         logger.info(f"Completed {page_name}")
 
 
+##############################
+#   ADMIN HOUR REGISTRATION
 @get('/profile/profile_admin_hour_registration')
 def admin_clipcards_get():
-    try:
-        db = master.db()
-        template_path = find_template('profile_admin_hour_registration', template_dirs)
-        if template_path is None:
-            return "Template not found."
-            
-        # Extract the relative path from views directory if necessary
-        relative_path = template_path.replace('views/', '').replace('.tpl', '')
 
-        cursor = db.cursor()
+    page_name = "profile_admin_hour_registration"
+
+    try:
+        # Establish database connection
+        db = master.db()
+        logger.debug(f"Database connection opened for {page_name}")
+
+        # Load correct template
+        template_path = find_template('profile_admin_hour_registration', template_dirs)  # Locate the template
+        if template_path is None:
+            logger.error("Hour registration template not found")
+            return "Template not found."
+        relative_path = template_path.replace('views/', '').replace('.tpl', '')  # Normalize template path
         
+        # Fetch active clipcards and user information
+        cursor = db.cursor()
         cursor.execute("""
-            SELECT clipcards.clipcard_id, clipcards.remaining_time, clipcards.time_used, clipcards.created_at, users.user_id, users.first_name, users.last_name, users.username, users.email, users.phone, customers.website_name, customers.website_url, card_types.clipcard_type_title
+            SELECT clipcards.clipcard_id, clipcards.remaining_time, clipcards.time_used, clipcards.created_at,
+                   users.user_id, users.first_name, users.last_name, users.username, users.email, users.phone,
+                   customers.website_name, customers.website_url, card_types.clipcard_type_title
             FROM clipcards
             JOIN payments ON clipcards.clipcard_id = payments.clipcard_id
             JOIN users ON payments.user_id = users.user_id
             JOIN customers ON users.user_id = customers.customer_id
             JOIN card_types ON clipcards.clipcard_type_id = card_types.clipcard_type_id
-            WHERE clipcards.is_active = "1";
+            WHERE clipcards.is_active = 1;
         """)
-        
         active_clipcards = cursor.fetchall()
         cursor.close()
 
         if not active_clipcards:
-            print("No active clip cards.") 
+            logger.info("No active clipcards found")
             return template(relative_path, active_clipcards=[], active_customers=[])
-        
-        active_customers = [{'user_id': row['user_id'], 
-                             'first_name': row['first_name'], 
-                             'last_name': row['last_name'], 
-                             'clipcard_id': row['clipcard_id']} 
-                            for row in active_clipcards]
 
+        # List of dictionaries for each active customer and clipcard ID
+        active_customers = [{
+            'user_id': row['user_id'],
+            'first_name': row['first_name'],
+            'last_name': row['last_name'],
+            'clipcard_id': row['clipcard_id']
+        } for row in active_clipcards]
+
+        # Format time data on each clipcard
+        formatted_clipcards = []
         for clipcard in active_clipcards:
             clipcard['time_used_hours'], clipcard['time_used_minutes'] = minutes_to_hours_minutes(clipcard['time_used'])
             clipcard['remaining_time_hours'], clipcard['remaining_time_minutes'] = minutes_to_hours_minutes(clipcard['remaining_time'])
+            clipcard['formatted_time_text'] = f"{clipcard['time_used_hours']} hours and {clipcard['time_used_minutes']} minutes" if clipcard['time_used_minutes'] else f"{clipcard['time_used_hours']} hours"
+            clipcard['formatted_remaining_time_text'] = f"{clipcard['remaining_time_hours']} hours and {clipcard['remaining_time_minutes']} minutes" if clipcard['remaining_time_minutes'] else f"{clipcard['remaining_time_hours']} hours"
+            formatted_clipcards.append(clipcard)
 
-            if clipcard['time_used_minutes'] > 0:
-                clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer og {clipcard['time_used_minutes']} minutter"
-            else:
-                clipcard['time_used_text'] = f"{clipcard['time_used_hours']} timer"
-
-            if clipcard['remaining_time_minutes'] > 0:
-                clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer og {clipcard['remaining_time_minutes']} minutter"
-            else:
-                clipcard['remaining_time_text'] = f"{clipcard['remaining_time_hours']} timer"
-       
-        return template(relative_path, global_content=global_content, profile_content=profile_content, active_clipcards=active_clipcards, active_customers=active_customers)
+        # Show template
+        logger.success(f"Succesfully showing template for {page_name}")
+        return template(relative_path, 
+                        global_content=global_content, 
+                        profile_content=profile_content, 
+                        active_clipcards=formatted_clipcards, 
+                        active_customers=active_customers
+                        )
     
     except Exception as e:
-        print("Error in admin_clipcards:", e) 
-        return {"info": str(e)}
-    
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {page_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
+
     finally:
-        if "db" in locals(): db.close()
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {page_name}")
 
 
+##############################
+#   DELETE CLIPCARD
 @delete('/delete_clipcard/<clipcard_id>')
 def delete_clipcard(clipcard_id):
+
+    function_name = "delete_clipcard"
+
     try:
+        # Establish database connection
+        db = master.db()
+        logger.debug(f"Database connection opened for {function_name}")
+
         cursor = db.cursor()
 
+        # Check if the clipcard exists
         cursor.execute("SELECT * FROM clipcards WHERE clipcard_id = ?", (clipcard_id,))
         existing_clipcard = cursor.fetchone()
+        
+        # Error if no clipcard
         if existing_clipcard is None:
+            logger.error(f"No clipcard found with ID: {clipcard_id}")
             return {"info": f"The clip card with id {clipcard_id} does not exist."}
 
+        # Info if already has been deleted
         if existing_clipcard["is_active"] == "0":
+            logger.info(f"Clipcard {clipcard_id} has already been deleted.")
             return {"info": f"The clip card with id {clipcard_id} has already been deleted."}
 
+        # Update clipcard as deleted
         updated_at = int(time.time())
         deleted_at = int(time.time())
-
         cursor.execute("""
             UPDATE clipcards 
-            SET updated_at = ?, deleted_at = ?, is_active = ? 
+            SET updated_at = ?, deleted_at = ?, is_active = 0 
             WHERE clipcard_id = ?
-        """, (updated_at, deleted_at, 0, clipcard_id))
+        """, (updated_at, deleted_at, clipcard_id))
         
+        # Commit changes to the database
         db.commit()
-
-        return {"info": "The clip card has been deleted."}
+        logger.success(f"{function_name} successful, clipcard {clipcard_id} deleted successfully")
+        return {"message": f"{function_name} successful"}
 
     except Exception as e:
-        db.rollback()
-        print("Error in delete_clipcard:", e)
-        return {"info": str(e)}
+        if "db" in locals():
+            db.rollback()
+            logger.info("Database transaction rolled back due to exception")
+        logger.error(f"Error during {function_name}: {e}")
+        response.status = 500
+        return {"error": "Internal Server Error"}
 
     finally:
-        if 'cursor' in locals(): cursor.close()
-        if 'db' in locals(): db.close()
+        if "db" in locals():
+            db.close()
+            logger.info("Database connection closed")
+        logger.info(f"Completed {function_name}")
 
 
 @post('/submit_task')
