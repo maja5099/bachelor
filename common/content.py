@@ -23,7 +23,7 @@ global_content = {
         },
     },
     # ICONS
-    "ui_icons": {       
+    "ui_icons": {
         "admin": "admin.svg",
         "burger": "burger.svg",
         "card": "card.svg",
@@ -46,19 +46,19 @@ global_content = {
         "user": "user.svg",
     },
     # SOME
-    "social_media": {     
+    "social_media": {
         # Unid
-        "unid": {     
+        "unid": {
             "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
             "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
         },
         # Empoyees
-        "employees": {     
-            "denise": {     
+        "employees": {
+            "denise": {
                 "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
                 "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
             },
-            "isabella": {     
+            "isabella": {
                 "instagram": {"icon": "instagram.svg", "link": "https://www.instagram.com/unid.studio/"},
                 "linkedin": {"icon": "linkedin.svg", "link": "https://www.linkedin.com/company/unid-studio/"},
             },
@@ -75,7 +75,7 @@ global_content = {
             ],
         },
         "header_bar": {
-            "selling_points": [  
+            "selling_points": [
                 {"icon": "heart.svg", "text": "Tilfredshedsgaranti"},
                 {"icon": "discount.svg", "text": "Studierabat"},
                 {"icon": "pen.svg", "text": "Skræddersyet løsning"},
@@ -84,7 +84,7 @@ global_content = {
         },
     },
     # FOOTER
-    "footer": {       
+    "footer": {
         "footer_info": [
             "UNID Studio © 2023",
             "All rights reserved",
@@ -96,99 +96,99 @@ global_content = {
         # Username
         "username": {
             "label_for": "username",
-            "text": "Brugernavn", 
-            "icon": "user_circle.svg", 
+            "text": "Brugernavn",
+            "icon": "user_circle.svg",
             "type": "text",
             "name": "username",
-            "inputmode":"text",
+            "inputmode": "text",
             "placeholder": "LoremIpsum",
             "form_info": "",
         },
         # Password
         "password": {
             "label_for": "pwd",
-            "text": "Adgangskode", 
-            "icon": "lock.svg", 
+            "text": "Adgangskode",
+            "icon": "lock.svg",
             "type": "password",
             "name": "pwd",
-            "inputmode":"text",
+            "inputmode": "text",
             "placeholder": "••••••••",
             "form_info": "Use at least 8 characters, one uppercase, one lowercase and one number.",
         },
         # First name
         "first_name": {
             "label_for": "first_name",
-            "text": "Fornavn", 
-            "icon": "user_name_semi.svg", 
+            "text": "Fornavn",
+            "icon": "user_name_semi.svg",
             "type": "text",
             "name": "first_name",
-            "inputmode":"text",
+            "inputmode": "text",
             "placeholder": "Lorem",
-            "form_info": "",    
+            "form_info": "",
         },
         # Last name
         "last_name": {
             "label_for": "last_name",
-            "text": "Efternavn", 
-            "icon": "user_name_full.svg", 
+            "text": "Efternavn",
+            "icon": "user_name_full.svg",
             "type": "text",
             "name": "last_name",
-            "inputmode":"text",
+            "inputmode": "text",
             "placeholder": "Ipsum",
-            "form_info": "",    
+            "form_info": "",
         },
         # Email
         "email": {
             "label_for": "email",
-            "text": "Email", 
-            "icon": "email.svg", 
+            "text": "Email",
+            "icon": "email.svg",
             "type": "email",
             "name": "email",
-            "inputmode":"email",
+            "inputmode": "email",
             "placeholder": "loremipsum@mail.com",
-            "form_info": "",    
+            "form_info": "",
         },
         # Phone
         "phone": {
             "label_for": "phone",
-            "text": "Telefon nummer", 
-            "icon": "phone.svg", 
+            "text": "Telefon nummer",
+            "icon": "phone.svg",
             "type": "tel",
             "name": "phone",
-            "inputmode":"tel",
-            "placeholder": "12 34 56 67",
-            "form_info": "",    
+            "inputmode": "tel",
+            "placeholder": "12 34 56 78",
+            "form_info": "",
         },
         # Website name
         "website_name": {
             "label_for": "website_name",
-            "text": "Navn på din hjemmeside", 
+            "text": "Navn på din hjemmeside",
             "icon": "pen_line.svg", 
             "type": "text",
             "name": "website_name",
-            "inputmode":"text",
+            "inputmode": "text",
             "placeholder": "Lorem-Ipsum.dk",
-            "form_info": "",    
+            "form_info": "",
         },
         # Website url
         "website_url": {
             "label_for": "website_url",
-            "text": "URL til din hjemmeside", 
-            "icon": "www.svg", 
+            "text": "URL til din hjemmeside",
+            "icon": "www.svg",
             "type": "url",
             "name": "website_url",
-            "inputmode":"url",
+            "inputmode": "url",
             "placeholder": "https://www.lorem-ipsum.dk",
-            "form_info": "",    
+            "form_info": "",
         },
         # Full name
         "full_name": {
             "label_for": "name",
-            "text": "Navn", 
-            "icon": "user_circle.svg", 
+            "text": "Navn",
+            "icon": "user_circle.svg",
             "type": "name",
             "name": "name",
-            "inputmode":"text",
+            "inputmode": "text",
             "placeholder": "Lorem Ipsum",
             "form_info": "",
         },
@@ -205,7 +205,7 @@ global_content = {
 #   FRONTPAGE / INDEX
 frontpage_content = {
     # HERO SECTION
-    "hero_section": {       
+    "hero_section": {    
         "header_text": "Unikke & skræddersyede løsninger",
         "subheader_text": "Vi bestræber os på, at lave unikke og kvalitets løsninger som opfylder hver enkel kundes behov.",
         "button_text": "Kontakt os",
@@ -221,14 +221,14 @@ frontpage_content = {
         "testimonials": [
             {
                 "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-                "author_name": "Lorem ipsum", 
-                "author_job_title": "Lorem ipsum", 
+                "author_name": "Lorem ipsum",
+                "author_job_title": "Lorem ipsum",
                 "author_image": "user.svg",
             },
             {
                 "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore nam eos incidunt, consequatur animi libero modi doloremque esse? Amet qui doloribus nam saepe vitae.",
-                "author_name": "Lorem ipsum", 
-                "author_job_title": "Lorem ipsum", 
+                "author_name": "Lorem ipsum",
+                "author_job_title": "Lorem ipsum",
                 "author_image": "user.svg",
             },
         ],
@@ -335,7 +335,7 @@ error_content = {
     "header_text": "Hov! Der skete en fejl",
     "illustration": "unid_universe.svg",
     "illustration_alt": "Illustration af UNID Universe",
-    "button_link": "/", 
+    "button_link": "/",
     "button_text": "Gå til forsiden",
     "404": {
         "error_title_text": "Fejl 404: Siden blev ikke fundet",
@@ -490,7 +490,7 @@ services_and_prices_content = {
         ],
     },
     # PRICES SECTION
-    "prices_section":{
+    "prices_section": {
         "header_text": "Find det rette klippekort til dig",
         "decorative_header_text": "Priser",
         "pricings": {
