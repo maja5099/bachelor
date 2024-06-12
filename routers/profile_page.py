@@ -219,9 +219,7 @@ def profile_template(template_name):
                             time_used_minutes=data['time_used_minutes'],
                             remaining_hours=data['remaining_hours'],
                             remaining_minutes=data['remaining_minutes']
-                            )
-
-        
+                            )        
         # General template rendering for other templates
         else:
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
