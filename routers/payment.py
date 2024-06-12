@@ -82,7 +82,7 @@ def process_payment():
             raise Exception('Clipcard type not found')
 
         clipcard_type_id = row['clipcard_type_id']
-        remaining_time = row['clipcard_type_time'] 
+        remaining_time = row['clipcard_type_time']
 
         # Insert payment and clipcard records into the database
         cursor.execute("INSERT INTO payments (payment_id, user_id, clipcard_id, amount_paid, created_at) VALUES (?, ?, ?, ?, ?)",

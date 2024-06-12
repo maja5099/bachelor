@@ -132,7 +132,7 @@ def login_get():
     try:
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(page_name, 
+        return template(page_name,
                         title="Log in",
                         # A-Z
                         global_content=global_content,
