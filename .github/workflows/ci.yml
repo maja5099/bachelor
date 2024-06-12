@@ -35,11 +35,12 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-      - name: Run ESLint
+      - name: Run ESLint with fix option
         run: npx eslint .
           --config .eslintrc.js
           --ext .js,.jsx
           --format stylish
+          --fix
         continue-on-error: true
 
       - name: Test with pytest
