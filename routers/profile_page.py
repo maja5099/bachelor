@@ -225,7 +225,6 @@ def profile_template(template_name):
         else:
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
             logger.success(f"Succesfully showing template for {function_name}")
-            
             return template(relative_path,
                             title="Din profil",
                             profile_content=profile_content,
