@@ -210,7 +210,6 @@ def clipcards():
             logger.error("Clipcard template not found.")
             return "Template not found."
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
-
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(relative_path,
