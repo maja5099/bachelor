@@ -239,7 +239,7 @@ def profile_template(template_name):
                             user=data['user'],
                             first_name=data['first_name'],
                             last_name=data['last_name'],
-                            username=data['username'],
+                            username=data['username']
                             )
 
     except Exception as e:

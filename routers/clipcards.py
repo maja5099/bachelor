@@ -225,7 +225,7 @@ def clipcards():
                         time_used_minutes=data['time_used_minutes'],
                         remaining_hours=data['remaining_hours'],
                         remaining_minutes=data['remaining_minutes'],
-                        tasks=data['tasks'],
+                        tasks=data['tasks']
                         )
 
     except Exception as e:
