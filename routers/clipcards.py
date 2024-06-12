@@ -210,9 +210,9 @@ def clipcards():
             logger.error("Clipcard template not found.")
             return "Template not found."
         relative_path = template_path.replace('views/', '').replace('.tpl', '')
-
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
+
         return template(relative_path,
                         global_content=global_content,
                         profile_content=profile_content,
@@ -226,7 +226,7 @@ def clipcards():
                         time_used_minutes=data['time_used_minutes'],
                         remaining_hours=data['remaining_hours'],
                         remaining_minutes=data['remaining_minutes'],
-                        tasks=data['tasks']
+                        tasks=data['tasks'],
                         )
 
     except Exception as e:
