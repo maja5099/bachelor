@@ -27,7 +27,6 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           npm install eslint@8.10.0
-          npm install @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Lint with flake8
         run: |
