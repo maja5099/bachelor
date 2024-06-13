@@ -53,22 +53,6 @@ finally:
 
 
 ##############################
-#   GIT AND PYTHONANYWHERE HOOK
-def git_update():
-    try:
-        repo = git.Repo('./bachelor')
-        origin = repo.remotes.origin
-        repo.create_head('main', origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
-        origin.pull()
-        logger.success("Git repository updated successfully.")
-        return ""
-    except Exception as e:
-        logger.error(f"Error updating git repository: {e}")
-    finally:
-        logger.info("Git update process completed.")
-
-
-##############################
 #   ERROR HANDLING
 def handle_error(error_code, error):
     try:
