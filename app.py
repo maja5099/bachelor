@@ -1,10 +1,11 @@
 ##############################
 #   IMPORTS
 #   Library imports
-from bottle import default_app, route, get, request, error, run, template, static_file, TEMPLATE_PATH
 import logging
 import git
 import os
+from bottle import default_app, route, get, request, error, run, template, static_file, TEMPLATE_PATH
+
 
 #   Local application imports
 from routers.messages import UPLOADS_FOLDER
