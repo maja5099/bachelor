@@ -87,14 +87,15 @@ def login():
         if not user:
             logger.error("User does not exist")
             return {"error": "Brugernavnet eksisterer ikke"}
-
+        
         # Verify the password
-        hashed_password_from_db = user["password"].encode('utf-8')
+        hashed_password_from_db = user["password"]
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
             set_cookie_secure("user", user)
             logger.success(f"{function_name} successful for user {username}. Redirected user.")
             return {"info": f"{function_name} successful", "redirect": "/"}
+
 
         else:
             logger.error("Incorrect password")
