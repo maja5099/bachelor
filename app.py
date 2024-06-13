@@ -2,8 +2,8 @@
 #   IMPORTS
 #   Library imports
 import logging
-import git
 import os
+import git
 from bottle import default_app, route, get, request, error, run, template, static_file, TEMPLATE_PATH
 
 
