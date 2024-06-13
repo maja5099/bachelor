@@ -40,22 +40,6 @@ finally:
 
 
 ##############################
-#  SET COOKIE
-def set_cookie_secure(cookie_name, cookie_value):
-    try:
-        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
-        logger.info(f"Satte cookie {cookie_name} med httponly.")
-
-    except Exception as e:
-        logger.error(f"Fejl ved sætning af cookie {cookie_name}. Fejl: {e}")
-        raise
-
-    finally:
-        logger.info(f"Processen med at sætte cookie {cookie_name} er fuldført.")
-
-
-
-##############################
 #   LOGIN - POST
 @post("/login")
 def login():
@@ -91,7 +75,7 @@ def login():
         hashed_password_from_db = user["password"]
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
-            set_cookie_secure("user", user)
+            response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True)
             logger.success(f"{function_name} successful for user {username}. Redirected user.")
             return {"info": f"{function_name} successful", "redirect": "/"}
 
