@@ -1,7 +1,7 @@
 <div class="relative h-full group hover:cursor-pointer">
   <img
     class="w-auto h-full object-cover object-center rounded-lg"
-    src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+    src="/assets/images/portfolio/portfolio.webp"
   />
   <div
     class="absolute inset-0 bg-unidLightBlue rounded-lg opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out"
