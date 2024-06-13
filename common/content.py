@@ -97,7 +97,7 @@ global_content = {
         "username": {
             "label_for": "username",
             "text": "Brugernavn",
-            "icon": "user_circle.svg",
+            "icon": "user.svg",
             "type": "text",
             "name": "username",
             "inputmode": "text",
@@ -185,7 +185,7 @@ global_content = {
         "full_name": {
             "label_for": "name",
             "text": "Navn",
-            "icon": "user_circle.svg",
+            "icon": "user.svg",
             "type": "name",
             "name": "name",
             "inputmode": "text",
