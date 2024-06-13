@@ -62,10 +62,8 @@ def set_cookie_secure(cookie_name, cookie_value):
 #   LOGIN - POST
 @post("/login")
 def login():
-
     function_name = "login"
     response.content_type = 'application/json'
-
     try:
         # Load environment variables
         load_dotenv('.env')
@@ -91,7 +89,7 @@ def login():
             return {"error": "Brugernavnet eksisterer ikke"}
 
         # Verify the password
-        hashed_password_from_db = user["password"]
+        hashed_password_from_db = user["password"].encode('utf-8')
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
             set_cookie_secure("user", user)
@@ -106,14 +104,15 @@ def login():
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
-        logger.error(f"Error during request for /{function_name}: {e}")
-        raise
+        logger.error(f"Error during request for /{function_name}: {e}", exc_info=True)
+        return {"error": "Internal server error"}
 
     finally:
         if "db" in locals():
             db.close()
             logger.info("Database connection closed")
         logger.info(f"Completed request for /{function_name}")
+
 
 
 ##############################
