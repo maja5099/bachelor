@@ -33,6 +33,7 @@ global_content = {
         "discount_full": "discount_full.svg",
         "documents": "documents.svg",
         "education": "education.svg",
+        "email": "email.svg",
         "error": "exclamation_mark.svg",
         "eye_closed": "eye_closed.svg",
         "eye_open": "eye_open.svg",
@@ -40,10 +41,17 @@ global_content = {
         "folder_open": "folder_open.svg",
         "hourglass": "hourglass.svg",
         "info": "info.svg",
+        "lock": "lock.svg",
+        "pen_line": "pen_line.svg",
+        "phone": "phone.svg",
         "message": "letter.svg",
         "stop_watch": "stop_watch.svg",
         "trashcan": "trashcan.svg",
         "user": "user.svg",
+        "user_circle": "user_circle.svg",
+        "user_name_full": "user_name_full.svg",
+        "user_name_semi": "user_name_semi.svg",
+        "www": "www.svg",
     },
     # SOME
     "social_media": {
@@ -97,7 +105,6 @@ global_content = {
         "username": {
             "label_for": "username",
             "text": "Brugernavn",
-            "icon": "user.svg",
             "type": "text",
             "name": "username",
             "inputmode": "text",
@@ -108,7 +115,6 @@ global_content = {
         "password": {
             "label_for": "pwd",
             "text": "Adgangskode",
-            "icon": "lock.svg",
             "type": "password",
             "name": "pwd",
             "inputmode": "text",
@@ -119,7 +125,6 @@ global_content = {
         "first_name": {
             "label_for": "first_name",
             "text": "Fornavn",
-            "icon": "user_name_semi.svg",
             "type": "text",
             "name": "first_name",
             "inputmode": "text",
@@ -130,7 +135,6 @@ global_content = {
         "last_name": {
             "label_for": "last_name",
             "text": "Efternavn",
-            "icon": "user_name_full.svg",
             "type": "text",
             "name": "last_name",
             "inputmode": "text",
@@ -141,7 +145,6 @@ global_content = {
         "email": {
             "label_for": "email",
             "text": "Email",
-            "icon": "email.svg",
             "type": "email",
             "name": "email",
             "inputmode": "email",
@@ -152,7 +155,6 @@ global_content = {
         "phone": {
             "label_for": "phone",
             "text": "Telefon nummer",
-            "icon": "phone.svg",
             "type": "tel",
             "name": "phone",
             "inputmode": "tel",
@@ -163,7 +165,6 @@ global_content = {
         "website_name": {
             "label_for": "website_name",
             "text": "Navn på din hjemmeside",
-            "icon": "pen_line.svg",
             "type": "text",
             "name": "website_name",
             "inputmode": "text",
@@ -174,7 +175,6 @@ global_content = {
         "website_url": {
             "label_for": "website_url",
             "text": "URL til din hjemmeside",
-            "icon": "www.svg",
             "type": "url",
             "name": "website_url",
             "inputmode": "url",
@@ -185,7 +185,6 @@ global_content = {
         "full_name": {
             "label_for": "name",
             "text": "Navn",
-            "icon": "user.svg",
             "type": "name",
             "name": "name",
             "inputmode": "text",

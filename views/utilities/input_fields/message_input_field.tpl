@@ -7,7 +7,7 @@
       class="absolute inset-y-0 start-0 flex items-center px-4 bg-unidLightBlue h-full rounded-bl-md rounded-tl-md"
     >
       <div id="icon_small" class="fill-white text-white w-5 h-5">
-        % include('assets/icons/letter.svg')
+        % include(global_content['ui_icons']['message'])
       </div>
     </div>
     <textarea
