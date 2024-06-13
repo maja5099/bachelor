@@ -48,6 +48,7 @@ def set_cookie_secure(cookie_name, cookie_value):
         
         # Fetch secret from environment variable
         secret = os.getenv('MY_SECRET')
+        print(f"Value of MY_SECRET: {secret}")  # Diagnostisk udskrift
         if not isinstance(secret, str):
             raise ValueError('MY_SECRET must be a string')
         
