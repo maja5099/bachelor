@@ -4,6 +4,9 @@
 import logging
 import sqlite3
 import pathlib
+import os
+from bottle import request
+from dotenv import load_dotenv
 
 
 #   Local application imports
@@ -43,5 +46,24 @@ def db():
         raise
     finally:
         logger.info("Database function execution completed.")
+
+
+##############################
+#   USER
+def user():
+    try:
+        load_dotenv(".env")
+        user = request.get_cookie("user", secret=os.getenv('MY_SECRET'))
+        if user:
+            logger.success("User successfully retrieved from cookie.")
+            return user
+        else:
+            logger.warning("No user found in cookie.")
+            return None
+    except Exception as ex:
+        logger.error(f"Error retrieving user from cookie: {ex}")
+        raise
+    finally:
+        logger.info("User function completed.")
 
 
