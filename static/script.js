@@ -162,23 +162,38 @@ async function login(event) {
   formData.append("username", username);
   formData.append("password", password);
 
-  // Sends a POST request to the server with the login credentials
-  const response = await fetch("/login", {
-    method: "POST",
-    body: formData,
-  });
+  try {
+    // Sends a POST request to the server with the login credentials
+    const response = await fetch("/login", {
+      method: "POST",
+      body: formData,
+    });
 
-  // Parses the response JSON data
-  const data = await response.json();
+    // Check if the response is JSON
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+      const data = await response.json();
 
-  // If the response contains an error, display it on the login form
-  if (data.error) {
-    document.getElementById("error_message").innerText = data.error;
+      if (data.error) {
+        // If the response contains an error, display it on the login form
+        document.getElementById("error_message").innerText = data.error;
+        document.getElementById("form_input_error_message").style.display = "flex";
+      } else {
+        // If login is successful, log a success message and redirect to the homepage
+        console.log("Login successful");
+        window.location.href = "/";
+      }
+    } else {
+      // Handle non-JSON response
+      const text = await response.text();
+      console.error("Unexpected response format:", text);
+      document.getElementById("error_message").innerText = "Unexpected server response. Please try again.";
+      document.getElementById("form_input_error_message").style.display = "flex";
+    }
+  } catch (error) {
+    console.error("Error during login:", error);
+    document.getElementById("error_message").innerText = "An error occurred during login. Please try again.";
     document.getElementById("form_input_error_message").style.display = "flex";
-    // If login is successful, log a success message and redirect to the homepage
-  } else {
-    console.log("Login successful");
-    window.location.href = "/";
   }
 }
 
