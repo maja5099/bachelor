@@ -71,6 +71,7 @@ def set_cookie_secure(cookie_name, cookie_value):
 def login():
 
     function_name = "login"
+    response.content_type = 'application/json'
 
     try:
         # Load environment variables
