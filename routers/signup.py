@@ -105,7 +105,7 @@ def signup():
 
         # Generate unique identifiers and timestamps
         user_id = str(uuid.uuid4().hex)
-        is_active = 1
+        is_active = "1"
         created_at = int(time.time())
         updated_at = int(time.time())
         deleted_at = ""

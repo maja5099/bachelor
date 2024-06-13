@@ -44,7 +44,7 @@ finally:
 def set_cookie_secure(cookie_name, cookie_value):
     try:
         response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
-        logger.success(f"Successfully set cookie: {cookie_name}")
+        logger.info(f"Set secure cookie {cookie_name}.")
 
     except Exception as e:
         logger.error(f"Error setting cookie {cookie_name}. Error: {e}")
