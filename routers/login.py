@@ -40,6 +40,32 @@ finally:
 
 
 ##############################
+#  SET COOKIE
+def set_cookie_secure(cookie_name, cookie_value):
+    try:
+        # Fetch host environment variable
+        host = os.getenv('HOST')
+        logger.success(f"Successfully set cookie: {cookie_name}")
+
+        # Set cookies with strict policies if not on localhost
+        if host != 'localhost':
+            response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
+            logger.info(f"Set secure cookie {cookie_name} with strict policies.")
+
+        # Set less strict cookies on localhost (development)
+        else:
+            response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
+            logger.info(f"Set cookie {cookie_name} with httponly.")
+
+    except Exception as e:
+        logger.error(f"Error setting cookie {cookie_name}. Error: {e}")
+        raise
+
+    finally:
+        logger.info(f"Process of setting cookie {cookie_name} completed.")
+
+
+##############################
 #   LOGIN - POST
 @post("/login")
 def login():
@@ -75,7 +101,7 @@ def login():
         hashed_password_from_db = user["password"]
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
             user.pop("password")
-            response.set_cookie("user", user, secret=os.getenv('MY_SECRET'), httponly=True)
+            set_cookie_secure("user", user)
             logger.success(f"{function_name} successful for user {username}. Redirected user.")
             return {"info": f"{function_name} successful", "redirect": "/"}
 

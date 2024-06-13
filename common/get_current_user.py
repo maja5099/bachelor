@@ -48,7 +48,7 @@ def get_current_user():
             current_user = db.execute("SELECT * FROM users WHERE username = ? LIMIT 1", (username,)).fetchone()
 
             db.close()
-            logger.success(f"Executed {function_name} successfully: user was fetcged")
+            logger.success(f"Executed {function_name} successfully: user was fetched")
             return current_user
 
         else:
