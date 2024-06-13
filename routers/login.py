@@ -1,7 +1,6 @@
 ##############################
 #   IMPORTS
 #   Library imports
-import json
 from bottle import post, request, response, template, get
 from dotenv import load_dotenv
 import bcrypt
@@ -44,21 +43,8 @@ finally:
 #  SET COOKIE
 def set_cookie_secure(cookie_name, cookie_value):
     try:
-        # Fetch host environment variable
-        host = os.getenv('HOST')
+        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
         logger.success(f"Successfully set cookie: {cookie_name}")
-
-        cookie_value_json = json.dumps(cookie_value)
-
-        # Set cookies with strict policies if not on localhost
-        if host != 'localhost':
-            response.set_cookie(cookie_name, cookie_value_json, secret=os.getenv('MY_SECRET'), httponly=True)
-            logger.info(f"Set secure cookie {cookie_name} with strict policies.")
-
-        # Set less strict cookies on localhost (development)
-        else:
-            response.set_cookie(cookie_name, cookie_value_json, secret=os.getenv('MY_SECRET'), httponly=True)
-            logger.info(f"Set cookie {cookie_name} with httponly.")
 
     except Exception as e:
         logger.error(f"Error setting cookie {cookie_name}. Error: {e}")
