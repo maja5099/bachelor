@@ -64,7 +64,7 @@ def contact():
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name,
-                        title="UNID Studio - Services og priser",
+                        title="UNID Studio - Kontakt",
                         # A-Z
                         contact_content=contact_content,
                         global_content=global_content,

@@ -64,7 +64,7 @@ def portfolio():
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name,
-                        title="UNID Studio - Services og priser",
+                        title="UNID Studio - Case portfolio",
                         # A-Z
                         global_content=global_content,
                         portfolio_content=portfolio_content,

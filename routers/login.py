@@ -133,7 +133,7 @@ def login_get():
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(page_name,
-                        title="Log in",
+                        title="UNID Studio - Log ind",
                         # A-Z
                         global_content=global_content,
                         login_content=login_content
