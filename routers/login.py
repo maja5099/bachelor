@@ -49,7 +49,7 @@ def set_cookie_secure(cookie_name, cookie_value):
 
         # Set cookies with strict policies if not on localhost
         if host != 'localhost':
-            response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True, secure=True, samesite='Strict')
+            response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
             logger.info(f"Set secure cookie {cookie_name} with strict policies.")
 
         # Set less strict cookies on localhost (development)
@@ -71,7 +71,6 @@ def set_cookie_secure(cookie_name, cookie_value):
 def login():
 
     function_name = "login"
-    response.content_type = 'application/json'
 
     try:
         # Load environment variables
