@@ -179,7 +179,11 @@ def messages_get():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(relative_path, global_content=global_content, profile_content=profile_content)
+        return template(relative_path, 
+                        # A-Z
+                        global_content=global_content, 
+                        profile_content=profile_content
+                        )
 
     except Exception as e:
         if "db" in locals():
@@ -246,7 +250,12 @@ def admin_messages_get():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(relative_path, messages=messages, global_content=global_content, profile_content=profile_content)
+        return template(relative_path, 
+                        # A-Z
+                        global_content=global_content, 
+                        messages=messages,
+                        profile_content=profile_content
+                        )
 
     except Exception as e:
         if "db" in locals():

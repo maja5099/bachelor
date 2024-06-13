@@ -28,7 +28,7 @@ finally:
 
 
 ##############################
-#   Content from content.py
+#   CONTENT VARIABLES
 try:
     global_content = content.global_content
     services_and_prices_content = content.services_and_prices_content
@@ -213,19 +213,20 @@ def clipcards():
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(relative_path,
-                        global_content=global_content,
-                        profile_content=profile_content,
-                        services_and_prices_content=services_and_prices_content,
+                        # A-Z
                         clipcards=clipcards,
                         current_user=current_user,
                         first_name=data['first_name'],
+                        global_content=global_content,
                         last_name=data['last_name'],
-                        username=data['username'],
-                        time_used_hours=data['time_used_hours'],
-                        time_used_minutes=data['time_used_minutes'],
+                        profile_content=profile_content,
                         remaining_hours=data['remaining_hours'],
                         remaining_minutes=data['remaining_minutes'],
-                        tasks=data['tasks']
+                        services_and_prices_content=services_and_prices_content,
+                        tasks=data['tasks'],
+                        time_used_hours=data['time_used_hours'],
+                        time_used_minutes=data['time_used_minutes'],
+                        username=data['username'],
                         )
 
     except Exception as e:
@@ -253,10 +254,11 @@ def buy_clipcard(clipcard_type, clipcard_price):
     # Show template
     logger.success(f"Succesfully showing template for {page_name}")
     return template('buy_clipcard.html',
+                    # A-Z
+                    clipcard_price=clipcard_price,
+                    clipcard_type=clipcard_type,
                     global_content=global_content,
                     profile_content=profile_content,
-                    clipcard_type=clipcard_type,
-                    clipcard_price=clipcard_price
                     )
 
 
@@ -297,7 +299,11 @@ def admin_clipcards_get():
 
         if not active_clipcards:
             logger.info("No active clipcards found.")
-            return template(relative_path, active_clipcards=[], active_customers=[])
+            return template(relative_path, 
+                            # A-Z
+                            active_clipcards=[], 
+                            active_customers=[]
+                            )
 
         # Format time in each clipcard
         formatted_clipcards = []
@@ -339,14 +345,14 @@ def admin_clipcards_get():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template(
-            relative_path,
-            global_content=global_content,
-            profile_content=profile_content,
-            formatted_clipcards=formatted_clipcards,
-            active_clipcards=active_clipcards,
-            active_customers=active_customers
-        )
+        return template(relative_path,
+                        # A-Z
+                        active_clipcards=active_clipcards,
+                        active_customers=active_customers,
+                        formatted_clipcards=formatted_clipcards,
+                        global_content=global_content,
+                        profile_content=profile_content,
+                        )
 
     except Exception as e:
         if "db" in locals():
@@ -400,7 +406,11 @@ def admin_hour_registration_get():
 
         if not active_clipcards:
             logger.info("No active clipcards found")
-            return template(relative_path, active_clipcards=[], active_customers=[])
+            return template(relative_path, 
+                            # A-Z
+                            active_clipcards=[], 
+                            active_customers=[]
+                            )
 
         # List of dictionaries for each active customer and clipcard ID
         active_customers = [{
@@ -422,10 +432,11 @@ def admin_hour_registration_get():
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
         return template(relative_path,
+                        # A-Z
+                        active_clipcards=formatted_clipcards,
+                        active_customers=active_customers,
                         global_content=global_content,
                         profile_content=profile_content,
-                        active_clipcards=formatted_clipcards,
-                        active_customers=active_customers
                         )
 
     except Exception as e:

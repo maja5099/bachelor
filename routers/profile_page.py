@@ -27,7 +27,7 @@ finally:
 
 
 ##############################
-#   Content from content.py
+#   CONTENT VARIABLES
 try:
     global_content = content.global_content
     services_and_prices_content = content.services_and_prices_content
@@ -143,21 +143,24 @@ def profile():
 
         # Show template
         logger.success(f"Succesfully showing template for {page_name}")
-        return template('profile', title="Din profil",
-                        current_user=current_user,
-                        profile_content=profile_content,
-                        global_content=global_content,
-                        services_and_prices_content=services_and_prices_content,
-                        user=data['user'],
-                        first_name=data['first_name'],
-                        last_name=data['last_name'],
-                        username=data['username'],
+        return template('profile', 
+                        title="Din profil",
+                        # A-Z
                         active_clipcards_count=data['active_clipcards_count'],
+                        current_user=current_user,
+                        first_name=data['first_name'],
+                        global_content=global_content,
                         inactive_clipcards_count=data['inactive_clipcards_count'],
+                        last_name=data['last_name'],
+                        profile_content=profile_content,
+                        remaining_hours=data['remaining_hours'],
+                        remaining_minutes=data['remaining_minutes'],
+                        services_and_prices_content=services_and_prices_content,
                         time_used_hours=data['time_used_hours'],
                         time_used_minutes=data['time_used_minutes'],
-                        remaining_hours=data['remaining_hours'],
-                        remaining_minutes=data['remaining_minutes'])
+                        user=data['user'],
+                        username=data['username'],
+                        )
 
     except Exception as e:
         logger.error(f"Error during request for /{page_name}: {e}")
@@ -205,41 +208,44 @@ def profile_template(template_name):
             # Adjust relative path for rendering
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
             return template(relative_path,
-                            profile_content=profile_content,
-                            current_user=current_user,
-                            global_content=global_content,
-                            services_and_prices_content=services_and_prices_content,
-                            user=data['user'],
-                            first_name=data['first_name'],
-                            last_name=data['last_name'],
-                            username=data['username'],
+                            # A-Z
                             active_clipcards_count=data['active_clipcards_count'],
+                            current_user=current_user,
+                            first_name=data['first_name'],
+                            global_content=global_content,
                             inactive_clipcards_count=data['inactive_clipcards_count'],
+                            last_name=data['last_name'],
+                            profile_content=profile_content,
+                            remaining_hours=data['remaining_hours'],
+                            remaining_minutes=data['remaining_minutes'],
+                            services_and_prices_content=services_and_prices_content,
                             time_used_hours=data['time_used_hours'],
                             time_used_minutes=data['time_used_minutes'],
-                            remaining_hours=data['remaining_hours'],
-                            remaining_minutes=data['remaining_minutes']
-                            )        
+                            user=data['user'],
+                            username=data['username'],
+                            )    
+            
         # General template rendering for other templates
         else:
             relative_path = template_path.replace('views/', '').replace('.tpl', '')
             logger.success(f"Succesfully showing template for {function_name}")
             return template(relative_path,
                             title="Din profil",
+                            # A-Z
+                            admin_messages_get=messages.admin_messages_get,
+                            current_user=current_user,
+                            delete_message=messages.delete_message,
+                            first_name=data['first_name'],
+                            get_current_user=messages.get_current_user,
+                            global_content=global_content,
+                            last_name=data['last_name'],
+                            messages_get=messages.messages_get,
                             profile_content=profile_content,
                             save_file=messages.save_file,
-                            get_current_user=messages.get_current_user,
                             send_message=messages.send_message,
-                            messages_get=messages.messages_get,
-                            admin_messages_get=messages.admin_messages_get,
-                            delete_message=messages.delete_message,
-                            current_user=current_user,
-                            global_content=global_content,
                             services_and_prices_content=services_and_prices_content,
                             user=data['user'],
-                            first_name=data['first_name'],
-                            last_name=data['last_name'],
-                            username=data['username']
+                            username=data['username'],
                             )
 
     except Exception as e:
