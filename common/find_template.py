@@ -23,7 +23,7 @@ finally:
 ##############################
 #   FIND TEMPLATE
 # Directory list where templates are expected to be found
-template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin']
+template_dirs = ['components', 'elements', 'sections', 'utilities', 'profile', 'profile/admin', 'profile/customer']
 
 
 def find_template(template_name, directories):
