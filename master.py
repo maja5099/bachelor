@@ -4,9 +4,6 @@
 import logging
 import sqlite3
 import pathlib
-import os
-from bottle import request
-from dotenv import load_dotenv
 
 
 #   Local application imports
