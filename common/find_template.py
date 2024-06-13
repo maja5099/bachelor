@@ -46,7 +46,7 @@ def find_template(template_name, directories):
                     return template_path
 
         # If the template is not found in any of the specified directories
-        print("Template not found")
+        print(f"{template_name} not found")
         return None
 
     except Exception as e:
