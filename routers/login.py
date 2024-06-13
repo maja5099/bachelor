@@ -43,19 +43,24 @@ finally:
 #  SET COOKIE
 def set_cookie_secure(cookie_name, cookie_value):
     try:
+        # Ensure cookie_value is a string
+        cookie_value_str = str(cookie_value)  # Convert to string if necessary
+        
         # Fetch secret from environment variable
         secret = os.getenv('MY_SECRET')
+        if not isinstance(secret, str):
+            raise ValueError('MY_SECRET must be a string')
         
-        # Set cookie with httponly
-        response.set_cookie(cookie_name, cookie_value, secret=secret, httponly=True)
-        logger.success(f"Successfully set cookie: {cookie_name}")
+        # Set cookie with httponly and secret key
+        response.set_cookie(cookie_name, cookie_value_str, secret=secret, httponly=True)
+        logger.info(f"Successfully set cookie {cookie_name}")
         
     except Exception as e:
         logger.error(f"Error setting cookie {cookie_name}. Error: {e}")
         raise
-    
     finally:
         logger.info(f"Process of setting cookie {cookie_name} completed.")
+
 
 
 ##############################
