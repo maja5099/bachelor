@@ -1,3 +1,8 @@
+![Frame 5](https://github.com/maja5099/bachelor/assets/79079320/87bd47a6-10ba-4cc9-ab00-b30c025efe3b)
+
+
+
+
 # BACHELOR 2024
 **A project by Isabella Hilarius Nielsen and Maja Birch Sørensen**
 
