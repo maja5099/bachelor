@@ -43,24 +43,15 @@ finally:
 #  SET COOKIE
 def set_cookie_secure(cookie_name, cookie_value):
     try:
-        # Ensure cookie_value is a string
-        cookie_value_str = str(cookie_value)  # Convert to string if necessary
-        
-        # Fetch secret from environment variable
-        secret = os.getenv('MY_SECRET')
-        print(f"Value of MY_SECRET: {secret}")  # Diagnostisk udskrift
-        if not isinstance(secret, str):
-            raise ValueError('MY_SECRET must be a string')
-        
-        # Set cookie with httponly and secret key
-        response.set_cookie(cookie_name, cookie_value_str, secret=secret, httponly=True)
-        logger.info(f"Successfully set cookie {cookie_name}")
-        
+        response.set_cookie(cookie_name, cookie_value, secret=os.getenv('MY_SECRET'), httponly=True)
+        logger.info(f"Satte cookie {cookie_name} med httponly.")
+
     except Exception as e:
-        logger.error(f"Error setting cookie {cookie_name}. Error: {e}")
+        logger.error(f"Fejl ved sætning af cookie {cookie_name}. Fejl: {e}")
         raise
+
     finally:
-        logger.info(f"Process of setting cookie {cookie_name} completed.")
+        logger.info(f"Processen med at sætte cookie {cookie_name} er fuldført.")
 
 
 
@@ -68,8 +59,10 @@ def set_cookie_secure(cookie_name, cookie_value):
 #   LOGIN - POST
 @post("/login")
 def login():
+
     function_name = "login"
     response.content_type = 'application/json'
+
     try:
         # Load environment variables
         load_dotenv('.env')
@@ -93,7 +86,7 @@ def login():
         if not user:
             logger.error("User does not exist")
             return {"error": "Brugernavnet eksisterer ikke"}
-        
+
         # Verify the password
         hashed_password_from_db = user["password"]
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password_from_db):
@@ -101,7 +94,6 @@ def login():
             set_cookie_secure("user", user)
             logger.success(f"{function_name} successful for user {username}. Redirected user.")
             return {"info": f"{function_name} successful", "redirect": "/"}
-
 
         else:
             logger.error("Incorrect password")
@@ -111,15 +103,14 @@ def login():
         if "db" in locals():
             db.rollback()
             logger.info("Database transaction rolled back due to exception")
-        logger.error(f"Error during request for /{function_name}: {e}", exc_info=True)
-        return {"error": "Internal server error"}
+        logger.error(f"Error during request for /{function_name}: {e}")
+        raise
 
     finally:
         if "db" in locals():
             db.close()
             logger.info("Database connection closed")
         logger.info(f"Completed request for /{function_name}")
-
 
 
 ##############################
