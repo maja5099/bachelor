@@ -5,7 +5,7 @@
         <div
           class="space-y-2 flex flex-col items-center mx-auto justify-center"
         >
-          <p id="decorative_header" class="text-white">
+          <p class="text-white text-base tracking-widest uppercase">
             {{ about_us_content["skills_section"]["decorative_header_text"] }}
           </p>
           <h2 class="text-white">

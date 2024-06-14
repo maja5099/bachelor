@@ -105,7 +105,7 @@
     <!-- prettier-ignore -->
     % end 
       % else:
-    <p>Ingen beskeder at vise.</p>
+    <p class="text-sm">Ingen beskeder at vise endnu.</p>
     % end
   </div>
 </div>

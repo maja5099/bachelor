@@ -96,6 +96,8 @@
     </h2>
   </div>
   <div class="grid lg:grid-cols-2 gap-8">
+    <!-- prettier-ignore -->
+    % if tasks: 
     % for task in tasks:
     <div id="content_box_styling">
       <div id="content_box_header_styling">
@@ -128,6 +130,22 @@
           </div>
         </div>
       </div>
+    </div>
+    <!-- prettier-ignore -->
+    % end 
+    % else:
+    <div class="space-y-1">
+      <p class="text-sm font-bold">
+        Hov, du har ikke fået lavet noget endnu...
+      </p>
+      <p class="text-sm">
+        Her vil du kunne få et overblik over hvilke opgaver, der er udført på
+        dit klippekort.
+      </p>
+      <p class="text-sm">
+        Klik på 'Beskeder' i menuen og skriv til os, hvad du vil have lavet!
+        dig!
+      </p>
     </div>
     % end
   </div>

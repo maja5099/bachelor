@@ -52,7 +52,7 @@
               Her vil du kunne få et overblik over timerne på dit klippekort.
             </p>
             <p class="text-sm">
-              Klik på 'Klippekort' i menuen, og vælge det klippekort, der passer
+              Klik på 'Klippekort' i menuen, og vælg det klippekort, der passer
               til dig!
             </p>
           </div>
