@@ -17,7 +17,25 @@ To get started follow these instructions:
 2. Install the required dependencies using: ```pip install -r requirements.txt```
 4. Run the application using: ```python app.py```
 5. You can now access the project via localhost at: ```http://localhost:2500```
+6. To explore all the functionalities, see chapter [Using our application](#using-our-application)
 
+---
 
 ### PythonAnywhere
 The project is also accesible at [PythonAnywhere](https://unid.eu.pythonanywhere.com/)
+
+---
+
+### Using our application
+To quickly explore our application both locally and on [PythonAnywhere](https://unid.eu.pythonanywhere.com/), you can log in using the following credentials. 
+We've set up both administrator and customer user profiles for you to explore different functionalities:
+
+- Administrator access:
+  - Username: ```unidisabella```
+  - Password: ```unidkode1234```
+
+- Customer access:
+  - Username: ```majabirch```
+  - Password: ```majakode1234```
+  
+Alternatively, feel free to create your own user account. Enjoy!
